@@ -24,7 +24,7 @@ class WeatherView extends StatelessWidget {
   Widget list(BuildContext context, WeatherState state) {
     List<Widget> current = [WeatherTile(state.current!, null)];
     List<Widget>  forecast = state.forecast
-            ?.map((e) => ForecastTile(() {
+            ?.map((e) => ForecastTile(e, () {
                   debugPrint("ForecastTile TAP");
                 }))
             .toList() ??

@@ -16,6 +16,7 @@ class WeatherAppView extends StatelessWidget {
         return MaterialApp(
           theme: ThemeData(
             primaryColor: color,
+            scaffoldBackgroundColor: Colors.grey[100],
             appBarTheme: const AppBarTheme(),
           ),
           home: const HomePage(),

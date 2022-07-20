@@ -18,35 +18,63 @@ class ForecastDto {
 
   Map<String, dynamic> toJson() => _$ForecastDtoToJson(this);
 }
-
 @JsonSerializable()
-class ForecastDayDto implements ForecastItemModel {
+class ForecastDayDto implements ForecastItemModel  {
   ForecastDayDto();
 
   @override
-  @JsonKey(name: "avghumidity")
-  double? averageHumidity;
+  double? get averageHumidity => dayDto?.averageHumidity;
 
   @override
-  @JsonKey(name: "avgtemp_c")
-  double? averageTemp;
+  double? get averageTemp => dayDto?.averageTemp;
 
   @override
-  @JsonKey(name: "daily_chance_of_rain")
-  double? chanceOfRain;
+  double? get chanceOfRain => dayDto?.chanceOfRain;
 
   @override
-  @JsonKey(name: "maxwind_kph")
-  double? maxWind;
+  ConditionModel? get condition => dayDto?.condition;
 
   @override
-  ConditionModel? get condition => conditionDto;
+  double? get maxWind => dayDto?.maxWind;
 
-  @JsonKey(name: "condition")
-  ConditionDTO? conditionDto;
+  @override
+  DateTime? get date => DateTime.tryParse(dateString ?? "");
+
+  @JsonKey(name: "date")
+  String? dateString;
+
+  @JsonKey(name: "day")
+  DayDto? dayDto;
 
   factory ForecastDayDto.fromJson(Map<String, dynamic> json) =>
       _$ForecastDayDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$ForecastDayDtoToJson(this);
+}
+
+@JsonSerializable()
+class DayDto{
+  DayDto();
+
+  @JsonKey(name: "avghumidity")
+  double? averageHumidity;
+
+  @JsonKey(name: "avgtemp_c")
+  double? averageTemp;
+
+  @JsonKey(name: "daily_chance_of_rain")
+  double? chanceOfRain;
+
+  @JsonKey(name: "maxwind_kph")
+  double? maxWind;
+
+  ConditionModel? get condition => conditionDto;
+
+  @JsonKey(name: "condition")
+  ConditionDTO? conditionDto;
+
+  factory DayDto.fromJson(Map<String, dynamic> json) =>
+      _$DayDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DayDtoToJson(this);
 }

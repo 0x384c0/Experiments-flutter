@@ -20,22 +20,22 @@ class CurrentWeatherState {
 }
 
 class ForecastWeatherState {
+  final String date;
   final String temp;
   final String chanceOfRain;
   final String humidity;
   final String wind;
   final ConditionState condition;
 
-  ForecastWeatherState(
-      this.temp, this.chanceOfRain, this.humidity, this.wind, this.condition);
+  ForecastWeatherState(this.date, this.temp, this.chanceOfRain, this.humidity,
+      this.wind, this.condition);
 }
 
 class ConditionState {
   final String text;
   final String icon;
 
-
   ConditionState.fromModel(ConditionModel? conditionModel)
-      : this.text = "",
-        this.icon = "";
+      : text = conditionModel?.text ?? "",
+        icon = conditionModel?.icon?.replaceAll("//", "https://") ?? "";
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 
 import 'package:domain/interactor/interactor.dart';
 import 'weather_state.dart';
@@ -9,6 +10,7 @@ class WeatherCubit extends Cubit<WeatherState?> {
   WeatherInteractor interactor;
 
   Future<void> refresh() async {
+    final formatter = DateFormat("EEE, MMM d, yyyy");
     final forecast = await interactor.getForecast();
     final weather = WeatherState(
       CurrentWeatherState(
@@ -20,6 +22,7 @@ class WeatherCubit extends Cubit<WeatherState?> {
       ),
       forecast.forecast
           ?.map((e) => ForecastWeatherState(
+                formatter.format(e.date ?? DateTime.now()),
                 "${e.averageTemp}°",
                 "${e.chanceOfRain}%",
                 "${e.averageHumidity}%",

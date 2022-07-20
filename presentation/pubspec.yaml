@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
+  intl: ^0.17.0
   domain:
     path: "../domain"
 
