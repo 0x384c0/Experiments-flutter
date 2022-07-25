@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 //modules
-import 'package:presentation/home_page.dart';
+import 'package:presentation/weather_page.dart';
 //local
 import 'theme_cubit.dart';
 
@@ -19,23 +19,9 @@ class WeatherAppView extends StatelessWidget {
             scaffoldBackgroundColor: Colors.grey[100],
             appBarTheme: const AppBarTheme(),
           ),
-          home: const HomePage(),
+          home: const WeatherPage(),
         );
       },
     );
   }
 }
-
-// class AppWidget extends StatelessWidget {
-//   const AppWidget({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context){
-//     return MaterialApp.router(
-//       title: 'My Smart App',
-//       theme: ThemeData(primarySwatch: Colors.green),
-//       routeInformationParser: Modular.routeInformationParser,
-//       routerDelegate: Modular.routerDelegate,
-//     );
-//   }
-// }

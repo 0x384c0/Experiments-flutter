@@ -1,12 +1,31 @@
+import 'package:domain/interactor/interactor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/weather_cubit.dart';
-import 'package:presentation/weather_state.dart';
+import 'package:presentation/data/weather_state.dart';
+import 'package:presentation/navigation/weather_navigator.dart';
 
 import 'forecast_tile.dart';
 import 'weather_tile.dart';
 
+//region pages
+class WeatherPage extends StatelessWidget {
+  const WeatherPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => WeatherCubit(
+          context.read<WeatherInteractor>(),
+          provideWeatherNavigator(context)), //TODO: use dart_modular for DI
+      child: const WeatherView(),
+    );
+  }
+}
+
 class WeatherView extends StatelessWidget {
+  const WeatherView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     context.read<WeatherCubit>().refresh();
@@ -23,9 +42,9 @@ class WeatherView extends StatelessWidget {
 
   Widget list(BuildContext context, WeatherState state) {
     List<Widget> current = [WeatherTile(state.current!, null)];
-    List<Widget>  forecast = state.forecast
+    List<Widget> forecast = state.forecast
             ?.map((e) => ForecastTile(e, () {
-                  debugPrint("ForecastTile TAP");
+                  context.read<WeatherCubit>().onForecastClick(e);
                 }))
             .toList() ??
         [];
@@ -40,23 +59,3 @@ class WeatherView extends StatelessWidget {
         ));
   }
 }
-
-// class SecondPage extends StatelessWidget {
-//   SecondPage(this.name, {Key? key}) : super(key: key);
-//
-//   final String name;
-//   late Navigator navigator;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Second Page $name')),
-//       body: Center(
-//         child: ElevatedButton(
-//           onPressed: () => navigator.back(),
-//           child: Text('Back to Home'),
-//         ),
-//       ),
-//     );
-//   }
-// }

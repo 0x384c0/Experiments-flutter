@@ -3,13 +3,15 @@ import 'package:intl/intl.dart';
 
 import 'package:domain/interactor/interactor.dart';
 import 'package:presentation/utils/geo_location.dart';
-import 'location_state.dart';
-import 'weather_state.dart';
+import 'package:presentation/navigation/weather_navigator.dart';
+import 'data/location_state.dart';
+import 'data/weather_state.dart';
 
 class WeatherCubit extends Cubit<WeatherState?> {
-  WeatherCubit(this.interactor) : super(null);
+  WeatherCubit(this.interactor, this.navigator) : super(null);
 
   WeatherInteractor interactor;
+  WeatherNavigator navigator;
 
   Future<void> refresh() async { //TODO: handle errors
     final formatter = DateFormat("EEE, MMM d, yyyy");
@@ -35,5 +37,9 @@ class WeatherCubit extends Cubit<WeatherState?> {
           .toList(),
     );
     emit(weather);
+  }
+
+  void onForecastClick(ForecastWeatherState state){
+    navigator.toForecastDetails(state);
   }
 }
