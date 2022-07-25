@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 import 'package:domain/interactor/interactor.dart';
+import 'package:presentation/utils/geo_location.dart';
+import 'location_state.dart';
 import 'weather_state.dart';
 
 class WeatherCubit extends Cubit<WeatherState?> {
@@ -9,9 +11,10 @@ class WeatherCubit extends Cubit<WeatherState?> {
 
   WeatherInteractor interactor;
 
-  Future<void> refresh() async {
+  Future<void> refresh() async { //TODO: handle errors
     final formatter = DateFormat("EEE, MMM d, yyyy");
-    final forecast = await interactor.getForecast();
+    final position = await GeoLocation.getPosition();
+    final forecast = await interactor.getForecast(LocationState.fromPosition(position));
     final weather = WeatherState(
       CurrentWeatherState(
         "${forecast.current?.temp}°",

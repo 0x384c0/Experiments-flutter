@@ -2,13 +2,14 @@ library interactor;
 
 import 'package:domain/data/current_model.dart';
 import 'package:domain/data/forecast_model.dart';
+import 'package:domain/data/location_model.dart';
 import 'package:domain/datasource/remote_data_source.dart';
 
 abstract class WeatherInteractor {
   //TODO: rename to bloc
   Future<CurrentModel> getCurrent();
 
-  Future<ForecastModel> getForecast();
+  Future<ForecastModel> getForecast(LocationModel location);
 }
 
 class _WeatherInteractorImpl extends WeatherInteractor {
@@ -22,8 +23,8 @@ class _WeatherInteractorImpl extends WeatherInteractor {
   }
 
   @override
-  Future<ForecastModel> getForecast() {
-    return remoteDataSource.getForecast();
+  Future<ForecastModel> getForecast(LocationModel location) {
+    return remoteDataSource.getForecast(location);
   }
 }
 
