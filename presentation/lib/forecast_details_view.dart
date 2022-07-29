@@ -10,8 +10,9 @@ class ForecastDetailsPage extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ForecastDetailsCubit, ForecastWeatherState>(builder: (context, state) {
-      return Scaffold(
+    return BlocBuilder<ForecastDetailsCubit, Map<String?, ForecastWeatherState?>>(builder: (context, args) {
+      final state = args.values.first;
+      return state != null ? Scaffold(
         appBar: AppBar(
           title: Text(state.date),
         ),
@@ -32,7 +33,7 @@ class ForecastDetailsPage extends StatelessWidget{
               ],
             ),
         ),
-      );
+      ) : Text("TODO: restore data from query args");
     });
   }
 }

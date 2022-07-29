@@ -46,6 +46,10 @@ class ForecastDayDto implements ForecastItemModel  {
   @JsonKey(name: "day")
   DayDto? dayDto;
 
+  @override
+  @JsonKey(name: "date_epoch")
+  int? dateEpoch;
+
   factory ForecastDayDto.fromJson(Map<String, dynamic> json) =>
       _$ForecastDayDtoFromJson(json);
 

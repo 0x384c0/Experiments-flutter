@@ -1,6 +1,7 @@
 import 'package:domain/interactor/interactor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:presentation/weather_cubit.dart';
 import 'package:presentation/data/weather_state.dart';
 import 'package:presentation/navigation/weather_navigator.dart';
@@ -16,7 +17,7 @@ class WeatherPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => WeatherCubit(
-          context.read<WeatherInteractor>(),
+          Modular.get<WeatherInteractor>(),
           provideWeatherNavigator(context)), //TODO: use dart_modular for DI
       child: const WeatherView(),
     );
@@ -28,7 +29,7 @@ class WeatherView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<WeatherCubit>().refresh();
+    ReadContext(context).read<WeatherCubit>().refresh();
     return Scaffold(
       appBar: AppBar(title: Text('Home Page')),
       body: Center(
@@ -44,13 +45,13 @@ class WeatherView extends StatelessWidget {
     List<Widget> current = [WeatherTile(state.current!, null)];
     List<Widget> forecast = state.forecast
             ?.map((e) => ForecastTile(e, () {
-                  context.read<WeatherCubit>().onForecastClick(e);
+                  ReadContext(context).read<WeatherCubit>().onForecastClick(e);
                 }))
             .toList() ??
         [];
     var widgets = current + forecast;
     return RefreshIndicator(
-        onRefresh: () => context.read<WeatherCubit>().refresh(),
+        onRefresh: () => ReadContext(context).read<WeatherCubit>().refresh(),
         child: ListView.builder(
           itemCount: widgets.length,
           itemBuilder: (context, index) {

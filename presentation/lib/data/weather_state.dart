@@ -20,6 +20,7 @@ class CurrentWeatherState {
 }
 
 class ForecastWeatherState {
+  final String dateEpoch;
   final String date;
   final String temp;
   final String chanceOfRain;
@@ -27,7 +28,7 @@ class ForecastWeatherState {
   final String wind;
   final ConditionState condition;
 
-  ForecastWeatherState(this.date, this.temp, this.chanceOfRain, this.humidity,
+  ForecastWeatherState(this.dateEpoch ,this.date, this.temp, this.chanceOfRain, this.humidity,
       this.wind, this.condition);
 }
 

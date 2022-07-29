@@ -33,6 +33,7 @@ dependencies:
   flutter_bloc: ^8.0.1
   hydrated_bloc: ^8.0.1
   path_provider: any
+  flutter_modular: any
   domain:
     path: "domain"
   data:

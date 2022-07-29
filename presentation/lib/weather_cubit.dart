@@ -13,10 +13,12 @@ class WeatherCubit extends Cubit<WeatherState?> {
   WeatherInteractor interactor;
   WeatherNavigator navigator;
 
-  Future<void> refresh() async { //TODO: handle errors
+  Future<void> refresh() async {
+    //TODO: handle errors
     final formatter = DateFormat("EEE, MMM d, yyyy");
     final position = await GeoLocation.getPosition();
-    final forecast = await interactor.getForecast(LocationState.fromPosition(position));
+    final forecast =
+        await interactor.getForecast(LocationState.fromPosition(position));
     final weather = WeatherState(
       CurrentWeatherState(
         "${forecast.current?.temp}°",
@@ -27,6 +29,7 @@ class WeatherCubit extends Cubit<WeatherState?> {
       ),
       forecast.forecast
           ?.map((e) => ForecastWeatherState(
+                "${e.dateEpoch}",
                 formatter.format(e.date ?? DateTime.now()),
                 "${e.averageTemp}°",
                 "${e.chanceOfRain}%",
@@ -39,7 +42,7 @@ class WeatherCubit extends Cubit<WeatherState?> {
     emit(weather);
   }
 
-  void onForecastClick(ForecastWeatherState state){
+  void onForecastClick(ForecastWeatherState state) {
     navigator.toForecastDetails(state);
   }
 }

@@ -8,6 +8,7 @@ abstract class ForecastModel {
 }
 
 abstract class ForecastItemModel {
+  final int? dateEpoch;
   final DateTime? date;
   final double? averageTemp;
   final double? chanceOfRain;
@@ -15,6 +16,6 @@ abstract class ForecastItemModel {
   final double? maxWind;
   final ConditionModel? condition;
 
-  ForecastItemModel(this.date, this.averageTemp, this.chanceOfRain,
+  ForecastItemModel(this.dateEpoch, this.date, this.averageTemp, this.chanceOfRain,
       this.averageHumidity, this.maxWind, this.condition);
 }
