@@ -35,6 +35,8 @@ class ConditionState {
   final String text;
   final String icon;
 
+  ConditionState(this.text,this.icon);//TODO: remove
+
   ConditionState.fromModel(ConditionModel? conditionModel)
       : text = conditionModel?.text ?? "",
         icon = conditionModel?.icon?.replaceAll("//", "https://") ?? "";

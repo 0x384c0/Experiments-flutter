@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 //modules
 import 'package:presentation/weather_page.dart';
+
 //local
 import 'theme_cubit.dart';
 
@@ -14,13 +16,13 @@ class WeatherAppView extends StatelessWidget {
     return BlocBuilder<ThemeCubit, Color>(
       builder: (context, color) {
         return MaterialApp(
-          theme: ThemeData(
-            primaryColor: color,
-            scaffoldBackgroundColor: Colors.grey[100],
-            appBarTheme: const AppBarTheme(),
-          ),
-          home: const WeatherPage(),
-        );
+            theme: ThemeData(
+              primaryColor: color,
+              scaffoldBackgroundColor: Colors.grey[100],
+              appBarTheme: const AppBarTheme(),
+            ),
+              home: const WeatherPage(),
+            );
       },
     );
   }

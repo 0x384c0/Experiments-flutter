@@ -7,7 +7,6 @@ import '../forecast_details_cubit.dart';
 import '../forecast_details_view.dart';
 
 abstract class WeatherNavigator {
-  // TODO: dont pass BuildContext
   toForecastDetails(ForecastWeatherState state);
 
   back();
@@ -34,7 +33,6 @@ class _WeatherNavigatorImpl implements WeatherNavigator {
   }
 }
 
-
-WeatherNavigator provideWeatherNavigator(BuildContext context){
+WeatherNavigator provideWeatherNavigator(BuildContext context) {
   return _WeatherNavigatorImpl(context);
 }
