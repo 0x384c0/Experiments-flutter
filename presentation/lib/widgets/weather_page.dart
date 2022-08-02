@@ -1,13 +1,9 @@
-import 'package:domain/interactor/interactor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:presentation/weather_cubit.dart';
 import 'package:presentation/data/weather_state.dart';
-import 'package:presentation/navigation/weather_navigator.dart';
-
-import 'forecast_tile.dart';
-import 'weather_tile.dart';
+import 'package:presentation/widgets/forecast_tile.dart';
+import 'package:presentation/widgets/weather_cubit.dart';
+import 'package:presentation/widgets/weather_tile.dart';
 
 //region pages
 class WeatherPage extends StatelessWidget {

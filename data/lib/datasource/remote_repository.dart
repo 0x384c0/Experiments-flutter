@@ -4,11 +4,10 @@ import 'package:data/api/weather_api.dart';
 import 'package:domain/data/current_model.dart';
 import 'package:domain/data/forecast_model.dart';
 import 'package:domain/data/location_model.dart';
-import 'package:domain/datasource/remote_data_source.dart';
+import 'package:domain/datasource/remote_repository.dart';
 
-class RemoteDataSourceImpl extends RemoteDataSource {
-  //TODO: rename to repository
-  RemoteDataSourceImpl(this.weatherApi);
+class RemoteRepositoryImpl extends RemoteRepository {
+  RemoteRepositoryImpl(this.weatherApi);
 
   String key = "0bab7dd1bacc418689b143833220304"; //TODO: move to config
   WeatherApi weatherApi;

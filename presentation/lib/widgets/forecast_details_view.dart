@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/data/weather_state.dart';
 
@@ -33,7 +32,7 @@ class ForecastDetailsPage extends StatelessWidget{
                 Text("Wind: ${state.wind}"),
               ],
             ),
-        ) : Center(),
+        ) : const Center(),
       );
     });
   }

@@ -17,8 +17,12 @@ class CurrentWeatherState {
   final String precipitation;
   final ConditionState condition;
 
-  CurrentWeatherState(
-      this.temp, this.wind, this.humidity, this.precipitation, this.condition);
+  CurrentWeatherState.fromModel(ForecastModel model)
+      : temp = "${model.current?.temp}°",
+        wind = "${model.current?.wind} km/h",
+        humidity = "${model.current?.humidity}%",
+        precipitation = "${model.current?.precipitation} mm",
+        condition = ConditionState.fromModel(model.current?.condition);
 }
 
 class ForecastWeatherState {
@@ -32,7 +36,8 @@ class ForecastWeatherState {
 
   ForecastWeatherState.fromModel(ForecastItemModel model)
       : dateEpoch = "${model.dateEpoch}",
-        date = DateFormat("EEE, MMM d, yyyy").format(model.date ?? DateTime.now()),
+        date =
+            DateFormat("EEE, MMM d, yyyy").format(model.date ?? DateTime.now()),
         temp = "${model.averageTemp}°",
         chanceOfRain = "${model.chanceOfRain}%",
         humidity = "${model.averageHumidity}%",

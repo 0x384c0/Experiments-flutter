@@ -2,10 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:domain/interactor/interactor.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:presentation/data/location_state.dart';
+import 'package:presentation/data/weather_state.dart';
 import 'package:presentation/utils/geo_location.dart';
 import 'package:presentation/navigation/weather_navigator.dart';
-import 'data/location_state.dart';
-import 'data/weather_state.dart';
 
 class WeatherCubit extends Cubit<WeatherState?> {
   WeatherCubit() : super(null);
@@ -19,15 +19,8 @@ class WeatherCubit extends Cubit<WeatherState?> {
     final forecast =
         await interactor.getForecast(LocationState.fromPosition(position));
     final weather = WeatherState(
-      CurrentWeatherState(
-        "${forecast.current?.temp}°",
-        "${forecast.current?.wind} km/h",
-        "${forecast.current?.humidity}%",
-        "${forecast.current?.precipitation} mm",
-        ConditionState.fromModel(forecast.current?.condition),
-      ),
-      forecast.forecast
-          ?.map((e) => ForecastWeatherState.fromModel(e)).toList(),
+      CurrentWeatherState.fromModel(forecast),
+      forecast.forecast?.map((e) => ForecastWeatherState.fromModel(e)).toList(),
     );
     emit(weather);
   }
