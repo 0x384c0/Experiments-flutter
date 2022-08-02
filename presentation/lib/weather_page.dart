@@ -16,9 +16,7 @@ class WeatherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => WeatherCubit(
-          Modular.get<WeatherInteractor>(),
-          provideWeatherNavigator(context)), //TODO: use dart_modular for DI
+      create: (_) => WeatherCubit(),
       child: const WeatherView(),
     );
   }
@@ -31,7 +29,7 @@ class WeatherView extends StatelessWidget {
   Widget build(BuildContext context) {
     ReadContext(context).read<WeatherCubit>().refresh();
     return Scaffold(
-      appBar: AppBar(title: Text('Home Page')),
+      appBar: AppBar(title: Text('Home Page')), //TODO: localize all strings
       body: Center(
         child:
             BlocBuilder<WeatherCubit, WeatherState?>(builder: (context, state) {

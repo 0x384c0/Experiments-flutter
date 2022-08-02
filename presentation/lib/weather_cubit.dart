@@ -1,16 +1,17 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:domain/interactor/interactor.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:presentation/utils/geo_location.dart';
 import 'package:presentation/navigation/weather_navigator.dart';
 import 'data/location_state.dart';
 import 'data/weather_state.dart';
 
 class WeatherCubit extends Cubit<WeatherState?> {
-  WeatherCubit(this.interactor, this.navigator) : super(null);
+  WeatherCubit() : super(null);
 
-  WeatherInteractor interactor;
-  WeatherNavigator navigator;
+  late WeatherInteractor interactor = Modular.get<WeatherInteractor>();
+  late WeatherNavigator navigator = Modular.get<WeatherNavigator>();
 
   Future<void> refresh() async {
     //TODO: handle errors
