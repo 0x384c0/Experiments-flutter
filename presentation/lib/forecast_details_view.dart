@@ -12,11 +12,12 @@ class ForecastDetailsPage extends StatelessWidget{
   Widget build(BuildContext context) {
     return BlocBuilder<ForecastDetailsCubit, Map<String?, ForecastWeatherState?>>(builder: (context, args) {
       final state = args.values.first;
-      return state != null ? Scaffold(
+      ReadContext(context).read<ForecastDetailsCubit>().refresh();
+      return Scaffold(
         appBar: AppBar(
-          title: Text(state.date),
+          title: Text(state?.date ?? "Loading"),
         ),
-        body: Center(
+        body: state != null ? Center(
             child: Wrap(
               direction: Axis.vertical,
               crossAxisAlignment:WrapCrossAlignment.start,
@@ -32,8 +33,8 @@ class ForecastDetailsPage extends StatelessWidget{
                 Text("Wind: ${state.wind}"),
               ],
             ),
-        ),
-      ) : Text("TODO: restore data from query args");
+        ) : Center(),
+      );
     });
   }
 }

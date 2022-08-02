@@ -1,4 +1,6 @@
+import 'package:domain/data/forecast_model.dart';
 import 'package:domain/data/weather_model.dart';
+import 'package:intl/intl.dart';
 
 class WeatherState {
   // keep in state
@@ -28,17 +30,21 @@ class ForecastWeatherState {
   final String wind;
   final ConditionState condition;
 
-  ForecastWeatherState(this.dateEpoch ,this.date, this.temp, this.chanceOfRain, this.humidity,
-      this.wind, this.condition);
+  ForecastWeatherState.fromModel(ForecastItemModel model)
+      : dateEpoch = "${model.dateEpoch}",
+        date = DateFormat("EEE, MMM d, yyyy").format(model.date ?? DateTime.now()),
+        temp = "${model.averageTemp}°",
+        chanceOfRain = "${model.chanceOfRain}%",
+        humidity = "${model.averageHumidity}%",
+        wind = "${model.maxWind} km/h",
+        condition = ConditionState.fromModel(model.condition);
 }
 
 class ConditionState {
   final String text;
   final String icon;
 
-  ConditionState(this.text,this.icon);//TODO: remove
-
-  ConditionState.fromModel(ConditionModel? conditionModel)
-      : text = conditionModel?.text ?? "",
-        icon = conditionModel?.icon?.replaceAll("//", "https://") ?? "";
+  ConditionState.fromModel(ConditionModel? model)
+      : text = model?.text ?? "",
+        icon = model?.icon?.replaceAll("//", "https://") ?? "";
 }
