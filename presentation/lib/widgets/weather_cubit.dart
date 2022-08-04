@@ -1,3 +1,4 @@
+import 'package:domain/data/forecast_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:domain/interactor/interactor.dart';
@@ -6,23 +7,22 @@ import 'package:presentation/data/location_state.dart';
 import 'package:presentation/data/weather_state.dart';
 import 'package:presentation/utils/geo_location.dart';
 import 'package:presentation/navigation/weather_navigator.dart';
+import 'package:presentation/utils/mapper.dart';
 
 class WeatherCubit extends Cubit<WeatherState?> {
   WeatherCubit() : super(null);
 
-  late WeatherInteractor interactor = Modular.get<WeatherInteractor>();
-  late WeatherNavigator navigator = Modular.get<WeatherNavigator>();
+  late WeatherInteractor interactor = Modular.get();
+  late WeatherNavigator navigator = Modular.get();
+  late Mapper<ForecastModel, WeatherState> forecastModelMapper = Modular.get();
 
-  Future<void> refresh() async {
+  Future<void> refresh() {
     //TODO: handle errors
-    final position = await GeoLocation.getPosition();
-    final forecast =
-        await interactor.getForecast(LocationState.fromPosition(position));
-    final weather = WeatherState(
-      CurrentWeatherState.fromModel(forecast),
-      forecast.forecast?.map((e) => ForecastWeatherState.fromModel(e)).toList(),
-    );
-    emit(weather);
+    return GeoLocation.getPosition()
+        .then((value) => LocationState.fromPosition(value))
+        .then((value) => interactor.getForecast(value))
+        .then(forecastModelMapper.map)
+        .then(emit);
   }
 
   void onForecastClick(ForecastWeatherState state) {
