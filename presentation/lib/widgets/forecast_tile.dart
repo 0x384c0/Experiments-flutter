@@ -9,7 +9,7 @@ class ForecastTile extends CardTile {
   final ForecastWeatherState state;
 
   @override
-  Widget buildItem() {
+  Widget buildItem(BuildContext context) {
     return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
             child: Row(

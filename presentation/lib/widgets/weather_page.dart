@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/data/weather_state.dart';
-import 'package:presentation/utils/page_widget.dart';
+import 'package:presentation/utils/widget_extensions.dart';
 import 'package:presentation/widgets/forecast_tile.dart';
 import 'package:presentation/widgets/weather_cubit.dart';
 import 'package:presentation/widgets/weather_tile.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 //region pages
 class WeatherPage extends StatelessWidget {
@@ -24,13 +25,15 @@ class WeatherView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final locale = AppLocalizations.of(context);
+    if (locale == null) return const Text("");
     final cubit = ReadContext(context).read<WeatherCubit>();
     cubit.refresh().catchError((error) => {onError(error, context)});
     return Scaffold(
-      appBar: AppBar(title: Text('Home Page')), //TODO: localize all strings
+      appBar: AppBar(title: Text(locale.home_page)), //TODO: localize all strings
       body: Center(
         child: BlocBuilder<WeatherCubit, WeatherState?>(builder: (context, state) {
-          return state == null ? Text("Loading") : list(context, state);
+          return state == null ? Text(locale.loading) : list(context, state);
         }),
       ),
     );

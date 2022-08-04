@@ -1,0 +1,10 @@
+{
+    "button_ok": "OK",
+    "alert_error_title": "Error",
+    "precipitation": "Precipitation",
+    "humidity": "Humidity",
+    "wind": "Wind",
+    "chance_of_rain": "Chance of rain",
+    "home_page": "Home Page",
+    "loading": "Loading"
+}

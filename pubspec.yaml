@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: # move translation to presentation or fix IDE errors
+    sdk: flutter
   bloc: ^8.0.2
   flutter_bloc: ^8.0.1
   hydrated_bloc: ^8.0.1
@@ -62,6 +64,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-extension PageWidget on Widget {
+extension WidgetExtensions on Widget {
   void onError(dynamic error, BuildContext context) {
+    final locale = AppLocalizations.of(context);
+    if (locale == null) return;
     // set up the button
     Widget okButton = TextButton(
-      child: Text("OK"),
+      child: Text(locale.button_ok),
       onPressed: () {
         Navigator.of(context, rootNavigator: true).pop();
       },
@@ -13,7 +15,7 @@ extension PageWidget on Widget {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Error"),
+      title: Text(locale.alert_error_title),
       content: Text(error.toString()),
       actions: [
         okButton,

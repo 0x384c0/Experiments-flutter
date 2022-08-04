@@ -49,7 +49,7 @@ abstract class CardTile extends ListTile {
             top: false,
             bottom: false,
             minimum: resolvedContentPadding,
-            child: buildItem(),
+            child: buildItem(context),
           ),
         ),
       ),
@@ -65,5 +65,5 @@ abstract class CardTile extends ListTile {
     return color ?? Colors.transparent;
   }
 
-  Widget buildItem();
+  Widget buildItem(BuildContext context);
 }
