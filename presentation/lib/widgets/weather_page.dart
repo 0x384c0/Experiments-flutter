@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/data/weather_state.dart';
+import 'package:presentation/utils/page_widget.dart';
 import 'package:presentation/widgets/forecast_tile.dart';
 import 'package:presentation/widgets/weather_cubit.dart';
 import 'package:presentation/widgets/weather_tile.dart';
@@ -23,12 +24,12 @@ class WeatherView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ReadContext(context).read<WeatherCubit>().refresh();
+    final cubit = ReadContext(context).read<WeatherCubit>();
+    cubit.refresh().catchError((error) => {onError(error, context)});
     return Scaffold(
       appBar: AppBar(title: Text('Home Page')), //TODO: localize all strings
       body: Center(
-        child:
-            BlocBuilder<WeatherCubit, WeatherState?>(builder: (context, state) {
+        child: BlocBuilder<WeatherCubit, WeatherState?>(builder: (context, state) {
           return state == null ? Text("Loading") : list(context, state);
         }),
       ),
@@ -36,16 +37,17 @@ class WeatherView extends StatelessWidget {
   }
 
   Widget list(BuildContext context, WeatherState state) {
+    final cubit = ReadContext(context).read<WeatherCubit>();
     List<Widget> current = [WeatherTile(state.current!, null)];
     List<Widget> forecast = state.forecast
             ?.map((e) => ForecastTile(e, () {
-                  ReadContext(context).read<WeatherCubit>().onForecastClick(e);
+                  cubit.onForecastClick(e);
                 }))
             .toList() ??
         [];
     var widgets = current + forecast;
     return RefreshIndicator(
-        onRefresh: () => ReadContext(context).read<WeatherCubit>().refresh(),
+        onRefresh: () => cubit.refresh().catchError((error) => {onError(error, context)}),
         child: ListView.builder(
           itemCount: widgets.length,
           itemBuilder: (context, index) {

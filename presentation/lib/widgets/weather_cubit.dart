@@ -16,8 +16,7 @@ class WeatherCubit extends Cubit<WeatherState?> {
   late WeatherNavigator navigator = Modular.get();
   late Mapper<ForecastModel, WeatherState> forecastModelMapper = Modular.get();
 
-  Future<void> refresh() {
-    //TODO: handle errors
+  Future<void> refresh() async {
     return GeoLocation.getPosition()
         .then((value) => LocationState.fromPosition(value))
         .then((value) => interactor.getForecast(value))
