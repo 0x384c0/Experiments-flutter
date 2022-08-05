@@ -37,11 +37,11 @@ dependencies:
   path_provider: any
   flutter_modular: any
   domain:
-    path: "domain"
+    path: "features/weather/domain"
   data:
-    path: "data"
+    path: "features/weather/data"
   presentation:
-    path: "presentation"
+    path: "features/weather/presentation"
 
 
   # The following adds the Cupertino Icons font to your application.
