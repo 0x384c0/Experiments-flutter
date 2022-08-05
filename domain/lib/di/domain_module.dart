@@ -1,4 +1,4 @@
-import 'package:domain/interactor/interactor.dart';
+import 'package:domain/usecases/interactor.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class DomainModule extends Module {

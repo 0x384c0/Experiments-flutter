@@ -3,7 +3,7 @@ library interactor;
 import 'package:domain/data/current_model.dart';
 import 'package:domain/data/forecast_model.dart';
 import 'package:domain/data/location_model.dart';
-import 'package:domain/datasource/remote_repository.dart';
+import 'package:domain/repository/remote_repository.dart';
 
 abstract class WeatherInteractor {
   //TODO: unit tests

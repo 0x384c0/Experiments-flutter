@@ -1,0 +1,30 @@
+import 'package:domain/usecases/interactor.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import '../../../utils/mock_location.dart';
+import '../../../utils/test_module.dart';
+
+main() {
+  late WeatherInteractor sut;
+  setUp(() {
+    TestModule.initModules();
+    sut = Modular.get<WeatherInteractor>();
+  });
+
+  test('get forecast successful', () async {
+    final forecast = await sut.getForecast(MockLocation());
+    expect(forecast.forecast?.length, 3);
+  });
+
+  test('get current successful', () async {
+    final current = await sut.getCurrent();
+    expect(current.current?.temp, 19.0);
+  });
+
+  test('get forecast item successful', () async {
+    final forecastItem = await sut.getForecastItem(MockLocation(), "1659657600");
+    expect(forecastItem?.dateEpoch, 1659657600);
+    expect(forecastItem?.averageTemp, 19.0);
+  });
+}
