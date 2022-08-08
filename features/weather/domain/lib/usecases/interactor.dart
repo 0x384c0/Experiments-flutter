@@ -6,7 +6,6 @@ import 'package:domain/data/location_model.dart';
 import 'package:domain/repository/remote_repository.dart';
 
 abstract class WeatherInteractor {
-  //TODO: unit tests
   Future<CurrentModel> getCurrent();
 
   Future<ForecastModel> getForecast(LocationModel location);
