@@ -2,12 +2,21 @@ import 'package:domain/data/forecast_model.dart';
 import 'package:domain/data/weather_model.dart';
 import 'package:intl/intl.dart';
 
-class WeatherState {
-  // keep in state
-  final CurrentWeatherState? current;
-  final List<ForecastWeatherState>? forecast;
+abstract class WeatherState {}
 
-  WeatherState(this.current, this.forecast);
+class WeatherStateEmpty implements WeatherState {}
+
+class WeatherStatePopulated implements WeatherState {
+  final CurrentWeatherState current;
+  final List<ForecastWeatherState> forecast;
+
+  WeatherStatePopulated(this.current, this.forecast);
+}
+
+class WeatherStateError implements WeatherState {
+  final Object error;
+
+  WeatherStateError(this.error);
 }
 
 class CurrentWeatherState {

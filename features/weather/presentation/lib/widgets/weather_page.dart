@@ -28,29 +28,37 @@ class WeatherView extends StatelessWidget {
     final locale = AppLocalizations.of(context);
     if (locale == null) return const Text("");
     final cubit = ReadContext(context).read<WeatherCubit>();
-    cubit.refresh().catchError((error) => {onError(error, context)});
+    cubit.refresh();
     return Scaffold(
-      appBar: AppBar(title: Text(locale.home_page)), //TODO: localize all strings
+      appBar: AppBar(title: Text(locale.home_page)),
       body: Center(
-        child: BlocBuilder<WeatherCubit, WeatherState?>(builder: (context, state) {
-          return state == null ? Text(locale.loading) : list(context, state);
+        child: BlocBuilder<WeatherCubit, WeatherState>(builder: (context, state) {
+          switch (state.runtimeType) {
+            case WeatherStatePopulated:
+              return list(context, state as WeatherStatePopulated);
+            case WeatherStateError:
+              onError((state as WeatherStateError).error, context);
+              return const SizedBox.shrink();
+            case WeatherStateEmpty:
+              return const SizedBox.shrink();
+          }
+          throw Exception("illegal state $state");
         }),
       ),
     );
   }
 
-  Widget list(BuildContext context, WeatherState state) {
+  Widget list(BuildContext context, WeatherStatePopulated state) {
     final cubit = ReadContext(context).read<WeatherCubit>();
-    List<Widget> current = [WeatherTile(state.current!, null)];
+    List<Widget> current = [WeatherTile(state.current, null)];
     List<Widget> forecast = state.forecast
-            ?.map((e) => ForecastTile(e, () {
+            .map((e) => ForecastTile(e, () {
                   cubit.onForecastClick(e);
                 }))
-            .toList() ??
-        [];
+            .toList();
     var widgets = current + forecast;
     return RefreshIndicator(
-        onRefresh: () => cubit.refresh().catchError((error) => {onError(error, context)}),
+        onRefresh: () => cubit.refresh(),
         child: ListView.builder(
           itemCount: widgets.length,
           itemBuilder: (context, index) {

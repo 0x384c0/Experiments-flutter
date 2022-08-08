@@ -7,8 +7,8 @@ import 'package:presentation/navigation/weather_navigator.dart';
 import 'package:presentation/utils/geo_location_manager.dart';
 import 'package:presentation/utils/mapper.dart';
 
-class WeatherCubit extends Cubit<WeatherState?> {
-  WeatherCubit() : super(null);
+class WeatherCubit extends Cubit<WeatherState> {
+  WeatherCubit() : super(WeatherStateEmpty());
 
   late WeatherInteractor interactor = Modular.get();
   late WeatherNavigator navigator = Modular.get();
@@ -20,10 +20,13 @@ class WeatherCubit extends Cubit<WeatherState?> {
         .getLocation()
         .then((value) => interactor.getForecast(value))
         .then(forecastModelMapper.map)
+        .catchError(catchError)
         .then(emit);
   }
 
   void onForecastClick(ForecastWeatherState state) {
     navigator.toForecastDetails(state);
   }
+
+  WeatherState catchError(Object e) => WeatherStateError(e);
 }

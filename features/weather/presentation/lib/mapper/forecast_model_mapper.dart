@@ -4,8 +4,8 @@ import 'package:presentation/utils/mapper.dart';
 
 class ForecastModelMapper extends Mapper<ForecastModel, WeatherState> {
   @override
-  WeatherState map(ForecastModel input) => WeatherState(
+  WeatherStatePopulated map(ForecastModel input) => WeatherStatePopulated(
         CurrentWeatherState.fromModel(input),
-        input.forecast?.map((e) => ForecastWeatherState.fromModel(e)).toList(),
+        input.forecast?.map((e) => ForecastWeatherState.fromModel(e)).toList() ?? [],
       );
 }
