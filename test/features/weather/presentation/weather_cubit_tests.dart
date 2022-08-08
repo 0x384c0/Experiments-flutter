@@ -14,10 +14,10 @@ main() {
     sut = await mockHydratedStorage(WeatherCubit.new);
   });
 
-  blocTest<WeatherCubit, WeatherState?>(
+  blocTest<WeatherCubit, WeatherState>(
     'refresh successful',
     build: () => sut,
     act: (cubit) => cubit.refresh(),
-    verify: (bloc) => {expect(sut.state?.forecast?.length, MockWeatherApiImpl.temp)}
+    verify: (bloc) => {expect((sut.state as WeatherStatePopulated).forecast.length, MockWeatherApiImpl.forecastItems)}
   );
 }

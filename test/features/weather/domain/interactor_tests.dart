@@ -15,7 +15,7 @@ main() {
 
   test('get forecast successful', () async {
     final forecast = await sut.getForecast(MockLocation());
-    expect(forecast.forecast?.length, MockWeatherApiImpl.temp);
+    expect(forecast.forecast?.length, MockWeatherApiImpl.forecastItems);
   });
 
   test('get current successful', () async {
@@ -24,8 +24,8 @@ main() {
   });
 
   test('get forecast item successful', () async {
-    final forecastItem = await sut.getForecastItem(MockLocation(), "1659657600");
-    expect(forecastItem?.dateEpoch, MockWeatherApiImpl.temp);
+    final forecastItem = await sut.getForecastItem(MockLocation(), MockWeatherApiImpl.dateEpoch.toString());
+    expect(forecastItem?.dateEpoch, MockWeatherApiImpl.dateEpoch);
     expect(forecastItem?.averageTemp, MockWeatherApiImpl.temp);
   });
 }

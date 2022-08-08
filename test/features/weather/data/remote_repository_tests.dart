@@ -15,7 +15,7 @@ main() {
 
   test('get forecast successful', () async {
     final forecast = await sut.getForecast(MockLocation());
-    expect(forecast.forecast?.length, MockWeatherApiImpl.temp);
+    expect(forecast.forecast?.length, MockWeatherApiImpl.forecastItems);
   });
 
   test('get current successful', () async {
