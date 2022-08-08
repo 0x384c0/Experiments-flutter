@@ -3,6 +3,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../utils/mock_location.dart';
+import '../../../utils/mock_weather_api_impl.dart';
 import '../../../utils/test_module.dart';
 
 main() {
@@ -14,11 +15,11 @@ main() {
 
   test('get forecast successful', () async {
     final forecast = await sut.getForecast(MockLocation());
-    expect(forecast.forecast?.length, 3);
+    expect(forecast.forecast?.length, MockWeatherApiImpl.temp);
   });
 
   test('get current successful', () async {
     final current = await sut.getCurrent();
-    expect(current.current?.temp, 19.0);
+    expect(current.current?.temp, MockWeatherApiImpl.temp);
   });
 }

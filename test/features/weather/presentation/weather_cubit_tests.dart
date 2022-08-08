@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:presentation/data/weather_state.dart';
 import 'package:presentation/widgets/weather_cubit.dart';
 
+import '../../../utils/mock_weather_api_impl.dart';
 import '../../../utils/test_module.dart';
 import 'utils/mock_storage.dart';
 
@@ -17,6 +18,6 @@ main() {
     'refresh successful',
     build: () => sut,
     act: (cubit) => cubit.refresh(),
-    verify: (bloc) => {expect(sut.state?.forecast?.length, 3)}
+    verify: (bloc) => {expect(sut.state?.forecast?.length, MockWeatherApiImpl.temp)}
   );
 }
