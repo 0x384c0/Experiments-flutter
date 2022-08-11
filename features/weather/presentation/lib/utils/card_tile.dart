@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 
+/// [ListTile] that wraps all its views in to card view
 abstract class CardTile extends ListTile {
   const CardTile(GestureTapCallback? onTap, {Key? key}) : super(onTap:onTap, key: key);
 

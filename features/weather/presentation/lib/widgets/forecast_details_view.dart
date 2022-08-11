@@ -5,7 +5,7 @@ import 'package:presentation/utils/widget_extensions.dart';
 import 'package:presentation/widgets/forecast_details_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
+/// Screen with forecast detail for specific date
 class ForecastDetailsPage extends StatelessWidget {
   const ForecastDetailsPage({Key? key}) : super(key: key);
 

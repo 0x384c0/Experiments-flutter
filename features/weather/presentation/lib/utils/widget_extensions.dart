@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 extension WidgetExtensions on Widget {
-  Future<void>  onError(dynamic error, BuildContext context) {
+  /// default [error] handler, will show [AlertDialog]
+  Future<void> onError(dynamic error, BuildContext context) {
       final locale = AppLocalizations.of(context);
       if (locale == null) return Future.value(null);
       // set up the button

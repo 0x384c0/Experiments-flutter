@@ -7,7 +7,7 @@ import 'package:presentation/widgets/weather_cubit.dart';
 import 'package:presentation/widgets/weather_tile.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-//region pages
+/// Screen with current weather and forecast
 class WeatherPage extends StatelessWidget {
   const WeatherPage({Key? key}) : super(key: key);
 
@@ -20,6 +20,7 @@ class WeatherPage extends StatelessWidget {
   }
 }
 
+/// View with current weather and forecast
 class WeatherView extends StatelessWidget {
   const WeatherView({Key? key}) : super(key: key);
 
