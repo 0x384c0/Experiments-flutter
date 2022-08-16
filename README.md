@@ -36,5 +36,4 @@ App has single feature - [weather](/features/weather). Feature split in to 3 mod
 - [widgets](/test/features/weather/presentation/)
 
 ## TODO
-* add CI scripts and GitHub Actions
-* review architecture, maybe Interactor is not needed
+* add screenshots
