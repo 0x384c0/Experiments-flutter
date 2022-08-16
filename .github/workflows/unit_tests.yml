@@ -20,6 +20,5 @@ jobs:
       - name: Install project dependencies
         run: sh scripts/pub_get_all.sh
 
-
       - name: Run unit tests
         run: sh scripts/run_tests.sh

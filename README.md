@@ -1,6 +1,8 @@
 # Weather App
 A sample flutter app that shows today weather and forecast for current device location
 
+![tests workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml/badge.svg)
+
 ### Build Requirements
 * flutter 3.0
 * Android Studio
@@ -31,8 +33,8 @@ App has single feature - [weather](/features/weather). Feature split in to 3 mod
 1. [mocktail](https://pub.dev/packages/mocktail)
 
 ### Test coverage
-- [data](/test/features/weather/data/remote_repository_tests.dart)
-- [domain](/test/features/weather/domain/interactor_tests.dart)
+- [data](/test/features/weather/data/remote_repository_test.dart)
+- [domain](/test/features/weather/domain/interactor_test.dart)
 - [widgets](/test/features/weather/presentation/)
 
 ## TODO
