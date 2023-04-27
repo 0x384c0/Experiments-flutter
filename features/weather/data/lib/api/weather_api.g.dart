@@ -19,27 +19,27 @@ class _WeatherApi implements WeatherApi {
 
   @override
   Future<ForecastResponseDTO> getCurrent(key, q, aqi) async {
-    const _extra = <String, dynamic>{};
+    const extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'key': key,
       r'q': q,
       r'aqi': aqi
     };
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final headers = <String, dynamic>{};
+    final data = <String, dynamic>{};
+    final result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ForecastResponseDTO>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
+            Options(method: 'GET', headers: headers, extra: extra)
                 .compose(_dio.options, '/current.json',
-                    queryParameters: queryParameters, data: _data)
+                    queryParameters: queryParameters, data: data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ForecastResponseDTO.fromJson(_result.data!);
+    final value = ForecastResponseDTO.fromJson(result.data!);
     return value;
   }
 
   @override
   Future<ForecastResponseDTO> getForecast(key, q, days, aqi, alerts) async {
-    const _extra = <String, dynamic>{};
+    const extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'key': key,
       r'q': q,
@@ -47,15 +47,15 @@ class _WeatherApi implements WeatherApi {
       r'aqi': aqi,
       r'alerts': alerts
     };
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final _result = await _dio.fetch<Map<String, dynamic>>(
+    final headers = <String, dynamic>{};
+    final data = <String, dynamic>{};
+    final result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ForecastResponseDTO>(
-            Options(method: 'GET', headers: _headers, extra: _extra)
+            Options(method: 'GET', headers: headers, extra: extra)
                 .compose(_dio.options, '/forecast.json',
-                    queryParameters: queryParameters, data: _data)
+                    queryParameters: queryParameters, data: data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ForecastResponseDTO.fromJson(_result.data!);
+    final value = ForecastResponseDTO.fromJson(result.data!);
     return value;
   }
 
