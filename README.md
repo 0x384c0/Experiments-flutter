@@ -4,7 +4,7 @@ A sample flutter app that shows today weather and forecast for current device lo
 ![tests workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml/badge.svg)
 
 ### Build Requirements
-* flutter 3.0
+* [flutter](https://github.com/flutter/flutter) 3.+
 * Android Studio
 
 ### Modules
@@ -42,4 +42,6 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 - [widgets](/test/features/weather/presentation/)
 
 ## TODO
-* add screenshots
+* add another feature
+* add loading indicators using [Lottie](https://pub.dev/packages/lottie)
+* add app screenshots

@@ -1,4 +1,3 @@
 ## Features
-* contains Presentation Layer (widgets and cubits)
 
-
+* contains Data layer with REST API requests
