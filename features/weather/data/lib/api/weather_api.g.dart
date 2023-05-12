@@ -6,10 +6,13 @@ part of 'weather_api.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
 class _WeatherApi implements WeatherApi {
-  _WeatherApi(this._dio, {this.baseUrl}) {
+  _WeatherApi(
+    this._dio, {
+    this.baseUrl,
+  }) {
     baseUrl ??= 'http://api.weatherapi.com/v1';
   }
 
@@ -18,44 +21,68 @@ class _WeatherApi implements WeatherApi {
   String? baseUrl;
 
   @override
-  Future<ForecastResponseDTO> getCurrent(key, q, aqi) async {
-    const extra = <String, dynamic>{};
+  Future<ForecastResponseDTO> getCurrent(
+    key,
+    q,
+    aqi,
+  ) async {
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'key': key,
       r'q': q,
-      r'aqi': aqi
+      r'aqi': aqi,
     };
-    final headers = <String, dynamic>{};
-    final data = <String, dynamic>{};
-    final result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ForecastResponseDTO>(
-            Options(method: 'GET', headers: headers, extra: extra)
-                .compose(_dio.options, '/current.json',
-                    queryParameters: queryParameters, data: data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ForecastResponseDTO.fromJson(result.data!);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ForecastResponseDTO>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/current.json',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ForecastResponseDTO.fromJson(_result.data!);
     return value;
   }
 
   @override
-  Future<ForecastResponseDTO> getForecast(key, q, days, aqi, alerts) async {
-    const extra = <String, dynamic>{};
+  Future<ForecastResponseDTO> getForecast(
+    key,
+    q,
+    days,
+    aqi,
+    alerts,
+  ) async {
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'key': key,
       r'q': q,
       r'days': days,
       r'aqi': aqi,
-      r'alerts': alerts
+      r'alerts': alerts,
     };
-    final headers = <String, dynamic>{};
-    final data = <String, dynamic>{};
-    final result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ForecastResponseDTO>(
-            Options(method: 'GET', headers: headers, extra: extra)
-                .compose(_dio.options, '/forecast.json',
-                    queryParameters: queryParameters, data: data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = ForecastResponseDTO.fromJson(result.data!);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ForecastResponseDTO>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/forecast.json',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = ForecastResponseDTO.fromJson(_result.data!);
     return value;
   }
 
