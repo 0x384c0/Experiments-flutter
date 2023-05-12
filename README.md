@@ -42,9 +42,11 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 - [widgets](/test/features/weather/presentation/)
 
 ### Adding New module
-- run in feature directory `flutter create --template=package presentation`
+- run `flutter create` in feature directory. For example: `flutter create --template=package presentation`
+- change name to corresponding directory. For example: `features_weather_presentation`
 - remove platform specific directories
 - add dependencies from other modules
+- add this module to other module dependencies using `path:`
 
 ## TODO
 * keep dependencies versions in single place
