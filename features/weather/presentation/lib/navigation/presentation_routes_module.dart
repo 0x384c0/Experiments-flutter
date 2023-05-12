@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:presentation/data/weather_state.dart';
-import 'package:presentation/widgets/forecast_details_cubit.dart';
-import 'package:presentation/widgets/forecast_details_view.dart';
-import 'package:presentation/widgets/weather_page.dart';
+import 'package:features_weather_presentation/data/weather_state.dart';
+import 'package:features_weather_presentation/widgets/forecast_details_cubit.dart';
+import 'package:features_weather_presentation/widgets/forecast_details_view.dart';
+import 'package:features_weather_presentation/widgets/weather_page.dart';
 
 class PresentationRoutesModule extends Module {
   @override

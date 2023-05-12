@@ -1,7 +1,7 @@
-import 'package:data/api/weather_api.dart';
-import 'package:data/repository/remote_repository.dart';
+import 'package:features_weather_data/api/weather_api.dart';
+import 'package:features_weather_data/repository/remote_repository.dart';
 import 'package:dio/dio.dart';
-import 'package:domain/repository/remote_repository.dart';
+import 'package:features_weather_domain/repository/remote_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class DataModule extends Module {

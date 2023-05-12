@@ -1,4 +1,4 @@
-import 'package:domain/data/location_model.dart';
+import 'package:features_weather_domain/data/location_model.dart';
 import 'package:geolocator/geolocator.dart';
 
 class LocationState implements LocationModel {

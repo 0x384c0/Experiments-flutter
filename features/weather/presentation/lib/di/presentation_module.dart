@@ -1,11 +1,11 @@
-import 'package:domain/data/forecast_model.dart';
+import 'package:features_weather_domain/data/forecast_model.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:presentation/data/weather_state.dart';
-import 'package:presentation/mapper/forecast_item_model_mapper.dart';
-import 'package:presentation/mapper/forecast_model_mapper.dart';
-import 'package:presentation/navigation/weather_navigator.dart';
-import 'package:presentation/utils/geo_location_manager.dart';
-import 'package:presentation/utils/mapper.dart';
+import 'package:features_weather_presentation/data/weather_state.dart';
+import 'package:features_weather_presentation/mapper/forecast_item_model_mapper.dart';
+import 'package:features_weather_presentation/mapper/forecast_model_mapper.dart';
+import 'package:features_weather_presentation/navigation/weather_navigator.dart';
+import 'package:features_weather_presentation/utils/geo_location_manager.dart';
+import 'package:features_weather_presentation/utils/mapper.dart';
 
 class PresentationModule extends Module {
   @override

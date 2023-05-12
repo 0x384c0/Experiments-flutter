@@ -41,7 +41,13 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 - [domain](/test/features/weather/domain/interactor_test.dart)
 - [widgets](/test/features/weather/presentation/)
 
+### Adding New module
+- run in feature directory `flutter create --template=package presentation`
+- remove platform specific directories
+- add dependencies from other modules
+
 ## TODO
+* keep dependencies versions in single place
 * add another feature
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)
 * add app screenshots

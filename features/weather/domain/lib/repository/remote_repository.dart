@@ -1,6 +1,6 @@
-import 'package:domain/data/forecast_model.dart';
-import 'package:domain/data/current_model.dart';
-import 'package:domain/data/location_model.dart';
+import 'package:features_weather_domain/data/forecast_model.dart';
+import 'package:features_weather_domain/data/current_model.dart';
+import 'package:features_weather_domain/data/location_model.dart';
 
 abstract class RemoteRepository {
   Future<CurrentModel> getCurrent();

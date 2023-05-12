@@ -1,4 +1,4 @@
-import 'package:domain/repository/remote_repository.dart';
+import 'package:features_weather_domain/repository/remote_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
 

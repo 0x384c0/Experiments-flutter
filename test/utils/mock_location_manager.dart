@@ -1,5 +1,5 @@
-import 'package:presentation/data/location_state.dart';
-import 'package:presentation/utils/geo_location_manager.dart';
+import 'package:features_weather_presentation/data/location_state.dart';
+import 'package:features_weather_presentation/utils/geo_location_manager.dart';
 
 class MockGeoLocationManagerImpl implements GeoLocationManager {
   @override

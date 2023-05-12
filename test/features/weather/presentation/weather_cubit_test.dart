@@ -1,7 +1,7 @@
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:presentation/data/weather_state.dart';
-import 'package:presentation/widgets/weather_cubit.dart';
+import 'package:features_weather_presentation/data/weather_state.dart';
+import 'package:features_weather_presentation/widgets/weather_cubit.dart';
 
 import '../../../utils/mock_weather_api_impl.dart';
 import '../../../utils/test_module.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:presentation/data/weather_state.dart';
+import 'package:features_weather_presentation/data/weather_state.dart';
 
 import '../utils/card_tile.dart';
 

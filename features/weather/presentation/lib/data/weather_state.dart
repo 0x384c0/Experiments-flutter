@@ -1,5 +1,5 @@
-import 'package:domain/data/forecast_model.dart';
-import 'package:domain/data/weather_model.dart';
+import 'package:features_weather_domain/data/forecast_model.dart';
+import 'package:features_weather_domain/data/weather_model.dart';
 import 'package:intl/intl.dart';
 
 abstract class WeatherState {}

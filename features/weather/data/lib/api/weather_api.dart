@@ -1,7 +1,7 @@
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
 
-import 'package:data/data/forecast_response_dto.dart';
+import 'package:features_weather_data/data/forecast_response_dto.dart';
 
 part 'weather_api.g.dart';
 

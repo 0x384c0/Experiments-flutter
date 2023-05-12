@@ -1,6 +1,6 @@
-import 'package:domain/data/forecast_model.dart';
-import 'package:presentation/data/weather_state.dart';
-import 'package:presentation/utils/mapper.dart';
+import 'package:features_weather_domain/data/forecast_model.dart';
+import 'package:features_weather_presentation/data/weather_state.dart';
+import 'package:features_weather_presentation/utils/mapper.dart';
 
 class ForecastModelMapper extends Mapper<ForecastModel, WeatherState> {
   @override

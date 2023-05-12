@@ -1,5 +1,5 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:presentation/data/weather_state.dart';
+import 'package:features_weather_presentation/data/weather_state.dart';
 
 /// Navigation for weather feature
 abstract class WeatherNavigator {

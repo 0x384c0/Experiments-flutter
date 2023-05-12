@@ -1,7 +1,7 @@
-import 'package:data/api/weather_api.dart';
-import 'package:data/data/current_dto.dart';
-import 'package:data/data/forecast_response_dto.dart';
-import 'package:domain/data/forecast_model.dart';
+import 'package:features_weather_data/api/weather_api.dart';
+import 'package:features_weather_data/data/current_dto.dart';
+import 'package:features_weather_data/data/forecast_response_dto.dart';
+import 'package:features_weather_domain/data/forecast_model.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockWeatherApiImpl implements WeatherApi {

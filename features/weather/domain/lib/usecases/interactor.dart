@@ -1,9 +1,9 @@
 library interactor;
 
-import 'package:domain/data/current_model.dart';
-import 'package:domain/data/forecast_model.dart';
-import 'package:domain/data/location_model.dart';
-import 'package:domain/repository/remote_repository.dart';
+import 'package:features_weather_domain/data/current_model.dart';
+import 'package:features_weather_domain/data/forecast_model.dart';
+import 'package:features_weather_domain/data/location_model.dart';
+import 'package:features_weather_domain/repository/remote_repository.dart';
 
 /// requests information about weather in area
 abstract class WeatherInteractor {

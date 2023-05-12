@@ -1,4 +1,4 @@
-name: data
+name: features_weather_data
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  domain:
+  features_weather_domain:
     path: "../domain"
   json_annotation: ^4.4.0
   retrofit: '>=3.0.0 <4.0.0'

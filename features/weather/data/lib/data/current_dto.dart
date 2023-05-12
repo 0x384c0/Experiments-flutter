@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:domain/data/weather_model.dart';
+import 'package:features_weather_domain/data/weather_model.dart';
 
 part 'current_dto.g.dart';
 
