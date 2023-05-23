@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:features_weather_presentation/data/weather_state.dart';
 import 'package:features_weather_presentation/navigation/weather_navigator.dart';
-import 'package:features_weather_presentation/utils/geo_location_manager.dart';
+import 'package:features_weather_presentation/utils/geo_location_provider.dart';
 import 'package:features_weather_presentation/utils/mapper.dart';
 
 class WeatherCubit extends Cubit<WeatherState> {
@@ -12,7 +12,7 @@ class WeatherCubit extends Cubit<WeatherState> {
 
   late WeatherInteractor interactor = Modular.get();
   late WeatherNavigator navigator = Modular.get();
-  late GeoLocationManager geoLocationManager = Modular.get();
+  late GeoLocationProvider geoLocationManager = Modular.get();
   late Mapper<ForecastModel, WeatherState> forecastModelMapper = Modular.get();
 
   Future<void> refresh() async {

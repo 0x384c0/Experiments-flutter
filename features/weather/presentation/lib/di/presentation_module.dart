@@ -4,7 +4,7 @@ import 'package:features_weather_presentation/data/weather_state.dart';
 import 'package:features_weather_presentation/mapper/forecast_item_model_mapper.dart';
 import 'package:features_weather_presentation/mapper/forecast_model_mapper.dart';
 import 'package:features_weather_presentation/navigation/weather_navigator.dart';
-import 'package:features_weather_presentation/utils/geo_location_manager.dart';
+import 'package:features_weather_presentation/utils/geo_location_provider.dart';
 import 'package:features_weather_presentation/utils/mapper.dart';
 
 class PresentationModule extends Module {
@@ -14,8 +14,8 @@ class PresentationModule extends Module {
           (i) => WeatherNavigatorImpl(),
           export: true,
         ),
-        Bind<GeoLocationManager>(
-          (i) => GeoLocationManagerImpl(),
+        Bind<GeoLocationProvider>(
+          (i) => GeoLocationProviderImpl(),
           export: true,
         ),
         Bind<Mapper<ForecastModel, WeatherState>>(

@@ -3,13 +3,13 @@ import 'package:features_weather_domain/usecases/interactor.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:features_weather_presentation/data/weather_state.dart';
-import 'package:features_weather_presentation/utils/geo_location_manager.dart';
+import 'package:features_weather_presentation/utils/geo_location_provider.dart';
 import 'package:features_weather_presentation/utils/mapper.dart';
 
 class ForecastDetailsCubit extends Cubit<Map<String?, ForecastWeatherState?>> {
   ForecastDetailsCubit(super.initialState);
 
-  late GeoLocationManager geoLocationManager = Modular.get();
+  late GeoLocationProvider geoLocationManager = Modular.get();
   late WeatherInteractor interactor = Modular.get<WeatherInteractor>();
   late Mapper<ForecastItemModel, ForecastWeatherState> forecastItemModelMapper = Modular.get();
 

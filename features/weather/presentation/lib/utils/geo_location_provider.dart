@@ -1,11 +1,11 @@
 import 'package:features_weather_presentation/data/location_state.dart';
 import 'package:features_weather_presentation/utils/geo_location.dart';
 
-abstract class GeoLocationManager {
+abstract class GeoLocationProvider {
   Future<LocationState> getLocation();
 }
 
-class GeoLocationManagerImpl implements GeoLocationManager {
+class GeoLocationProviderImpl implements GeoLocationProvider {
   @override
   Future<LocationState> getLocation() => GeoLocation.getPosition().then((value) => LocationState.fromPosition(value));
 }
