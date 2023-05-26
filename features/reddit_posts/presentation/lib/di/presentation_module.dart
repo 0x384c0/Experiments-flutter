@@ -1,5 +1,5 @@
+import 'package:features_reddit_posts_presentation/navigation/navigator.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import '../navigation/navigator.dart';
 
 class PresentationModule extends Module {
   @override
