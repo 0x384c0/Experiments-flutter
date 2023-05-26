@@ -1,6 +1,9 @@
+import 'package:features_reddit_posts_presentation/navigation/reddit_posts_navigator.dart';
 import 'package:features_reddit_posts_presentation/widgets/posts_view.dart';
+import 'package:features_weather_presentation/navigation/weather_navigator.dart';
 import 'package:features_weather_presentation/widgets/weather_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -31,6 +34,9 @@ class _HomePageState
     });
   }
 
+  late WeatherNavigator weatherNavigator = Modular.get();
+  late RedditPostsNavigator redditPostsNavigator = Modular.get();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +46,7 @@ class _HomePageState
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
+      // body: const RouterOutlet(),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -58,6 +65,20 @@ class _HomePageState
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
+        // onTap: (index) {
+        //   switch (index) {
+        //     case 0:
+        //       redditPostsNavigator.home();
+        //       break;
+        //     case 1:
+        //       weatherNavigator.home();
+        //       break;
+        //     case 2:
+        //       redditPostsNavigator.home();
+        //       break;
+        //   }
+        //   _selectedIndex = index;
+        // },
       ),
     );
   }

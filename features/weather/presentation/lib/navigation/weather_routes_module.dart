@@ -5,7 +5,7 @@ import 'package:features_weather_presentation/widgets/forecast_details_cubit.dar
 import 'package:features_weather_presentation/widgets/forecast_details_view.dart';
 import 'package:features_weather_presentation/widgets/weather_page.dart';
 
-class PresentationRoutesModule extends Module {
+class WeatherRoutesModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const WeatherPage()),

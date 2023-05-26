@@ -1,17 +1,25 @@
+import 'package:features_features_host_presentation/navigation/home_routes_module.dart';
 import 'package:features_weather_data/di/data_module.dart';
 import 'package:features_weather_domain/di/domain_module.dart';
+import 'package:features_weather_presentation/navigation/weather_routes_module.dart';
+import 'package:features_weather_presentation/di/presentation_module.dart' as weather;
+import 'package:features_reddit_posts_presentation/di/presentation_module.dart' as reddit_posts;
+import 'package:features_reddit_posts_presentation/navigation/reddit_posts_routes_module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:features_weather_presentation/di/presentation_module.dart';
-import 'package:features_features_host_presentation/navigation/presentation_routes_module.dart';
 
 class AppModule extends Module {
   @override
   List<Module> get imports => [
         DataModule(),
         DomainModule(),
-        PresentationModule(),
+        weather.PresentationModule(),
+        reddit_posts.PresentationModule(),
       ];
 
   @override
-  List<ModularRoute> get routes => [ModuleRoute('/', module: PresentationRoutesModule())];
+  List<ModularRoute> get routes => [
+        ModuleRoute('/', module: HomeRoutesModule()),
+        ModuleRoute('/weather', module: WeatherRoutesModule()),
+        ModuleRoute('/posts', module: RedditPostsRoutesModule()),
+      ];
 }
