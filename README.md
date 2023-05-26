@@ -49,7 +49,6 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 - add this module as dependency to other modules using `path:`
 
 ## TODO
-* keep dependencies versions in single place
-* add another feature
+* implement another [feature](/features/reddit_posts)
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)
 * add app screenshots
