@@ -1,4 +1,4 @@
-import 'package:features_features_host_presentation/navigation/home_routes_module.dart';
+import 'package:features_home_presentation/navigation/home_routes_module.dart';
 import 'package:features_reddit_posts_presentation/di/presentation_module.dart' as reddit_posts;
 import 'package:features_reddit_posts_presentation/navigation/reddit_posts_routes_module.dart';
 import 'package:features_weather_data/di/data_module.dart';

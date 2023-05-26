@@ -137,10 +137,10 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
-  features_features_host_presentation:
+  features_home_presentation:
     dependency: "direct main"
     description:
-      path: "features/features_host/presentation"
+      path: "features/home/presentation"
       relative: true
     source: path
     version: "0.0.1"

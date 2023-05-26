@@ -36,8 +36,8 @@ dependencies:
   hydrated_bloc: ^8.0.1
   path_provider: any
   flutter_modular: any
-  features_features_host_presentation:
-    path: "features/features_host/presentation"
+  features_home_presentation:
+    path: "features/home/presentation"
   features_weather_domain:
     path: "features/weather/domain"
   features_weather_data:
