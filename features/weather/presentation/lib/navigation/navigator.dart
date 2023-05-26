@@ -1,12 +1,12 @@
 import 'package:features_weather_presentation/data/weather_state.dart';
+import 'package:features_weather_presentation/widgets/weather_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../widgets/weather_page.dart';
 import 'routes_module.dart';
 
 /// Navigation for weather feature
-abstract class WeatherNavigator {
+abstract class Navigator {
   Widget homePage();
 
   toForecastDetails(ForecastWeatherState state);
@@ -15,7 +15,7 @@ abstract class WeatherNavigator {
 }
 
 /// Private implementation if weather navigation
-class WeatherNavigatorImpl implements WeatherNavigator {
+class NavigatorImpl implements Navigator {
   @override
   homePage() {
     return const WeatherPage();

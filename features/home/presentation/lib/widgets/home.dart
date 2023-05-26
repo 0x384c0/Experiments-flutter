@@ -1,5 +1,5 @@
-import 'package:features_reddit_posts_presentation/navigation/reddit_posts_navigator.dart';
-import 'package:features_weather_presentation/navigation/weather_navigator.dart';
+import 'package:features_reddit_posts_presentation/navigation/navigator.dart' as reddit_posts;
+import 'package:features_weather_presentation/navigation/navigator.dart' as weather;
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -12,8 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late RedditPostsNavigator redditPostsNavigator = Modular.get();
-  late WeatherNavigator weatherNavigator = Modular.get();
+  late reddit_posts.Navigator redditPostsNavigator = Modular.get();
+  late weather.Navigator weatherNavigator = Modular.get();
 
   late final _widgetOptions = [
     redditPostsNavigator.homePage(),

@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 /// Navigation for weather feature
-abstract class RedditPostsNavigator {
+abstract class Navigator {
   Widget homePage();
 
   back();
 }
 
 /// Private implementation if weather navigation
-class RedditPostsNavigatorImpl implements RedditPostsNavigator {
+class NavigatorImpl implements Navigator {
   @override
   homePage() {
     return const PostsPage();

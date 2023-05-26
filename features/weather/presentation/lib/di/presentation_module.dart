@@ -3,15 +3,15 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:features_weather_presentation/data/weather_state.dart';
 import 'package:features_weather_presentation/mapper/forecast_item_model_mapper.dart';
 import 'package:features_weather_presentation/mapper/forecast_model_mapper.dart';
-import 'package:features_weather_presentation/navigation/weather_navigator.dart';
+import 'package:features_weather_presentation/navigation/navigator.dart';
 import 'package:features_weather_presentation/utils/geo_location_provider.dart';
 import 'package:features_weather_presentation/utils/mapper.dart';
 
 class PresentationModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind<WeatherNavigator>(
-          (i) => WeatherNavigatorImpl(),
+        Bind<Navigator>(
+          (i) => NavigatorImpl(),
           export: true,
         ),
         Bind<GeoLocationProvider>(
