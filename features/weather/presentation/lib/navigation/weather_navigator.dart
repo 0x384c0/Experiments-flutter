@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../widgets/weather_page.dart';
-import 'weather_routes_module.dart';
+import 'routes_module.dart';
 
 /// Navigation for weather feature
 abstract class WeatherNavigator {
@@ -23,7 +23,7 @@ class WeatherNavigatorImpl implements WeatherNavigator {
 
   @override
   toForecastDetails(ForecastWeatherState state) {
-    Modular.to.pushNamed('${WeatherRoutesModule.path}/forecast?time_epoch=${state.dateEpoch}', arguments: state);
+    Modular.to.pushNamed('${RoutesModule.path}/forecast?time_epoch=${state.dateEpoch}', arguments: state);
   }
 
   @override

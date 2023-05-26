@@ -1,7 +1,7 @@
 import 'package:features_reddit_posts_presentation/widgets/posts_view.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class RedditPostsRoutesModule extends Module {
+class RoutesModule extends Module {
   static const path = 'posts';
 
   @override

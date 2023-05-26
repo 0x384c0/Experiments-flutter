@@ -2,9 +2,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import '../widgets/home.dart';
 
-class HomeRoutesModule extends Module {
+class RoutesModule extends Module {
+  static const path = '/';
+
   @override
   List<ModularRoute> get routes => [
-    ChildRoute('/', child: (context, args) => const HomePage())
+    ChildRoute(path, child: (context, args) => const HomePage())
   ];
 }
