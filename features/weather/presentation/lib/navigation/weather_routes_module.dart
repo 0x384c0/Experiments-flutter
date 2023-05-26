@@ -6,6 +6,8 @@ import 'package:features_weather_presentation/widgets/forecast_details_view.dart
 import 'package:features_weather_presentation/widgets/weather_page.dart';
 
 class WeatherRoutesModule extends Module {
+  static const path = '/weather';
+
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const WeatherPage()),
