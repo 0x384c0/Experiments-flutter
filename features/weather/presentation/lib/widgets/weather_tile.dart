@@ -12,8 +12,7 @@ class WeatherTile extends CardTile {
 
   @override
   Widget buildItem(BuildContext context) {
-    final locale = AppLocalizations.of(context);
-    if (locale == null) return const Text("");
+    final locale = AppLocalizations.of(context)!;
     return Padding(
             padding: const EdgeInsets.all(24.0),
             child: Row(
@@ -34,9 +33,9 @@ class WeatherTile extends CardTile {
                   crossAxisAlignment:WrapCrossAlignment.start,
                   spacing: 16,
                   children: [
-                    Text("${locale.precipitation}: ${state.precipitation}"),
-                    Text("${locale.humidity}: ${state.humidity}"),
-                    Text("${locale.wind}: ${state.wind}"),
+                    Text("${locale.weather_precipitation}: ${state.precipitation}"),
+                    Text("${locale.weather_humidity}: ${state.humidity}"),
+                    Text("${locale.weather_wind}: ${state.wind}"),
                   ],
                 )
               ],

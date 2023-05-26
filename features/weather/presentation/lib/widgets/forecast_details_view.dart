@@ -11,8 +11,7 @@ class ForecastDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locale = AppLocalizations.of(context);
-    if (locale == null) return const Text("");
+    final locale = AppLocalizations.of(context)!;
     return BlocBuilder<ForecastDetailsCubit, Map<String?, ForecastWeatherState?>>(builder: (context, args) {
       final state = args.values.first;
       ReadContext(context).read<ForecastDetailsCubit>().refresh().catchError((error) => {onError(error, context)});
@@ -32,9 +31,9 @@ class ForecastDetailsPage extends StatelessWidget {
                       width: 64,
                       height: 64,
                     ),
-                    Text("${locale.chance_of_rain}: ${state.chanceOfRain}"),
-                    Text("${locale.humidity}: ${state.humidity}"),
-                    Text("${locale.wind}: ${state.wind}"),
+                    Text("${locale.weather_chance_of_rain}: ${state.chanceOfRain}"),
+                    Text("${locale.weather_humidity}: ${state.humidity}"),
+                    Text("${locale.weather_wind}: ${state.wind}"),
                   ],
                 ),
               )

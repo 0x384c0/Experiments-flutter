@@ -2,6 +2,7 @@ import 'package:features_reddit_posts_presentation/navigation/reddit_posts_navig
 import 'package:features_weather_presentation/navigation/weather_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -29,19 +30,20 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final locale = AppLocalizations.of(context)!;
     return Scaffold(
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Posts',
+            icon: const Icon(Icons.web),
+            label: locale.reddit_posts_home_page,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            label: 'Weather',
+            icon: const Icon(Icons.cloud),
+            label: locale.weather_home_page,
           ),
         ],
         currentIndex: _selectedIndex,

@@ -1,10 +1,13 @@
 {
     "button_ok": "OK",
     "alert_error_title": "Error",
-    "precipitation": "Precipitation",
-    "humidity": "Humidity",
-    "wind": "Wind",
-    "chance_of_rain": "Chance of rain",
-    "home_page": "Home Page",
-    "loading": "Loading"
+    "loading": "Loading",
+
+    "weather_precipitation": "Precipitation",
+    "weather_humidity": "Humidity",
+    "weather_wind": "Wind",
+    "weather_chance_of_rain": "Chance of rain",
+    "weather_home_page": "Weather",
+
+    "reddit_posts_home_page": "Posts"
 }

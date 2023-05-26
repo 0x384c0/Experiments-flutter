@@ -26,12 +26,11 @@ class WeatherView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final locale = AppLocalizations.of(context);
-    if (locale == null) return const Text("");
+    final locale = AppLocalizations.of(context)!;
     final cubit = ReadContext(context).read<WeatherCubit>();
     cubit.refresh();
     return Scaffold(
-      appBar: AppBar(title: Text(locale.home_page)),
+      appBar: AppBar(title: Text(locale.weather_home_page)),
       body: Center(
         child: BlocBuilder<WeatherCubit, WeatherState>(builder: (context, state) {
           switch (state.runtimeType) {
