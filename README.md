@@ -50,5 +50,7 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 
 ## TODO
 * implement another [feature](/features/reddit_posts)
+* Remove fromModel() everywhere. Use mappers
+* reuse widgets
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)
 * add app screenshots
