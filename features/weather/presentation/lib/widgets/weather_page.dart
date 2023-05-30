@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:common_presentation/ui/widget_extensions.dart';
 import 'package:features_weather_presentation/data/weather_state.dart';
-import 'package:features_weather_presentation/utils/widget_extensions.dart';
 import 'package:features_weather_presentation/widgets/forecast_tile.dart';
 import 'package:features_weather_presentation/widgets/weather_cubit.dart';
 import 'package:features_weather_presentation/widgets/weather_tile.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Screen with current weather and forecast

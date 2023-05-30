@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:common_presentation/ui/card_tile.dart';
 import 'package:features_weather_presentation/data/weather_state.dart';
-import 'package:features_weather_presentation/utils/card_tile.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 

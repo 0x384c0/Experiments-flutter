@@ -1,4 +1,4 @@
-name: features_weather_presentation
+name: common_presentation
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
@@ -12,15 +12,6 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  features_weather_domain:
-    path: "../domain"
-  common_presentation:
-    path: "../../common/presentation"
-  flutter_bloc: ^8.0.1
-  flutter_modular: any
-  intl: ^0.17.0
-  geolocator: ^9.0.1
-  rxdart: ^0.27.5
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,5 @@
+import 'package:common_presentation/ui/card_tile.dart';
 import 'package:features_weather_presentation/data/weather_state.dart';
-import 'package:features_weather_presentation/utils/card_tile.dart';
 import 'package:flutter/material.dart';
 
 class ForecastTile extends CardTile {

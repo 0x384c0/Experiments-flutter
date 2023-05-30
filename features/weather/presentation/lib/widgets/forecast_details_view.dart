@@ -1,8 +1,8 @@
+import 'package:common_presentation/ui/widget_extensions.dart';
+import 'package:features_weather_presentation/data/weather_state.dart';
+import 'package:features_weather_presentation/widgets/forecast_details_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:features_weather_presentation/data/weather_state.dart';
-import 'package:features_weather_presentation/utils/widget_extensions.dart';
-import 'package:features_weather_presentation/widgets/forecast_details_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 /// Screen with forecast detail for specific date
