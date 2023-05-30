@@ -1,12 +1,11 @@
+import 'package:common_presentation/ui/card_tile.dart';
 import 'package:features_reddit_posts_presentation/data/post_state.dart';
 import 'package:flutter/material.dart';
 
-class PostTile extends ListTile { // TODO: reuse CardTile
-  // const PostTile(this.state ,super.onTap, {Key? key}): super(key: key);
-  const PostTile(this.state, {super.key});
+class PostTile extends CardTile {
+  const PostTile(this.state, super.onTap, {super.key});
 
   final PostItemState state;
-
 
   @override
   Widget buildItem(BuildContext context) {
@@ -15,7 +14,9 @@ class PostTile extends ListTile { // TODO: reuse CardTile
         child: Row(
           children: [
             Text(state.author),
-            const Spacer(flex: 1,),
+            const Spacer(
+              flex: 1,
+            ),
             Text(
               state.title,
               style: const TextStyle(fontSize: 16),

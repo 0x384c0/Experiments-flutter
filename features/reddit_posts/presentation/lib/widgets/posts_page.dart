@@ -1,5 +1,6 @@
 library presentation;
 
+import 'package:common_presentation/ui/widget_extensions.dart';
 import 'package:features_reddit_posts_presentation/data/post_state.dart';
 import 'package:features_reddit_posts_presentation/widgets/post_tile.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,7 @@ class PostsView extends StatelessWidget {
             case PostsStatePopulated:
               return list(context, state as PostsStatePopulated);
             case PostsStateError:
-              // onError((state as PostsStateError).error, context); // TODO: reuse WidgetExtensions
+              onError((state as PostsStateError).error, context);
               return const SizedBox.shrink();
             case PostsStateEmpty:
               return const SizedBox.shrink();
@@ -52,10 +53,9 @@ class PostsView extends StatelessWidget {
   Widget list(BuildContext context, PostsStatePopulated state) {
     final cubit = ReadContext(context).read<PostsCubit>();
     List<Widget> widgets = state.posts
-        .map((e) => PostTile(e))
-    //     .map((e) => PostTile(e, () {
-    //   cubit.onPostClick(e);
-    // }))
+        .map((e) => PostTile(e, () {
+              cubit.onPostClick(e);
+            }))
         .toList();
     return RefreshIndicator(
         onRefresh: () => cubit.refresh(),
