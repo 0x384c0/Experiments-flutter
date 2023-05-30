@@ -43,7 +43,7 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 
 ### Adding New module
 - run `flutter create` in feature directory with unique project name. For example: `flutter create --template=package --project-name features_weather_presentation presentation`
-- remove platform folders. For example: `cd presentation && rm -rf android ios linux macos windows`
+- remove unused files. For example: `cd presentation && rm -rf android ios linux macos windows LICENSE CHANGELOG.md`
 - replace `homepage:` with `publish_to: none` in `podspec.yaml`
 - add dependencies from other modules
 - add this module as dependency to other modules using `path:`
