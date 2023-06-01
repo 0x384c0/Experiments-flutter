@@ -11,22 +11,42 @@ class PostTile extends CardTile {
   Widget buildItem(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
-        child: Row(
-          children: [
-            Text(state.author),
-            const Spacer(
-              flex: 1,
-            ),
-            Text(
-              state.title,
-              style: const TextStyle(fontSize: 16),
-            ),
-            Image.network(
-              state.icon,
-              width: 32,
-              height: 32,
-            ),
-          ],
-        ));
+        child: SizedBox(
+            width: double.infinity,
+            height: 64,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                AspectRatio(
+                  aspectRatio: 1,
+                  child: Image.network(
+                    state.icon,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        state.title,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      Wrap(
+                        spacing: 16,
+                        children: [
+                          Text(
+                            state.category,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          Text(state.author),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            )));
   }
 }

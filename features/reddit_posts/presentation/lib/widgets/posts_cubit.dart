@@ -14,7 +14,7 @@ class PostsCubit extends Cubit<PostsState> {
     // return interactor.getPosts()
     //     .then(postModelMapper.map)
     //     .catchError(catchError)
-    return Future.value(PostsStatePopulated([PostItemState("permalink", "author", "category", "icon", "title")]))
+    return Future.value(PostsStatePopulated([PostItemState("permalink", "author", "category", "https://a.thumbs.redditmedia.com/nLiItt44kuNMbjdW8ivLIsaedKeyudymQQsMNwtOO-0.jpg", "title")]))
         .then(emit);
   }
 
