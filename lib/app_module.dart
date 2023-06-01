@@ -1,4 +1,5 @@
 import 'package:features_home_presentation/navigation/routes_module.dart' as home;
+import 'package:features_reddit_posts_domain/di/domain_module.dart' as reddit_posts;
 import 'package:features_reddit_posts_presentation/di/presentation_module.dart' as reddit_posts;
 import 'package:features_reddit_posts_presentation/navigation/routes_module.dart' as reddit_posts;
 import 'package:features_weather_data/di/data_module.dart' as weather;
@@ -14,6 +15,7 @@ class AppModule extends Module {
         weather.DomainModule(),
         weather.PresentationModule(),
         reddit_posts.PresentationModule(),
+        reddit_posts.DomainModule(),
       ];
 
   @override

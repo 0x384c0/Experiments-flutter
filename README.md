@@ -51,6 +51,7 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 ## TODO
 * implement another [feature](/features/reddit_posts)
 * Remove fromModel() everywhere. Use mappers
+* reorganize directories, move common from features/
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)
 * update scheme screenshot
 * add app screenshots

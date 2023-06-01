@@ -32,7 +32,7 @@ class PostsView extends StatelessWidget {
     final cubit = ReadContext(context).read<PostsCubit>();
     cubit.refresh();
     return Scaffold(
-      appBar: AppBar(title: Text(locale.weather_home_page)),
+      appBar: AppBar(title: Text(locale.reddit_posts_home_page)),
       body: Center(
         child: BlocBuilder<PostsCubit, PostsState>(builder: (context, state) {
           switch (state.runtimeType) {

@@ -1,4 +1,4 @@
-name: features_reddit_posts_presentation
+name: features_reddit_posts_domain
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
@@ -10,26 +10,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
-  features_reddit_posts_domain:
-    path: "../domain"
-  common_presentation:
-    path: "../../common/presentation"
-  flutter_bloc: ^8.0.1
   flutter_modular: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  modular_test: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-  generate: true
 
   # To add assets to your package, add an assets section, like this:
   # assets:

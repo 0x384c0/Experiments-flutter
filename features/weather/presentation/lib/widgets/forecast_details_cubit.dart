@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:features_weather_presentation/data/weather_state.dart';
 import 'package:features_weather_presentation/utils/geo_location_provider.dart';
-import 'package:features_weather_presentation/utils/mapper.dart';
+import 'package:common_presentation/data/mapper.dart';
 
 class ForecastDetailsCubit extends Cubit<Map<String?, ForecastWeatherState?>> {
   ForecastDetailsCubit(super.initialState);
