@@ -19,7 +19,7 @@ abstract class WeatherInteractor {
 class WeatherInteractorImpl extends WeatherInteractor {
   WeatherInteractorImpl(this.remoteRepository);
 
-  late RemoteRepository remoteRepository;
+  RemoteRepository remoteRepository;
 
   @override
   Future<CurrentModel> getCurrent() {
