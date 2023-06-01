@@ -55,3 +55,4 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)
 * update scheme screenshot
 * add app screenshots
+* split localized string per module

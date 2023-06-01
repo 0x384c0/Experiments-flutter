@@ -12,13 +12,13 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  intl: any
   features_weather_domain:
     path: "../domain"
   common_presentation:
     path: "../../common/presentation"
   flutter_bloc: ^8.0.1
   flutter_modular: any
-  intl: ^0.17.0
   geolocator: ^9.0.1
   rxdart: ^0.27.5
 

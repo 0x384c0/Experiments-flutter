@@ -1,5 +1,3 @@
-import 'package:intl/intl.dart';
-
 abstract class PostsState {}
 
 class PostsStateEmpty implements PostsState {}
