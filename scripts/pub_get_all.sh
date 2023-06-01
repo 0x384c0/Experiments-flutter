@@ -1,9 +1,9 @@
 BASEDIR=$(realpath $(dirname "$0")/..)
-cd $BASEDIR/features/weather/domain
-flutter pub get
-cd $BASEDIR/features/weather/data
-flutter pub get
-cd $BASEDIR/features/weather/presentation
-flutter pub get
+for d in features/*/*; do
+  echo "----- Running pub get for $d -----"
+  cd $BASEDIR/$d
+  flutter pub get
+done
+
 cd $BASEDIR
 flutter pub get
