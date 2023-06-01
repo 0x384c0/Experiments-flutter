@@ -1,4 +1,5 @@
 import 'package:features_reddit_posts_domain/data/post_model.dart';
+import 'package:features_reddit_posts_domain/repository/remote_repository.dart';
 
 /// requests data from API
 abstract class PostsInteractor {
@@ -7,16 +8,12 @@ abstract class PostsInteractor {
 }
 
 class PostsInteractorImpl extends PostsInteractor {
+  PostsInteractorImpl(this.remoteRepository);
+
+  RemoteRepository remoteRepository;
+
   @override
   Future<List<PostModel>> getPosts() {
-    return Future.value(List.generate(
-        10,
-        (index) => PostModel(
-              "permalink",
-              "author",
-              "category",
-              "https://external-preview.redd.it/NWszZmJlM3Z6NTNiMW1BwCtpVDf8j5faduXZq-RKccAC52b2mpYTMxsPrNsJ.png?format=pjpg&auto=webp&v=enabled&s=2af5b356292ca89e78826abb6c282eb2502a7e76",
-              "title $index",
-            )));
+    return remoteRepository.getPosts();
   }
 }

@@ -5,7 +5,7 @@ class DomainModule extends Module {
   @override
   List<Bind> get binds => [
         Bind<PostsInteractor>(
-          (i) => PostsInteractorImpl(),
+          (i) => PostsInteractorImpl(i()),
           export: true,
         ),
       ];
