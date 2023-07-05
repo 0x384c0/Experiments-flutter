@@ -23,7 +23,7 @@ class NavigatorImpl implements Navigator {
 
   @override
   toForecastDetails(ForecastWeatherState state) {
-    Modular.to.pushNamed('${RoutesModule.path}/forecast?time_epoch=${state.dateEpoch}', arguments: state);
+    Modular.to.pushNamed('${RoutesModule.path}${RoutesModule.forecast}?${Params.timeEpoch}=${state.dateEpoch}', arguments: state);
   }
 
   @override

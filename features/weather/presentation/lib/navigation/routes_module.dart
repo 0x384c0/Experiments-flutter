@@ -7,19 +7,22 @@ import 'package:features_weather_presentation/widgets/weather_page.dart';
 
 class RoutesModule extends Module {
   static const path = '/weather';
+  static const forecast = '/forecast';
 
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const WeatherPage()),
         ChildRoute(
-          '/forecast',
+          forecast,
           child: (context, args) => BlocProvider.value(
-            value: ForecastDetailsCubit({
-              args.queryParams["time_epoch"]:
-                  args.data is ForecastWeatherState ? args.data : null
-            }),
+            value: ForecastDetailsCubit(
+                {args.queryParams[Params.timeEpoch]: args.data is ForecastWeatherState ? args.data : null}),
             child: const ForecastDetailsPage(),
           ),
         ),
       ];
+}
+
+class Params {
+  static const timeEpoch = 'time_epoch';
 }
