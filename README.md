@@ -1,5 +1,5 @@
-# Weather App
-A sample flutter app that shows today weather and forecast for current device location
+# Modular Flutter App
+A sample flutter app that has mutliple features.
 
 ![tests workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml/badge.svg)
 
@@ -41,7 +41,14 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 ### Test coverage
 - [data](/test/features/weather/data/remote_repository_test.dart)
 - [domain](/test/features/weather/domain/interactor_test.dart)
-- [widgets](/test/features/weather/presentation/)
+- [widgets](/test/features/weather/presentation)
+
+### [.run](.run) scripts
+* [build_runner](.run/build_runner.run.xml) - generate code for JSON Serializable 
+* [clean_all](.run/clean_all.run.xml) - run `flutter clean` in all modules
+* [pub_get_all](.run/pub_get_all.run.xml) - run `flutter pub get` in all modules
+* [generate_translate_file](.run/generate_translate_file.run.xml) - regenerate localized strings
+* [main.dart](.run/main.dart.run.xml) - run app
 
 ### Adding New module
 - run `flutter create` in feature directory with unique project name. For example: `flutter create --template=package --project-name features_weather_presentation presentation`
@@ -51,8 +58,7 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 - add this module as dependency to other modules using `path:`
 
 ## TODO
-* describe used abbreviations
-* describe all scripts from .run/
+* in post details use enum as state
 * Remove fromModel() everywhere. Use mappers
 * reorganize directories, move common from features/
 * split module common/presentation
