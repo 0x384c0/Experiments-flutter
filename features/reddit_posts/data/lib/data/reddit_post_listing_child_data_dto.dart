@@ -8,8 +8,10 @@ class RedditPostListingChildDataDTO {
 
   @JsonKey(name: "author")
   String? author;
-  @JsonKey(name: "text")
-  String? text;
+  @JsonKey(name: "title")
+  String? title;
+  @JsonKey(name: "body")
+  String? body;
   @JsonKey(name: "thumbnail")
   String? thumbnail;
   @JsonKey(name: "subreddit")

@@ -13,6 +13,7 @@ class PostModelsMapper extends Mapper<List<PostModel>, PostsState> {
               e.category ?? "",
               e.icon ?? "",
               e.title ?? "",
+              null,
             ))
         .toList());
   }

@@ -52,17 +52,15 @@ class PostsView extends StatelessWidget {
 
   Widget list(BuildContext context, PostsStatePopulated state) {
     final cubit = ReadContext(context).read<PostsCubit>();
-    List<Widget> widgets = state.posts
-        .map((e) => PostTile(e, () {
-              cubit.onPostClick(e);
-            }))
-        .toList();
+    var widgets = state.posts.map((e) => PostTile(e, () {
+          cubit.onPostClick(e);
+        }));
     return RefreshIndicator(
         onRefresh: () => cubit.refresh(),
         child: ListView.builder(
           itemCount: widgets.length,
           itemBuilder: (context, index) {
-            return widgets[index];
+            return widgets.elementAt(index);
           },
         ));
   }

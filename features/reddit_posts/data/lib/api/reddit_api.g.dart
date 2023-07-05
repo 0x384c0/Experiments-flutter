@@ -60,7 +60,7 @@ class _RedditApi implements RedditApi {
     )
             .compose(
               _dio.options,
-              '/r/${permalink}',
+              '${permalink}',
               queryParameters: queryParameters,
               data: _data,
             )

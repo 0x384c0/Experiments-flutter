@@ -14,7 +14,7 @@ class RedditPostListingDTOMapper extends Mapper<List<RedditPostListingDTO>, Post
               e.data?.author,
               e.data?.subreddit,
               e.data?.thumbnail,
-              e.data?.text,
+              e.data?.body,
               null,
             ))
         .toList();
@@ -23,7 +23,7 @@ class RedditPostListingDTOMapper extends Mapper<List<RedditPostListingDTO>, Post
       post?.author,
       post?.subreddit,
       post?.thumbnail,
-      post?.text,
+      post?.title,
       comments,
     );
   }

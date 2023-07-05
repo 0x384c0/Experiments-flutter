@@ -10,7 +10,8 @@ RedditPostListingChildDataDTO _$RedditPostListingChildDataDTOFromJson(
         Map<String, dynamic> json) =>
     RedditPostListingChildDataDTO()
       ..author = json['author'] as String?
-      ..text = json['text'] as String?
+      ..title = json['title'] as String?
+      ..body = json['body'] as String?
       ..thumbnail = json['thumbnail'] as String?
       ..subreddit = json['subreddit'] as String?;
 
@@ -18,7 +19,8 @@ Map<String, dynamic> _$RedditPostListingChildDataDTOToJson(
         RedditPostListingChildDataDTO instance) =>
     <String, dynamic>{
       'author': instance.author,
-      'text': instance.text,
+      'title': instance.title,
+      'body': instance.body,
       'thumbnail': instance.thumbnail,
       'subreddit': instance.subreddit,
     };

@@ -20,6 +20,9 @@ class PostItemState {
   final String category;
   final String icon;
   final String title;
+  final List<PostItemState>? comments;
 
-  PostItemState(this.permalink, this.author, this.category, this.icon, this.title);
+  bool get isComment => comments?.isEmpty ?? true;
+
+  PostItemState(this.permalink, this.author, this.category, this.icon, this.title, this.comments);
 }
