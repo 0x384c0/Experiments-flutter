@@ -9,7 +9,7 @@ class PostModelsMapper extends Mapper<Iterable<PostModel>, PostsState> {
           e.permalink!,
           e.author ?? "",
           e.category ?? "",
-          e.icon ?? "",
+          e.icon,
           e.title ?? "",
           null,
         )));

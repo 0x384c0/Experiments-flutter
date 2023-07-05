@@ -9,6 +9,7 @@ class PostTile extends CardTile {
 
   @override
   Widget buildItem(BuildContext context) {
+    var url = state.icon?.toString();
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
         child: SizedBox(
@@ -17,12 +18,12 @@ class PostTile extends CardTile {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                AspectRatio(
-                  aspectRatio: 1,
-                  child: Image.network(
-                    state.icon,
-                  ),
-                ),
+                url?.isEmpty ?? true
+                    ? const SizedBox.shrink()
+                    : AspectRatio(
+                        aspectRatio: 1,
+                        child: Image.network(url!),
+                      ),
                 Flexible(
                     child: Padding(
                   padding: const EdgeInsets.all(8.0),

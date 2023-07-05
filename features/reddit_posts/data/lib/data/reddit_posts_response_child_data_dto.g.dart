@@ -12,7 +12,7 @@ RedditPostsResponseChildDataDTO _$RedditPostsResponseChildDataDTOFromJson(
       ..permalink = json['permalink'] as String?
       ..author = json['author'] as String?
       ..subreddit = json['subreddit'] as String?
-      ..icon = json['icon'] as String?
+      ..thumbnail = json['thumbnail'] as String?
       ..title = json['title'] as String?;
 
 Map<String, dynamic> _$RedditPostsResponseChildDataDTOToJson(
@@ -21,6 +21,6 @@ Map<String, dynamic> _$RedditPostsResponseChildDataDTOToJson(
       'permalink': instance.permalink,
       'author': instance.author,
       'subreddit': instance.subreddit,
-      'icon': instance.icon,
+      'thumbnail': instance.thumbnail,
       'title': instance.title,
     };

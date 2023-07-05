@@ -12,8 +12,8 @@ class RedditPostsResponseChildDataDTO {
   String? author;
   @JsonKey(name: "subreddit")
   String? subreddit;
-  @JsonKey(name: "icon")
-  String? icon;
+  @JsonKey(name: "thumbnail")
+  String? thumbnail;
   @JsonKey(name: "title")
   String? title;
 

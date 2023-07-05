@@ -9,14 +9,14 @@ class PostModelMapper extends Mapper<PostModel, PostItemState> {
       input.permalink ?? "",
       input.author ?? "",
       input.category ?? "",
-      input.icon ?? "",
+      input.icon,
       input.title ?? "",
       input.comments
           ?.map((e) => PostItemState(
                 e.permalink ?? "",
                 e.author ?? "",
                 e.category ?? "",
-                e.icon ?? "",
+                e.icon,
                 e.title ?? "",
                 null,
               ))

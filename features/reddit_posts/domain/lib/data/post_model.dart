@@ -2,7 +2,7 @@ class PostModel {
   final String? permalink;
   final String? author;
   final String? category;
-  final String? icon;
+  final Uri? icon;
   final String? title;
   final Iterable<PostModel>? comments;
 
