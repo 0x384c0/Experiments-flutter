@@ -12,6 +12,7 @@ class RedditPostsResponseDTOMapper extends Mapper<RedditPostsResponseDTO, List<P
                   e.data?.subreddit,
                   e.data?.icon,
                   e.data?.title,
+                  null,
                 ))
             .toList() ??
         [];

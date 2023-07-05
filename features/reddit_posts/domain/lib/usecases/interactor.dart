@@ -5,6 +5,8 @@ import 'package:features_reddit_posts_domain/repository/remote_repository.dart';
 abstract class PostsInteractor {
   /// return list of [PostsModel] from API
   Future<List<PostModel>> getPosts();
+  /// return single [PostsModel] with comments from API
+  Future<PostModel> getPost(String permalink);
 }
 
 class PostsInteractorImpl extends PostsInteractor {
@@ -15,5 +17,10 @@ class PostsInteractorImpl extends PostsInteractor {
   @override
   Future<List<PostModel>> getPosts() {
     return remoteRepository.getPosts();
+  }
+
+  @override
+  Future<PostModel> getPost(String permalink) {
+    return remoteRepository.getPost(permalink);
   }
 }

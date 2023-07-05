@@ -4,6 +4,7 @@ class PostModel {
   final String? category;
   final String? icon;
   final String? title;
+  final List<PostModel>? comments;
 
-  PostModel(this.permalink, this.author, this.category, this.icon, this.title);
+  PostModel(this.permalink, this.author, this.category, this.icon, this.title, this.comments);
 }

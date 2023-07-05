@@ -21,7 +21,7 @@ class _RedditApi implements RedditApi {
   String? baseUrl;
 
   @override
-  Future<RedditPostsResponseDTO> getCurrent(
+  Future<RedditPostsResponseDTO> getPosts(
     subreddit,
     sort,
   ) async {
@@ -43,6 +43,32 @@ class _RedditApi implements RedditApi {
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = RedditPostsResponseDTO.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<RedditPostListingDTO>> getPost(permalink) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<RedditPostListingDTO>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/r/${permalink}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    var value = _result.data!
+        .map((dynamic i) =>
+            RedditPostListingDTO.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
