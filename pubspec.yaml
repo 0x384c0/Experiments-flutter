@@ -45,10 +45,12 @@ dependencies:
     path: "features/weather/data"
   features_weather_presentation:
     path: "features/weather/presentation"
-  features_reddit_posts_presentation:
-    path: "features/reddit_posts/presentation"
   features_reddit_posts_domain:
     path: "features/reddit_posts/domain"
+  features_reddit_posts_data:
+    path: "features/reddit_posts/data"
+  features_reddit_posts_presentation:
+    path: "features/reddit_posts/presentation"
 
 
   # The following adds the Cupertino Icons font to your application.

@@ -151,6 +151,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  features_reddit_posts_data:
+    dependency: "direct main"
+    description:
+      path: "features/reddit_posts/data"
+      relative: true
+    source: path
+    version: "0.0.1"
   features_reddit_posts_domain:
     dependency: "direct main"
     description:
