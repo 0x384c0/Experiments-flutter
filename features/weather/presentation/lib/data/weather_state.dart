@@ -8,7 +8,7 @@ class WeatherStateEmpty implements WeatherState {}
 
 class WeatherStatePopulated implements WeatherState {
   final CurrentWeatherState current;
-  final List<ForecastWeatherState> forecast;
+  final Iterable<ForecastWeatherState> forecast;
 
   WeatherStatePopulated(this.current, this.forecast);
 }

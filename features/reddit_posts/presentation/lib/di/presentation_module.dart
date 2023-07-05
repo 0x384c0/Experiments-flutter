@@ -13,7 +13,7 @@ class PresentationModule extends Module {
           (i) => NavigatorImpl(),
           export: true,
         ),
-        Bind<Mapper<List<PostModel>, PostsState>>(
+        Bind<Mapper<Iterable<PostModel>, PostsState>>(
           (i) => PostModelsMapper(),
           export: true,
         ),

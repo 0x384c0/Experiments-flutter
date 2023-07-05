@@ -28,7 +28,7 @@ class PostDetailsPage extends StatelessWidget {
   }
 
   Widget list(PostItemState state, PostDetailsCubit cubit) {
-    var widgets = ([state] + (state.comments ?? [])).map((e) {
+    var widgets = ([state] + (state.comments?.toList() ?? [])).map((e) {
       return e.isComment ? CommentTile(e, () {}) : PostTile(e, () {});
     });
     return RefreshIndicator(

@@ -6,6 +6,6 @@ class ForecastModelMapper extends Mapper<ForecastModel, WeatherState> {
   @override
   WeatherStatePopulated map(ForecastModel input) => WeatherStatePopulated(
         CurrentWeatherState.fromModel(input),
-        input.forecast?.map((e) => ForecastWeatherState.fromModel(e)).toList() ?? [],
+        input.forecast?.map((e) => ForecastWeatherState.fromModel(e)) ?? [],
       );
 }

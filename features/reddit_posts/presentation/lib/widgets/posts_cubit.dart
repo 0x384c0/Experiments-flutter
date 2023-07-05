@@ -11,7 +11,7 @@ class PostsCubit extends Cubit<PostsState> {
 
   late PostsInteractor interactor = Modular.get();
   late Navigator navigator = Modular.get();
-  late Mapper<List<PostModel>, PostsState> postModelMapper = Modular.get();
+  late Mapper<Iterable<PostModel>, PostsState> postModelMapper = Modular.get();
 
   Future<void> refresh() async {
     return interactor.getPosts().then(postModelMapper.map).catchError(catchError).then(emit);

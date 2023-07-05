@@ -13,11 +13,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 class DataModule extends Module {
   @override
   List<Bind> get binds => [
-        Bind<Mapper<RedditPostsResponseDTO, List<PostModel>>>(
+        Bind<Mapper<RedditPostsResponseDTO, Iterable<PostModel>>>(
           (i) => RedditPostsResponseDTOMapper(),
           export: true,
         ),
-        Bind<Mapper<List<RedditPostListingDTO>, PostModel>>(
+        Bind<Mapper<Iterable<RedditPostListingDTO>, PostModel>>(
           (i) => RedditPostListingDTOMapper(),
           export: true,
         ),

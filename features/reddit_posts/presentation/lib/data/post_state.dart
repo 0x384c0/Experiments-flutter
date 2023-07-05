@@ -3,7 +3,7 @@ abstract class PostsState {}
 class PostsStateEmpty implements PostsState {}
 
 class PostsStatePopulated implements PostsState {
-  final List<PostItemState> posts;
+  final Iterable<PostItemState> posts;
 
   PostsStatePopulated(this.posts);
 }
@@ -20,7 +20,7 @@ class PostItemState {
   final String category;
   final String icon;
   final String title;
-  final List<PostItemState>? comments;
+  final Iterable<PostItemState>? comments;
 
   bool get isComment => comments?.isEmpty ?? true;
 

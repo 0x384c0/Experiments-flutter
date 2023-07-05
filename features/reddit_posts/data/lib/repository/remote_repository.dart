@@ -15,7 +15,7 @@ class RemoteRepositoryImpl implements RemoteRepository {
   RedditPostListingDTOMapper redditPostListingDTOMapper;
 
   @override
-  Future<List<PostModel>> getPosts() {
+  Future<Iterable<PostModel>> getPosts() {
     return redditApi.getPosts("all", RedditPostsSortDTO.top).then(redditPostsResponseDTOMapper.map);
   }
 

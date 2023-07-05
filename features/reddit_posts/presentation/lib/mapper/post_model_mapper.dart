@@ -20,8 +20,7 @@ class PostModelMapper extends Mapper<PostModel, PostItemState> {
                 e.title ?? "",
                 null,
               ))
-          .where((element) => element.title.isNotEmpty)
-          .toList(),
+          .where((element) => element.title.isNotEmpty),
     );
   }
 }
