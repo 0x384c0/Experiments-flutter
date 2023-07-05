@@ -9,7 +9,7 @@ class RedditPostsResponseDTOMapper extends Mapper<RedditPostsResponseDTO, List<P
             ?.map((e) => PostModel(
                   e.data?.permalink,
                   e.data?.author,
-                  e.data?.category,
+                  e.data?.subreddit,
                   e.data?.icon,
                   e.data?.title,
                 ))

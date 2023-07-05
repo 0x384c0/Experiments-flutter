@@ -10,8 +10,8 @@ class RedditPostsResponseChildDataDTO {
   String? permalink;
   @JsonKey(name: "author")
   String? author;
-  @JsonKey(name: "category")
-  String? category;
+  @JsonKey(name: "subreddit")
+  String? subreddit;
   @JsonKey(name: "icon")
   String? icon;
   @JsonKey(name: "title")

@@ -23,7 +23,8 @@ class PostTile extends CardTile {
                     state.icon,
                   ),
                 ),
-                Padding(
+                Flexible(
+                    child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,21 +32,23 @@ class PostTile extends CardTile {
                     children: [
                       Text(
                         state.title,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontSize: 16),
                       ),
                       Wrap(
-                        spacing: 16,
+                        spacing: 4,
                         children: [
                           Text(
                             state.category,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
+                          const Text("•"),
                           Text(state.author),
                         ],
                       ),
                     ],
                   ),
-                )
+                ))
               ],
             )));
   }
