@@ -3,15 +3,17 @@ A sample flutter app that shows today weather and forecast for current device lo
 
 ![tests workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml/badge.svg)
 
+<img src="/media/mac_app_screenshot.jpg" height="300">
+
 ### Build Requirements
 * [flutter](https://github.com/flutter/flutter) 3.+
 * Android Studio
 
 ### Modules
-App has single feature - [weather](/features/weather). Feature split in to 3 modules
-- [Presentation](/features/weather/presentation) - contains Presentation Layer (widgets and cubits)
-- [Domain](/features/weather/domain) - contains Domain layer with business logic (interactors and interfaces)
-- [Data](/features/weather/data) - contains Data layer with REST API requests
+App has multiple features - [posts](/features/reddit_posts), [weather](/features/weather). Each feature split in to 3 modules
+- [Presentation](/features/reddit_posts/presentation) - contains Presentation Layer (widgets and cubits)
+- [Domain](/features/reddit_posts/domain) - contains Domain layer with business logic (interactors and interfaces)
+- [Data](/features/reddit_posts/data) - contains Data layer with REST API requests
 
 ### Layers Scheme
 
@@ -19,10 +21,10 @@ App has single feature - [weather](/features/weather). Feature split in to 3 mod
 
 ### Communication between layers
 
-1. [UI](/features/weather/presentation/lib/widgets/weather_page.dart) sends signals to [Cubit](/features/weather/presentation/lib/widgets/weather_cubit.dart)
-2. Cubit executes Use cases from [Interactor](/features/weather/domain/lib/usecases/interactor.dart).
-3. Use case obtains data from [Repository](/features/weather/data/lib/repository/remote_repository.dart)
-4. Repository returns data from a [Api](/features/weather/data/lib/api/weather_api.dart).
+1. [UI](/features/reddit_posts/presentation/lib/widgets/posts_page.dart) sends signals to [Cubit](/features/reddit_posts/presentation/lib/widgets/posts_cubit.dart)
+2. Cubit executes Use cases from [Interactor](/features/reddit_posts/domain/lib/usecases/interactor.dart).
+3. Use case obtains data from [Repository](/features/reddit_posts/data/lib/repository/remote_repository.dart)
+4. Repository returns data from a [Api](/features/reddit_posts/data/lib/api/reddit_api.dart).
 5. Information flows back to the UI to be displayed.
 
 Presentation and Data depends on Domain, but Domain know nothing about them.
@@ -49,13 +51,10 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 - add this module as dependency to other modules using `path:`
 
 ## TODO
-* implement another [feature](/features/reddit_posts)
+* describe used abbreviations
+* describe all scripts from .run/
 * Remove fromModel() everywhere. Use mappers
 * reorganize directories, move common from features/
 * split module common/presentation
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)
-* update scheme screenshot
-* add app screenshots
-* describe used abbreviations
-* describe all scripts from .run/ 
 * split localized string per module
