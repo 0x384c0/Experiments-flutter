@@ -6,12 +6,13 @@ class PostModelsMapper extends Mapper<List<PostModel>, PostsState> {
   @override
   PostsState map(List<PostModel> input) {
     return PostsStatePopulated(input
+        .where((element) => element.permalink != null)
         .map((e) => PostItemState(
-              e.permalink,
-              e.author,
-              e.category,
-              e.icon,
-              e.title,
+              e.permalink!,
+              e.author ?? "",
+              e.category ?? "",
+              e.icon ?? "",
+              e.title ?? "",
             ))
         .toList());
   }

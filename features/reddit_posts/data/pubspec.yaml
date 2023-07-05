@@ -12,7 +12,9 @@ dependencies:
     sdk: flutter
   features_reddit_posts_domain:
     path: "../domain"
-  json_annotation: ^4.4.0
+  common_presentation:
+    path: "../../common/presentation"
+  json_annotation: ^4.8.1
   retrofit: '>=3.0.0 <4.0.0'
   dio: any
   flutter_modular: any

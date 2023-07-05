@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   features_weather_domain:
     path: "../domain"
-  json_annotation: ^4.4.0
+  json_annotation: ^4.8.1
   retrofit: '>=3.0.0 <4.0.0'
   dio: any
   flutter_modular: any
