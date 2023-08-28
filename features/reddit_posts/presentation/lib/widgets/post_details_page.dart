@@ -31,7 +31,7 @@ class PostDetailsPage extends StatelessWidget {
               appBar: AppBar(title: Text(state.postItemState.category)),
               body: Center(child: list(state.postItemState, context, false)));
         case PostDetailsStateError:
-          onError((state as PostsStateError).error, context);
+          onError((state as PostDetailsStateError).error, context);
           return empty();
       }
       throw Exception("illegal state $state");
@@ -49,13 +49,14 @@ class PostDetailsPage extends StatelessWidget {
     });
 
     if (isLoading) {
-      _refreshIndicatorKey.currentState?.show();
-      cubit.refresh().catchError((error) => {onError(error, context)});
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _refreshIndicatorKey.currentState?.show();
+      });
     }
 
     return RefreshIndicator(
       key: _refreshIndicatorKey,
-      onRefresh: () => cubit.refresh().catchError((error) => {onError(error, context)}),
+      onRefresh: () => refreshWithError(cubit, context),
       child: ListView.builder(
         itemCount: widgets.length,
         itemBuilder: (context, index) {
@@ -71,5 +72,10 @@ class PostDetailsPage extends StatelessWidget {
 
   Widget empty() {
     return const SizedBox.shrink();
+  }
+
+  Future<void> refreshWithError(PostDetailsCubit cubit, BuildContext context) {
+    print("!!! refreshWithError");
+    return cubit.refresh().catchError((error) => {onError(error, context)});
   }
 }
