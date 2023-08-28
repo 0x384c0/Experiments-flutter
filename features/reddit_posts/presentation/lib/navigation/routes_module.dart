@@ -1,3 +1,4 @@
+import 'package:features_reddit_posts_presentation/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/data/post_state.dart';
 import 'package:features_reddit_posts_presentation/widgets/post_details_cubit.dart';
 import 'package:features_reddit_posts_presentation/widgets/post_details_page.dart';
@@ -12,14 +13,17 @@ class RoutesModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (context, args) => const PostsPage()),
-        ChildRoute(
-          postDetails,
-          child: (context, args) => BlocProvider.value(
-            value:
-                PostDetailsCubit({args.queryParams[Params.permalink]: args.data is PostItemState ? args.data : null}),
-            child: const PostDetailsPage(),
-          ),
-        ),
+        ChildRoute(postDetails, child: (context, args) {
+          var permalink = args.queryParams[Params.permalink];
+          var postItemState = args.data is PostItemState ? args.data : null;
+          var state = postItemState != null
+              ? PostDetailsStateEmptyComments(permalink, postItemState)
+              : PostDetailsStateEmpty(permalink);
+          return BlocProvider.value(
+            value: PostDetailsCubit(state),
+            child: PostDetailsPage(),
+          );
+        }),
       ];
 }
 

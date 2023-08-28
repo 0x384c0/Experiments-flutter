@@ -1,4 +1,5 @@
 import 'package:common_presentation/ui/widget_extensions.dart';
+import 'package:features_reddit_posts_presentation/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/data/post_state.dart';
 import 'package:features_reddit_posts_presentation/widgets/comment_tile.dart';
 import 'package:features_reddit_posts_presentation/widgets/post_details_cubit.dart';
@@ -10,29 +11,51 @@ import 'post_tile.dart';
 
 /// Screen with post details
 class PostDetailsPage extends StatelessWidget {
-  const PostDetailsPage({Key? key}) : super(key: key);
+  PostDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
-    return BlocBuilder<PostDetailsCubit, Map<String?, PostItemState?>>(builder: (context, args) {
-      final state = args.values.first;
-      final cubit = ReadContext(context).read<PostDetailsCubit>();
-      cubit.refresh().catchError((error) => {onError(error, context)});
-      return Scaffold(
-          appBar: AppBar(
-            title: Text(state?.category ?? locale.loading),
-          ),
-          body: Center(child: state != null ? list(state, cubit) : loading()));
+    return BlocBuilder<PostDetailsCubit, PostDetailsState>(builder: (context, state) {
+      switch (state.runtimeType) {
+        case PostDetailsStateEmpty:
+          return Scaffold(appBar: AppBar(title: Text(locale.loading)), body: Center(child: loading()));
+        case PostDetailsStateEmptyComments:
+          state = (state as PostDetailsStateEmptyComments);
+          return Scaffold(
+              appBar: AppBar(title: Text(state.postItemState.category)),
+              body: Center(child: list(state.postItemState, context, true)));
+        case PostDetailsStatePopulated:
+          state = (state as PostDetailsStatePopulated);
+          return Scaffold(
+              appBar: AppBar(title: Text(state.postItemState.category)),
+              body: Center(child: list(state.postItemState, context, false)));
+        case PostDetailsStateError:
+          onError((state as PostsStateError).error, context);
+          return empty();
+      }
+      throw Exception("illegal state $state");
     });
   }
 
-  Widget list(PostItemState state, PostDetailsCubit cubit) {
-    var widgets = ([state] + (state.comments?.toList() ?? [])).map((e) {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey = GlobalKey<RefreshIndicatorState>();
+
+  Widget list(PostItemState? state, BuildContext context, bool isLoading) {
+    final cubit = ReadContext(context).read<PostDetailsCubit>();
+    var comments = state?.comments?.toList() ?? [];
+    var stateAsList = (state != null) ? [state] : [];
+    var widgets = (stateAsList + comments).map((e) {
       return e.isComment ? CommentTile(e, () {}) : PostTile(e, () {});
     });
+
+    if (isLoading) {
+      _refreshIndicatorKey.currentState?.show();
+      cubit.refresh().catchError((error) => {onError(error, context)});
+    }
+
     return RefreshIndicator(
-      onRefresh: () => cubit.refresh(),
+      key: _refreshIndicatorKey,
+      onRefresh: () => cubit.refresh().catchError((error) => {onError(error, context)}),
       child: ListView.builder(
         itemCount: widgets.length,
         itemBuilder: (context, index) {
@@ -44,5 +67,9 @@ class PostDetailsPage extends StatelessWidget {
 
   Widget loading() {
     return const Center(child: CircularProgressIndicator());
+  }
+
+  Widget empty() {
+    return const SizedBox.shrink();
   }
 }

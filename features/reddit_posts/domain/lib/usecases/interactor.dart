@@ -6,7 +6,7 @@ abstract class PostsInteractor {
   /// return list of [PostsModel] from API
   Future<Iterable<PostModel>> getPosts();
   /// return single [PostsModel] with comments from API
-  Future<PostModel> getPost(String permalink);
+  Future<PostModel> getPost(String? permalink);
 }
 
 class PostsInteractorImpl extends PostsInteractor {
@@ -20,7 +20,7 @@ class PostsInteractorImpl extends PostsInteractor {
   }
 
   @override
-  Future<PostModel> getPost(String permalink) {
-    return remoteRepository.getPost(permalink);
+  Future<PostModel> getPost(String? permalink) {
+    return permalink != null ? remoteRepository.getPost(permalink) : Future.error(const FormatException("permalink is null"));
   }
 }

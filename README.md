@@ -58,7 +58,6 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 - add this module as dependency to other modules using `path:`
 
 ## TODO
-* in post details use enum as state
 * Remove fromModel() everywhere. Use mappers
 * reorganize directories, move common from features/
 * split module common/presentation

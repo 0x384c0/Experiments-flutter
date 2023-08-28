@@ -1,17 +1,38 @@
 import 'post_state.dart';
 
-abstract class PostDetailsState {}
+abstract class PostDetailsState {
+  final String? permalink;
 
-class PostDetailsStateEmpty implements PostDetailsState {}
+  PostDetailsState(this.permalink);
+}
+
+class PostDetailsStateEmpty implements PostDetailsState {
+  @override
+  final String? permalink;
+
+  PostDetailsStateEmpty(this.permalink);
+}
+
+class PostDetailsStateEmptyComments implements PostDetailsState {
+  @override
+  final String? permalink;
+  final PostItemState postItemState;
+
+  PostDetailsStateEmptyComments(this.permalink, this.postItemState);
+}
 
 class PostDetailsStatePopulated implements PostDetailsState {
-  final Map<String?, PostItemState?> postsDetails;
+  @override
+  final String? permalink;
+  final PostItemState postItemState;
 
-  PostDetailsStatePopulated(this.postsDetails);
+  PostDetailsStatePopulated(this.permalink, this.postItemState);
 }
 
 class PostDetailsStateError implements PostDetailsState {
+  @override
+  final String? permalink;
   final Object error;
 
-  PostDetailsStateError(this.error);
+  PostDetailsStateError(this.permalink, this.error);
 }

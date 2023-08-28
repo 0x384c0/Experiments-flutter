@@ -1,5 +1,6 @@
 import 'package:common_presentation/data/mapper.dart';
 import 'package:features_reddit_posts_domain/data/post_model.dart';
+import 'package:features_reddit_posts_presentation/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/data/post_state.dart';
 import 'package:features_reddit_posts_presentation/mapper/post_model_mapper.dart';
 import 'package:features_reddit_posts_presentation/mapper/post_models_mapper.dart';
@@ -17,7 +18,7 @@ class PresentationModule extends Module {
           (i) => PostModelsMapper(),
           export: true,
         ),
-        Bind<Mapper<PostModel, PostItemState>>(
+        Bind<Mapper<PostModel, PostDetailsState>>(
           (i) => PostModelMapper(),
           export: true,
         ),
