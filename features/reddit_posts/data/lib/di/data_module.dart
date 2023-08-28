@@ -17,7 +17,7 @@ class DataModule extends Module {
           (i) => RedditPostsResponseDTOMapper(),
           export: true,
         ),
-        Bind<Mapper<Iterable<RedditPostListingDTO>, PostModel>>(
+        Bind<Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel>>(
           (i) => RedditPostListingDTOMapper(),
           export: true,
         ),

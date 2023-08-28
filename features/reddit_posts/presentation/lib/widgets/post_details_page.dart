@@ -75,7 +75,6 @@ class PostDetailsPage extends StatelessWidget {
   }
 
   Future<void> refreshWithError(PostDetailsCubit cubit, BuildContext context) {
-    print("!!! refreshWithError");
     return cubit.refresh().catchError((error) => {onError(error, context)});
   }
 }
