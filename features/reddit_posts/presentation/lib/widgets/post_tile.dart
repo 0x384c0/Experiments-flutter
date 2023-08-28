@@ -36,15 +36,21 @@ class PostTile extends CardTile {
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontSize: 16),
                       ),
-                      Wrap(
-                        spacing: 4,
+                      Row(
                         children: [
                           Text(
                             state.category,
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
+                          const SizedBox(width: 4),
                           const Text("•"),
-                          Text(state.author),
+                          const SizedBox(width: 4),
+                          Expanded(
+                            child: Text(
+                              state.author,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          )
                         ],
                       ),
                     ],
