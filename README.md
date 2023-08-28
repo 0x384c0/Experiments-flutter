@@ -62,4 +62,6 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 * reorganize directories, move common from features/
 * split module common/presentation
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)
+* on error dismiss previous errors and add option to refresh after error
+* add paging
 * split localized string per module
