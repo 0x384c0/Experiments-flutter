@@ -5,7 +5,7 @@ import 'package:features_weather_presentation/mapper/forecast_item_model_mapper.
 import 'package:features_weather_presentation/mapper/forecast_model_mapper.dart';
 import 'package:features_weather_presentation/navigation/navigator.dart';
 import 'package:features_weather_presentation/utils/geo_location_provider.dart';
-import 'package:common_presentation/data/mapper.dart';
+import 'package:common_domain/mapper/mapper.dart';
 
 class PresentationModule extends Module {
   @override

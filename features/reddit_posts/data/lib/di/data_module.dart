@@ -1,4 +1,4 @@
-import 'package:common_presentation/data/mapper.dart';
+import 'package:common_domain/mapper/mapper.dart';
 import 'package:dio/dio.dart';
 import 'package:features_reddit_posts_data/api/reddit_api.dart';
 import 'package:features_reddit_posts_data/data/reddit_post_listing_dto.dart';

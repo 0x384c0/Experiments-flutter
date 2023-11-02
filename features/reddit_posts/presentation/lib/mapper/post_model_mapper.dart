@@ -1,4 +1,4 @@
-import 'package:common_presentation/data/mapper.dart';
+import 'package:common_domain/mapper/mapper.dart';
 import 'package:features_reddit_posts_domain/data/post_model.dart';
 import 'package:features_reddit_posts_presentation/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/data/post_state.dart';

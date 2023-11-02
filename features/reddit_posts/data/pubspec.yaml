@@ -14,6 +14,8 @@ dependencies:
     path: "../domain"
   common_presentation:
     path: "../../../common/presentation"
+  common_domain:
+    path: "../../../common/domain"
   json_annotation: ^4.8.1
   retrofit: '>=3.0.0 <4.0.0'
   dio: any

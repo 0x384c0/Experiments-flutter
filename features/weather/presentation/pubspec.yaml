@@ -17,6 +17,8 @@ dependencies:
     path: "../domain"
   common_presentation:
     path: "../../../common/presentation"
+  common_domain:
+    path: "../../../common/domain"
   flutter_bloc: ^8.0.1
   flutter_modular: any
   geolocator: ^9.0.1

@@ -1,4 +1,4 @@
-import 'package:common_presentation/data/mapper.dart';
+import 'package:common_domain/mapper/mapper.dart';
 import 'package:features_weather_domain/data/forecast_model.dart';
 import 'package:features_weather_presentation/data/weather_state.dart';
 import 'package:intl/intl.dart';
