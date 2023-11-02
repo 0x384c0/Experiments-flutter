@@ -22,3 +22,5 @@ jobs:
 
       - name: Deploy web app
         uses: bluefireteam/flutter-gh-pages@v7
+        with:
+          baseHref: /Experiments-flutter/
