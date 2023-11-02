@@ -1,7 +1,3 @@
-import 'package:features_weather_domain/data/forecast_model.dart';
-import 'package:features_weather_domain/data/weather_model.dart';
-import 'package:intl/intl.dart';
-
 abstract class WeatherState {}
 
 class WeatherStateEmpty implements WeatherState {}
@@ -10,7 +6,10 @@ class WeatherStatePopulated implements WeatherState {
   final CurrentWeatherState current;
   final Iterable<ForecastWeatherState> forecast;
 
-  WeatherStatePopulated(this.current, this.forecast);
+  WeatherStatePopulated(
+    this.current,
+    this.forecast,
+  );
 }
 
 class WeatherStateError implements WeatherState {
@@ -26,12 +25,13 @@ class CurrentWeatherState {
   final String precipitation;
   final ConditionState condition;
 
-  CurrentWeatherState.fromModel(ForecastModel model)
-      : temp = "${model.current?.temp}°",
-        wind = "${model.current?.wind} km/h",
-        humidity = "${model.current?.humidity}%",
-        precipitation = "${model.current?.precipitation} mm",
-        condition = ConditionState.fromModel(model.current?.condition);
+  CurrentWeatherState(
+    this.temp,
+    this.wind,
+    this.humidity,
+    this.precipitation,
+    this.condition,
+  );
 }
 
 class ForecastWeatherState {
@@ -43,22 +43,23 @@ class ForecastWeatherState {
   final String wind;
   final ConditionState condition;
 
-  ForecastWeatherState.fromModel(ForecastItemModel model)
-      : dateEpoch = "${model.dateEpoch}",
-        date =
-            DateFormat("EEE, MMM d, yyyy").format(model.date ?? DateTime.now()),
-        temp = "${model.averageTemp}°",
-        chanceOfRain = "${model.chanceOfRain}%",
-        humidity = "${model.averageHumidity}%",
-        wind = "${model.maxWind} km/h",
-        condition = ConditionState.fromModel(model.condition);
+  ForecastWeatherState(
+    this.dateEpoch,
+    this.date,
+    this.temp,
+    this.chanceOfRain,
+    this.humidity,
+    this.wind,
+    this.condition,
+  );
 }
 
 class ConditionState {
   final String text;
   final String icon;
 
-  ConditionState.fromModel(ConditionModel? model)
-      : text = model?.text ?? "",
-        icon = model?.icon?.replaceAll("//", "https://") ?? "";
+  ConditionState(
+    this.text,
+    this.icon,
+  );
 }

@@ -58,7 +58,6 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 - add this module as dependency to other modules using `path:`
 
 ## TODO
-* Remove fromModel() everywhere. Use mappers
 * split module common/presentation
 * add CI for building web app
 * add paging
