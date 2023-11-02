@@ -1,3 +1,4 @@
+# !/bin/sh
 BASEDIR=$(realpath "$(dirname "$0")"/..)
 for d in features/*/data; do
   echo "----- Running build_runner for $d -----"

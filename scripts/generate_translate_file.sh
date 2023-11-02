@@ -1,3 +1,4 @@
+# !/bin/sh
 BASEDIR=$(realpath "$(dirname "$0")"/..)
 for file in features/*/*/l10n.yaml; do
   d="$(dirname "$file")"

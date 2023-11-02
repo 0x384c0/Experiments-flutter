@@ -58,8 +58,6 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 - add this module as dependency to other modules using `path:`
 
 ## TODO
-* split module common/presentation
-* add CI for building web app
 * add paging
 * on error dismiss previous errors and add option to refresh after error
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)

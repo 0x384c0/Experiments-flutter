@@ -1,6 +1,7 @@
+# !/bin/sh
 BASEDIR=$(realpath "$(dirname "$0")"/..)
 
-function info {
+info () {
 	echo "$(tput setaf 2; tput bold;)INFO: $1$(tput sgr0)"
 }
 
