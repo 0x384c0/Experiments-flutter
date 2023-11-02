@@ -15,7 +15,7 @@ dependencies:
   features_reddit_posts_domain:
     path: "../domain"
   common_presentation:
-    path: "../../common/presentation"
+    path: "../../../common/presentation"
   flutter_bloc: ^8.0.1
   flutter_modular: any
 

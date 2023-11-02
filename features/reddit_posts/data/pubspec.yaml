@@ -13,7 +13,7 @@ dependencies:
   features_reddit_posts_domain:
     path: "../domain"
   common_presentation:
-    path: "../../common/presentation"
+    path: "../../../common/presentation"
   json_annotation: ^4.8.1
   retrofit: '>=3.0.0 <4.0.0'
   dio: any

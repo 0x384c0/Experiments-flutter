@@ -52,7 +52,7 @@ packages:
   common_presentation:
     dependency: "direct main"
     description:
-      path: "../../common/presentation"
+      path: "../../../common/presentation"
       relative: true
     source: path
     version: "0.0.1"
