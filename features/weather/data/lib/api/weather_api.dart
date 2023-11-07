@@ -5,7 +5,7 @@ import 'package:features_weather_data/data/forecast_response_dto.dart';
 
 part 'weather_api.g.dart';
 
-@RestApi(baseUrl: "http://api.weatherapi.com/v1")
+@RestApi(baseUrl: "https://api.weatherapi.com/v1")
 abstract class WeatherApi {
   factory WeatherApi(Dio dio, {String baseUrl}) = _WeatherApi;
 
