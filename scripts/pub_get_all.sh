@@ -11,5 +11,5 @@ for dir in $(find "$BASEDIR" -type f -name "pubspec.yaml" ! -path "*/.*" -exec d
   info "Working directory: $dir"
 
   # Change to the directory and run 'flutter pub get'
-  (cd "$dir" && flutter pub get)
+  (cd "$dir" && flutter pub get) # replace get with upgrade to update all libraries
 done

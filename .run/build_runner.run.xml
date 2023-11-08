@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="build_runner" type="ShConfigurationType">
-    <option name="SCRIPT_TEXT" value="sh build_runner.sh" />
+    <option name="SCRIPT_TEXT" value="" />
     <option name="INDEPENDENT_SCRIPT_PATH" value="true" />
     <option name="SCRIPT_PATH" value="$PROJECT_DIR$/scripts/build_runner.sh" />
     <option name="SCRIPT_OPTIONS" value="" />
