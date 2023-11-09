@@ -1,0 +1,49 @@
+# Unit tests
+unit_tests:
+  stage: test
+  tags:
+    - mobile
+  only:
+    - merge_requests
+    - developer
+    - master
+  script:
+    - sh scripts/run_tests.sh
+
+# Android
+compile_android:
+  stage: build
+  tags:
+    - mobile
+  only:
+    - merge_requests
+    - developer
+    - master
+  artifacts:
+    paths:
+      - build/app/outputs/flutter-apk/app-release.apk
+  script:
+    sh scripts/compile_android.sh
+
+deploy_to_stage_android:
+  stage: deploy
+  tags:
+    - mobile
+  needs:
+    - unit_tests
+    - compile_android
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"'
+      when: manual
+      allow_failure: true
+  before_script:
+    - sh scripts/init_bundler.sh
+  script:
+    - sh scripts/deploy_to_stage_android.sh
+
+before_script:
+  - sh scripts/validate_environment.sh
+  - sh scripts/set_version.sh
+  - sh scripts/pub_get_all.sh
+  - sh scripts/build_runner.sh
+  - sh scripts/generate_translate_file.sh

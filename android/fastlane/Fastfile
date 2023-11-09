@@ -1,0 +1,28 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+platform :android do
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta_android do
+    firebase_app_distribution(
+        app: ENV["FIREBASE_ANDROID_APP_ID"],
+        groups: "beta_testers",
+        android_artifact_type: "APK",
+        apk_path: "../build/app/outputs/flutter-apk/app-release.apk"
+    )
+  end
+end

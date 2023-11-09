@@ -15,6 +15,10 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+
+# Patch version number and build number are controlled by CI with script scripts/set_version.sh
+# You should only edit minor and major version numbers
+
 version: 1.0.0+1
 
 environment:
