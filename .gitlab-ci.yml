@@ -33,7 +33,9 @@ deploy_to_stage_android:
     - unit_tests
     - compile_android
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "developer"'
+      when: on_success
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "developer"'
       when: manual
       allow_failure: true
   before_script:
