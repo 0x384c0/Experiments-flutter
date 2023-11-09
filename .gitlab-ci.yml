@@ -5,7 +5,7 @@ unit_tests:
     - mobile
   only:
     - merge_requests
-    - developer
+    - develop
     - master
   script:
     - sh scripts/run_tests.sh
@@ -17,7 +17,7 @@ compile_android:
     - mobile
   only:
     - merge_requests
-    - developer
+    - develop
     - master
   artifacts:
     paths:
@@ -33,9 +33,9 @@ deploy_to_stage_android:
     - unit_tests
     - compile_android
   rules:
-    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "developer"'
+    - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "develop"'
       when: on_success
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "developer"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"'
       when: manual
       allow_failure: true
   before_script:
