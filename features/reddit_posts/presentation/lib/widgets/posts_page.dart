@@ -15,8 +15,8 @@ class PostsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => PostsCubit(),
+    return BlocProvider.value(
+      value: PostsCubit(),
       child: const PostsView(),
     );
   }
@@ -30,6 +30,7 @@ class PostsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
     final cubit = ReadContext(context).read<PostsCubit>();
+    // TODO: use BlocBuilder
     cubit.refresh();
     return Scaffold(
       appBar: AppBar(title: Text(locale.reddit_posts_home_page)),
