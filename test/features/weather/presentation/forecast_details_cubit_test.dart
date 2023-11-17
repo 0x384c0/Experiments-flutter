@@ -11,7 +11,8 @@ main() {
   late ForecastDetailsCubit sut;
   setUp(() async {
     TestModule.initModules();
-    sut = await mockHydratedStorage(() => ForecastDetailsCubit({MockWeatherApiImpl.dateEpoch.toString(): null}));
+    mockHydratedStorage();
+    sut = ForecastDetailsCubit({MockWeatherApiImpl.dateEpoch.toString(): null});
   });
 
   blocTest<ForecastDetailsCubit, Map<String?, ForecastWeatherState?>?>(

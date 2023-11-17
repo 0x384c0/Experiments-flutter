@@ -11,13 +11,14 @@ main() {
   late WeatherCubit sut;
   setUp(() async {
     TestModule.initModules();
-    sut = await mockHydratedStorage(WeatherCubit.new);
+    mockHydratedStorage();
+    sut = WeatherCubit();
   });
 
   blocTest<WeatherCubit, WeatherState>(
     'refresh successful',
     build: () => sut,
     act: (cubit) => cubit.refresh(),
-    verify: (bloc) => {expect((sut.state as WeatherStatePopulated).forecast.length, MockWeatherApiImpl.forecastItems)}
+    verify: (bloc) => {expect((sut.state as WeatherStatePopulated).forecast.length, MockWeatherApiImpl.forecastItems)},
   );
 }
