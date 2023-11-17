@@ -13,10 +13,10 @@ packages:
     dependency: transitive
     description:
       name: auto_injector
-      sha256: "2b0a076df2dd300ba3acfc270653f351fadf4d7889f042cd853f80ac83661af7"
+      sha256: "2952a4d4339ed3b65e8e54765ec68ee6ada5cb21d83cb8d39e3f6b4e690ab5ca"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.0"
+    version: "2.0.2"
   bloc:
     dependency: transitive
     description:
@@ -124,10 +124,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_modular
-      sha256: "0d50176ce394b792b447ee1c73e51e60c42b028a07b1974f3930f962c5f5e933"
+      sha256: ac6298ce1abd414286ee5a554fc45e81e358461979b5d4e02c8abd685e3b23f2
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.4+1"
+    version: "6.3.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -150,10 +150,10 @@ packages:
     dependency: transitive
     description:
       name: geolocator_android
-      sha256: "741579fa6c9e412984d2bdb2fbaa54e3c3f7587c60aeacfe6e058358a11f40f8"
+      sha256: "93906636752ea4d4e778afa981fdfe7409f545b3147046300df194330044d349"
       url: "https://pub.dev"
     source: hosted
-    version: "4.4.0"
+    version: "4.3.1"
   geolocator_apple:
     dependency: transitive
     description:
@@ -230,10 +230,10 @@ packages:
     dependency: transitive
     description:
       name: modular_core
-      sha256: fbcc3683dedbe0ccd1d75636c94c057b56c5ec4e068cc0ac40cefd5ba27c109c
+      sha256: "5baaa460ac9d85d457d6864ef41a2194b8115a6bdeb585a684789f2d9004c892"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.3+1"
+    version: "3.3.2"
   nested:
     dependency: transitive
     description:
@@ -262,10 +262,10 @@ packages:
     dependency: transitive
     description:
       name: provider
-      sha256: cdbe7530b12ecd9eb455bdaa2fcb8d4dad22e80b8afb4798b41479d5ce26847f
+      sha256: "9a96a0a19b594dbc5bf0f1f27d2bc67d5f95957359b461cd9feb44ed6ae75096"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.5"
+    version: "6.1.1"
   result_dart:
     dependency: transitive
     description:
@@ -295,14 +295,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
-  sprintf:
-    dependency: transitive
-    description:
-      name: sprintf
-      sha256: "1fc9ffe69d4df602376b52949af107d8f5703b77cda567c4d7d86a0693120f23"
-      url: "https://pub.dev"
-    source: hosted
-    version: "7.0.0"
   stack_trace:
     dependency: transitive
     description:
@@ -355,10 +347,10 @@ packages:
     dependency: transitive
     description:
       name: uuid
-      sha256: df5a4d8f22ee4ccd77f8839ac7cb274ebc11ef9adcce8b92be14b797fe889921
+      sha256: "648e103079f7c64a36dc7d39369cabb358d377078a051d6ae2ad3aa539519313"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.1"
+    version: "3.0.7"
   vector_math:
     dependency: transitive
     description:
@@ -377,4 +369,4 @@ packages:
     version: "0.1.4-beta"
 sdks:
   dart: ">=3.1.5 <4.0.0"
-  flutter: ">=3.13.0"
+  flutter: ">=2.8.0"

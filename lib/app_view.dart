@@ -8,11 +8,8 @@ class AppView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.grey[100],
-      ),
-      routeInformationParser: Modular.routeInformationParser,
-      routerDelegate: Modular.routerDelegate,
+      theme: ThemeData(scaffoldBackgroundColor: Colors.grey[100]),
+      routerConfig: Modular.routerConfig,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
     );

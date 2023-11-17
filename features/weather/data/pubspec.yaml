@@ -15,7 +15,7 @@ dependencies:
   json_annotation: ^4.8.1
   retrofit: '>=3.0.0 <4.0.0'
   dio: any
-  flutter_modular: any
+  flutter_modular: ^6.3.2
 
 dev_dependencies:
   flutter_test:

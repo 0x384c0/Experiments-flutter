@@ -11,20 +11,20 @@ class RoutesModule extends Module {
   static const postDetails = '/post_details';
 
   @override
-  List<ModularRoute> get routes => [
-        ChildRoute('/', child: (context, args) => const PostsPage()),
-        ChildRoute(postDetails, child: (context, args) {
-          var permalink = args.queryParams[Params.permalink];
-          var postItemState = args.data is PostItemState ? args.data : null;
-          var state = postItemState != null
-              ? PostDetailsStateEmptyComments(permalink, postItemState)
-              : PostDetailsStateEmpty(permalink);
-          return BlocProvider.value(
-            value: PostDetailsCubit(state),
-            child: PostDetailsPage(),
-          );
-        }),
-      ];
+  void routes(r) {
+    r.child('/', child: (context) => const PostsPage());
+    r.child(postDetails, child: (context) {
+      var permalink = r.args.queryParams[Params.permalink];
+      var postItemState = r.args.data is PostItemState ? r.args.data : null;
+      var state = postItemState != null
+          ? PostDetailsStateEmptyComments(permalink, postItemState)
+          : PostDetailsStateEmpty(permalink);
+      return BlocProvider.value(
+        value: PostDetailsCubit(state),
+        child: PostDetailsPage(),
+      );
+    });
+  }
 }
 
 class Params {

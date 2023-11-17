@@ -10,24 +10,16 @@ import 'package:features_reddit_posts_domain/data/post_model.dart';
 import 'package:features_reddit_posts_domain/repository/remote_repository.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class DataModule extends Module {
+class PostsDataModule extends Module {
   @override
-  List<Bind> get binds => [
-        Bind<Mapper<RedditPostsResponseDTO, Iterable<PostModel>>>(
-          (i) => RedditPostsResponseDTOMapper(),
-          export: true,
-        ),
-        Bind<Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel>>(
-          (i) => RedditPostListingDTOMapper(),
-          export: true,
-        ),
-        Bind<RedditApi>(
-          (i) => RedditApi(Dio()),
-          export: true,
-        ),
-        Bind<RemoteRepository>(
-          (i) => RemoteRepositoryImpl(i(), i(), i()),
-          export: true,
-        ),
-      ];
+  void binds(Injector i) {
+    i.add<Mapper<RedditPostsResponseDTO, Iterable<PostModel>>>(RedditPostsResponseDTOMapper.new);
+    i.add<Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel>>(RedditPostListingDTOMapper.new);
+    i.add<RedditApi>(() => RedditApi(Dio()));
+  }
+
+  @override
+  exportedBinds(Injector i) {
+    i.add<PostsRemoteRepository>(RemoteRepositoryImpl.new);
+  }
 }

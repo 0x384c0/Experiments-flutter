@@ -12,8 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late reddit_posts.Navigator redditPostsNavigator = Modular.get();
-  late weather.Navigator weatherNavigator = Modular.get();
+  late reddit_posts.PostsNavigator redditPostsNavigator = Modular.get();
+  late weather.WeatherNavigator weatherNavigator = Modular.get();
 
   late final _widgetOptions = [
     redditPostsNavigator.homePage(),

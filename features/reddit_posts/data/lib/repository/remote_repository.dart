@@ -8,7 +8,7 @@ import 'package:features_reddit_posts_data/data/reddit_posts_sort_dto.dart';
 import 'package:features_reddit_posts_domain/data/post_model.dart';
 import 'package:features_reddit_posts_domain/repository/remote_repository.dart';
 
-class RemoteRepositoryImpl implements RemoteRepository {
+class RemoteRepositoryImpl implements PostsRemoteRepository {
   RemoteRepositoryImpl(this.redditApi, this.redditPostsResponseDTOMapper, this.redditPostListingDTOMapper);
 
   RedditApi redditApi;

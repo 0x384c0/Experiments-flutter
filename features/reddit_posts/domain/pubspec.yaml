@@ -10,13 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_modular: any
+  flutter_modular: ^6.3.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  modular_test: any
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

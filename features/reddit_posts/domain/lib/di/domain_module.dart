@@ -1,12 +1,9 @@
 import 'package:features_reddit_posts_domain/usecases/interactor.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class DomainModule extends Module {
+class PostsDomainModule extends Module {
   @override
-  List<Bind> get binds => [
-        Bind<PostsInteractor>(
-          (i) => PostsInteractorImpl(i()),
-          export: true,
-        ),
-      ];
+  exportedBinds(Injector i) {
+    i.add<PostsInteractor>(() => PostsInteractorImpl(Modular.get()));
+  }
 }

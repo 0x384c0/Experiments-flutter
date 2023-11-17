@@ -7,10 +7,10 @@ import '../../../utils/mock_weather_api_impl.dart';
 import '../../../utils/test_module.dart';
 
 main() {
-  late RemoteRepository sut;
+  late WeatherRemoteRepository sut;
   setUp(() {
     TestModule.initModules();
-    sut = Modular.get<RemoteRepository>();
+    sut = Modular.get<WeatherRemoteRepository>();
   });
 
   test('get forecast successful', () async {

@@ -10,7 +10,7 @@ class PostsCubit extends Cubit<PostsState> {
   PostsCubit() : super(PostsStateEmpty());
 
   late PostsInteractor interactor = Modular.get();
-  late Navigator navigator = Modular.get();
+  late PostsNavigator navigator = Modular.get();
   late Mapper<Iterable<PostModel>, PostsState> postModelMapper = Modular.get();
 
   Future<void> refresh() async {

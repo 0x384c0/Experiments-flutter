@@ -5,22 +5,22 @@ import 'package:features_weather_presentation/widgets/forecast_details_cubit.dar
 import 'package:features_weather_presentation/widgets/forecast_details_view.dart';
 import 'package:features_weather_presentation/widgets/weather_page.dart';
 
-class RoutesModule extends Module {
+class WeatherRoutesModule extends Module {
   static const path = '/weather';
   static const forecast = '/forecast';
 
   @override
-  List<ModularRoute> get routes => [
-        ChildRoute('/', child: (context, args) => const WeatherPage()),
-        ChildRoute(
-          forecast,
-          child: (context, args) => BlocProvider.value(
-            value: ForecastDetailsCubit(
-                {args.queryParams[Params.timeEpoch]: args.data is ForecastWeatherState ? args.data : null}),
-            child: const ForecastDetailsPage(),
-          ),
-        ),
-      ];
+  void routes(r) {
+    r.child('/', child: (context) => const WeatherPage());
+    r.child(
+      forecast,
+      child: (context) => BlocProvider.value(
+        value: ForecastDetailsCubit(
+            {r.args.queryParams[Params.timeEpoch]: r.args.data is ForecastWeatherState ? r.args.data : null}),
+        child: const ForecastDetailsPage(),
+      ),
+    );
+  }
 }
 
 class Params {

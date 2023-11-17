@@ -7,20 +7,11 @@ import 'package:features_reddit_posts_presentation/mapper/post_models_mapper.dar
 import 'package:features_reddit_posts_presentation/navigation/navigator.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class PresentationModule extends Module {
+class PostsPresentationModule extends Module {
   @override
-  List<Bind> get binds => [
-        Bind<Navigator>(
-          (i) => NavigatorImpl(),
-          export: true,
-        ),
-        Bind<Mapper<Iterable<PostModel>, PostsState>>(
-          (i) => PostModelsMapper(),
-          export: true,
-        ),
-        Bind<Mapper<PostModel, PostDetailsState>>(
-          (i) => PostModelMapper(),
-          export: true,
-        ),
-      ];
+  exportedBinds(Injector i) {
+    i.add<Mapper<Iterable<PostModel>, PostsState>>(PostModelsMapper.new);
+    i.add<Mapper<PostModel, PostDetailsState>>(PostModelMapper.new);
+    i.add<PostsNavigator>(NavigatorImpl.new);
+  }
 }

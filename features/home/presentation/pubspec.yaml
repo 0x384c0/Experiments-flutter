@@ -12,8 +12,8 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_bloc: ^8.0.1
-  flutter_modular: any
+  flutter_bloc: ^8.1.3
+  flutter_modular: ^6.3.2
   features_weather_presentation:
     path: "../../../features/weather/presentation"
   features_reddit_posts_presentation:

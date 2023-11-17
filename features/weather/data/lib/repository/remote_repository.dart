@@ -6,7 +6,7 @@ import 'package:features_weather_domain/data/forecast_model.dart';
 import 'package:features_weather_domain/data/location_model.dart';
 import 'package:features_weather_domain/repository/remote_repository.dart';
 
-class RemoteRepositoryImpl implements RemoteRepository {
+class RemoteRepositoryImpl implements WeatherRemoteRepository {
   RemoteRepositoryImpl(this.weatherApi);
 
   String key = "0bab7dd1bacc418689b143833220304"; //TODO: move to config

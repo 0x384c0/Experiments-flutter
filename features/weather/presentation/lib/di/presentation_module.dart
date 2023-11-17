@@ -7,24 +7,12 @@ import 'package:features_weather_presentation/navigation/navigator.dart';
 import 'package:features_weather_presentation/utils/geo_location_provider.dart';
 import 'package:common_domain/mapper/mapper.dart';
 
-class PresentationModule extends Module {
+class WeatherPresentationModule extends Module {
   @override
-  List<Bind> get binds => [
-        Bind<Navigator>(
-          (i) => NavigatorImpl(),
-          export: true,
-        ),
-        Bind<GeoLocationProvider>(
-          (i) => GeoLocationProviderImpl(),
-          export: true,
-        ),
-        Bind<Mapper<ForecastModel, WeatherState>>(
-          (i) => ForecastModelMapper(),
-          export: true,
-        ),
-        Bind<Mapper<ForecastItemModel, ForecastWeatherState>>(
-          (i) => ForecastItemModelMapper(),
-          export: true,
-        ),
-      ];
+  exportedBinds(Injector i) {
+    i.add<Mapper<ForecastModel, WeatherState>>(ForecastModelMapper.new);
+    i.add<Mapper<ForecastItemModel, ForecastWeatherState>>(ForecastItemModelMapper.new);
+    i.add<WeatherNavigator>(NavigatorImpl.new);
+    i.add<GeoLocationProvider>(GeoLocationProviderImpl.new);
+  }
 }

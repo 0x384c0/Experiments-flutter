@@ -12,9 +12,9 @@ import 'mock_weather_api_impl.dart';
 class TestModule extends Module {
   @override
   List<Module> get imports => [
-        DataModule(),
-        DomainModule(),
-        PresentationModule(),
+        WeatherDataModule(),
+        WeatherDomainModule(),
+        WeatherPresentationModule(),
       ];
 
   static void initModules() {

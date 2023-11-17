@@ -11,7 +11,7 @@ class WeatherCubit extends Cubit<WeatherState> {
   WeatherCubit() : super(WeatherStateEmpty());
 
   late WeatherInteractor interactor = Modular.get();
-  late Navigator navigator = Modular.get();
+  late WeatherNavigator navigator = Modular.get();
   late GeoLocationProvider geoLocationManager = Modular.get();
   late Mapper<ForecastModel, WeatherState> forecastModelMapper = Modular.get();
 

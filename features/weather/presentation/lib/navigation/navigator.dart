@@ -6,7 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'routes_module.dart';
 
 /// Navigation for weather feature
-abstract class Navigator {
+abstract class WeatherNavigator {
   Widget homePage();
 
   toForecastDetails(ForecastWeatherState state);
@@ -15,7 +15,7 @@ abstract class Navigator {
 }
 
 /// Private implementation if weather navigation
-class NavigatorImpl implements Navigator {
+class NavigatorImpl implements WeatherNavigator {
   @override
   homePage() {
     return const WeatherPage();
@@ -23,7 +23,7 @@ class NavigatorImpl implements Navigator {
 
   @override
   toForecastDetails(ForecastWeatherState state) {
-    Modular.to.pushNamed('${RoutesModule.path}${RoutesModule.forecast}?${Params.timeEpoch}=${state.dateEpoch}', arguments: state);
+    Modular.to.pushNamed('${WeatherRoutesModule.path}${WeatherRoutesModule.forecast}?${Params.timeEpoch}=${state.dateEpoch}', arguments: state);
   }
 
   @override
