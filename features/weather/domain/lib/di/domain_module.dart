@@ -4,6 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 class WeatherDomainModule extends Module {
   @override
   exportedBinds(Injector i) {
-    i.add<WeatherInteractor>(() => WeatherInteractorImpl(Modular.get()));
+    i.addSingleton<WeatherInteractor>(() => WeatherInteractorImpl(Modular.get()));
   }
 }

@@ -12,6 +12,6 @@ class WeatherDataModule extends Module {
 
   @override
   exportedBinds(Injector i) {
-    i.add<WeatherRemoteRepository>(RemoteRepositoryImpl.new);
+    i.addSingleton<WeatherRemoteRepository>(RemoteRepositoryImpl.new);
   }
 }

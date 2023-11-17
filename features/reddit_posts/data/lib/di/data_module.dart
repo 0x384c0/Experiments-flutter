@@ -20,6 +20,6 @@ class PostsDataModule extends Module {
 
   @override
   exportedBinds(Injector i) {
-    i.add<PostsRemoteRepository>(RemoteRepositoryImpl.new);
+    i.addSingleton<PostsRemoteRepository>(RemoteRepositoryImpl.new);
   }
 }

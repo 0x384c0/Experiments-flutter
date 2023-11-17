@@ -10,8 +10,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 class PostsPresentationModule extends Module {
   @override
   exportedBinds(Injector i) {
-    i.add<Mapper<Iterable<PostModel>, PostsState>>(PostModelsMapper.new);
-    i.add<Mapper<PostModel, PostDetailsState>>(PostModelMapper.new);
-    i.add<PostsNavigator>(NavigatorImpl.new);
+    i.addSingleton<Mapper<Iterable<PostModel>, PostsState>>(PostModelsMapper.new);
+    i.addSingleton<Mapper<PostModel, PostDetailsState>>(PostModelMapper.new);
+    i.addSingleton<PostsNavigator>(NavigatorImpl.new);
   }
 }

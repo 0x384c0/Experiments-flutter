@@ -4,6 +4,6 @@ import 'package:flutter_modular/flutter_modular.dart';
 class PostsDomainModule extends Module {
   @override
   exportedBinds(Injector i) {
-    i.add<PostsInteractor>(() => PostsInteractorImpl(Modular.get()));
+    i.addSingleton<PostsInteractor>(() => PostsInteractorImpl(Modular.get()));
   }
 }

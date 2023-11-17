@@ -10,9 +10,9 @@ import 'package:common_domain/mapper/mapper.dart';
 class WeatherPresentationModule extends Module {
   @override
   exportedBinds(Injector i) {
-    i.add<Mapper<ForecastModel, WeatherState>>(ForecastModelMapper.new);
-    i.add<Mapper<ForecastItemModel, ForecastWeatherState>>(ForecastItemModelMapper.new);
-    i.add<WeatherNavigator>(NavigatorImpl.new);
-    i.add<GeoLocationProvider>(GeoLocationProviderImpl.new);
+    i.addSingleton<Mapper<ForecastModel, WeatherState>>(ForecastModelMapper.new);
+    i.addSingleton<Mapper<ForecastItemModel, ForecastWeatherState>>(ForecastItemModelMapper.new);
+    i.addSingleton<WeatherNavigator>(NavigatorImpl.new);
+    i.addSingleton<GeoLocationProvider>(GeoLocationProviderImpl.new);
   }
 }
