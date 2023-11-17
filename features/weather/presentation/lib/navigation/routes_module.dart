@@ -14,9 +14,10 @@ class WeatherRoutesModule extends Module {
     r.child('/', child: (context) => const WeatherPage());
     r.child(
       forecast,
-      child: (context) => BlocProvider.value(
-        value: ForecastDetailsCubit(
-            {r.args.queryParams[Params.timeEpoch]: r.args.data is ForecastWeatherState ? r.args.data : null}),
+      child: (context) => BlocProvider(
+        create: (_) => ForecastDetailsCubit({
+          r.args.queryParams[Params.timeEpoch]: r.args.data is ForecastWeatherState ? r.args.data : null,
+        }),
         child: const ForecastDetailsPage(),
       ),
     );

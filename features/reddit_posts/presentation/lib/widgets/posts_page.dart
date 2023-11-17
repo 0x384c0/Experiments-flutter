@@ -15,8 +15,8 @@ class PostsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider.value(
-      value: PostsCubit(),
+    return BlocProvider(
+        create: (_) => PostsCubit(),
       child: const PostsView(),
     );
   }

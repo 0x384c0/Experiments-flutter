@@ -19,8 +19,8 @@ class RoutesModule extends Module {
       var state = postItemState != null
           ? PostDetailsStateEmptyComments(permalink, postItemState)
           : PostDetailsStateEmpty(permalink);
-      return BlocProvider.value(
-        value: PostDetailsCubit(state),
+      return BlocProvider(
+        create: (_) => PostDetailsCubit(state),
         child: PostDetailsPage(),
       );
     });
