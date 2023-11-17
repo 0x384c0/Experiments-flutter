@@ -12,7 +12,7 @@ abstract class PostsInteractor {
 class PostsInteractorImpl extends PostsInteractor {
   PostsInteractorImpl(this.remoteRepository);
 
-  PostsRemoteRepository remoteRepository;
+  final PostsRemoteRepository remoteRepository;
 
   @override
   Future<Iterable<PostModel>> getPosts() {
