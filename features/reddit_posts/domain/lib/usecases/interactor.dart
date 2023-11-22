@@ -9,7 +9,7 @@ abstract class PostsInteractor {
   Future<PostModel> getPost(String? permalink);
 }
 
-class PostsInteractorImpl extends PostsInteractor {
+class PostsInteractorImpl implements PostsInteractor {
   PostsInteractorImpl(this.remoteRepository);
 
   final PostsRemoteRepository remoteRepository;

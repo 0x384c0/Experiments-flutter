@@ -16,7 +16,7 @@ abstract class WeatherInteractor {
 }
 
 /// private implementation of [WeatherInteractor]
-class WeatherInteractorImpl extends WeatherInteractor {
+class WeatherInteractorImpl implements WeatherInteractor {
   WeatherInteractorImpl(this.remoteRepository);
 
   final WeatherRemoteRepository remoteRepository;
