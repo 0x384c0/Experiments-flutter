@@ -65,3 +65,6 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 * https://pub.dev/packages/easy_localization
 * https://pub.dev/packages/auto_route
 * https://pub.dev/packages/freezed
+* create simple module as template
+* fature module should not depend on eachother, all communication via small interfaces in common module
+* replace helper methods with widgets
