@@ -58,6 +58,7 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 - add this module as dependency to other modules using `path:`
 
 ## TODO
+* https://github.com/cfug/dio/issues/1653
 * move code to src directory and use export show for exposing package apis
 * add paging
 * on error dismiss previous errors and add option to refresh after error
