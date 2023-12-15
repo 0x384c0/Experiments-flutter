@@ -12,7 +12,7 @@ class TestModule extends Module {
       ];
 
   static void initModules() {
-    Modular.bindModule(WeatherDataModule());
+    Modular.bindModule(TestModule());
     Modular.replaceInstance<WeatherApi>(MockWeatherApiImpl()); // not working, solution - replace flutter modular with something better
   }
 }
