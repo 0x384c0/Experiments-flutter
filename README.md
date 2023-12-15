@@ -21,7 +21,7 @@ App has multiple features - [posts](/features/reddit_posts), [weather](/features
 
 ### Communication between layers
 
-1. [UI](/features/reddit_posts/presentation/lib/widgets/posts_page.dart) sends signals to [Cubit](/features/reddit_posts/presentation/lib/widgets/posts_cubit.dart)
+1. [UI](/features/reddit_posts/presentation/lib/src/widgets/posts_page.dart) sends signals to [Cubit](/features/reddit_posts/presentation/lib/src/widgets/posts_cubit.dart)
 2. Cubit executes Use cases from [Interactor](/features/reddit_posts/domain/lib/usecases/interactor.dart).
 3. Use case obtains data from [Repository](/features/reddit_posts/data/lib/repository/remote_repository.dart)
 4. Repository returns data from a [Api](/features/reddit_posts/data/lib/api/reddit_api.dart).

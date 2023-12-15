@@ -1,12 +1,10 @@
-import 'package:features_home_presentation/navigation/routes_module.dart';
+import 'package:features_home_presentation/features_home_presentation.dart';
 import 'package:features_reddit_posts_data/features_reddit_posts_data.dart';
 import 'package:features_reddit_posts_domain/di/domain_module.dart';
-import 'package:features_reddit_posts_presentation/di/presentation_module.dart';
-import 'package:features_reddit_posts_presentation/navigation/routes_module.dart';
+import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
 import 'package:features_weather_data/features_weather_data.dart';
 import 'package:features_weather_domain/di/domain_module.dart';
-import 'package:features_weather_presentation/di/presentation_module.dart';
-import 'package:features_weather_presentation/navigation/routes_module.dart';
+import 'package:features_weather_presentation/features_weather_presentation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
