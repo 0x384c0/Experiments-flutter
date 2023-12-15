@@ -3,18 +3,20 @@ import 'package:features_weather_domain/features_weather_domain.dart';
 import '../api/weather_api.dart';
 
 class RemoteRepositoryImpl implements WeatherRemoteRepository {
-  RemoteRepositoryImpl(this.weatherApi);
+  RemoteRepositoryImpl(this._weatherApi);
 
-  String key = "0bab7dd1bacc418689b143833220304"; //TODO: move to config
-  WeatherApi weatherApi;
+  final String _key = "0bab7dd1bacc418689b143833220304"; //TODO: move to config
+  final WeatherApi _weatherApi;
 
   @override
   Future<CurrentModel> getCurrent() {
-    return weatherApi.getCurrent(key, "London", false);
+    return _weatherApi.getCurrent(_key, "London", false);
   }
 
   @override
   Future<ForecastModel> getForecast(LocationModel location) {
-    return weatherApi.getForecast(key, location.toString(), 10, false, false);
+    return _weatherApi.getForecast(_key, location.toString(), 10, false, false);
   }
+
+  getApi() => _weatherApi;
 }

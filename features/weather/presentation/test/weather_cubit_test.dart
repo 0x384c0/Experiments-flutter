@@ -1,11 +1,11 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:features_weather_presentation/src/data/weather_state.dart';
+import 'package:features_weather_presentation/src/widgets/weather_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:features_weather_presentation/data/weather_state.dart';
-import 'package:features_weather_presentation/widgets/weather_cubit.dart';
 
-import '../../../utils/mock_weather_api_impl.dart';
-import '../../../utils/test_module.dart';
+import 'utils/mock_datasource_impl.dart';
 import 'utils/mock_storage.dart';
+import 'utils/test_module.dart';
 
 main() {
   late WeatherCubit sut;
@@ -19,6 +19,6 @@ main() {
     'refresh successful',
     build: () => sut,
     act: (cubit) => cubit.refresh(),
-    verify: (bloc) => {expect((sut.state as WeatherStatePopulated).forecast.length, MockWeatherApiImpl.forecastItems)},
+    verify: (bloc) => {expect((sut.state as WeatherStatePopulated).forecast.length, MockDatasourceImpl.forecastItems)},
   );
 }

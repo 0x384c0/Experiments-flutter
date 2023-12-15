@@ -8,7 +8,7 @@ import '../repository/remote_repository.dart';
 class WeatherDataModule extends Module {
   @override
   void binds(Injector i) {
-    i.add<WeatherApi>(() => WeatherApi(Dio()));
+    i.addInstance(WeatherApi(Dio()));
   }
 
   @override

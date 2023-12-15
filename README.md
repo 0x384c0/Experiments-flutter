@@ -40,7 +40,7 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 
 ### Test coverage
 - [data](/test/features/weather/data/remote_repository_test.dart)
-- [domain](/test/features/weather/domain/interactor_test.dart)
+- [domain](/features/weather/domain/test/interactor_test.dart)
 - [widgets](/test/features/weather/presentation)
 
 ### [.run](.run) scripts
@@ -58,6 +58,7 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 - add this module as dependency to other modules using `path:`
 
 ## TODO
+* replace flutter_modular with something usable
 * https://github.com/cfug/dio/issues/1653
 * move code to src directory and use export show for exposing package apis
 * add paging
