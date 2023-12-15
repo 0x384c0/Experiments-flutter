@@ -1,12 +1,13 @@
 library data;
 
 import 'package:common_domain/mapper/mapper.dart';
-import 'package:features_reddit_posts_data/api/reddit_api.dart';
-import 'package:features_reddit_posts_data/data/reddit_post_listing_dto.dart';
-import 'package:features_reddit_posts_data/data/reddit_posts_response_dto.dart';
-import 'package:features_reddit_posts_data/data/reddit_posts_sort_dto.dart';
 import 'package:features_reddit_posts_domain/data/post_model.dart';
 import 'package:features_reddit_posts_domain/repository/remote_repository.dart';
+
+import '../api/reddit_api.dart';
+import '../data/reddit_post_listing_dto.dart';
+import '../data/reddit_posts_response_dto.dart';
+import '../data/reddit_posts_sort_dto.dart';
 
 class RemoteRepositoryImpl implements PostsRemoteRepository {
   RemoteRepositoryImpl(this.redditApi, this.redditPostsResponseDTOMapper, this.redditPostListingDTOMapper);
