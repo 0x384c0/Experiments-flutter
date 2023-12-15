@@ -1,7 +1,4 @@
-import 'package:features_weather_domain/data/current_model.dart';
-import 'package:features_weather_domain/data/forecast_model.dart';
-import 'package:features_weather_domain/data/location_model.dart';
-import 'package:features_weather_domain/repository/remote_repository.dart';
+import 'package:features_weather_domain/features_weather_domain.dart';
 
 import '../api/weather_api.dart';
 

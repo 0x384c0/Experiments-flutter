@@ -1,6 +1,5 @@
 import 'package:common_domain/mapper/mapper.dart';
-import 'package:features_reddit_posts_domain/data/post_model.dart';
-import 'package:features_reddit_posts_domain/usecases/interactor.dart';
+import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 

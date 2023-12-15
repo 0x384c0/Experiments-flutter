@@ -1,5 +1,7 @@
-import 'package:features_reddit_posts_domain/usecases/interactor.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../features_reddit_posts_domain.dart';
+import '../use_cases/interactor_impl.dart';
 
 class PostsDomainModule extends Module {
   @override

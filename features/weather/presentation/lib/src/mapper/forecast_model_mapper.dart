@@ -1,8 +1,7 @@
-import 'package:features_weather_domain/data/forecast_model.dart';
-import 'package:features_weather_domain/data/weather_model.dart';
-import '../data/weather_state.dart';
 import 'package:common_domain/mapper/mapper.dart';
+import 'package:features_weather_domain/features_weather_domain.dart';
 
+import '../data/weather_state.dart';
 import 'condition_model_mapper.dart';
 import 'forecast_item_model_mapper.dart';
 
@@ -25,8 +24,7 @@ class ForecastModelMapper extends Mapper<ForecastModel, WeatherState> {
     );
   }
 
-  ConditionState getConditionState(ConditionModel? model) =>
-      ConditionState(
+  ConditionState getConditionState(ConditionModel? model) => ConditionState(
         model?.text ?? "",
         model?.icon?.replaceAll("//", "https://") ?? "",
       );

@@ -1,7 +1,6 @@
+import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:features_weather_domain/data/forecast_model.dart';
-import 'package:features_weather_domain/data/weather_model.dart';
 import 'current_dto.dart';
 
 part 'forecast_dto.g.dart';
@@ -13,13 +12,13 @@ class ForecastDto {
   @JsonKey(name: "forecastday")
   List<ForecastDayDto>? forecastDayDto;
 
-  factory ForecastDto.fromJson(Map<String, dynamic> json) =>
-      _$ForecastDtoFromJson(json);
+  factory ForecastDto.fromJson(Map<String, dynamic> json) => _$ForecastDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$ForecastDtoToJson(this);
 }
+
 @JsonSerializable()
-class ForecastDayDto implements ForecastItemModel  {
+class ForecastDayDto implements ForecastItemModel {
   ForecastDayDto();
 
   @override
@@ -50,14 +49,13 @@ class ForecastDayDto implements ForecastItemModel  {
   @JsonKey(name: "date_epoch")
   int? dateEpoch;
 
-  factory ForecastDayDto.fromJson(Map<String, dynamic> json) =>
-      _$ForecastDayDtoFromJson(json);
+  factory ForecastDayDto.fromJson(Map<String, dynamic> json) => _$ForecastDayDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$ForecastDayDtoToJson(this);
 }
 
 @JsonSerializable()
-class DayDto{
+class DayDto {
   DayDto();
 
   @JsonKey(name: "avghumidity")
@@ -77,8 +75,7 @@ class DayDto{
   @JsonKey(name: "condition")
   ConditionDTO? conditionDto;
 
-  factory DayDto.fromJson(Map<String, dynamic> json) =>
-      _$DayDtoFromJson(json);
+  factory DayDto.fromJson(Map<String, dynamic> json) => _$DayDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$DayDtoToJson(this);
 }

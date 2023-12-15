@@ -1,11 +1,11 @@
-import 'package:features_weather_domain/data/forecast_model.dart';
-import 'package:features_weather_domain/usecases/interactor.dart';
+import 'package:common_domain/mapper/mapper.dart';
+import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
 import '../data/weather_state.dart';
 import '../navigation/navigator.dart';
 import '../utils/geo_location_provider.dart';
-import 'package:common_domain/mapper/mapper.dart';
 
 class WeatherCubit extends Cubit<WeatherState> {
   WeatherCubit() : super(WeatherStateEmpty());

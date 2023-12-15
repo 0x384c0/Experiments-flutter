@@ -1,8 +1,8 @@
 import 'package:common_domain/mapper/mapper.dart';
-import 'package:features_weather_domain/data/forecast_model.dart';
-import '../data/weather_state.dart';
+import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:intl/intl.dart';
 
+import '../data/weather_state.dart';
 import 'condition_model_mapper.dart';
 
 class ForecastItemModelMapper extends Mapper<ForecastItemModel, ForecastWeatherState> {

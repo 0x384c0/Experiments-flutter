@@ -1,6 +1,6 @@
 
 import 'package:features_weather_data/features_weather_data.dart';
-import 'package:features_weather_domain/di/domain_module.dart';
+import 'package:features_weather_domain/di/module.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:features_weather_presentation/di/module.dart';
 import 'package:features_weather_presentation/utils/geo_location_provider.dart';

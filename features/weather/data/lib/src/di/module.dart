@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:features_weather_domain/repository/remote_repository.dart';
+import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../api/weather_api.dart';

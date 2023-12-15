@@ -1,4 +1,5 @@
-import 'package:features_reddit_posts_domain/data/post_model.dart';
+
+import '../../features_reddit_posts_domain.dart';
 
 abstract class PostsRemoteRepository {
   Future<Iterable<PostModel>> getPosts();

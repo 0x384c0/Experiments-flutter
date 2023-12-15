@@ -1,8 +1,6 @@
+import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:features_weather_domain/data/forecast_model.dart';
-import 'package:features_weather_domain/data/current_model.dart';
-import 'package:features_weather_domain/data/weather_model.dart';
 import 'current_dto.dart';
 import 'forecast_dto.dart';
 
@@ -24,8 +22,7 @@ class ForecastResponseDTO implements ForecastModel, CurrentModel {
   @JsonKey(name: "forecast")
   ForecastDto? forecastDto;
 
-  factory ForecastResponseDTO.fromJson(Map<String, dynamic> json) =>
-      _$ForecastResponseDTOFromJson(json);
+  factory ForecastResponseDTO.fromJson(Map<String, dynamic> json) => _$ForecastResponseDTOFromJson(json);
 
   Map<String, dynamic> toJson() => _$ForecastResponseDTOToJson(this);
 }
