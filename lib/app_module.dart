@@ -18,11 +18,13 @@ class AppModule extends Module {
   // class names for modules cannot be same
   @override
   List<Module> get imports => [
-        PostsPresentationModule(),
-        PostsDataModule(),
-        PostsDomainModule(),
-        WeatherPresentationModule(),
-        WeatherDomainModule(),
-        WeatherDataModule(),
+        PostsDomainModule([
+          PostsPresentationModule(),
+          PostsDataModule(),
+        ]),
+        WeatherDomainModule([
+          WeatherPresentationModule(),
+          WeatherDataModule(),
+        ]),
       ];
 }
