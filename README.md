@@ -39,9 +39,10 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 1. [mocktail](https://pub.dev/packages/mocktail)
 
 ### Test coverage
-- [data](/test/features/weather/data/remote_repository_test.dart)
+- [data](/features/weather/data/test)
 - [domain](/features/weather/domain/test/interactor_test.dart)
-- [widgets](/test/features/weather/presentation)
+- [widgets](/features/weather/presentation/test)
+- [UI tests](/ui_tests/features)
 
 ### [.run](.run) scripts
 * [build_runner](.run/build_runner.run.xml) - generate code for JSON Serializable 

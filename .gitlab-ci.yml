@@ -1,5 +1,25 @@
+# Common
+default:
+  cache: &flutter_cache
+    paths:
+      - .dart_tool
+      - ./**/.dart_tool
+      - .flutter-plugins
+      - ./**/.flutter-plugins
+      - .flutter-plugins-dependencies
+      - ./**/.flutter-plugins-dependencies
+
+.build_flutter:
+  before_script:
+    - sh scripts/validate_environment.sh
+    - sh scripts/set_version.sh
+    - sh scripts/pub_get_all.sh
+    - sh scripts/build_runner.sh
+    - sh scripts/generate_translate_file.sh
+
 # Unit tests
 unit_tests:
+  extends: .build_flutter
   stage: test
   tags:
     - mobile
@@ -10,8 +30,32 @@ unit_tests:
   script:
     - sh scripts/run_tests.sh
 
+# UI tests
+ui_tests:
+  extends: .build_flutter
+  stage: test
+  tags:
+    - mobile
+  only:
+    - merge_requests
+    - develop
+    - master
+  cache:
+    <<: *flutter_cache
+    paths:
+      - ui_tests/node_modules
+      - ui_tests/venv
+      - ios/Pods
+  script:
+    - sh scripts/ui_tests_setup.sh
+    - sh scripts/build_debug_ios.sh
+    - sh scripts/ui_tests_run.sh
+  after_script:
+    - sh scripts/ui_tests_stop_simulator.sh
+
 # Android
 compile_android:
+  extends: .build_flutter
   stage: build
   tags:
     - mobile
@@ -19,6 +63,11 @@ compile_android:
     - merge_requests
     - develop
     - master
+  cache:
+    key: android_cache
+    <<: *flutter_cache
+    paths:
+      - android/.gradle
   artifacts:
     paths:
       - build/app/outputs/flutter-apk/app-release.apk
@@ -38,14 +87,8 @@ deploy_to_stage_android:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "develop"'
       when: manual
       allow_failure: true
+  cache: []
   before_script:
     - sh scripts/init_bundler.sh
   script:
     - sh scripts/deploy_to_stage_android.sh
-
-before_script:
-  - sh scripts/validate_environment.sh
-  - sh scripts/set_version.sh
-  - sh scripts/pub_get_all.sh
-  - sh scripts/build_runner.sh
-  - sh scripts/generate_translate_file.sh
