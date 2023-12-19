@@ -1,8 +1,8 @@
 from .common_functions import (
     wait_for_visible,
-    wait_time,
     fill_field,
 )
+
 
 class AuthorizationActions(object):
 
