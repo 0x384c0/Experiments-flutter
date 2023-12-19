@@ -10,7 +10,7 @@ check_command() {
 check_command flutter
 echo "Flutter is installed."
 
-# Upload
+# Deploy
 check_command bundle
 echo "Bundler is installed."
 
