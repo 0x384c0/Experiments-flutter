@@ -66,6 +66,7 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 * on error dismiss previous errors and add option to refresh after error
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)
 * split localized string per module
+* https://pub.dev/packages/mapify_generator
 * https://pub.dev/packages/easy_localization
 * https://pub.dev/packages/auto_route
 * https://pub.dev/packages/freezed
