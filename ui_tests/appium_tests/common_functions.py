@@ -4,6 +4,7 @@ from time import sleep, time
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 
 WAIT_SECONDS_SHORT = 1
 WAIT_SECONDS = 30
@@ -12,18 +13,20 @@ WAIT_SECONDS = 30
 def wait_for_visible(driver, xpath):
     return get_impl(driver).wait_for_visible(xpath)
 
+def wait_for_disappear(driver, xpath):
+    get_impl(driver).wait_for_disappear(xpath)
 
 def scroll_for_visible(driver, xpath):
     return get_impl(driver).scroll_for_visible(xpath)
 
-
 def if_visible(driver, xpath):
     return get_impl(driver).if_visible(xpath)
-
 
 def fill_field(driver, xpath, value):
     return get_impl(driver).fill_field(xpath, value)
 
+def clear_field(driver, xpath, value):
+    return get_impl(driver).clear_field(xpath, value)
 
 def get_impl(driver):
     return CommonFunctionsIOSImpl(driver)
@@ -37,6 +40,10 @@ class CommonFunctionsIOSImpl:
         wait = WebDriverWait(self.driver, WAIT_SECONDS)
         element = wait.until(EC.visibility_of_element_located((AppiumBy.XPATH, xpath)))
         return element
+
+    def wait_for_disappear(self, xpath):
+        wait = WebDriverWait(self.driver, WAIT_SECONDS)
+        wait.until(EC.invisibility_of_element_located((AppiumBy.XPATH, xpath)))
 
     def scroll_for_visible(self, xpath):
         start_time = time()
@@ -67,8 +74,14 @@ class CommonFunctionsIOSImpl:
         return True
 
     def fill_field(self, xpath, value):
-        element = wait_for_visible(self.driver, xpath)
-        element.click()
-        sleep(0.5)
-        element.send_keys(value)
-        sleep(0.5)
+        wait_for_visible(self.driver, xpath).click()
+        sleep(0.6)
+        wait_for_visible(self.driver, xpath).send_keys(value)
+        sleep(0.1)
+
+    def clear_field(self, xpath, value):
+        wait_for_visible(self.driver, xpath).click()
+        sleep(0.6)
+        for iter in range(value):
+            sleep(0.05)
+            wait_for_visible(self.driver, xpath).send_keys(Keys.BACKSPACE)
