@@ -3,11 +3,8 @@ import 'package:common_presentation/widgets/alert_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// TODO: try to implements as mixin instead of class
 /// Cubit, that can emit [PageState]
-abstract class PageStateCubit<T> extends Cubit<PageState<T>> {
-  PageStateCubit({PageState<T>? initialState}) : super(initialState ?? PageStateEmptyLoading());
-
+mixin CubitWithPageState<T> on Cubit<PageState<T>> {
   /// Will close alert, caused by [alertDialogState]
   closeAlert() => emit(state.copyWith(alertDialogState: StateWithAlert.noAlert));
 

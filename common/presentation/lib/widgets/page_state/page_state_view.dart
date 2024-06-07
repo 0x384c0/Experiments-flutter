@@ -1,5 +1,5 @@
 import 'package:common_presentation/widgets/page_state/page_state.dart';
-import 'package:common_presentation/widgets/page_state/page_state_cubit.dart';
+import 'package:common_presentation/widgets/page_state/cubit_with_page_state.dart';
 import 'package:common_presentation/widgets/alert_dialog.dart';
 import 'package:common_presentation/widgets/empty_view.dart';
 import 'package:common_presentation/widgets/error_view.dart';
@@ -16,8 +16,8 @@ class PageStateView<T> extends StatelessWidget {
     required this.child,
   });
 
-  /// convenience initializer for passing [PageStateCubit] only
-  PageStateView.cubut({super.key, required PageStateCubit<T> cubit, required this.child})
+  /// convenience initializer for passing [CubitWithPageState] only
+  PageStateView.cubut({super.key, required CubitWithPageState<T> cubit, required this.child})
       : state = cubit.state,
         closeAlert = cubit.closeAlert,
         refresh = cubit.refresh;
