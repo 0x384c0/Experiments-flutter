@@ -6,6 +6,7 @@ import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutterui_modifiers/flutterui_modifiers.dart';
 
 import 'post_tile.dart';
 import 'posts_cubit.dart';
@@ -40,15 +41,27 @@ class _PostsView extends StatelessWidget {
     final cubit = context.watch<PostsCubit>();
     var widgets = posts.map((e) => PostTile(e, () => cubit.onPostClick(e)));
     return RefreshIndicator(
-        onRefresh: cubit.refresh,
-        child: ScrollToEndListener(
-          onScrolledToEnd: cubit.loadNextPage,
-          child: (controller) => ListView.builder(
-            controller: controller,
-            itemCount: widgets.length,
-            padding: const EdgeInsets.all(8.0),
-            itemBuilder: (context, index) => widgets.elementAt(index),
-          ),
-        ));
+      onRefresh: cubit.refresh,
+      child: ScrollToEndListener(
+        onScrolledToEnd: cubit.loadNextPage,
+        child: (controller) => CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          controller: controller,
+          slivers: [
+            SliverList.builder(
+              itemCount: widgets.length,
+              // padding: const EdgeInsets.all(8.0),
+              itemBuilder: (context, index) => widgets.elementAt(index),
+            ),
+            SliverToBoxAdapter(child: _pageLoadingIndicator(cubit)),
+          ],
+        ),
+      ),
+    );
   }
+
+  Widget _pageLoadingIndicator(PostsCubit cubit) => Visibility(
+        visible: cubit.state.paginationState?.isLoadingPage == true,
+        child: const Center(child: CircularProgressIndicator()).padding(all: 8),
+      );
 }
