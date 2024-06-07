@@ -159,6 +159,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutterui_modifiers:
+    dependency: transitive
+    description:
+      name: flutterui_modifiers
+      sha256: "92f76e643683dc92b317901a7c6be8fe07bc7b5b418a1fc0f96380f49e8ff406"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.1"
   geolocator:
     dependency: transitive
     description:

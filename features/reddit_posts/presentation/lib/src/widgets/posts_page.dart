@@ -46,6 +46,7 @@ class _PostsView extends StatelessWidget {
           child: (controller) => ListView.builder(
             controller: controller,
             itemCount: widgets.length,
+            padding: const EdgeInsets.all(8.0),
             itemBuilder: (context, index) => widgets.elementAt(index),
           ),
         ));

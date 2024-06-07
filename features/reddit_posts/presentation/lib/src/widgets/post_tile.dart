@@ -1,6 +1,7 @@
 import 'package:common_presentation/widgets/card_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
+import 'package:flutterui_modifiers/flutterui_modifiers.dart';
 
 import '../data/post_state.dart';
 
@@ -12,58 +13,48 @@ class PostTile extends CardTile {
   @override
   Widget buildItem(BuildContext context) {
     var url = state.icon?.toString();
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
-        child: SizedBox(
-            width: double.infinity,
-            height: 64,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Row(
+      children: [
+        url?.isEmpty ?? true
+            ? const SizedBox.shrink()
+            : SizedBox(
+                width: 64,
+                height: 64,
+                child: FadeInImage.memoryNetwork(
+                  placeholder: kTransparentImage,
+                  image: url!,
+                  imageErrorBuilder: _imageError,
+                  fit: BoxFit.fitHeight,
+                ),
+              ),
+        const SizedBox(width: 8),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              state.title,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontSize: 16),
+            ),
+            Row(
               children: [
-                url?.isEmpty ?? true
-                    ? const SizedBox.shrink()
-                    : AspectRatio(
-                        aspectRatio: 1,
-                        child: FadeInImage.memoryNetwork(
-                          placeholder: kTransparentImage,
-                          image: url!,
-                          imageErrorBuilder: _imageError,
-                        ),
-                      ),
-                Flexible(
-                    child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        state.title,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 16),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            state.category,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(width: 4),
-                          const Text("•"),
-                          const SizedBox(width: 4),
-                          Expanded(
-                            child: Text(
-                              state.author,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
+                Text(
+                  state.category,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                const Text(" • "),
+                Expanded(
+                  child: Text(
+                    state.author,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                ))
+                )
               ],
-            )));
+            ),
+          ],
+        ).flex(1),
+      ],
+    ).padding(all: url?.isEmpty ?? true ? 8 : 0);
   }
 
   Widget _imageError(
