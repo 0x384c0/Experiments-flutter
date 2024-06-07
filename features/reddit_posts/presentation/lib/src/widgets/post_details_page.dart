@@ -10,14 +10,7 @@ import 'post_tile.dart';
 
 /// Screen with post details
 class PostDetailsPage extends StatelessWidget {
-  const PostDetailsPage({super.key});
-
-  @override
-  Widget build(BuildContext context) => _PostDetailsView();
-}
-
-class _PostDetailsView extends StatelessWidget {
-  _PostDetailsView({Key? key}) : super(key: key);
+  PostDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {

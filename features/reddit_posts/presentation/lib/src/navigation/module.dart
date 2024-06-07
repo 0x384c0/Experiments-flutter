@@ -20,7 +20,7 @@ class RoutesModule extends Module {
       final state = PostDetailsState(permalink, postItemState);
       return BlocProvider(
         create: (_) => PostDetailsCubit(state)..refresh(),
-        child: const PostDetailsPage(),
+        child: PostDetailsPage(),
       );
     });
   }
