@@ -15,14 +15,12 @@ class RoutesModule extends Module {
   void routes(r) {
     r.child('/', child: (context) => const PostsPage());
     r.child(postDetails, child: (context) {
-      var permalink = r.args.queryParams[Params.permalink];
-      var postItemState = r.args.data is PostItemState ? r.args.data : null;
-      var state = postItemState != null
-          ? PostDetailsStateEmptyComments(permalink, postItemState)
-          : PostDetailsStateEmpty(permalink);
+      final permalink = r.args.queryParams[Params.permalink];
+      final postItemState = r.args.data is PostItemState ? r.args.data : null;
+      final state = PostDetailsState(permalink, postItemState);
       return BlocProvider(
-        create: (_) => PostDetailsCubit(state),
-        child: PostDetailsPage(),
+        create: (_) => PostDetailsCubit(state)..refresh(),
+        child: const PostDetailsPage(),
       );
     });
   }

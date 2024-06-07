@@ -6,8 +6,7 @@ import '../data/post_state.dart';
 
 class PostModelMapper extends Mapper<PostModel, PostDetailsState> {
   @override
-  PostDetailsStatePopulated map(PostModel input) {
-    return PostDetailsStatePopulated(
+  PostDetailsState map(PostModel input) => PostDetailsState(
         input.permalink,
         PostItemState(
           input.permalink ?? "",
@@ -25,6 +24,6 @@ class PostModelMapper extends Mapper<PostModel, PostDetailsState> {
                     null,
                   ))
               .where((element) => element.title.isNotEmpty),
-        ));
-  }
+        ),
+      );
 }

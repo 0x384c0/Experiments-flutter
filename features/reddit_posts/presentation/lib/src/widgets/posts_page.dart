@@ -24,7 +24,6 @@ class PostsPage extends StatelessWidget {
   }
 }
 
-/// View with current weather and forecast
 class _PostsView extends StatelessWidget {
   const _PostsView({Key? key}) : super(key: key);
 

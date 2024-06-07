@@ -12,7 +12,7 @@ import '../navigation/navigator.dart';
 
 class PostsCubit extends Cubit<PageState<Iterable<PostItemState>>>
     with
-        CubitPageStateMixin<Iterable<PostItemState>>,
+        CubitPageStateMixin,
         CubitPaginationMixin<PageState<Iterable<PostItemState>>, Iterable<PostItemState>> {
   PostsCubit() : super(PageStateEmptyLoading());
 
