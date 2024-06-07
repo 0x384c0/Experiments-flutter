@@ -50,9 +50,9 @@ abstract class PageStateCubit<T> extends Cubit<PageState<T>> {
 
   /// Should be called after creation of [PageStateView]
   @nonVirtual
-  Future refresh() async {
+  Future refresh({bool? showLoading}) async {
     try {
-      emitEmptyLoading();
+      if (showLoading == true) emitEmptyLoading();
       await onRefresh();
     } catch (e) {
       if (!(await _interceptError(e))) {

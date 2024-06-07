@@ -24,7 +24,7 @@ class PageStateView<T> extends StatelessWidget {
 
   final PageState<T> state;
   final VoidCallback closeAlert;
-  final RefreshCallback refresh;
+  final Future<void> Function({bool? showLoading}) refresh;
   final Widget Function(T data) child;
 
   @override
@@ -32,7 +32,10 @@ class PageStateView<T> extends StatelessWidget {
     AlertDialogPresenter.instance.alertDialog(context, state, closeAlert);
     switch (state) {
       case final PageStateEmptyError state:
-        return ErrorView(errorDescription: state.errorDescription, refresh: refresh);
+        return ErrorView(
+          errorDescription: state.errorDescription,
+          refresh: () => refresh(showLoading: true),
+        );
       case final PageStateEmptyLoading _:
         return const LoadingIndicator();
       case final PageStatePopulated<T> state:
