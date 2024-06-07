@@ -1,5 +1,6 @@
 import 'package:common_presentation/widgets/card_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 import '../data/post_state.dart';
 
@@ -23,7 +24,11 @@ class PostTile extends CardTile {
                     ? const SizedBox.shrink()
                     : AspectRatio(
                         aspectRatio: 1,
-                        child: Image.network(url!),
+                        child: FadeInImage.memoryNetwork(
+                          placeholder: kTransparentImage,
+                          image: url!,
+                          imageErrorBuilder: _imageError,
+                        ),
                       ),
                 Flexible(
                     child: Padding(
@@ -60,4 +65,11 @@ class PostTile extends CardTile {
               ],
             )));
   }
+
+  Widget _imageError(
+    BuildContext context,
+    Object error,
+    StackTrace? stackTrace,
+  ) =>
+      const Icon(Icons.image);
 }
