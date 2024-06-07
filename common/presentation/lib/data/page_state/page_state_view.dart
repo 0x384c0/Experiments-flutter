@@ -29,7 +29,7 @@ class PageStateView<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    alertDialog(context, state, closeAlert);
+    AlertDialogPresenter.instance.alertDialog(context, state, closeAlert);
     switch (state) {
       case final PageStateEmptyError state:
         return ErrorView(errorDescription: state.errorDescription, refresh: refresh);
