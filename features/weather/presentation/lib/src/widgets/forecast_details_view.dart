@@ -1,4 +1,4 @@
-import 'package:common_presentation/ui/widget_extensions.dart';
+import 'package:common_presentation/extensions/widget_extensions.dart';
 import '../data/weather_state.dart';
 import '../widgets/forecast_details_cubit.dart';
 import 'package:flutter/material.dart';

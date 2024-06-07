@@ -1,4 +1,4 @@
-import 'package:common_presentation/ui/card_tile.dart';
+import 'package:common_presentation/widgets/card_tile.dart';
 import 'package:flutter/material.dart';
 
 import '../data/post_state.dart';

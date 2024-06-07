@@ -1,4 +1,4 @@
-import 'package:common_presentation/ui/card_tile.dart';
+import 'package:common_presentation/widgets/card_tile.dart';
 import '../data/weather_state.dart';
 import 'package:flutter/material.dart';
 
