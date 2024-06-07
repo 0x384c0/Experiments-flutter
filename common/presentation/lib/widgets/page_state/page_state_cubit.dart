@@ -37,16 +37,9 @@ abstract class PageStateCubit<T> extends Cubit<PageState<T>> {
     if (!isClosed) emit(PageStateEmptyLoading());
   }
 
-  Future<bool> _interceptError(Object e) async {
-    // final shouldLogout = await userAuth.shouldLogoutOnError(e); //TODO: inject auth error intercept logic
-    // if (shouldLogout) launcherNavigator.toEntryPoint();
-    // return shouldLogout;
-    return false;
-  }
-
-  // AuthInteractor get userAuth;
-  //
-  // LauncherNavigator get launcherNavigator;
+  /// override to intercept errors
+  /// For example logout on Unauthorized errors
+  Future<bool> interceptError(Object e) async => false;
 
   /// Should be called after creation of [PageStateView]
   @nonVirtual
@@ -55,7 +48,7 @@ abstract class PageStateCubit<T> extends Cubit<PageState<T>> {
       if (showLoading == true) emitEmptyLoading();
       await onRefresh();
     } catch (e) {
-      if (!(await _interceptError(e))) {
+      if (!(await interceptError(e))) {
         emitEmptyError(e.toString());
       }
     }
