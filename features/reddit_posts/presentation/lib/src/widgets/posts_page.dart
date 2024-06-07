@@ -48,10 +48,12 @@ class _PostsView extends StatelessWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           controller: controller,
           slivers: [
-            SliverList.builder(
-              itemCount: widgets.length,
-              // padding: const EdgeInsets.all(8.0),
-              itemBuilder: (context, index) => widgets.elementAt(index),
+            SliverPadding(
+              padding: const EdgeInsets.all(8),
+              sliver: SliverList.builder(
+                itemCount: widgets.length,
+                itemBuilder: (context, index) => widgets.elementAt(index),
+              ),
             ),
             SliverToBoxAdapter(child: _pageLoadingIndicator(cubit.state.paginationState?.isLoadingPage ?? false)),
           ],
