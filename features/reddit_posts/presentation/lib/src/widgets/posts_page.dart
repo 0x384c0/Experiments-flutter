@@ -1,6 +1,7 @@
 library presentation;
 
 import 'package:common_presentation/data/page_state/page_state_view.dart';
+import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,9 +41,13 @@ class _PostsView extends StatelessWidget {
     var widgets = posts.map((e) => PostTile(e, () => cubit.onPostClick(e)));
     return RefreshIndicator(
         onRefresh: cubit.refresh,
-        child: ListView.builder(
-          itemCount: widgets.length,
-          itemBuilder: (context, index) => widgets.elementAt(index),
+        child: ScrollToEndListener(
+          onScrolledToEnd: cubit.loadNextPage,
+          child: (controller) => ListView.builder(
+            controller: controller,
+            itemCount: widgets.length,
+            itemBuilder: (context, index) => widgets.elementAt(index),
+          ),
         ));
   }
 }

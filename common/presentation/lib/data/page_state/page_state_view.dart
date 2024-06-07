@@ -34,7 +34,6 @@ class PageStateView<T> extends StatelessWidget {
       case final PageStateEmptyError state:
         return ErrorView(errorDescription: state.errorDescription, refresh: refresh);
       case final PageStateEmptyLoading _:
-        _refreshPage();
         return const LoadingIndicator();
       case final PageStatePopulated<T> state:
         return child(state.data);
@@ -43,9 +42,5 @@ class PageStateView<T> extends StatelessWidget {
       default:
         return EmptyStateView(refresh: refresh);
     }
-  }
-
-  _refreshPage() {
-    WidgetsBinding.instance.addPostFrameCallback((_) => refresh());
   }
 }

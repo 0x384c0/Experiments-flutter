@@ -9,19 +9,30 @@ import '../data/reddit_posts_response_dto.dart';
 import '../data/reddit_posts_sort_dto.dart';
 
 class RemoteRepositoryImpl implements PostsRemoteRepository {
+  static const String _defaultSubreddit = "all";
+  static const int _pageLimit = 25;
+
   RemoteRepositoryImpl(this.redditApi, this.redditPostsResponseDTOMapper, this.redditPostListingDTOMapper);
 
   RedditApi redditApi;
-  Mapper<RedditPostsResponseDTO, Iterable<PostModel>> redditPostsResponseDTOMapper;
+  Mapper<RedditPostsResponseDTO, PostsModel> redditPostsResponseDTOMapper;
   Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel> redditPostListingDTOMapper;
 
   @override
-  Future<Iterable<PostModel>> getPosts() {
-    return redditApi.getPosts("all", RedditPostsSortDTO.top).then(redditPostsResponseDTOMapper.map);
+  Future<PostsModel> getPosts({
+    String? after,
+  }) {
+    return redditApi
+        .getPosts(
+          subreddit: _defaultSubreddit,
+          sort: RedditPostsSortDTO.top,
+          limit: _pageLimit,
+          after: after,
+        )
+        .then(redditPostsResponseDTOMapper.map);
   }
 
   @override
-  Future<PostModel> getPost(String permalink) {
-    return redditApi.getPost(permalink).then((dto) => redditPostListingDTOMapper.map({permalink: dto}));
-  }
+  Future<PostModel> getPost(String permalink) =>
+      redditApi.getPost(permalink).then((dto) => redditPostListingDTOMapper.map({permalink: dto}));
 }

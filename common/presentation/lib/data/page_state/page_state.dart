@@ -1,10 +1,18 @@
+import 'package:common_presentation/mixins/cubit_with_pagination.dart';
 import 'package:common_presentation/widgets/alert_dialog.dart';
 
-abstract class PageState<T> implements StateWithAlert {
-  PageState(this.alertDialogState);
+/// Make PageState abstract anc create new class, that implement all these interfaces
+abstract class PageState<T> implements StateWithAlert, StateWithPagination {
+  PageState({
+    this.alertDialogState,
+    this.paginationState,
+  });
 
   @override
   final AlertDialogState? alertDialogState;
+
+  @override
+  final PaginationState? paginationState;
 
   PageState<T> newWith({T? data}) {
     if (data == null) return PageStateEmptyLoading<T>();
@@ -12,41 +20,102 @@ abstract class PageState<T> implements StateWithAlert {
     return PageStatePopulated<T>(data: data);
   }
 
-  PageState<T> copyWith({T? data, AlertDialogState? alertDialogState});
+  @override
+  PageState<T> copyWith({
+    T? data,
+    AlertDialogState? alertDialogState,
+    PaginationState? paginationState,
+  });
 }
 
 class PageStateEmpty<T> extends PageState<T> {
-  PageStateEmpty({AlertDialogState? alertDialogState}) : super(alertDialogState);
+  PageStateEmpty({
+    AlertDialogState? alertDialogState,
+    PaginationState? paginationState,
+  }) : super(
+          alertDialogState: alertDialogState,
+          paginationState: paginationState,
+        );
 
   @override
-  PageState<T> copyWith({T? data, AlertDialogState? alertDialogState}) =>
-      PageStateEmpty(alertDialogState: alertDialogState ?? this.alertDialogState);
+  PageState<T> copyWith({
+    T? data,
+    AlertDialogState? alertDialogState,
+    PaginationState? paginationState,
+  }) =>
+      PageStateEmpty(
+        alertDialogState: alertDialogState ?? this.alertDialogState,
+        paginationState: paginationState ?? this.paginationState,
+      );
 }
 
 class PageStateEmptyLoading<T> extends PageState<T> {
-  PageStateEmptyLoading({AlertDialogState? alertDialogState}) : super(alertDialogState);
+  PageStateEmptyLoading({
+    AlertDialogState? alertDialogState,
+    PaginationState? paginationState,
+  }) : super(
+          alertDialogState: alertDialogState,
+          paginationState: paginationState,
+        );
 
   @override
-  PageState<T> copyWith({T? data, AlertDialogState? alertDialogState}) =>
-      PageStateEmptyLoading(alertDialogState: alertDialogState ?? this.alertDialogState);
+  PageState<T> copyWith({
+    T? data,
+    AlertDialogState? alertDialogState,
+    PaginationState? paginationState,
+  }) =>
+      PageStateEmptyLoading(
+        alertDialogState: alertDialogState ?? this.alertDialogState,
+        paginationState: paginationState ?? this.paginationState,
+      );
 }
 
 class PageStateEmptyError<T> extends PageState<T> {
-  PageStateEmptyError({AlertDialogState? alertDialogState, required this.errorDescription}) : super(alertDialogState);
+  PageStateEmptyError({
+    AlertDialogState? alertDialogState,
+    PaginationState? paginationState,
+    required this.errorDescription,
+  }) : super(
+          alertDialogState: alertDialogState,
+          paginationState: paginationState,
+        );
 
   final String errorDescription;
 
   @override
-  PageState<T> copyWith({T? data, AlertDialogState? alertDialogState}) => PageStateEmptyError(
-      alertDialogState: alertDialogState ?? this.alertDialogState, errorDescription: errorDescription);
+  PageState<T> copyWith({
+    T? data,
+    AlertDialogState? alertDialogState,
+    PaginationState? paginationState,
+  }) =>
+      PageStateEmptyError(
+        alertDialogState: alertDialogState ?? this.alertDialogState,
+        paginationState: paginationState ?? this.paginationState,
+        errorDescription: errorDescription,
+      );
 }
 
 class PageStatePopulated<T> extends PageState<T> {
-  PageStatePopulated({AlertDialogState? alertDialogState, required this.data}) : super(alertDialogState);
+  PageStatePopulated({
+    required this.data,
+    AlertDialogState? alertDialogState,
+    PaginationState? paginationState,
+  }) : super(
+          alertDialogState: alertDialogState,
+          paginationState: paginationState,
+        );
 
   T data;
 
   @override
-  PageState<T> copyWith({T? data, AlertDialogState? alertDialogState}) =>
-      PageStatePopulated<T>(alertDialogState: alertDialogState ?? this.alertDialogState, data: data ?? this.data);
+  PageState<T> copyWith({
+    T? data,
+    AlertDialogState? alertDialogState,
+    PaginationState? paginationState,
+  }) =>
+      PageStatePopulated<T>(
+        alertDialogState: alertDialogState ?? this.alertDialogState,
+        paginationState: paginationState ?? this.paginationState,
+        data: data ?? this.data,
+      );
 }

@@ -6,7 +6,7 @@ import '../data/reddit_post_listing_dto.dart';
 
 class RedditPostListingDTOMapper extends Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel> {
   @override
-  PostModel map(Map<String, Iterable<RedditPostListingDTO>> input) {
+  map(input) {
     var permalink = input.keys.first;
     var dto = input.values.first;
     var post = dto.elementAt(0).data?.children?[0].data;
@@ -17,6 +17,7 @@ class RedditPostListingDTOMapper extends Mapper<Map<String, Iterable<RedditPostL
           e.data?.thumbnail?.parseUri(),
           e.data?.body,
           null,
+          null,
         ));
     return PostModel(
       permalink,
@@ -25,6 +26,7 @@ class RedditPostListingDTOMapper extends Mapper<Map<String, Iterable<RedditPostL
       post?.thumbnail?.parseUri(),
       post?.title,
       comments,
+      dto.elementAt(0).data?.after,
     );
   }
 }

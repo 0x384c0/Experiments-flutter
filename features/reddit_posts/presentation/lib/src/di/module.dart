@@ -11,7 +11,7 @@ import '../mapper/post_models_mapper.dart';
 class PostsPresentationModule extends Module {
   @override
   exportedBinds(Injector i) {
-    i.add<Mapper<Iterable<PostModel>, Iterable<PostItemState>>>(PostModelsMapper.new);
+    i.add<Mapper<PostsModel, Iterable<PostItemState>>>(PostModelsMapper.new);
     i.add<Mapper<PostModel, PostDetailsState>>(PostModelMapper.new);
     i.add<PostsNavigator>(NavigatorImpl.new);
   }

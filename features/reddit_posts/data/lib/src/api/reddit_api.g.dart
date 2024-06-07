@@ -21,12 +21,18 @@ class _RedditApi implements RedditApi {
   String? baseUrl;
 
   @override
-  Future<RedditPostsResponseDTO> getPosts(
-    subreddit,
-    sort,
-  ) async {
+  Future<RedditPostsResponseDTO> getPosts({
+    required subreddit,
+    required sort,
+    required limit,
+    after,
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'limit': limit,
+      r'after': after,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(

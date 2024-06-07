@@ -4,10 +4,10 @@ import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 
 import '../data/reddit_posts_response_dto.dart';
 
-class RedditPostsResponseDTOMapper extends Mapper<RedditPostsResponseDTO, Iterable<PostModel>> {
+class RedditPostsResponseDTOMapper extends Mapper<RedditPostsResponseDTO, PostsModel> {
   @override
-  Iterable<PostModel> map(RedditPostsResponseDTO input) {
-    return input.data?.children?.map((e) {
+  map(RedditPostsResponseDTO input) {
+    final posts = input.data?.children?.map((e) {
           return PostModel(
             e.data?.permalink,
             e.data?.author,
@@ -15,8 +15,11 @@ class RedditPostsResponseDTOMapper extends Mapper<RedditPostsResponseDTO, Iterab
             e.data?.thumbnail?.parseUri(),
             e.data?.title,
             null,
+            null,
           );
         }) ??
         [];
+
+    return PostsModel(posts, input.data?.after);
   }
 }

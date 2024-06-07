@@ -8,6 +8,9 @@ part 'reddit_post_listing_data_dto.g.dart';
 class RedditPostListingDataDTO {
   RedditPostListingDataDTO();
 
+  @JsonKey(name: "after")
+  String? after;
+
   @JsonKey(name: "children")
   List<RedditPostListingChildDTO>? children;
 

@@ -1,7 +1,7 @@
-
-import '../../features_reddit_posts_domain.dart';
+import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 
 abstract class PostsRemoteRepository {
-  Future<Iterable<PostModel>> getPosts();
+  Future<PostsModel> getPosts({required String? after});
+
   Future<PostModel> getPost(String permalink);
 }

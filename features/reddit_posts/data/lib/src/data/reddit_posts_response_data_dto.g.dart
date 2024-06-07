@@ -12,10 +12,12 @@ RedditPostsResponseDataDTO _$RedditPostsResponseDataDTOFromJson(
       ..children = (json['children'] as List<dynamic>?)
           ?.map((e) =>
               RedditPostsResponseChildDTO.fromJson(e as Map<String, dynamic>))
-          .toList();
+          .toList()
+      ..after = json['after'] as String?;
 
 Map<String, dynamic> _$RedditPostsResponseDataDTOToJson(
         RedditPostsResponseDataDTO instance) =>
     <String, dynamic>{
       'children': instance.children,
+      'after': instance.after,
     };

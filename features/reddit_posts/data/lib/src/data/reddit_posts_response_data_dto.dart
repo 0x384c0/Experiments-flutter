@@ -10,6 +10,9 @@ class RedditPostsResponseDataDTO {
   @JsonKey(name: "children")
   List<RedditPostsResponseChildDTO>? children;
 
+  @JsonKey(name: "after")
+  String? after;
+
   factory RedditPostsResponseDataDTO.fromJson(Map<String, dynamic> json) => _$RedditPostsResponseDataDTOFromJson(json);
 
   Map<String, dynamic> toJson() => _$RedditPostsResponseDataDTOToJson(this);
