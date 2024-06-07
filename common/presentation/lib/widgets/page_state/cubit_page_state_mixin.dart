@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Cubit, that can emit [PageState]
-mixin CubitWithPageState<T> on Cubit<PageState<T>> {
+mixin CubitPageStateMixin<T> on Cubit<PageState<T>> {
   /// Will close alert, caused by [alertDialogState]
   closeAlert() => emit(state.copyWith(alertDialogState: StateWithAlert.noAlert));
 

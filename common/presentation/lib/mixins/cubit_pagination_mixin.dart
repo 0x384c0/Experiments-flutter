@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-mixin CubitWithPagination<S extends StateWithPagination, D> on Cubit<S> {
+mixin CubitPaginationMixin<S extends StateWithPagination, D> on Cubit<S> {
   //region overrides
   bool get isCanLoadPages;
 

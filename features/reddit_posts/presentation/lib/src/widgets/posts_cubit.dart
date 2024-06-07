@@ -1,7 +1,7 @@
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:common_presentation/widgets/page_state/page_state.dart';
-import 'package:common_presentation/widgets/page_state/cubit_with_page_state.dart';
-import 'package:common_presentation/mixins/cubit_with_pagination.dart';
+import 'package:common_presentation/widgets/page_state/cubit_page_state_mixin.dart';
+import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +12,8 @@ import '../navigation/navigator.dart';
 
 class PostsCubit extends Cubit<PageState<Iterable<PostItemState>>>
     with
-        CubitWithPageState<Iterable<PostItemState>>,
-        CubitWithPagination<PageState<Iterable<PostItemState>>, Iterable<PostItemState>> {
+        CubitPageStateMixin<Iterable<PostItemState>>,
+        CubitPaginationMixin<PageState<Iterable<PostItemState>>, Iterable<PostItemState>> {
   PostsCubit() : super(PageStateEmptyLoading());
 
   late PostsInteractor interactor = Modular.get();

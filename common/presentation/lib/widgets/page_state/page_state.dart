@@ -1,4 +1,4 @@
-import 'package:common_presentation/mixins/cubit_with_pagination.dart';
+import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
 import 'package:common_presentation/widgets/alert_dialog.dart';
 
 /// Make PageState abstract anc create new class, that implement all these interfaces
