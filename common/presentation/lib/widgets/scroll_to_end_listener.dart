@@ -16,11 +16,13 @@ import 'package:flutter/material.dart';
 class ScrollToEndListener extends StatefulWidget {
   const ScrollToEndListener({
     super.key,
+    this.controller,
     required this.onScrolledToEnd,
     required this.child,
   });
 
   final VoidCallback? onScrolledToEnd;
+  final ScrollController? controller;
   final ScrollView Function(ScrollController) child;
 
   @override
@@ -33,7 +35,7 @@ class _ScrollToEndListenerState extends State<ScrollToEndListener> {
 
   @override
   void initState() {
-    _controller = ScrollController();
+    _controller = widget.controller ?? ScrollController();
     _controller.addListener(() {
       final onScrolledToEnd = widget.onScrolledToEnd;
       if (onScrolledToEnd == null) return;

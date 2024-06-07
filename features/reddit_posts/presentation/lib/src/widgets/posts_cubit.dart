@@ -3,7 +3,7 @@ import 'package:common_presentation/data/page_state/page_state.dart';
 import 'package:common_presentation/data/page_state/page_state_cubit.dart';
 import 'package:common_presentation/mixins/cubit_with_pagination.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../data/post_state.dart';
@@ -15,6 +15,8 @@ class PostsCubit extends PageStateCubit<Iterable<PostItemState>>
   late PostsNavigator navigator = Modular.get();
   late Mapper<PostsModel, Iterable<PostItemState>> postModelMapper = Modular.get();
 
+  final scrollController = ScrollController();
+
   String? _lastAfter;
 
   @override
@@ -24,7 +26,13 @@ class PostsCubit extends PageStateCubit<Iterable<PostItemState>>
     await interactor.getPosts(after: null).then(_saveAfter).then(postModelMapper.map).then(emitData);
   }
 
-  onPostClick(PostItemState state) => navigator.toPostDetails(state);
+  onPostTap(PostItemState state) => navigator.toPostDetails(state);
+
+  onTopBarTap() => scrollController.animateTo(
+        0,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.fastOutSlowIn,
+      );
 
   @override
   emitWithNewPage(Iterable<PostItemState> nextPageData) => emitData([

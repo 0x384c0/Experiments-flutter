@@ -29,20 +29,24 @@ class _PostsView extends StatelessWidget {
   const _PostsView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => PageStateView.cubut(
-        cubit: context.watch<PostsCubit>(),
-        child: (data) => Scaffold(
-          appBar: AppBar(title: Text(AppLocalizations.of(context)!.reddit_posts_home_page)),
-          body: Center(child: _list(context, data)),
-        ),
-      );
+  Widget build(BuildContext context) {
+    final cubit = context.watch<PostsCubit>();
+    return PageStateView.cubut(
+      cubit: cubit,
+      child: (data) => Scaffold(
+        appBar: AppBar(title: Text(AppLocalizations.of(context)!.reddit_posts_home_page).onTap(cubit.onTopBarTap)),
+        body: Center(child: _list(context, data)),
+      ),
+    );
+  }
 
   Widget _list(BuildContext context, Iterable<PostItemState> posts) {
     final cubit = context.watch<PostsCubit>();
-    var widgets = posts.map((e) => PostTile(e, () => cubit.onPostClick(e)));
+    var widgets = posts.map((e) => PostTile(e, () => cubit.onPostTap(e)));
     return RefreshIndicator(
       onRefresh: cubit.refresh,
       child: ScrollToEndListener(
+        controller: cubit.scrollController,
         onScrolledToEnd: cubit.loadNextPage,
         child: (controller) => CustomScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
