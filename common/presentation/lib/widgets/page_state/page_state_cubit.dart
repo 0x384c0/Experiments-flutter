@@ -52,6 +52,7 @@ abstract class PageStateCubit<T> extends Cubit<PageState<T>> {
   @nonVirtual
   Future refresh() async {
     try {
+      emitEmptyLoading();
       await onRefresh();
     } catch (e) {
       if (!(await _interceptError(e))) {
