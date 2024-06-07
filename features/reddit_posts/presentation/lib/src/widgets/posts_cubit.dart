@@ -33,6 +33,9 @@ class PostsCubit extends PageStateCubit<Iterable<PostItemState>>
       ]);
 
   @override
+  bool get isCanLoadPages => stateData?.isNotEmpty == true;
+
+  @override
   bool isLastPage(Iterable<PostItemState> data) => data.isEmpty;
 
   @override

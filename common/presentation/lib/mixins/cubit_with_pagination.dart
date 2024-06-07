@@ -2,6 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 mixin CubitWithPagination<S extends StateWithPagination, D> on Cubit<S> {
   //region overrides
+  bool get isCanLoadPages;
+
   bool isLastPage(D data);
 
   Future<D> loadPage(int pageNumber);
@@ -25,7 +27,6 @@ mixin CubitWithPagination<S extends StateWithPagination, D> on Cubit<S> {
 
   /// Call this method, when view is scrolled to end
   Future<void> loadNextPage() async {
-    //TODO: load only if state is PageStatePopulated
     if (_paginationState.isLoadingPage || _paginationState.isFinalPageLoaded) return;
     try {
       emit(state.copyWith(
