@@ -1,6 +1,6 @@
 library presentation;
 
-import 'package:common_presentation/data/page_state/page_state_view.dart';
+import 'package:common_presentation/widgets/page_state/page_state_view.dart';
 import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:flutter/material.dart';

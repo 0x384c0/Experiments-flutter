@@ -1,4 +1,4 @@
-import 'package:common_presentation/data/page_state/page_state.dart';
+import 'package:common_presentation/widgets/page_state/page_state.dart';
 import 'package:common_presentation/widgets/alert_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

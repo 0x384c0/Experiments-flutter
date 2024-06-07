@@ -1,6 +1,6 @@
 import 'package:common_domain/mapper/mapper.dart';
-import 'package:common_presentation/data/page_state/page_state.dart';
-import 'package:common_presentation/data/page_state/page_state_cubit.dart';
+import 'package:common_presentation/widgets/page_state/page_state.dart';
+import 'package:common_presentation/widgets/page_state/page_state_cubit.dart';
 import 'package:common_presentation/mixins/cubit_with_pagination.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:flutter/widgets.dart';

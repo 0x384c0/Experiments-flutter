@@ -1,5 +1,5 @@
-import 'package:common_presentation/data/page_state/page_state.dart';
-import 'package:common_presentation/data/page_state/page_state_cubit.dart';
+import 'package:common_presentation/widgets/page_state/page_state.dart';
+import 'package:common_presentation/widgets/page_state/page_state_cubit.dart';
 import 'package:common_presentation/widgets/alert_dialog.dart';
 import 'package:common_presentation/widgets/empty_view.dart';
 import 'package:common_presentation/widgets/error_view.dart';
