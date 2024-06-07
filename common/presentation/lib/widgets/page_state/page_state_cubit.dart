@@ -9,13 +9,9 @@ abstract class PageStateCubit<T> extends Cubit<PageState<T>> {
   PageStateCubit({PageState<T>? initialState}) : super(initialState ?? PageStateEmptyLoading());
 
   /// Will close alert, caused by [alertDialogState]
-  closeAlert() {
-    emit(state.copyWith(alertDialogState: StateWithAlert.noAlert));
-  }
+  closeAlert() => emit(state.copyWith(alertDialogState: StateWithAlert.noAlert));
 
-  emitAlert({required AlertDialogState alertDialogState}) {
-    emit(state.copyWith(alertDialogState: alertDialogState));
-  }
+  emitAlert({required AlertDialogState alertDialogState}) => emit(state.copyWith(alertDialogState: alertDialogState));
 
   /// Returns data if type [T] if loaded, null otherwise
   T? get stateData => state is PageStatePopulated<T> ? (state as PageStatePopulated<T>).data : null;
