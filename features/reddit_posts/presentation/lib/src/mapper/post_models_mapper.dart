@@ -3,16 +3,9 @@ import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 
 import '../data/post_state.dart';
 
-class PostModelsMapper extends Mapper<Iterable<PostModel>, PostsState> {
+class PostModelsMapper extends Mapper<Iterable<PostModel>, Iterable<PostItemState>> {
   @override
-  PostsState map(Iterable<PostModel> input) {
-    return PostsStatePopulated(input.where((element) => element.permalink != null).map((e) => PostItemState(
-          e.permalink!,
-          e.author ?? "",
-          e.category ?? "",
-          e.icon,
-          e.title ?? "",
-          null,
-        )));
-  }
+  map(Iterable<PostModel> input) => input
+      .where((element) => element.permalink != null)
+      .map((e) => PostItemState(e.permalink!, e.author ?? "", e.category ?? "", e.icon, e.title ?? "", null));
 }
