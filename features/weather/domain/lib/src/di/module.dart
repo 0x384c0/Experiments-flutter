@@ -10,6 +10,6 @@ class WeatherDomainModule extends Module {
 
   @override
   exportedBinds(Injector i) {
-    i.addSingleton<WeatherInteractor>(WeatherInteractorImpl.new);
+    i.add<WeatherInteractor>(WeatherInteractorImpl.new);
   }
 }

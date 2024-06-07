@@ -11,6 +11,6 @@ class PostsDomainModule extends Module {
 
   @override
   exportedBinds(Injector i) {
-    i.addSingleton<PostsInteractor>(PostsInteractorImpl.new);
+    i.add<PostsInteractor>(PostsInteractorImpl.new);
   }
 }

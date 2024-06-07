@@ -9,7 +9,7 @@ import 'mock_location_manager.dart';
 class _MockDataModule extends Module {
   @override
   void exportedBinds(Injector i) {
-    i.addSingleton<WeatherRemoteRepository>(MockDatasourceImpl.new);
+    i.add<WeatherRemoteRepository>(MockDatasourceImpl.new);
   }
 }
 

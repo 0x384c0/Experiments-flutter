@@ -6,7 +6,7 @@ import 'mock_datasource_impl.dart';
 class _MockDataModule extends Module {
   @override
   void exportedBinds(Injector i) {
-    i.addSingleton<WeatherRemoteRepository>(MockDatasourceImpl.new);
+    i.add<WeatherRemoteRepository>(MockDatasourceImpl.new);
   }
 }
 
