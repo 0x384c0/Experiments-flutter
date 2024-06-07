@@ -6,13 +6,10 @@ import '../api/weather_api.dart';
 import '../repository/remote_repository.dart';
 
 class WeatherDataModule extends Module {
-  @override
-  void binds(Injector i) {
-    i.addInstance(WeatherApi(Dio()));
-  }
 
   @override
   exportedBinds(Injector i) {
-    i.addSingleton<WeatherRemoteRepository>(RemoteRepositoryImpl.new);
+    i.add<WeatherApi>(() => WeatherApi(Dio()));
+    i.add<WeatherRemoteRepository>(RemoteRepositoryImpl.new);
   }
 }
