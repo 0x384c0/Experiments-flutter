@@ -53,15 +53,15 @@ class _PostsView extends StatelessWidget {
               // padding: const EdgeInsets.all(8.0),
               itemBuilder: (context, index) => widgets.elementAt(index),
             ),
-            SliverToBoxAdapter(child: _pageLoadingIndicator(cubit)),
+            SliverToBoxAdapter(child: _pageLoadingIndicator(cubit.state.paginationState?.isLoadingPage ?? false)),
           ],
         ),
       ),
     );
   }
 
-  Widget _pageLoadingIndicator(PostsCubit cubit) => Visibility(
-        visible: cubit.state.paginationState?.isLoadingPage == true,
+  Widget _pageLoadingIndicator(bool isLoadingPage) => Visibility(
+        visible: isLoadingPage,
         child: const Center(child: CircularProgressIndicator()).padding(all: 8),
       );
 }
