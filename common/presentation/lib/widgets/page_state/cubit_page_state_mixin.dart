@@ -5,10 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Cubit, that can emit [PageState]
 mixin CubitPageStateMixin<T> on Cubit<PageState<T>> {
-  /// Will close alert, caused by [alertDialogState]
-  closeAlert() => emit(state.copyWith(alertDialogState: StateWithAlert.noAlert));
-
-  emitAlert({required AlertDialogState alertDialogState}) => emit(state.copyWith(alertDialogState: alertDialogState));
 
   /// Returns data if type [T] if loaded, null otherwise
   T? get stateData => state is PageStatePopulated<T> ? (state as PageStatePopulated<T>).data : null;

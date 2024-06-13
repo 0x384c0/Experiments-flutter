@@ -1,14 +1,14 @@
 import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
 import 'package:common_presentation/widgets/alert_dialog.dart';
 
-/// Make PageState abstract anc create new class, that implement all these interfaces
-abstract class PageState<T> implements StateWithAlert, StateWithPagination {
+/// Statef of page that has state for data and alert
+// TODO: make PageState abstract
+abstract class PageState<T> implements StateWithPagination {
   PageState({
     this.alertDialogState,
     this.paginationState,
   });
 
-  @override
   final AlertDialogState? alertDialogState;
 
   @override

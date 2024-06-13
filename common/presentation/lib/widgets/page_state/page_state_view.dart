@@ -1,6 +1,5 @@
 import 'package:common_presentation/widgets/page_state/page_state.dart';
 import 'package:common_presentation/widgets/page_state/cubit_page_state_mixin.dart';
-import 'package:common_presentation/widgets/alert_dialog.dart';
 import 'package:common_presentation/widgets/empty_view.dart';
 import 'package:common_presentation/widgets/error_view.dart';
 import 'package:common_presentation/widgets/loading_indicator.dart';
@@ -11,7 +10,6 @@ class PageStateView<T> extends StatelessWidget {
   const PageStateView({
     super.key,
     required this.state,
-    required this.closeAlert,
     required this.refresh,
     required this.child,
   });
@@ -19,17 +17,14 @@ class PageStateView<T> extends StatelessWidget {
   /// convenience initializer for passing [CubitPageStateMixin] only
   PageStateView.cubut({super.key, required CubitPageStateMixin<T> cubit, required this.child})
       : state = cubit.state,
-        closeAlert = cubit.closeAlert,
         refresh = cubit.refresh;
 
   final PageState<T> state;
-  final VoidCallback closeAlert;
   final Future<void> Function({bool? showLoading}) refresh;
   final Widget Function(T data) child;
 
   @override
   Widget build(BuildContext context) {
-    AlertDialogPresenter.instance.alertDialog(context, state, closeAlert);
     switch (state) {
       case final PageStateEmptyError state:
         return ErrorView(

@@ -5,15 +5,35 @@ import 'package:flutter/material.dart';
 class AlertDialogPresenter {
   static final instance = AlertDialogPresenter();
 
-  var _isShowingAlert = false;
+  AlertDialogState? _presentedAlertDialogState;
 
-  alertDialog(BuildContext context, StateWithAlert? state, VoidCallback closeAlert) {
-    final title = state?.alertDialogState?.getTitle(context);
-    final content = state?.alertDialogState?.getContent(context);
-    final shouldSHowAlert = title?.isNotEmpty == true || content?.isNotEmpty == true;
-    ModalRoute.of(context);
-    if (shouldSHowAlert && !_isShowingAlert) {
-      _isShowingAlert = true;
+  onBuild({
+    required BuildContext context,
+    AlertDialogState? alertDialogState,
+    VoidCallback? onCloseAlert,
+  }) {
+
+    final presentedTitle = _presentedAlertDialogState?.getTitle(context);
+    final presentedContent = _presentedAlertDialogState?.getContent(context);
+
+    final title = alertDialogState?.getTitle(context);
+    final content = alertDialogState?.getContent(context);
+    final shouldBePresented = title?.isNotEmpty == true || content?.isNotEmpty == true;
+    final isPresented = _presentedAlertDialogState != null;
+    final isDifferentState = presentedTitle != title || presentedContent != content;
+    final shouldDoNothing = isPresented && !isDifferentState;
+    final shouldClose = isPresented && (!shouldBePresented || isDifferentState);
+    final shouldPresent = !isPresented && shouldBePresented;
+
+    if (shouldDoNothing) return;
+
+    if (shouldClose) {
+      _presentedAlertDialogState = null;
+      Navigator.pop(context);
+    }
+
+    if (shouldPresent) {
+      _presentedAlertDialogState = alertDialogState;
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showDialog<String>(
           context: context,
@@ -28,52 +48,46 @@ class AlertDialogPresenter {
             ],
           ),
         ).then((value) {
-          closeAlert();
-          _isShowingAlert = false;
+          onCloseAlert?.call();
+          _presentedAlertDialogState = null;
         });
       });
-    } else if (_isShowingAlert) {
-      Navigator.pop(context, MaterialLocalizations.of(context).okButtonLabel);
-      _isShowingAlert = false;
     }
   }
-}
-
-abstract class StateWithAlert {
-  AlertDialogState? get alertDialogState;
-
-  /// if passing null to [alertDialogState] is impossible, [StateWithAlert.noAlert] can be used to close alerts
-  static AlertDialogState noAlert = NoAlertDialogState();
 }
 
 abstract class AlertDialogState {
   String? getTitle(BuildContext context);
 
   String? getContent(BuildContext context);
+
+  static NoAlertDialogState noAlert = NoAlertDialogState();
 }
 
 class ErrorAlertDialogState extends AlertDialogState {
-  ErrorAlertDialogState(this._text);
+  ErrorAlertDialogState(this._title, this._text);
 
-  final String? _text;
-
-  @override
-  String? getContent(BuildContext context) => _text; //TODO: inject custom error message map from _text
-
-  @override
-  String? getTitle(BuildContext context) => ""; //TODO: inject custom title
-}
-
-class SuccessAlertDialogState extends AlertDialogState {
-  SuccessAlertDialogState(this._text);
-
+  final String? _title;
   final String? _text;
 
   @override
   String? getContent(BuildContext context) => _text;
 
   @override
-  String? getTitle(BuildContext context) => null;
+  String? getTitle(BuildContext context) => _title;
+}
+
+class SuccessAlertDialogState extends AlertDialogState {
+  SuccessAlertDialogState(this._title, this._text);
+
+  final String? _text;
+  final String? _title;
+
+  @override
+  String? getContent(BuildContext context) => _text;
+
+  @override
+  String? getTitle(BuildContext context) => _title;
 }
 
 class NoAlertDialogState extends AlertDialogState {

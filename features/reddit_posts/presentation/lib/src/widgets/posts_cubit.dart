@@ -1,4 +1,5 @@
 import 'package:common_domain/mapper/mapper.dart';
+import 'package:common_presentation/mixins/cubit_alert_mixin.dart';
 import 'package:common_presentation/widgets/page_state/page_state.dart';
 import 'package:common_presentation/widgets/page_state/cubit_page_state_mixin.dart';
 import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
@@ -13,7 +14,8 @@ import '../navigation/navigator.dart';
 class PostsCubit extends Cubit<PageState<Iterable<PostItemState>>>
     with
         CubitPageStateMixin,
-        CubitPaginationMixin<PageState<Iterable<PostItemState>>, Iterable<PostItemState>> {
+        CubitPaginationMixin<PageState<Iterable<PostItemState>>, Iterable<PostItemState>>,
+        CubitAlertMixin {
   PostsCubit() : super(PageStateEmptyLoading());
 
   late PostsInteractor interactor = Modular.get();
