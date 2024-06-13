@@ -9,8 +9,8 @@ class AlertDialogPresenter {
 
   onBuild({
     required BuildContext context,
-    AlertDialogState? alertDialogState,
-    VoidCallback? onCloseAlert,
+    required AlertDialogState? alertDialogState,
+    required VoidCallback onCloseAlert,
   }) {
 
     final presentedTitle = _presentedAlertDialogState?.getTitle(context);
@@ -48,7 +48,7 @@ class AlertDialogPresenter {
             ],
           ),
         ).then((value) {
-          onCloseAlert?.call();
+          onCloseAlert.call();
           _presentedAlertDialogState = null;
         });
       });

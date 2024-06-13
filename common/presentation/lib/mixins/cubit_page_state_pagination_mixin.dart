@@ -2,19 +2,19 @@ import 'package:common_presentation/widgets/page_state/cubit_page_state_mixin.da
 
 import 'cubit_pagination_mixin.dart';
 
-mixin CubitPageStatePaginationMixin<T> on CubitPageStateMixin<DataWithPagination<T>> {
-  DataWithPagination<T>? get dataWithPagination => stateData;
+mixin CubitPageStatePaginationMixin<D,T extends DataWithPagination<D>> on CubitPageStateMixin<T> {
+  T? get dataWithPagination => stateData;
 
-  emitDataWithPagination(DataWithPagination<T>? dataWithPagination) => emitData(dataWithPagination);
+  emitDataWithPagination(T? dataWithPagination) => emitData(dataWithPagination);
 }
 
-mixin CubitPageStatePaginationIterableMixin<T> on CubitPageStateMixin<DataWithPagination<Iterable<T>>> {
-  Iterable<T> addPages(Iterable<T> nextPageData) => [
+mixin CubitPageStatePaginationIterableMixin<D,T extends DataWithPagination<Iterable<D>>> on CubitPageStateMixin<T> {
+  Iterable<D> addPages(Iterable<D> nextPageData) => [
         ...stateData?.data ?? [],
         ...nextPageData,
       ];
 
   bool get isCanLoadPages => stateData?.data.isNotEmpty == true;
 
-  bool isLastPage(Iterable<T> data) => data.isEmpty;
+  bool isLastPage(Iterable<D> data) => data.isEmpty;
 }

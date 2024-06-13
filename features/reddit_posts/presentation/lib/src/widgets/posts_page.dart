@@ -1,7 +1,6 @@
 library presentation;
 
 import 'package:common_presentation/mixins/widget_alert_mixin.dart';
-import 'package:common_presentation/widgets/alert_dialog.dart';
 import 'package:common_presentation/widgets/page_state/page_state_view.dart';
 import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
@@ -32,7 +31,7 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<PostsCubit>();
-    onBuild(context, cubit.state.alertDialogState);
+    onBuild(context, cubit);
     return PageStateView.cubut(
       cubit: cubit,
       child: (data) => Scaffold(

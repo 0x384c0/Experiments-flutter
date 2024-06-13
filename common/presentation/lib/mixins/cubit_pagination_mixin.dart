@@ -1,32 +1,33 @@
-mixin CubitPaginationMixin<T> {
+mixin CubitPaginationMixin<D, T extends DataWithPagination<D>> {
   //region abstract
   bool get isCanLoadPages;
 
-  bool isLastPage(T data);
+  bool isLastPage(D data);
 
-  Future<T> loadPage(int pageNumber);
+  Future<D> loadPage(int pageNumber);
 
   /// Add new data from page to existing state and return this new state
-  T addPages(T nextPageData);
+  D addPages(D nextPageData);
 
-  DataWithPagination<T>? get dataWithPagination;
+  T? get dataWithPagination;
 
-  emitDataWithPagination(DataWithPagination<T>? dataWithPagination);
+  emitDataWithPagination(T? dataWithPagination);
 
   //endregion
 
   //region implemented
   PaginationState get _paginationState => dataWithPagination?.paginationState ?? PaginationState.empty();
 
-  DataWithPagination<T> newPaginationState(T data) => DataWithPagination(data: data);
-
   /// Resets state of pages
   void onBeforeFirstPageLoad() {
-    emitDataWithPagination(dataWithPagination?.copyWith(
-        paginationState: _paginationState.copyWith(
-      currentPageIndex: 0,
-      isFinalPageLoaded: false,
-    )));
+    final paginationState = _paginationState.copyWith(currentPageIndex: 0, isFinalPageLoaded: false);
+    final oldData = dataWithPagination;
+    if (oldData != null) {
+      final data = oldData.copyWith(paginationState: paginationState);
+      emitDataWithPagination(data as T);
+    } else {
+      emitDataWithPagination(null);
+    }
   }
 
   /// Call this method, when view is scrolled to end
@@ -38,41 +39,36 @@ mixin CubitPaginationMixin<T> {
           isLoadingPage: true,
           currentPageIndex: _paginationState.currentPageIndex + 1,
         ),
-      ));
+      ) as T);
       final result = await loadPage(_paginationState.currentPageIndex);
       if (isLastPage(result)) {
         emitDataWithPagination(
-            dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)));
+            dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)) as T);
       } else {
-        emitDataWithPagination(dataWithPagination?.copyWith(data: addPages(result)));
+        emitDataWithPagination(dataWithPagination?.copyWith(data: addPages(result)) as T);
       }
     } catch (e) {
       emitDataWithPagination(
-          dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)));
+          dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)) as T);
       rethrow;
     } finally {
       await Future.delayed(const Duration(milliseconds: 50));
       emitDataWithPagination(
-          dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isLoadingPage: false)));
+          dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isLoadingPage: false)) as T);
     }
   }
 //endregion
 }
 
-class DataWithPagination<T> {
-  final T data;
-  final PaginationState? paginationState;
+abstract interface class DataWithPagination<T> {
+  T get data;
 
-  DataWithPagination({required this.data, this.paginationState});
+  PaginationState? get paginationState;
 
   DataWithPagination<T> copyWith({
     T? data,
     PaginationState? paginationState,
-  }) =>
-      DataWithPagination(
-        data: data ?? this.data,
-        paginationState: paginationState ?? this.paginationState,
-      );
+  });
 }
 
 class PaginationState {

@@ -5,13 +5,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Cubit, that can emit [PageState]
 mixin CubitPageStateMixin<T> on Cubit<PageState<T>> {
-
   /// Returns data if type [T] if loaded, null otherwise
-  T? get stateData => state is PageStatePopulated<T> ? (state as PageStatePopulated<T>).data : null;
+  T? get stateData {
+    if (state is PageStatePopulated<T>) {
+      return (state as PageStatePopulated<T>).data;
+    } else {
+      return null;
+    }
+  }
 
   /// Emit new state
   emitData(T? data) {
-    if (!isClosed) emit(state.newWith(data: data));
+    if (!isClosed) emit(_getNewStateFromData(data: data));
   }
 
   emitEmpty() {
@@ -24,6 +29,12 @@ mixin CubitPageStateMixin<T> on Cubit<PageState<T>> {
 
   emitEmptyLoading() {
     if (!isClosed) emit(PageStateEmptyLoading());
+  }
+
+  PageState<T> _getNewStateFromData({T? data}) {
+    if (data == null) return PageStateEmptyLoading<T>();
+    if (data is List && data.isEmpty) return PageStateEmpty<T>();
+    return PageStatePopulated<T>(data: data);
   }
 
   /// override to intercept errors

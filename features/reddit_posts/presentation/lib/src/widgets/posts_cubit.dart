@@ -1,6 +1,7 @@
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:common_presentation/mixins/cubit_alert_mixin.dart';
 import 'package:common_presentation/mixins/cubit_page_state_pagination_mixin.dart';
+import 'package:common_presentation/widgets/page_state/generic_page_state.dart';
 import 'package:common_presentation/widgets/page_state/page_state.dart';
 import 'package:common_presentation/widgets/page_state/cubit_page_state_mixin.dart';
 import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
@@ -12,12 +13,12 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../data/post_state.dart';
 import '../navigation/navigator.dart';
 
-class PostsCubit extends Cubit<PageState<DataWithPagination<Iterable<PostItemState>>>>
+class PostsCubit extends Cubit<PageState<GenericPageState<Iterable<PostItemState>>>>
     with
         CubitPageStateMixin,
-        CubitPaginationMixin<Iterable<PostItemState>>,
-        CubitPageStatePaginationMixin,
-        CubitPageStatePaginationIterableMixin<PostItemState>,
+        CubitPaginationMixin<Iterable<PostItemState>, GenericPageState<Iterable<PostItemState>>>,
+        CubitPageStatePaginationMixin<Iterable<PostItemState>, GenericPageState<Iterable<PostItemState>>>,
+        CubitPageStatePaginationIterableMixin<PostItemState, GenericPageState<Iterable<PostItemState>>>,
         CubitAlertMixin {
   PostsCubit() : super(PageStateEmptyLoading());
 
@@ -37,7 +38,7 @@ class PostsCubit extends Cubit<PageState<DataWithPagination<Iterable<PostItemSta
         .getPosts(after: null)
         .then(_saveLastAfter)
         .then(postModelMapper.map)
-        .then(newPaginationState)
+        .then(_newPaginationState)
         .then(emitData);
   }
 
@@ -55,6 +56,9 @@ class PostsCubit extends Cubit<PageState<DataWithPagination<Iterable<PostItemSta
       interactor.getPosts(after: _lastAfter).then(_saveLastAfter).then(postModelMapper.map);
 
   // endregion
+
+  GenericPageState<Iterable<PostItemState>> _newPaginationState(Iterable<PostItemState> data) =>
+      GenericPageState(data: data);
 
   PostsModel _saveLastAfter(PostsModel model) {
     _lastAfter = model.after;
