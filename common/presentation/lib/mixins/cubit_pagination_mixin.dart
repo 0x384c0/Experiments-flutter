@@ -1,61 +1,78 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-mixin CubitPaginationMixin<S extends StateWithPagination, D> on Cubit<S> {
-  //region overrides
+mixin CubitPaginationMixin<T> {
+  //region abstract
   bool get isCanLoadPages;
 
-  bool isLastPage(D data);
+  bool isLastPage(T data);
 
-  Future<D> loadPage(int pageNumber);
+  Future<T> loadPage(int pageNumber);
 
-  /// Here add new data from page to existing state and emit it
-  emitWithNewPage(D nextPageData);
+  /// Add new data from page to existing state and return this new state
+  T addPages(T nextPageData);
+
+  DataWithPagination<T>? get dataWithPagination;
+
+  emitDataWithPagination(DataWithPagination<T>? dataWithPagination);
 
   //endregion
 
-  //region internal
-  PaginationState get _paginationState => state.paginationState ?? PaginationState.empty();
+  //region implemented
+  PaginationState get _paginationState => dataWithPagination?.paginationState ?? PaginationState.empty();
+
+  DataWithPagination<T> newPaginationState(T data) => DataWithPagination(data: data);
 
   /// Resets state of pages
   void onBeforeFirstPageLoad() {
-    emit(state.copyWith(
+    emitDataWithPagination(dataWithPagination?.copyWith(
         paginationState: _paginationState.copyWith(
       currentPageIndex: 0,
       isFinalPageLoaded: false,
-    )) as S);
+    )));
   }
 
   /// Call this method, when view is scrolled to end
   Future<void> loadNextPage() async {
     if (_paginationState.isLoadingPage || _paginationState.isFinalPageLoaded) return;
     try {
-      emit(state.copyWith(
+      emitDataWithPagination(dataWithPagination?.copyWith(
         paginationState: _paginationState.copyWith(
           isLoadingPage: true,
           currentPageIndex: _paginationState.currentPageIndex + 1,
         ),
-      ) as S);
+      ));
       final result = await loadPage(_paginationState.currentPageIndex);
       if (isLastPage(result)) {
-        emit(state.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)) as S);
+        emitDataWithPagination(
+            dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)));
       } else {
-        emitWithNewPage(result);
+        emitDataWithPagination(dataWithPagination?.copyWith(data: addPages(result)));
       }
     } catch (e) {
-      emit(state.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)) as S);
+      emitDataWithPagination(
+          dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)));
       rethrow;
     } finally {
       await Future.delayed(const Duration(milliseconds: 50));
-      emit(state.copyWith(paginationState: _paginationState.copyWith(isLoadingPage: false)) as S);
+      emitDataWithPagination(
+          dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isLoadingPage: false)));
     }
   }
 //endregion
 }
 
-abstract class StateWithPagination {
-  abstract final PaginationState? paginationState;
+class DataWithPagination<T> {
+  final T data;
+  final PaginationState? paginationState;
 
-  StateWithPagination copyWith({PaginationState? paginationState});
+  DataWithPagination({required this.data, this.paginationState});
+
+  DataWithPagination<T> copyWith({
+    T? data,
+    PaginationState? paginationState,
+  }) =>
+      DataWithPagination(
+        data: data ?? this.data,
+        paginationState: paginationState ?? this.paginationState,
+      );
 }
 
 class PaginationState {

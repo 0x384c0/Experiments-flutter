@@ -37,7 +37,7 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
       cubit: cubit,
       child: (data) => Scaffold(
         appBar: AppBar(title: Text(AppLocalizations.of(context)!.reddit_posts_home_page).onTap(cubit.onTopBarTap)),
-        body: Center(child: _list(context, data)),
+        body: Center(child: _list(context, data.data)),
       ),
     );
   }
@@ -61,7 +61,7 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
                 itemBuilder: (context, index) => widgets.elementAt(index),
               ),
             ),
-            SliverToBoxAdapter(child: _pageLoadingIndicator(cubit.state.paginationState?.isLoadingPage ?? false)),
+            SliverToBoxAdapter(child: _pageLoadingIndicator(cubit.stateData?.paginationState?.isLoadingPage ?? false)),
           ],
         ),
       ),

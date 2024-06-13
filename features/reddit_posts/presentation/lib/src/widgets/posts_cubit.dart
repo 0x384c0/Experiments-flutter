@@ -11,11 +11,8 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../data/post_state.dart';
 import '../navigation/navigator.dart';
 
-class PostsCubit extends Cubit<PageState<Iterable<PostItemState>>>
-    with
-        CubitPageStateMixin,
-        CubitPaginationMixin<PageState<Iterable<PostItemState>>, Iterable<PostItemState>>,
-        CubitAlertMixin {
+class PostsCubit extends Cubit<PageState<DataWithPagination<Iterable<PostItemState>>>>
+    with CubitPageStateMixin, CubitPaginationMixin<Iterable<PostItemState>>, CubitAlertMixin {
   PostsCubit() : super(PageStateEmptyLoading());
 
   late PostsInteractor interactor = Modular.get();
@@ -30,7 +27,12 @@ class PostsCubit extends Cubit<PageState<Iterable<PostItemState>>>
   onRefresh() async {
     _lastAfter = null;
     onBeforeFirstPageLoad();
-    await interactor.getPosts(after: null).then(_saveAfter).then(postModelMapper.map).then(emitData);
+    await interactor
+        .getPosts(after: null)
+        .then(_saveLastAfter)
+        .then(postModelMapper.map)
+        .then(newPaginationState)
+        .then(emitData);
   }
 
   onPostTap(PostItemState state) => navigator.toPostDetails(state);
@@ -41,23 +43,33 @@ class PostsCubit extends Cubit<PageState<Iterable<PostItemState>>>
         curve: Curves.fastOutSlowIn,
       );
 
+  //region CubitPaginationMixin
   @override
-  emitWithNewPage(Iterable<PostItemState> nextPageData) => emitData([
-        ...stateData ?? [],
+  addPages(Iterable<PostItemState> nextPageData) => [
+        ...stateData?.data ?? [],
         ...nextPageData,
-      ]);
+      ];
 
   @override
-  bool get isCanLoadPages => stateData?.isNotEmpty == true;
+  bool get isCanLoadPages => stateData?.data.isNotEmpty == true;
 
   @override
   bool isLastPage(Iterable<PostItemState> data) => data.isEmpty;
 
   @override
   Future<Iterable<PostItemState>> loadPage(int pageNumber) async =>
-      interactor.getPosts(after: _lastAfter).then(_saveAfter).then(postModelMapper.map);
+      interactor.getPosts(after: _lastAfter).then(_saveLastAfter).then(postModelMapper.map);
 
-  PostsModel _saveAfter(PostsModel model) {
+  @override
+  DataWithPagination<Iterable<PostItemState>>? get dataWithPagination => stateData;
+
+  @override
+  emitDataWithPagination(DataWithPagination<Iterable<PostItemState>>? dataWithPagination) =>
+      emitData(dataWithPagination);
+
+  // endregion
+
+  PostsModel _saveLastAfter(PostsModel model) {
     _lastAfter = model.after;
     return model;
   }
