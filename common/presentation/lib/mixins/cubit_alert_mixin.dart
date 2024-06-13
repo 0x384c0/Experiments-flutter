@@ -1,7 +1,7 @@
 import 'package:common_presentation/widgets/alert_dialog.dart';
 import 'package:common_presentation/widgets/page_state/cubit_page_state_mixin.dart';
 
-mixin CubitAlertMixin<T extends DataWithAlert> on CubitPageStateMixin<T> {
+mixin CubitAlertMixin<T extends StateWithAlert> on CubitPageStateMixin<T> {
   emitAlertWithText(String text) => emitAlert(alertDialogState: SuccessAlertDialogState(null, text));
 
   emitAlert({required AlertDialogState alertDialogState}) {
@@ -16,8 +16,8 @@ mixin CubitAlertMixin<T extends DataWithAlert> on CubitPageStateMixin<T> {
   closeAlert() => emitAlert(alertDialogState: AlertDialogState.noAlert);
 }
 
-abstract interface class DataWithAlert {
+abstract interface class StateWithAlert {
   AlertDialogState? get alertDialogState;
 
-  DataWithAlert copyWith({AlertDialogState? alertDialogState});
+  StateWithAlert copyWith({AlertDialogState? alertDialogState});
 }

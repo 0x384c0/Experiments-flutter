@@ -2,7 +2,7 @@ import 'package:common_presentation/mixins/cubit_alert_mixin.dart';
 import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
 import 'package:common_presentation/widgets/alert_dialog.dart';
 
-class GenericPageState<T> implements DataWithPagination<T>, DataWithAlert {
+class GenericPageState<T> implements StateWithPagination<T>, StateWithAlert {
   GenericPageState({
     required this.data,
     this.paginationState,

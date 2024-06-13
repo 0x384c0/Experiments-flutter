@@ -1,4 +1,4 @@
-mixin CubitPaginationMixin<D, T extends DataWithPagination<D>> {
+mixin CubitPaginationMixin<D, T extends StateWithPagination<D>> {
   //region abstract
   bool get isCanLoadPages;
 
@@ -60,12 +60,12 @@ mixin CubitPaginationMixin<D, T extends DataWithPagination<D>> {
 //endregion
 }
 
-abstract interface class DataWithPagination<T> {
+abstract interface class StateWithPagination<T> {
   T get data;
 
   PaginationState? get paginationState;
 
-  DataWithPagination<T> copyWith({
+  StateWithPagination<T> copyWith({
     T? data,
     PaginationState? paginationState,
   });
