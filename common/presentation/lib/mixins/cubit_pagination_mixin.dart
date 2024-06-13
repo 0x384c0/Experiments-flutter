@@ -7,7 +7,7 @@ mixin CubitPaginationMixin<D, T extends StateWithPagination<D>> {
   Future<D> loadPage(int pageNumber);
 
   /// Add new data from page to existing state and return this new state
-  D addPages(D nextPageData);
+  D? addPages(D nextPageData);
 
   T? get dataWithPagination;
 

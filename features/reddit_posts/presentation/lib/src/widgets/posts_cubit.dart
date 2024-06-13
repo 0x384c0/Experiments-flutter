@@ -17,7 +17,7 @@ class PostsCubit extends Cubit<PageState<GenericPageState<Iterable<PostItemState
     with
         CubitPageStateMixin,
         CubitPaginationMixin<Iterable<PostItemState>, GenericPageState<Iterable<PostItemState>>>,
-        CubitPageStatePaginationMixin<Iterable<PostItemState>, GenericPageState<Iterable<PostItemState>>>,
+        CubitPageStatePaginationMixin,
         CubitPageStatePaginationIterableMixin<PostItemState, GenericPageState<Iterable<PostItemState>>>,
         CubitAlertMixin {
   PostsCubit() : super(PageStateEmptyLoading());
