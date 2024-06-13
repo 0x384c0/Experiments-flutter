@@ -1,5 +1,6 @@
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:common_presentation/mixins/cubit_alert_mixin.dart';
+import 'package:common_presentation/mixins/cubit_page_state_pagination_mixin.dart';
 import 'package:common_presentation/widgets/page_state/page_state.dart';
 import 'package:common_presentation/widgets/page_state/cubit_page_state_mixin.dart';
 import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
@@ -12,7 +13,12 @@ import '../data/post_state.dart';
 import '../navigation/navigator.dart';
 
 class PostsCubit extends Cubit<PageState<DataWithPagination<Iterable<PostItemState>>>>
-    with CubitPageStateMixin, CubitPaginationMixin<Iterable<PostItemState>>, CubitAlertMixin {
+    with
+        CubitPageStateMixin,
+        CubitPaginationMixin<Iterable<PostItemState>>,
+        CubitPageStatePaginationMixin,
+        CubitPageStatePaginationIterableMixin<PostItemState>,
+        CubitAlertMixin {
   PostsCubit() : super(PageStateEmptyLoading());
 
   late PostsInteractor interactor = Modular.get();
@@ -45,27 +51,8 @@ class PostsCubit extends Cubit<PageState<DataWithPagination<Iterable<PostItemSta
 
   //region CubitPaginationMixin
   @override
-  addPages(Iterable<PostItemState> nextPageData) => [
-        ...stateData?.data ?? [],
-        ...nextPageData,
-      ];
-
-  @override
-  bool get isCanLoadPages => stateData?.data.isNotEmpty == true;
-
-  @override
-  bool isLastPage(Iterable<PostItemState> data) => data.isEmpty;
-
-  @override
   Future<Iterable<PostItemState>> loadPage(int pageNumber) async =>
       interactor.getPosts(after: _lastAfter).then(_saveLastAfter).then(postModelMapper.map);
-
-  @override
-  DataWithPagination<Iterable<PostItemState>>? get dataWithPagination => stateData;
-
-  @override
-  emitDataWithPagination(DataWithPagination<Iterable<PostItemState>>? dataWithPagination) =>
-      emitData(dataWithPagination);
 
   // endregion
 
