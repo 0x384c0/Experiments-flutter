@@ -1,4 +1,5 @@
 import 'package:common_presentation/widgets/page_state/page_state_view.dart';
+import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +11,19 @@ import 'post_tile.dart';
 
 /// Screen with post details
 class PostDetailsPage extends StatelessWidget {
-  PostDetailsPage({super.key});
+  const PostDetailsPage({super.key, required this.state});
+
+  final PostDetailsState state;
+
+  @override
+  Widget build(BuildContext context) => BlocProvider(
+        create: (_) => PostDetailsCubit(state)..refresh(),
+        child: _PostDetailsView(),
+      );
+}
+
+class _PostDetailsView extends StatelessWidget {
+  _PostDetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {

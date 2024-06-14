@@ -1,9 +1,7 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../data/post_details_state.dart';
 import '../data/post_state.dart';
-import '../widgets/post_details_cubit.dart';
 import '../widgets/post_details_page.dart';
 import '../widgets/posts_page.dart';
 
@@ -18,10 +16,7 @@ class RoutesModule extends Module {
       final permalink = r.args.queryParams[Params.permalink];
       final postItemState = r.args.data is PostItemState ? r.args.data : null;
       final state = PostDetailsState(permalink, postItemState);
-      return BlocProvider(
-        create: (_) => PostDetailsCubit(state)..refresh(),
-        child: PostDetailsPage(),
-      );
+      return PostDetailsPage(state: state);
     });
   }
 }
