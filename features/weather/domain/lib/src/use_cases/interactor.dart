@@ -21,19 +21,13 @@ class WeatherInteractorImpl implements WeatherInteractor {
   final WeatherRemoteRepository remoteRepository;
 
   @override
-  Future<CurrentModel> getCurrent() {
-    return remoteRepository.getCurrent();
-  }
+  Future<CurrentModel> getCurrent() => remoteRepository.getCurrent();
 
   @override
-  Future<ForecastModel> getForecast(LocationModel location) {
-    return remoteRepository.getForecast(location);
-  }
+  Future<ForecastModel> getForecast(LocationModel location) => remoteRepository.getForecast(location);
 
   @override
-  Future<ForecastItemModel?> getForecastItem(LocationModel location, String dateEpoch) {
-    return remoteRepository
-        .getForecast(location)
-        .then((value) => value.forecast?.firstWhere((element) => element.dateEpoch.toString() == dateEpoch));
-  }
+  Future<ForecastItemModel?> getForecastItem(LocationModel location, String dateEpoch) => remoteRepository
+      .getForecast(location)
+      .then((value) => value.forecast?.firstWhere((element) => element.dateEpoch.toString() == dateEpoch));
 }

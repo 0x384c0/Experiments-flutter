@@ -4,7 +4,6 @@ import 'package:features_weather_presentation/src/utils/geo_location_provider.da
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'mock_datasource_impl.dart';
-import 'mock_location_manager.dart';
 
 class _MockDataModule extends Module {
   @override
@@ -17,7 +16,7 @@ class TestModule extends Module {
   @override
   List<Module> get imports => [
         WeatherDomainModule([_MockDataModule()]),
-        WeatherPresentationModule(),
+        WeatherPresentationModule(isRealDevice: false),
       ];
 
   static void initModules() {

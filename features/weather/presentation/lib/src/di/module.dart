@@ -9,11 +9,19 @@ import '../navigation/navigator.dart';
 import '../utils/geo_location_provider.dart';
 
 class WeatherPresentationModule extends Module {
+  final bool isRealDevice;
+
+  WeatherPresentationModule({required this.isRealDevice});
+
   @override
   exportedBinds(Injector i) {
     i.add<Mapper<ForecastModel, WeatherState>>(ForecastModelMapper.new);
     i.add<Mapper<ForecastItemModel, ForecastWeatherState>>(ForecastItemModelMapper.new);
     i.add<WeatherNavigator>(NavigatorImpl.new);
-    i.add<GeoLocationProvider>(GeoLocationProviderImpl.new);
+    if (isRealDevice) {
+      i.add<GeoLocationProvider>(GeoLocationProviderImpl.new);
+    } else {
+      i.add<GeoLocationProvider>(MockGeoLocationProviderImpl.new);
+    }
   }
 }

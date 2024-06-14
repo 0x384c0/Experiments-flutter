@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:safe_device/safe_device.dart';
 
 import 'app_module.dart';
 import 'app_view.dart';
@@ -12,5 +13,11 @@ void main() async {
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory(),
   );
-  runApp(ModularApp(module: AppModule(), child: const AppView()));
+
+  runApp(
+    ModularApp(
+      module: AppModule(isRealDevice: await SafeDevice.isRealDevice),
+      child: const AppView(),
+    ),
+  );
 }

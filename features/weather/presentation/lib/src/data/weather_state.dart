@@ -1,21 +1,11 @@
-abstract class WeatherState {}
-
-class WeatherStateEmpty implements WeatherState {}
-
-class WeatherStatePopulated implements WeatherState {
+class WeatherState {
   final CurrentWeatherState current;
   final Iterable<ForecastWeatherState> forecast;
 
-  WeatherStatePopulated(
+  WeatherState(
     this.current,
     this.forecast,
   );
-}
-
-class WeatherStateError implements WeatherState {
-  final Object error;
-
-  WeatherStateError(this.error);
 }
 
 class CurrentWeatherState {

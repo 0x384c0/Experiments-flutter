@@ -10,19 +10,16 @@ class ForecastModelMapper extends Mapper<ForecastModel, WeatherState> {
   var conditionModelMapper = ConditionModelMapper();
 
   @override
-  WeatherStatePopulated map(ForecastModel input) {
-    var condition = input.current?.condition;
-    return WeatherStatePopulated(
-      CurrentWeatherState(
-        "${input.current?.temp}°",
-        "${input.current?.wind} km/h",
-        "${input.current?.humidity}%",
-        "${input.current?.precipitation} mm",
-        conditionModelMapper.map(condition),
-      ),
-      input.forecast?.map(forecastItemModelMapper.map) ?? [],
-    );
-  }
+  WeatherState map(ForecastModel input) => WeatherState(
+        CurrentWeatherState(
+          "${input.current?.temp}°",
+          "${input.current?.wind} km/h",
+          "${input.current?.humidity}%",
+          "${input.current?.precipitation} mm",
+          conditionModelMapper.map(input.current?.condition),
+        ),
+        input.forecast?.map(forecastItemModelMapper.map) ?? [],
+      );
 
   ConditionState getConditionState(ConditionModel? model) => ConditionState(
         model?.text ?? "",

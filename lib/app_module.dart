@@ -8,6 +8,10 @@ import 'package:features_weather_presentation/features_weather_presentation.dart
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
+  final bool isRealDevice;
+
+  AppModule({required this.isRealDevice});
+
   @override
   void routes(r) {
     r.module(HomeRoutesModule.path, module: HomeRoutesModule());
@@ -23,7 +27,7 @@ class AppModule extends Module {
           PostsDataModule(),
         ]),
         WeatherDomainModule([
-          WeatherPresentationModule(),
+          WeatherPresentationModule(isRealDevice: isRealDevice),
           WeatherDataModule(),
         ]),
       ];
