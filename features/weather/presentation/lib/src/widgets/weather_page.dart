@@ -10,7 +10,7 @@ import 'weather_tile.dart';
 
 /// Screen with current weather and forecast
 class WeatherPage extends StatelessWidget {
-  const WeatherPage({Key? key}) : super(key: key);
+  const WeatherPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,18 +21,20 @@ class WeatherPage extends StatelessWidget {
   }
 }
 
-/// View with current weather and forecast
 class WeatherView extends StatelessWidget {
-  const WeatherView({Key? key}) : super(key: key);
+  const WeatherView({super.key});
 
   @override
-  Widget build(BuildContext context) => PageStateView.cubut(
-        cubit: ReadContext(context).read<WeatherCubit>(),
-        child: (data) => Scaffold(
-          appBar: AppBar(title: Text(AppLocalizations.of(context)!.weather_home_page)),
-          body: Center(child: _list(context, data.data)),
-        ),
-      );
+  Widget build(BuildContext context) {
+    final cubit = context.watch<WeatherCubit>();
+    return Scaffold(
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.weather_home_page)),
+      body: PageStateView.cubut(
+        cubit: cubit,
+        child: (data) => Center(child: _list(context, data.data)),
+      ),
+    );
+  }
 
   Widget _list(BuildContext context, WeatherState state) {
     final cubit = ReadContext(context).read<WeatherCubit>();

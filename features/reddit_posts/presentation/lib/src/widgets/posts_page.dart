@@ -14,7 +14,7 @@ import 'posts_cubit.dart';
 
 /// A PostsView Page.
 class PostsPage extends StatelessWidget {
-  const PostsPage({Key? key}) : super(key: key);
+  const PostsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,17 +26,17 @@ class PostsPage extends StatelessWidget {
 }
 
 class _PostsView extends StatelessWidget with WidgetAlertMixin {
-  const _PostsView({Key? key}) : super(key: key);
+  const _PostsView();
 
   @override
   Widget build(BuildContext context) {
     final cubit = context.watch<PostsCubit>();
     onBuild(context, cubit);
-    return PageStateView.cubut(
-      cubit: cubit,
-      child: (data) => Scaffold(
-        appBar: AppBar(title: Text(AppLocalizations.of(context)!.reddit_posts_home_page).onTap(cubit.onTopBarTap)),
-        body: Center(child: _list(context, data.data)),
+    return Scaffold(
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.reddit_posts_home_page).onTap(cubit.onTopBarTap)),
+      body: PageStateView.cubut(
+        cubit: cubit,
+        child: (data) => Center(child: _list(context, data.data)),
       ),
     );
   }
