@@ -1,44 +1,58 @@
-import 'package:common_presentation/extensions/widget_extensions.dart';
-import '../data/weather_state.dart';
-import '../widgets/forecast_details_cubit.dart';
+import 'package:common_presentation/widgets/page_state/page_state_view.dart';
+import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-/// Screen with forecast detail for specific date
+import 'forecast_details_cubit.dart';
+
 class ForecastDetailsPage extends StatelessWidget {
-  const ForecastDetailsPage({Key? key}) : super(key: key);
+  const ForecastDetailsPage({super.key, required this.args});
+
+  final Map<String?, ForecastWeatherState?> args;
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => ForecastDetailsCubit(args)..refresh(),
+      child: _ForecastDetails(args),
+    );
+  }
+}
+
+class _ForecastDetails extends StatelessWidget {
+  const _ForecastDetails(this.args);
+
+  final Map<String?, ForecastWeatherState?> args;
+
+  @override
+  Widget build(BuildContext context) {
+    final cubit = context.watch<ForecastDetailsCubit>();
+    return Scaffold(
+      appBar: AppBar(title: Text(args.values.firstOrNull?.date ?? AppLocalizations.of(context)!.loading)),
+      body: PageStateView.cubut(
+        cubit: cubit,
+        child: (data) => Center(child: _list(context, data.data.values.first!)),
+      ),
+    );
+  }
+
+  Widget _list(BuildContext context, ForecastWeatherState state) {
     final locale = AppLocalizations.of(context)!;
-    return BlocBuilder<ForecastDetailsCubit, Map<String?, ForecastWeatherState?>>(builder: (context, args) {
-      final state = args.values.first;
-      ReadContext(context).read<ForecastDetailsCubit>().refresh().catchError((error) => {onError(error, context)});
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(state?.date ?? locale.loading),
+    return Wrap(
+      direction: Axis.vertical,
+      crossAxisAlignment: WrapCrossAlignment.start,
+      spacing: 16,
+      children: [
+        Image.network(
+          state.condition.icon,
+          width: 64,
+          height: 64,
         ),
-        body: state != null
-            ? Center(
-                child: Wrap(
-                  direction: Axis.vertical,
-                  crossAxisAlignment: WrapCrossAlignment.start,
-                  spacing: 16,
-                  children: [
-                    Image.network(
-                      state.condition.icon,
-                      width: 64,
-                      height: 64,
-                    ),
-                    Text("${locale.weather_chance_of_rain}: ${state.chanceOfRain}"),
-                    Text("${locale.weather_humidity}: ${state.humidity}"),
-                    Text("${locale.weather_wind}: ${state.wind}"),
-                  ],
-                ),
-              )
-            : const Center(),
-      );
-    });
+        Text("${locale.weather_chance_of_rain}: ${state.chanceOfRain}"),
+        Text("${locale.weather_humidity}: ${state.humidity}"),
+        Text("${locale.weather_wind}: ${state.wind}"),
+      ],
+    );
   }
 }

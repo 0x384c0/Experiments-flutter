@@ -12,17 +12,18 @@ import 'weather_tile.dart';
 class WeatherPage extends StatelessWidget {
   const WeatherPage({super.key});
 
+  // TODO: try use BlocBuilder
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => WeatherCubit()..refresh(),
-      child: const WeatherView(),
+      child: const _WeatherView(),
     );
   }
 }
 
-class WeatherView extends StatelessWidget {
-  const WeatherView({super.key});
+class _WeatherView extends StatelessWidget {
+  const _WeatherView();
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:common_presentation/widgets/page_state/generic_page_state.dart';
+import 'package:common_presentation/widgets/page_state/page_state.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:features_weather_presentation/src/widgets/forecast_details_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,9 +17,9 @@ main() {
     sut = ForecastDetailsCubit({MockDatasourceImpl.dateEpoch.toString(): null});
   });
 
-  blocTest<ForecastDetailsCubit, Map<String?, ForecastWeatherState?>?>('refresh successful',
+  blocTest<ForecastDetailsCubit, PageState<GenericPageState<Map<String?, ForecastWeatherState?>>>>('refresh successful',
       build: () => sut,
       act: (cubit) => cubit.refresh(),
       verify: (bloc) =>
-          {expect(sut.state[MockDatasourceImpl.dateEpoch.toString()]?.temp, '${MockDatasourceImpl.temp}°')});
+          {expect(sut.stateData?.data[MockDatasourceImpl.dateEpoch.toString()]?.temp, '${MockDatasourceImpl.temp}°')});
 }
