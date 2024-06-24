@@ -9,16 +9,14 @@ class PostCommentsView extends StatelessWidget {
   const PostCommentsView({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return PageStateView.bloc(
-      getBloc: context.watch<PostCommentsCubit>,
-      child: (PostCommentsPageState data) {
-        final tiles = data.data.map((e) => CommentTile(e, () {}));
-        return ListView.builder(
-          itemCount: tiles.length,
-          itemBuilder: (context, index) => tiles.elementAt(index),
-        );
-      },
-    );
-  }
+  Widget build(BuildContext context) => PageStateView.bloc(
+        getBloc: context.watch<PostCommentsCubit>,
+        child: (PostCommentsPageState data) {
+          final tiles = data.data.map((e) => CommentTile(e, () {}));
+          return ListView.builder(
+            itemCount: tiles.length,
+            itemBuilder: (context, index) => tiles.elementAt(index),
+          );
+        },
+      );
 }
