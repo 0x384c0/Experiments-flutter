@@ -1,4 +1,4 @@
-import 'package:common_presentation/widgets/page_state/page_state_view.dart';
+import 'package:common_presentation/widgets/page_state/page_state_bloc_builder.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:features_reddit_posts_presentation/src/widgets/post_comments_cubit.dart';
@@ -28,7 +28,7 @@ class PostDetailsPage extends StatelessWidget {
 
 class _PostDetailsView extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => PageStateView.bloc(
+  Widget build(BuildContext context) => createBlocPageStateBlocBuilder(
         getBloc: context.watch<PostDetailsCubit>,
         child: (PostDetailsState data) => Scaffold(
           appBar: AppBar(title: Text(data.postItemState?.category ?? "")),

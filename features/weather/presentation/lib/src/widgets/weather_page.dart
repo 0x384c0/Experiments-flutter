@@ -1,4 +1,4 @@
-import 'package:common_presentation/widgets/page_state/page_state_view.dart';
+import 'package:common_presentation/widgets/page_state/page_state_bloc_builder.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +12,6 @@ import 'weather_tile.dart';
 class WeatherPage extends StatelessWidget {
   const WeatherPage({super.key});
 
-  // TODO: try use BlocBuilder
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -29,7 +28,7 @@ class _WeatherView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.weather_home_page)),
-      body: PageStateView.bloc(
+      body: createBlocPageStateBlocBuilder(
         getBloc: context.watch<WeatherCubit>,
         child: (WeatherPageState data) => Center(child: _list(context, data.data)),
       ),

@@ -1,7 +1,7 @@
 library presentation;
 
 import 'package:common_presentation/mixins/widget_alert_mixin.dart';
-import 'package:common_presentation/widgets/page_state/page_state_view.dart';
+import 'package:common_presentation/widgets/page_state/page_state_bloc_builder.dart';
 import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
     onBuild(context, cubit);
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.reddit_posts_home_page).onTap(cubit.onTopBarTap)),
-      body: PageStateView.bloc(
+      body: createBlocPageStateBlocBuilder(
         getBloc: context.watch<PostsCubit>,
         child: (PostsPageState data) => Center(child: _list(context, data.data)),
       ),
