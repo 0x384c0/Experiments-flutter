@@ -1,10 +1,9 @@
 import 'package:common_presentation/widgets/page_state/page_state.dart';
-import 'package:common_presentation/widgets/alert_dialog.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 /// Cubit, that can emit [PageState]
-mixin CubitPageStateMixin<T> on Cubit<PageState<T>> {
+mixin CubitPageStateMixin<T> on BlocBase<PageState<T>> {
   /// Returns data if type [T] if loaded, null otherwise
   T? get stateData {
     if (state is PageStatePopulated<T>) {
