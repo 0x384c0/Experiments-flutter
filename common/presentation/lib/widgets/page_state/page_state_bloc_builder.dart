@@ -11,27 +11,26 @@ Widget createPageStateBlocBuilder<B extends BlocBase<PageState<T>>, T>({
   Key? key,
   required Future<void> Function({bool? showLoading}) refresh,
   required Widget Function(T data) child,
-}) {
-  return BlocBuilder<B, PageState<T>>(
-    builder: (context, state) {
-      switch (state) {
-        case final PageStateEmptyError state:
-          return ErrorView(
-            errorDescription: state.errorDescription,
-            refresh: () => refresh(showLoading: true),
-          );
-        case final PageStateEmptyLoading _:
-          return const LoadingIndicator();
-        case final PageStatePopulated<T> state:
-          return child(state.data);
-        case final PageStateEmpty _:
-          return EmptyStateView(refresh: refresh);
-        default:
-          return EmptyStateView(refresh: refresh);
-      }
-    },
-  );
-}
+}) =>
+    BlocBuilder<B, PageState<T>>(
+      builder: (context, state) {
+        switch (state) {
+          case final PageStateEmptyError state:
+            return ErrorView(
+              errorDescription: state.errorDescription,
+              refresh: () => refresh(showLoading: true),
+            );
+          case final PageStateEmptyLoading _:
+            return const LoadingIndicator();
+          case final PageStatePopulated<T> state:
+            return child(state.data);
+          case final PageStateEmpty _:
+            return EmptyStateView(refresh: refresh);
+          default:
+            return EmptyStateView(refresh: refresh);
+        }
+      },
+    );
 
 /// convenience method for passing [BlocPageStateMixin] only
 Widget createBlocPageStateBlocBuilder<B extends BlocPageStateMixin<T>, T>({
