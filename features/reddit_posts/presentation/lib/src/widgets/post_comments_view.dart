@@ -10,10 +10,9 @@ class PostCommentsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<PostCommentsCubit>();
-    return PageStateView.cubut(
-      cubit: cubit,
-      child: (data) {
+    return PageStateView.bloc(
+      getBloc: context.watch<PostCommentsCubit>,
+      child: (PostCommentsPageState data) {
         final tiles = data.data.map((e) => CommentTile(e, () {}));
         return ListView.builder(
           itemCount: tiles.length,

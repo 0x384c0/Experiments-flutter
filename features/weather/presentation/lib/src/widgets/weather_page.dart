@@ -27,12 +27,11 @@ class _WeatherView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<WeatherCubit>();
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.weather_home_page)),
-      body: PageStateView.cubut(
-        cubit: cubit,
-        child: (data) => Center(child: _list(context, data.data)),
+      body: PageStateView.bloc(
+        getBloc: context.watch<WeatherCubit>,
+        child: (WeatherPageState data) => Center(child: _list(context, data.data)),
       ),
     );
   }

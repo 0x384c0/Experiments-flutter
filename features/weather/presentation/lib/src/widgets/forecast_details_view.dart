@@ -27,12 +27,11 @@ class _ForecastDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<ForecastDetailsCubit>();
     return Scaffold(
       appBar: AppBar(title: Text(args.values.firstOrNull?.date ?? AppLocalizations.of(context)!.loading)),
-      body: PageStateView.cubut(
-        cubit: cubit,
-        child: (data) => Center(child: _list(context, data.data.values.first!)),
+      body: PageStateView.bloc(
+        getBloc: context.watch<ForecastDetailsCubit>,
+        child: (ForecastDetailsPageState data) => Center(child: _list(context, data.data.values.first!)),
       ),
     );
   }

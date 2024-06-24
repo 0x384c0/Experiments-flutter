@@ -3,7 +3,7 @@ import 'package:common_presentation/mixins/cubit_alert_mixin.dart';
 import 'package:common_presentation/mixins/cubit_page_state_pagination_mixin.dart';
 import 'package:common_presentation/widgets/page_state/generic_page_state.dart';
 import 'package:common_presentation/widgets/page_state/page_state.dart';
-import 'package:common_presentation/widgets/page_state/cubit_page_state_mixin.dart';
+import 'package:common_presentation/widgets/page_state/bloc_page_state_mixin.dart';
 import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:flutter/widgets.dart';
@@ -13,9 +13,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 import '../data/post_state.dart';
 import '../navigation/navigator.dart';
 
-class PostsCubit extends Cubit<PageState<GenericPageState<Iterable<PostItemState>>>>
+typedef PostsPageState = GenericPageState<Iterable<PostItemState>>;
+
+class PostsCubit extends Cubit<PageState<PostsPageState>>
     with
-        CubitPageStateMixin,
+        BlocPageStateMixin,
         CubitPaginationMixin<Iterable<PostItemState>, GenericPageState<Iterable<PostItemState>>>,
         CubitPageStatePaginationMixin,
         CubitPageStatePaginationIterableMixin<PostItemState, GenericPageState<Iterable<PostItemState>>>,

@@ -1,5 +1,5 @@
 import 'package:common_domain/mapper/mapper.dart';
-import 'package:common_presentation/widgets/page_state/cubit_page_state_mixin.dart';
+import 'package:common_presentation/widgets/page_state/bloc_page_state_mixin.dart';
 import 'package:common_presentation/widgets/page_state/generic_page_state.dart';
 import 'package:common_presentation/widgets/page_state/page_state.dart';
 import 'package:features_weather_domain/features_weather_domain.dart';
@@ -10,7 +10,9 @@ import '../data/weather_state.dart';
 import '../navigation/navigator.dart';
 import '../utils/geo_location_provider.dart';
 
-class WeatherCubit extends Cubit<PageState<GenericPageState<WeatherState>>> with CubitPageStateMixin {
+typedef WeatherPageState = GenericPageState<WeatherState>;
+
+class WeatherCubit extends Cubit<PageState<WeatherPageState>> with BlocPageStateMixin {
   WeatherCubit() : super(PageStateEmptyLoading());
 
   late WeatherInteractor interactor = Modular.get();

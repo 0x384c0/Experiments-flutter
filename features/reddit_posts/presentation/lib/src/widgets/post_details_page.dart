@@ -28,18 +28,15 @@ class PostDetailsPage extends StatelessWidget {
 
 class _PostDetailsView extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    final PostDetailsCubit cubit = context.watch();
-    return PageStateView.cubut(
-      cubit: cubit,
-      child: (data) => Scaffold(
-        appBar: AppBar(title: Text(data.postItemState?.category ?? "")),
-        body: Center(
-          child: data.postItemState != null ? _list(data.postItemState!, context) : _loadingIndicator(),
+  Widget build(BuildContext context) => PageStateView.bloc(
+        getBloc: context.watch<PostDetailsCubit>,
+        child: (PostDetailsState data) => Scaffold(
+          appBar: AppBar(title: Text(data.postItemState?.category ?? "")),
+          body: Center(
+            child: data.postItemState != null ? _list(data.postItemState!, context) : _loadingIndicator(),
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   Widget _list(PostItemState state, BuildContext context) {
     final PostDetailsCubit cubit = context.watch();

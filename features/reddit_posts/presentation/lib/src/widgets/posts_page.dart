@@ -34,9 +34,9 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
     onBuild(context, cubit);
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context)!.reddit_posts_home_page).onTap(cubit.onTopBarTap)),
-      body: PageStateView.cubut(
-        cubit: cubit,
-        child: (data) => Center(child: _list(context, data.data)),
+      body: PageStateView.bloc(
+        getBloc: context.watch<PostsCubit>,
+        child: (PostsPageState data) => Center(child: _list(context, data.data)),
       ),
     );
   }
