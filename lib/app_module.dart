@@ -1,3 +1,4 @@
+import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_home_presentation/features_home_presentation.dart';
 import 'package:features_reddit_posts_data/features_reddit_posts_data.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
@@ -17,6 +18,7 @@ class AppModule extends Module {
     r.module(HomeRoutesModule.path, module: HomeRoutesModule());
     r.module(RoutesModule.path, module: RoutesModule());
     r.module(WeatherRoutesModule.path, module: WeatherRoutesModule());
+    r.module(FormsRoutesModule.path, module: FormsRoutesModule());
   }
 
   // class names for modules cannot be same
@@ -30,5 +32,6 @@ class AppModule extends Module {
           WeatherPresentationModule(isRealDevice: isRealDevice),
           WeatherDataModule(),
         ]),
+        FormsPresentationModule(),
       ];
 }

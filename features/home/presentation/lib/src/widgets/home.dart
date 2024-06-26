@@ -1,3 +1,4 @@
+import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
 import 'package:features_weather_presentation/features_weather_presentation.dart';
 import 'package:flutter/material.dart';
@@ -14,10 +15,12 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   late PostsNavigator redditPostsNavigator = Modular.get();
   late WeatherNavigator weatherNavigator = Modular.get();
+  late FormsNavigator formsNavigator = Modular.get();
 
   late final _widgetOptions = [
     redditPostsNavigator.homePage(),
     weatherNavigator.homePage(),
+    formsNavigator.homePage(),
   ];
 
   int _selectedIndex = 0;
@@ -44,6 +47,10 @@ class _HomePageState extends State<HomePage> {
           BottomNavigationBarItem(
             icon: const Icon(Icons.cloud),
             label: locale.weather_home_page,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.edit_note),
+            label: locale.forms_home_page,
           ),
         ],
         currentIndex: _selectedIndex,

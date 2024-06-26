@@ -18,6 +18,8 @@ dependencies:
     path: "../../../features/weather/presentation"
   features_reddit_posts_presentation:
     path: "../../../features/reddit_posts/presentation"
+  features_forms_presentation:
+    path: "../../../features/forms/presentation"
 
 dev_dependencies:
   flutter_test:
