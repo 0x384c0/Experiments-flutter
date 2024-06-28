@@ -44,14 +44,16 @@ class FormzzValidationState with _$FormzzValidationState {
         userAgreement: RequiredBool.dirty(userAgreement.value),
       );
 
-  bool get formHasInvalidFields => [
+  bool get isFormHasInvalidFields => [
         firstName.isValid,
-        companyName.isValid,
+        if (isValidateCompanyName) companyName.isValid,
         email.isValid,
         password.isValid,
         repeatPassword.isValid,
         userAgreement.isValid,
       ].contains(false);
+
+  bool get isValidateCompanyName => entityType == EntityType.legalEntity;
 }
 
 enum EntityType { physicalPerson, legalEntity }

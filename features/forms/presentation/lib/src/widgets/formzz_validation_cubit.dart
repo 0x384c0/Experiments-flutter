@@ -15,6 +15,8 @@ class FormzzValidationCubit extends Cubit<FormzzValidationState> {
 
   late final FormsNavigator _navigator = Modular.get();
 
+  onEntityTypeChanged(EntityType newValue) => emit(state.copyWith(entityType: newValue));
+
   onFirstNameChanged(String newValue) => emit(state.copyWith(firstName: RequiredString.dirty(newValue)));
 
   onCompanyNameChanged(String newValue) => emit(state.copyWith(companyName: RequiredString.dirty(newValue)));
@@ -38,7 +40,7 @@ class FormzzValidationCubit extends Cubit<FormzzValidationState> {
 
   bool _validateForm() {
     emit(state.dirtyCopy);
-    return !state.formHasInvalidFields;
+    return !state.isFormHasInvalidFields;
   }
 
   Future<void> onSubmit() async {

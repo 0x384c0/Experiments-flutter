@@ -19,6 +19,8 @@
     "forms_material_validation": "Material Validation",
     "forms_formzz_validation": "Formzz Validation",
     "forms_submit": "Submit",
+    "forms_legal_entity": "Legal Entity",
+    "forms_physical_person": "Physical Person",
     "forms_first_name": "First Name",
     "forms_company_name": "Company Name",
     "forms_phone": "Phone",
