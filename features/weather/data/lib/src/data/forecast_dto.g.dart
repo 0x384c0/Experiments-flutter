@@ -22,7 +22,7 @@ ForecastDayDto _$ForecastDayDtoFromJson(Map<String, dynamic> json) =>
       ..dayDto = json['day'] == null
           ? null
           : DayDto.fromJson(json['day'] as Map<String, dynamic>)
-      ..dateEpoch = json['date_epoch'] as int?;
+      ..dateEpoch = (json['date_epoch'] as num?)?.toInt();
 
 Map<String, dynamic> _$ForecastDayDtoToJson(ForecastDayDto instance) =>
     <String, dynamic>{
