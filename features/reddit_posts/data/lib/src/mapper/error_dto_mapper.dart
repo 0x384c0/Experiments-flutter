@@ -7,9 +7,9 @@ import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
   @override
   ErrorModel map(dynamic input) {
-    if (input is DioError) {
+    if (input is DioException) {
       switch (input.type) {
-        case DioErrorType.response:
+        case DioExceptionType.badResponse:
           if (input.response?.data case var data?) {
             if (data is Map<String, dynamic>) {
               return ErrorModel("${data["error"]} ${data["message"]}");
@@ -17,11 +17,13 @@ class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
               return ErrorModel(data);
             }
           }
-        case DioErrorType.connectTimeout:
-        case DioErrorType.sendTimeout:
-        case DioErrorType.receiveTimeout:
-        case DioErrorType.cancel:
-        case DioErrorType.other:
+        case DioExceptionType.connectionError:
+        case DioExceptionType.connectionTimeout:
+        case DioExceptionType.sendTimeout:
+        case DioExceptionType.receiveTimeout:
+        case DioExceptionType.cancel:
+        case DioExceptionType.badCertificate:
+        case DioExceptionType.unknown:
           final error = input.error;
           return ErrorModel(error is SocketException ? error.message : input.message);
       }

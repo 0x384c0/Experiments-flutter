@@ -7,7 +7,7 @@ import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutterui_modifiers/flutterui_modifiers.dart';
+import 'package:common_presentation/extensions/flutterui_modifiers.dart';
 
 import 'post_tile.dart';
 import 'posts_cubit.dart';

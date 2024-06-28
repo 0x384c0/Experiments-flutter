@@ -1,8 +1,8 @@
+import 'package:common_presentation/extensions/flutterui_modifiers.dart';
 import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:flutterui_modifiers/flutterui_modifiers.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class FormsPage extends StatelessWidget {
   const FormsPage({super.key});

@@ -5,7 +5,7 @@ import 'package:features_reddit_posts_presentation/src/widgets/post_comments_cub
 import 'package:features_reddit_posts_presentation/src/widgets/post_comments_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutterui_modifiers/flutterui_modifiers.dart';
+import 'package:common_presentation/extensions/flutterui_modifiers.dart';
 
 import 'post_details_cubit.dart';
 import 'post_tile.dart';

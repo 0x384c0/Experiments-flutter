@@ -4,7 +4,7 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: '>=3.1.5 <4.0.0'
+  sdk: '>=3.4.3 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
@@ -12,20 +12,20 @@ dependencies:
     sdk: flutter
   features_weather_domain:
     path: "../domain"
-  json_annotation: ^4.8.1
-  retrofit: '>=3.0.0 <4.0.0'
-  dio: any
-  flutter_modular: ^6.3.2
+  json_annotation: ^4.9.0
+  retrofit: ^4.1.0
+  dio: ^5.4.3+1
+  flutter_modular: ^6.3.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  bloc_test: ^9.0.2
-  mocktail: ^0.3.0
+  bloc_test: ^9.1.7
+  mocktail: ^1.0.4
 
-  flutter_lints: ^2.0.0
-  build_runner: ^2.0.0
-  json_serializable: ^6.0.0
-  retrofit_generator: '>=4.0.0 <5.0.0'
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.11
+  json_serializable: ^6.8.0
+  retrofit_generator: ^8.1.0
 
 flutter:
