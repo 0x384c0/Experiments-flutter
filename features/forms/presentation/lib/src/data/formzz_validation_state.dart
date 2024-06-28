@@ -41,6 +41,7 @@ class FormzzValidationState with _$FormzzValidationState {
         email: Email.dirty(password.value),
         password: Password.dirty(password.value),
         repeatPassword: RepeatPassword.dirty(repeatPassword.value, password: password.value),
+        userAgreement: RequiredBool.dirty(userAgreement.value),
       );
 
   bool get formHasInvalidFields => [
@@ -49,6 +50,7 @@ class FormzzValidationState with _$FormzzValidationState {
         email.isValid,
         password.isValid,
         repeatPassword.isValid,
+        userAgreement.isValid,
       ].contains(false);
 }
 

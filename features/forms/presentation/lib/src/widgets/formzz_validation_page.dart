@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutterui_modifiers/flutterui_modifiers.dart';
 
+import 'form_inputs/check_box_form_input.dart';
 import 'form_inputs/string_form_input.dart';
 import 'formzz_validation_cubit.dart';
 
@@ -33,34 +34,34 @@ class _FormzzValidationView extends StatelessWidget {
               isRequired: true,
               error: formState.firstName.error?.stringDescription(context),
               onChanged: cubit.onFirstNameChanged,
-              title: locale.forms_first_name,
+              label: locale.forms_first_name,
             ),
             StringFormField(
               initialValue: formState.companyName.value,
               isRequired: true,
               error: formState.companyName.error?.stringDescription(context),
               onChanged: cubit.onCompanyNameChanged,
-              title: locale.forms_company_name,
+              label: locale.forms_company_name,
             ),
             StringFormField(
               initialValue: formState.phone,
               isRequired: false,
               onChanged: cubit.onPhoneChanged,
-              title: locale.forms_phone,
+              label: locale.forms_phone,
             ),
             StringFormField(
               initialValue: formState.email.value,
               isRequired: true,
               error: formState.email.error?.stringDescription(context),
               onChanged: cubit.onEmailChanged,
-              title: locale.forms_email,
+              label: locale.forms_email,
             ),
             StringFormField(
               initialValue: formState.password.value,
               isRequired: true,
               error: formState.password.error?.stringDescription(context),
               onChanged: cubit.onPasswordChanged,
-              title: locale.forms_password,
+              label: locale.forms_password,
               hints: const [AutofillHints.newPassword],
               keyboardType: TextInputType.visiblePassword,
               obscureText: true,
@@ -70,10 +71,16 @@ class _FormzzValidationView extends StatelessWidget {
               isRequired: true,
               error: formState.repeatPassword.error?.stringDescription(context),
               onChanged: cubit.onRepeatPasswordChanged,
-              title: locale.forms_repeat_password,
+              label: locale.forms_repeat_password,
               hints: const [AutofillHints.newPassword],
               keyboardType: TextInputType.visiblePassword,
               obscureText: true,
+            ),
+            CheckBoxFormInput(
+              value: cubit.state.userAgreement.value,
+              label: Text(locale.forms_agree_to_terms),
+              error: cubit.state.userAgreement.error?.stringDescription(context),
+              onChanged: cubit.onUserAgreementChanged,
             ),
             const SizedBox(height: 24),
             ElevatedButton(

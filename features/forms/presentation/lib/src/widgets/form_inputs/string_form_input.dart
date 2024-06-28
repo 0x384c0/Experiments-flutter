@@ -7,7 +7,7 @@ class StringFormField extends TextFormField {
 
   StringFormField({
     super.key,
-    required String title,
+    required String label,
     Function(String)? onChanged,
     String? initialValue,
     bool? isRequired,
@@ -28,12 +28,12 @@ class StringFormField extends TextFormField {
           obscuringCharacter: _obscuringCharacter,
           decoration: obscureText == true
               ? InputDecoration(
-                  labelText: isRequired == true ? "$title$_requiredSymbol" : title,
+                  labelText: isRequired == true ? "$label$_requiredSymbol" : label,
                   errorText: error,
                   hintText: hintText ?? _obscuredHint,
                 )
               : InputDecoration(
-                  labelText: isRequired == true ? "$title$_requiredSymbol" : title,
+                  labelText: isRequired == true ? "$label$_requiredSymbol" : label,
                   errorText: error,
                 ),
         );

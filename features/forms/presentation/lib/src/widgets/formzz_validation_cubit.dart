@@ -1,8 +1,11 @@
+import 'dart:ffi';
+
 import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_forms_presentation/src/data/formzz_validation_state.dart';
 import 'package:features_forms_presentation/src/validators/email.dart';
 import 'package:features_forms_presentation/src/validators/password.dart';
 import 'package:features_forms_presentation/src/validators/repeat_password.dart';
+import 'package:features_forms_presentation/src/validators/required_bool.dart';
 import 'package:features_forms_presentation/src/validators/required_string.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -21,6 +24,8 @@ class FormzzValidationCubit extends Cubit<FormzzValidationState> {
   onEmailChanged(String newValue) => emit(state.copyWith(email: Email.dirty(newValue)));
 
   onPasswordChanged(String newValue) => emit(state.copyWith(password: Password.dirty(newValue)));
+
+  onUserAgreementChanged(bool newValue) => emit(state.copyWith(userAgreement: RequiredBool.dirty(newValue)));
 
   onRepeatPasswordChanged(String newValue) => emit(
         state.copyWith(
