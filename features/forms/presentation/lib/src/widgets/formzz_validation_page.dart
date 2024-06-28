@@ -4,26 +4,26 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutterui_modifiers/flutterui_modifiers.dart';
 
 import 'form_inputs/string_form_input.dart';
-import 'form_validation_cubit.dart';
+import 'formzz_validation_cubit.dart';
 
-class FormValidationPage extends StatelessWidget {
-  const FormValidationPage({super.key});
+class FormzzValidationPage extends StatelessWidget {
+  const FormzzValidationPage({super.key});
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-        create: (_) => FormValidationCubit(),
-        child: _FormValidationView(),
+        create: (_) => FormzzValidationCubit(),
+        child: _FormzzValidationView(),
       );
 }
 
-class _FormValidationView extends StatelessWidget {
+class _FormzzValidationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
-    final FormValidationCubit cubit = context.watch();
+    final FormzzValidationCubit cubit = context.watch();
     final formState = cubit.state;
     return Scaffold(
-      appBar: AppBar(title: Text(locale.forms_form_validation)),
+      appBar: AppBar(title: Text(locale.forms_formzz_validation)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

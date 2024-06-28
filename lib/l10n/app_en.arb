@@ -16,7 +16,8 @@
     "reddit_posts_home_page": "Posts",
 
     "forms_home_page": "Forms",
-    "forms_form_validation": "Form Validation",
+    "forms_material_validation": "Material Validation",
+    "forms_formzz_validation": "Formzz Validation",
     "forms_submit": "Submit",
     "forms_first_name": "First Name",
     "forms_company_name": "Company Name",

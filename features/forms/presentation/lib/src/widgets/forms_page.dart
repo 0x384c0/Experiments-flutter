@@ -18,8 +18,8 @@ class FormsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ElevatedButton(
-            onPressed: _navigator.toFormValidation,
-            child: Text(locale.forms_form_validation),
+            onPressed: _navigator.toFormzzValidation,
+            child: Text(locale.forms_formzz_validation),
           ),
         ],
       ).padding(all: 8),

@@ -7,7 +7,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 abstract class FormsNavigator {
   Widget homePage();
 
-  Future<Object?> toFormValidation();
+  Future<Object?> toFormzzValidation();
 
   back();
 }
@@ -18,7 +18,7 @@ class NavigatorImpl implements FormsNavigator {
   homePage() => const FormsPage();
 
   @override
-  toFormValidation() => Modular.to.pushNamed('${FormsRoutesModule.path}${FormsRoutesModule.formValidation}');
+  toFormzzValidation() => Modular.to.pushNamed('${FormsRoutesModule.path}${FormsRoutesModule.formzzValidation}');
 
   @override
   back() => Modular.to.pop();

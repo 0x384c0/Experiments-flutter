@@ -1,5 +1,5 @@
 import 'package:features_forms_presentation/features_forms_presentation.dart';
-import 'package:features_forms_presentation/src/data/form_validation_state.dart';
+import 'package:features_forms_presentation/src/data/formzz_validation_state.dart';
 import 'package:features_forms_presentation/src/validators/email.dart';
 import 'package:features_forms_presentation/src/validators/password.dart';
 import 'package:features_forms_presentation/src/validators/repeat_password.dart';
@@ -7,8 +7,8 @@ import 'package:features_forms_presentation/src/validators/required_string.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class FormValidationCubit extends Cubit<FormValidationState> {
-  FormValidationCubit() : super(FormValidationState.initial());
+class FormzzValidationCubit extends Cubit<FormzzValidationState> {
+  FormzzValidationCubit() : super(FormzzValidationState.initial());
 
   late final FormsNavigator _navigator = Modular.get();
 

@@ -5,11 +5,11 @@ import 'package:features_forms_presentation/src/validators/required_bool.dart';
 import 'package:features_forms_presentation/src/validators/required_string.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'form_validation_state.freezed.dart';
+part 'formzz_validation_state.freezed.dart';
 
 @freezed
-class FormValidationState with _$FormValidationState {
-  factory FormValidationState({
+class FormzzValidationState with _$FormzzValidationState {
+  factory FormzzValidationState({
     required String profileImagePath,
     required EntityType entityType,
     required String phone,
@@ -19,11 +19,11 @@ class FormValidationState with _$FormValidationState {
     required Password password,
     required RepeatPassword repeatPassword,
     required RequiredBool userAgreement,
-  }) = _FormValidationState;
+  }) = _FormzzValidationState;
 
-  FormValidationState._();
+  FormzzValidationState._();
 
-  factory FormValidationState.initial() => FormValidationState(
+  factory FormzzValidationState.initial() => FormzzValidationState(
         profileImagePath: "",
         entityType: EntityType.physicalPerson,
         phone: "",
@@ -35,7 +35,7 @@ class FormValidationState with _$FormValidationState {
         userAgreement: const RequiredBool.pure(false),
       );
 
-  FormValidationState get dirtyCopy => copyWith(
+  FormzzValidationState get dirtyCopy => copyWith(
         firstName: RequiredString.dirty(firstName.value),
         companyName: RequiredString.dirty(companyName.value),
         email: Email.dirty(password.value),
