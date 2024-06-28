@@ -12,5 +12,7 @@
     "reddit_posts_home_page": "Posts",
 
     "forms_home_page": "Forms",
-    "forms_form_validation": "Form Validation"
+    "forms_form_validation": "Form Validation",
+    "forms_submit": "Submit",
+    "forms_first_name": "First Name"
 }
