@@ -1,5 +1,6 @@
 import 'package:features_forms_presentation/src/validators/validation_error.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 
 class RepeatPassword extends FormzInput<String, RepeatPasswordValidationError> {
@@ -23,5 +24,5 @@ class RepeatPasswordValidationError extends CommonValidationError {
 
   @override
   String errorFieldText(BuildContext context) =>
-      "context.localizations.authentication_password_dont_match"; //TODO: inject strings
+      AppLocalizations.of(context)!.common_invalid_field;
 }

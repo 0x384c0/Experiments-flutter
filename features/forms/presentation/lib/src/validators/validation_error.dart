@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 enum ValidationErrorType {
   empty,
@@ -12,9 +13,9 @@ class CommonValidationError {
 
   final String? apiError;
 
-  String errorFieldText(BuildContext context) => "context.localizations.common_error"; //TODO: inject strings
+  String errorFieldText(BuildContext context) => AppLocalizations.of(context)!.common_error;
 
-  String emptyFieldText(BuildContext context) => "context.localizations.common_empty_field";
+  String emptyFieldText(BuildContext context) => AppLocalizations.of(context)!.common_empty_field;
 
   String? stringDescription(BuildContext context) {
     if (apiError?.isNotEmpty == true) return apiError;

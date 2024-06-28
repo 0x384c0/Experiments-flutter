@@ -8,9 +8,7 @@ class RequiredBool extends FormzInput<bool, CommonValidationError> {
 
   @override
   CommonValidationError? validator(bool value) {
-    if (isPure) {
-      return null;
-    }
+    if (isPure) return null;
     return value ? null : CommonValidationError(ValidationErrorType.empty);
   }
 }

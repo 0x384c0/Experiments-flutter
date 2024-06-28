@@ -1,5 +1,6 @@
 import 'package:features_forms_presentation/src/validators/validation_error.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 
 class Email extends FormzInput<String, EmailValidationError> {
@@ -33,6 +34,5 @@ class EmailValidationError extends CommonValidationError {
   EmailValidationError(super.validationError, {super.apiError});
 
   @override
-  String errorFieldText(BuildContext context) =>
-      apiError ?? "context.localizations.authentication_invalid_email"; //TODO: inject strings
+  String errorFieldText(BuildContext context) => apiError ?? AppLocalizations.of(context)!.common_invalid_field;
 }

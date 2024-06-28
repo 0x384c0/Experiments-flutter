@@ -21,6 +21,8 @@ class FormValidationState with _$FormValidationState {
     required RequiredBool userAgreement,
   }) = _FormValidationState;
 
+  FormValidationState._();
+
   factory FormValidationState.initial() => FormValidationState(
         profileImagePath: "",
         entityType: EntityType.physicalPerson,
@@ -32,6 +34,14 @@ class FormValidationState with _$FormValidationState {
         repeatPassword: const RepeatPassword.pure("", password: ""),
         userAgreement: const RequiredBool.pure(false),
       );
+
+  bool get formHasInvalidFields => [
+        firstName.isValid,
+        companyName.isValid,
+        email.isValid,
+        password.isValid,
+        repeatPassword.isValid,
+      ].contains(false);
 }
 
 enum EntityType { physicalPerson, legalEntity }

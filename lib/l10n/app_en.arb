@@ -3,6 +3,10 @@
     "alert_error_title": "Error",
     "loading": "Loading",
 
+    "common_error": "Error",
+    "common_empty_field": "This field is mandatory.",
+    "common_invalid_field": "Invalid data.",
+
     "weather_precipitation": "Precipitation",
     "weather_humidity": "Humidity",
     "weather_wind": "Wind",
@@ -14,5 +18,11 @@
     "forms_home_page": "Forms",
     "forms_form_validation": "Form Validation",
     "forms_submit": "Submit",
-    "forms_first_name": "First Name"
+    "forms_first_name": "First Name",
+    "forms_company_name": "Company Name",
+    "forms_phone": "Phone",
+    "forms_email": "Email",
+    "forms_password": "Password",
+    "forms_repeat_password": "Repeat Password",
+    "forms_form_has_error": "There are errors in the form. Please check all fields."
 }

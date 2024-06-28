@@ -1,5 +1,8 @@
 import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_forms_presentation/src/data/form_validation_state.dart';
+import 'package:features_forms_presentation/src/validators/email.dart';
+import 'package:features_forms_presentation/src/validators/password.dart';
+import 'package:features_forms_presentation/src/validators/repeat_password.dart';
 import 'package:features_forms_presentation/src/validators/required_string.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -11,14 +14,32 @@ class FormValidationCubit extends Cubit<FormValidationState> {
 
   onFirstNameChanged(String newValue) => emit(state.copyWith(firstName: RequiredString.dirty(newValue)));
 
+  onCompanyNameChanged(String newValue) => emit(state.copyWith(companyName: RequiredString.dirty(newValue)));
+
+  onPhoneChanged(String newValue) => emit(state.copyWith(phone: newValue));
+
+  onEmailChanged(String newValue) => emit(state.copyWith(email: Email.dirty(newValue)));
+
+  onPasswordChanged(String newValue) => emit(state.copyWith(password: Password.dirty(newValue)));
+
+  onRepeatPasswordChanged(String newValue) => emit(
+        state.copyWith(
+          repeatPassword: RepeatPassword.dirty(
+            newValue,
+            password: state.password.value,
+          ),
+        ),
+      );
+
   bool _validateForm() {
     emit(state.copyWith(
       firstName: RequiredString.dirty(state.firstName.value),
+      companyName: RequiredString.dirty(state.companyName.value),
+      email: Email.dirty(state.password.value),
+      password: Password.dirty(state.password.value),
+      repeatPassword: RepeatPassword.dirty(state.repeatPassword.value, password: state.password.value),
     ));
-    final hasInvalidField = [
-      state.firstName.isValid,
-    ].contains(false);
-    return !hasInvalidField;
+    return !state.formHasInvalidFields;
   }
 
   Future<void> onSubmit() async {
