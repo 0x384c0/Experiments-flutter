@@ -11,5 +11,5 @@ for dir in $(find "$BASEDIR" -type f -name "pubspec.yaml" ! -path "*/.*" -exec d
   info "Working directory: $dir"
 
   # Change to the directory and run 'flutter pub upgrade'
-  (cd "$dir" && flutter pub upgrade --major-versions)
+  (cd "$dir" && flutter pub upgrade --major-versions --tighten)
 done
