@@ -88,7 +88,7 @@ class _FormzzValidationView extends StatelessWidget {
               ),
             ],
           ],
-        ).flex(1).padding(all: 16),
+        ).padding(all: 16),
       ),
     );
   }

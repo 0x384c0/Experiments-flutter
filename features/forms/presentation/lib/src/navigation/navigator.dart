@@ -9,6 +9,8 @@ abstract class FormsNavigator {
 
   Future<Object?> toFormzzValidation();
 
+  Future<Object?> toMaterialValidation();
+
   back();
 }
 
@@ -19,6 +21,9 @@ class NavigatorImpl implements FormsNavigator {
 
   @override
   toFormzzValidation() => Modular.to.pushNamed('${FormsRoutesModule.path}${FormsRoutesModule.formzzValidation}');
+
+  @override
+  toMaterialValidation() => Modular.to.pushNamed('${FormsRoutesModule.path}${FormsRoutesModule.materialValidation}');
 
   @override
   back() => Modular.to.pop();

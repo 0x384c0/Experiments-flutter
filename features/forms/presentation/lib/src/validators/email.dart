@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 
+final emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
 class Email extends FormzInput<String, EmailValidationError> {
   const Email.dirty(super.value, {this.apiError}) : super.dirty();
 
   const Email.pure(super.value, {this.apiError}) : super.pure();
-
-  static final _emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
   final String? apiError;
 
@@ -17,7 +17,7 @@ class Email extends FormzInput<String, EmailValidationError> {
     if (isPure) return null;
     if (apiError?.isNotEmpty == true) return EmailValidationError(ValidationErrorType.invalid, apiError: apiError);
     if (value.isEmpty) return EmailValidationError(ValidationErrorType.empty);
-    return _emailRegExp.hasMatch(value) ? null : EmailValidationError(ValidationErrorType.invalid);
+    return emailRegExp.hasMatch(value) ? null : EmailValidationError(ValidationErrorType.invalid);
   }
 
   @override

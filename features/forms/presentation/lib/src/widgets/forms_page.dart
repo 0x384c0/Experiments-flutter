@@ -18,6 +18,10 @@ class FormsPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           ElevatedButton(
+            onPressed: _navigator.toMaterialValidation,
+            child: Text(locale.forms_material_validation),
+          ),
+          ElevatedButton(
             onPressed: _navigator.toFormzzValidation,
             child: Text(locale.forms_formzz_validation),
           ),
