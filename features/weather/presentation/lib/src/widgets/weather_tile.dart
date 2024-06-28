@@ -5,7 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
 class WeatherTile extends CardTile {
-  const WeatherTile(this.state ,super.onTap, {Key? key}): super(key: key);
+  const WeatherTile(this.state ,super.onTap, {super.key});
 
   final CurrentWeatherState state;
 

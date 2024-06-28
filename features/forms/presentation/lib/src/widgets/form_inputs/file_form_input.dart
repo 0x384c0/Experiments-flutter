@@ -23,11 +23,11 @@ class FileFormInput extends StatelessWidget {
   final ValueChanged<String> onFileSelected;
 
   const FileFormInput({
-    Key? key,
+    super.key,
     required this.label,
     required this.selectedFilePath,
     required this.onFileSelected,
-  }) : super(key: key);
+  });
 
   Future<void> _pickFile(BuildContext context) async {
     final result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: allowedExtensions);

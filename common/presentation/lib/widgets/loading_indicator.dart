@@ -8,7 +8,7 @@ class LoadingIndicator extends StatelessWidget {
         label: "loading",
         child: Container(
           alignment: AlignmentDirectional.center,
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).colorScheme.surface,
           child: const CircularProgressIndicator(),
         ),
       );

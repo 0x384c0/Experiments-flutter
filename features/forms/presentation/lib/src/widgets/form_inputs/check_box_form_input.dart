@@ -7,12 +7,12 @@ class CheckBoxFormInput extends StatelessWidget {
   final String? error;
 
   const CheckBoxFormInput({
-    Key? key,
+    super.key,
     required this.value,
     required this.label,
     required this.onChanged,
     this.error,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

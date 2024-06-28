@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_forms_presentation/src/data/formzz_validation_state.dart';
 import 'package:features_forms_presentation/src/validators/email.dart';

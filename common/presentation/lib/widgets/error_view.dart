@@ -17,7 +17,7 @@ class ErrorView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SingleChildScrollView(
         child: Container(
-          color: transparent ? null : Theme.of(context).colorScheme.background,
+          color: transparent ? null : Theme.of(context).colorScheme.surface,
           alignment: AlignmentDirectional.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

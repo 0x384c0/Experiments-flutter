@@ -12,14 +12,14 @@ class PickerOrTextFormInput extends StatelessWidget {
   final List<String> hints;
 
   const PickerOrTextFormInput({
-    Key? key,
+    super.key,
     required this.label,
     required this.onChanged,
     required this.hints,
     this.values,
     this.initialValue,
     this.hintText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) => values != null

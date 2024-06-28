@@ -9,14 +9,14 @@ class PickerFormInput extends StatelessWidget {
   final String? error;
 
   const PickerFormInput({
-    Key? key,
+    super.key,
     required this.label,
     required this.onChanged,
     required this.values,
     this.initialValue,
     this.hintText,
     this.error,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

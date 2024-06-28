@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 
 /// [ListTile] that wraps all its views in to card view
 abstract class CardTile extends ListTile {
-  const CardTile(GestureTapCallback? onTap, {Key? key}) : super(onTap: onTap, key: key);
+  const CardTile(GestureTapCallback? onTap, {super.key}) : super(onTap: onTap);
 
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final Set<MaterialState> states = <MaterialState>{
-      if (!enabled || (onTap == null && onLongPress == null)) MaterialState.disabled,
-      if (selected) MaterialState.selected,
+    final Set<WidgetState> states = <WidgetState>{
+      if (!enabled || (onTap == null && onLongPress == null)) WidgetState.disabled,
+      if (selected) WidgetState.selected,
     };
     final ListTileThemeData tileTheme = ListTileTheme.of(context);
-    final MouseCursor effectiveMouseCursor = MaterialStateProperty.resolveAs<MouseCursor?>(mouseCursor, states) ??
+    final MouseCursor effectiveMouseCursor = WidgetStateProperty.resolveAs<MouseCursor?>(mouseCursor, states) ??
         tileTheme.mouseCursor?.resolve(states) ??
-        MaterialStateMouseCursor.clickable.resolve(states);
+        WidgetStateMouseCursor.clickable.resolve(states);
     final cardShape = shape ?? tileTheme.shape ?? const Border();
     return Card(
       clipBehavior: Clip.antiAlias,

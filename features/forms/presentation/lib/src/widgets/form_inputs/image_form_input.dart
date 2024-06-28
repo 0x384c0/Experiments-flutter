@@ -9,11 +9,11 @@ class ImageFormInput extends StatelessWidget {
   final VoidCallback onRemove;
 
   const ImageFormInput({
-    Key? key,
+    super.key,
     this.imagePath,
     required this.onTap,
     required this.onRemove,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +38,8 @@ class ImageFormInput extends StatelessWidget {
                     fit: BoxFit.cover,
                     width: size,
                     height: size,
-                  ).backgroundColor(Theme.of(context).colorScheme.background),
-                  Icon(Icons.clear, color: Theme.of(context).colorScheme.background, size: 32.0)
+                  ).backgroundColor(Theme.of(context).colorScheme.surface),
+                  Icon(Icons.clear, color: Theme.of(context).colorScheme.surface, size: 32.0)
                       .padding(all: 5)
                       .onTap(onRemove)
                 ],

@@ -8,23 +8,19 @@ class StringFormField extends TextFormField {
   StringFormField({
     super.key,
     required String label,
-    Function(String)? onChanged,
-    String? initialValue,
+    Function(String)? super.onChanged,
+    super.initialValue,
     bool? isRequired,
     String? error,
     String? hintText,
     List<String>? hints,
     bool? obscureText,
-    bool autofocus = false,
-    TextInputType? keyboardType,
+    super.autofocus,
+    super.keyboardType,
   }) : super(
-          initialValue: initialValue,
-          keyboardType: keyboardType,
           enabled: onChanged != null,
-          onChanged: onChanged,
           autofillHints: hints,
           obscureText: obscureText ?? false,
-          autofocus: autofocus,
           obscuringCharacter: _obscuringCharacter,
           decoration: obscureText == true
               ? InputDecoration(

@@ -3,7 +3,7 @@ import '../data/weather_state.dart';
 import 'package:flutter/material.dart';
 
 class ForecastTile extends CardTile {
-  const ForecastTile(this.state ,super.onTap, {Key? key}): super(key: key);
+  const ForecastTile(this.state ,super.onTap, {super.key});
 
   final ForecastWeatherState state;
 
