@@ -8,7 +8,9 @@
     "weather_wind": "Wind",
     "weather_chance_of_rain": "Chance of rain",
     "weather_home_page": "Weather",
-    "forms_home_page": "Forms",
 
-    "reddit_posts_home_page": "Posts"
+    "reddit_posts_home_page": "Posts",
+
+    "forms_home_page": "Forms",
+    "forms_form_validation": "Form Validation"
 }

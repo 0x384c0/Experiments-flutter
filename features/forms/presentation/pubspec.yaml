@@ -10,14 +10,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   common_presentation:
     path: "../../../common/presentation"
-  common_domain:
-    path: "../../../common/domain"
+  flutterui_modifiers: any
   flutter_bloc: ^8.1.3
   flutter_modular: ^6.3.2
+  formz: ^0.7.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
+  generate: true
+  uses-material-design: true
