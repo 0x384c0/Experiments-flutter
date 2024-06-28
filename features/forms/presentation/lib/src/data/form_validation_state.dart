@@ -35,6 +35,14 @@ class FormValidationState with _$FormValidationState {
         userAgreement: const RequiredBool.pure(false),
       );
 
+  FormValidationState get dirtyCopy => copyWith(
+        firstName: RequiredString.dirty(firstName.value),
+        companyName: RequiredString.dirty(companyName.value),
+        email: Email.dirty(password.value),
+        password: Password.dirty(password.value),
+        repeatPassword: RepeatPassword.dirty(repeatPassword.value, password: password.value),
+      );
+
   bool get formHasInvalidFields => [
         firstName.isValid,
         companyName.isValid,

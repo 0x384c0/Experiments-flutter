@@ -32,19 +32,11 @@ class FormValidationCubit extends Cubit<FormValidationState> {
       );
 
   bool _validateForm() {
-    emit(state.copyWith(
-      firstName: RequiredString.dirty(state.firstName.value),
-      companyName: RequiredString.dirty(state.companyName.value),
-      email: Email.dirty(state.password.value),
-      password: Password.dirty(state.password.value),
-      repeatPassword: RepeatPassword.dirty(state.repeatPassword.value, password: state.password.value),
-    ));
+    emit(state.dirtyCopy);
     return !state.formHasInvalidFields;
   }
 
   Future<void> onSubmit() async {
-    if (_validateForm()) {
-      return await _navigator.back();
-    }
+    if (_validateForm()) return await _navigator.back();
   }
 }
