@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutterui_modifiers/flutterui_modifiers.dart';
 
-import 'form_inputs/text_form_input.dart';
+import 'form_inputs/string_form_input.dart';
 import 'form_validation_cubit.dart';
 
 class FormValidationPage extends StatelessWidget {
@@ -28,7 +28,7 @@ class _FormValidationView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextFormInput(
+            StringFormField(
               initialValue: formState.firstName.value,
               isRequired: true,
               error: formState.firstName.error?.stringDescription(context),
