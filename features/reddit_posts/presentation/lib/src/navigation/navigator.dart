@@ -17,18 +17,13 @@ abstract class PostsNavigator {
 /// Private implementation if weather navigation
 class NavigatorImpl implements PostsNavigator {
   @override
-  homePage() {
-    return const PostsPage();
-  }
+  homePage() => const PostsPage();
 
   @override
-  toPostDetails(PostItemState state) {
-    Modular.to.pushNamed('${RoutesModule.path}${RoutesModule.postDetails}?${Params.permalink}=${state.permalink}',
-        arguments: state);
-  }
+  toPostDetails(PostItemState state) =>
+      Modular.to.pushNamed('${RoutesModule.path}${RoutesModule.postDetails}?${Params.permalink}=${state.permalink}',
+          arguments: state);
 
   @override
-  back() {
-    Modular.to.pop();
-  }
+  back() => Modular.to.pop();
 }

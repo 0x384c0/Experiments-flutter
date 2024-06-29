@@ -1,13 +1,12 @@
 library presentation;
 
+import 'package:common_presentation/extensions/flutterui_modifiers.dart';
 import 'package:common_presentation/mixins/widget_alert_mixin.dart';
 import 'package:common_presentation/widgets/page_state/page_state_bloc_builder.dart';
 import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:common_presentation/extensions/flutterui_modifiers.dart';
 
 import 'post_tile.dart';
 import 'posts_cubit.dart';
@@ -17,12 +16,10 @@ class PostsPage extends StatelessWidget {
   const PostsPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => PostsCubit()..refresh(),
-      child: const _PostsView(),
-    );
-  }
+  Widget build(BuildContext context) => BlocProvider(
+        create: (_) => PostsCubit()..refresh(),
+        child: const _PostsView(),
+      );
 }
 
 class _PostsView extends StatelessWidget with WidgetAlertMixin {
@@ -32,12 +29,9 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
   Widget build(BuildContext context) {
     final cubit = context.watch<PostsCubit>();
     onBuild(context, cubit);
-    return Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context)!.reddit_posts_home_page).onTap(cubit.onTopBarTap)),
-      body: createBlocPageStateBlocBuilder(
-        getBloc: context.watch<PostsCubit>,
-        child: (PostsPageState data) => Center(child: _list(context, data.data)),
-      ),
+    return createBlocPageStateBlocBuilder(
+      getBloc: context.watch<PostsCubit>,
+      child: (PostsPageState data) => Center(child: _list(context, data.data)),
     );
   }
 

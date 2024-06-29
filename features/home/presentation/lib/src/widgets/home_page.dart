@@ -1,4 +1,5 @@
 import 'package:features_forms_presentation/features_forms_presentation.dart';
+import 'package:features_home_presentation/src/widgets/drawer_page.dart';
 import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
 import 'package:features_weather_presentation/features_weather_presentation.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +24,12 @@ class _HomePageState extends State<HomePage> {
     formsNavigator.homePage(),
   ];
 
+  Widget _getWidgetOptionTitle(BuildContext context, index) => [
+        Text(AppLocalizations.of(context)!.reddit_posts_home_page),
+        Text(AppLocalizations.of(context)!.weather_home_page),
+        Text(AppLocalizations.of(context)!.forms_home_page),
+      ][index];
+
   int _selectedIndex = 0;
 
   void _onItemTapped(int index) {
@@ -35,9 +42,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      appBar: AppBar(title: _getWidgetOptionTitle(context, _selectedIndex)),
+      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
+      drawer: Drawer(child: DrawerPage()),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(

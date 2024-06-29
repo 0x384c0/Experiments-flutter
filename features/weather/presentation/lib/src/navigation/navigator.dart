@@ -17,17 +17,14 @@ abstract class WeatherNavigator {
 /// Private implementation if weather navigation
 class NavigatorImpl implements WeatherNavigator {
   @override
-  homePage() {
-    return const WeatherPage();
-  }
+  homePage() => const WeatherPage();
 
   @override
-  toForecastDetails(ForecastWeatherState state) {
-    Modular.to.pushNamed('${WeatherRoutesModule.path}${WeatherRoutesModule.forecast}?${Params.timeEpoch}=${state.dateEpoch}', arguments: state);
-  }
+  toForecastDetails(ForecastWeatherState state) => Modular.to.pushNamed(
+        '${WeatherRoutesModule.path}${WeatherRoutesModule.forecast}?${Params.timeEpoch}=${state.dateEpoch}',
+        arguments: state,
+      );
 
   @override
-  back() {
-    Modular.to.pop();
-  }
+  back() => Modular.to.pop();
 }

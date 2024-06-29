@@ -12,21 +12,18 @@ class FormsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
-    return Scaffold(
-      appBar: AppBar(title: Text(locale.forms_home_page)),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          ElevatedButton(
-            onPressed: _navigator.toMaterialValidation,
-            child: Text(locale.forms_material_validation),
-          ),
-          ElevatedButton(
-            onPressed: _navigator.toFormzzValidation,
-            child: Text(locale.forms_formzz_validation),
-          ),
-        ],
-      ).padding(all: 8),
-    );
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ElevatedButton(
+          onPressed: _navigator.toMaterialValidation,
+          child: Text(locale.forms_material_validation),
+        ),
+        ElevatedButton(
+          onPressed: _navigator.toFormzzValidation,
+          child: Text(locale.forms_formzz_validation),
+        ),
+      ],
+    ).padding(all: 8);
   }
 }

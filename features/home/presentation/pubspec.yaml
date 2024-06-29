@@ -14,6 +14,8 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.6
   flutter_modular: ^6.3.4
+  common_presentation:
+    path: "../../../common/presentation"
   features_weather_presentation:
     path: "../../../features/weather/presentation"
   features_reddit_posts_presentation:

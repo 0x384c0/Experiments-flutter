@@ -1,6 +1,6 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
-import '../widgets/home.dart';
+import '../widgets/home_page.dart';
 
 class HomeRoutesModule extends Module {
   static const path = '/';
