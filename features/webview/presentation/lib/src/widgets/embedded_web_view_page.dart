@@ -3,11 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class EmbeddedWebViewPage extends StatelessWidget {
-  const EmbeddedWebViewPage({super.key});
+  const EmbeddedWebViewPage({super.key, required this.uri});
+
+  final WebUri uri;
 
   @override
-  Widget build(BuildContext context) => WebViewEmbeddedPage(
-        uri: WebUri.uri(Uri.parse("https://www.google.com/")),
-        showLoading: true,
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(),
+        body: WebViewEmbeddedPage(
+          uri: uri,
+          showLoading: true,
+        ),
       );
 }

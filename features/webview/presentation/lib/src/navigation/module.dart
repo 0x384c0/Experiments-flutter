@@ -9,10 +9,12 @@ class WebViewRoutesModule extends Module {
   static const embedded = '/embedded';
   static const fullscreen = '/fullscreen';
 
+  final _testUri = WebUri.uri(Uri.parse("https://file-examples.com/index.php/sample-documents-download/sample-pdf-download/"));
+
   @override
   void routes(r) {
     r.child('/', child: (context) => const WebViewsPage());
-    r.child(embedded, child: (context) => const EmbeddedWebViewPage());
-    r.child(fullscreen, child: (context) => WebViewPage(uri: WebUri.uri(Uri.parse("https://www.google.com/"))));
+    r.child(embedded, child: (context) => EmbeddedWebViewPage(uri: _testUri));
+    r.child(fullscreen, child: (context) => WebViewPage(uri: _testUri));
   }
 }

@@ -6,7 +6,6 @@ import 'package:features_webview_presentation/src/widgets/web_view/web_view_mana
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
-
 /// Fullscreen WebView page with navigation components, like app bar
 class WebViewPage extends StatefulWidget {
   /// [WebUri] that will be loaded after WebView creation
@@ -39,6 +38,7 @@ class _WebViewPageState extends State<WebViewPage> {
   bool _canGoBack = false;
   bool _canGoForward = false;
   bool _initialLoading = true;
+  bool _isLoading = false;
   String? _errorMessage;
 
   InAppWebViewController? _webViewController;
@@ -125,9 +125,9 @@ class _WebViewPageState extends State<WebViewPage> {
                 _url = url.toString();
               });
             },
-            onDownloadStartRequest: WebViewManager.onDownloadStartRequest,
+            onDownloadStartRequest: _onDownloadStartRequest,
           ),
-          if (_initialLoading) const LoadingIndicator(),
+          if (_initialLoading || _isLoading) const LoadingIndicator(),
           if (_errorMessage?.isNotEmpty == true)
             ErrorView(
               errorDescription: _errorMessage,
@@ -135,6 +135,20 @@ class _WebViewPageState extends State<WebViewPage> {
               refresh: () async => await _refresh(),
             ),
         ])));
+  }
+
+  _onDownloadStartRequest(InAppWebViewController controller, DownloadStartRequest request) async {
+    try {
+      if (_isLoading) return;
+      setState(() {
+        _isLoading = true;
+      });
+      await WebViewManager.onDownloadStartRequest(controller, request);
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   _refresh() async {

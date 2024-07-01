@@ -40,8 +40,8 @@ class _WebViewEmbeddedPageState extends State<WebViewEmbeddedPage>
     with AutomaticKeepAliveClientMixin<WebViewEmbeddedPage> {
   final GlobalKey _webViewKey = GlobalKey();
   InAppWebViewController? _webViewController;
-  String _url = "";
   bool _initialLoading = true;
+  bool _isLoading = false;
   String? _errorMessage;
   late PullToRefreshController _pullToRefreshController;
 
@@ -72,9 +72,6 @@ class _WebViewEmbeddedPageState extends State<WebViewEmbeddedPage>
         onLoadStart: (controller, url) {
           if (mounted) {
             debugPrint("WebViewEmbeddedPage.onLoadStart $url");
-            setState(() {
-              this._url = url.toString();
-            });
           }
         },
         androidOnPermissionRequest: WebViewManager.androidOnPermissionRequest,
@@ -83,7 +80,6 @@ class _WebViewEmbeddedPageState extends State<WebViewEmbeddedPage>
           _pullToRefreshController.endRefreshing();
           setState(() {
             _initialLoading = false;
-            this._url = url.toString();
           });
           if (url case var url?) await WebViewManager.preventCookiesFromExpire(url);
           if (widget.onStopLoading != null && url != null) {
@@ -98,14 +94,9 @@ class _WebViewEmbeddedPageState extends State<WebViewEmbeddedPage>
             _errorMessage = message;
           });
         },
-        onUpdateVisitedHistory: (controller, url, androidIsReload) {
-          setState(() {
-            this._url = url.toString();
-          });
-        },
-        onDownloadStartRequest: WebViewManager.onDownloadStartRequest,
+        onDownloadStartRequest: _onDownloadStartRequest,
       ),
-      if ((widget.showLoading ?? false) && _initialLoading) const LoadingIndicator(),
+      if ((widget.showLoading ?? false) && (_initialLoading || _isLoading)) const LoadingIndicator(),
       if (_errorMessage?.isNotEmpty == true)
         ErrorView(
           errorDescription: _errorMessage,
@@ -113,6 +104,24 @@ class _WebViewEmbeddedPageState extends State<WebViewEmbeddedPage>
           refresh: () async => await _refresh(),
         ),
     ]);
+  }
+
+  _onDownloadStartRequest(InAppWebViewController controller, DownloadStartRequest request) async {
+    try {
+      if (widget.showLoading == true) {
+        if (_isLoading) return;
+        setState(() {
+          _isLoading = true;
+        });
+      }
+      await WebViewManager.onDownloadStartRequest(controller, request);
+    } finally {
+      if (widget.showLoading == true) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
   }
 
   _refresh() async {

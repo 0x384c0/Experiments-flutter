@@ -62,7 +62,6 @@ class WebViewManager {
         }
       };
 
-  //TODO: show loading before call
   static onDownloadStartRequest(InAppWebViewController controller, DownloadStartRequest request) async {
     final uri = request.url;
     _lastInterceptedFileUrls.add(uri);
