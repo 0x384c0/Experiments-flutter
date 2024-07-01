@@ -6,6 +6,7 @@ import 'package:features_reddit_posts_presentation/features_reddit_posts_present
 import 'package:features_weather_data/features_weather_data.dart';
 import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:features_weather_presentation/features_weather_presentation.dart';
+import 'package:features_webview_presentation/features_webview_presentation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
@@ -19,6 +20,7 @@ class AppModule extends Module {
     r.module(RoutesModule.path, module: RoutesModule());
     r.module(WeatherRoutesModule.path, module: WeatherRoutesModule());
     r.module(FormsRoutesModule.path, module: FormsRoutesModule());
+    r.module(WebViewRoutesModule.path, module: WebViewRoutesModule());
   }
 
   // class names for modules cannot be same
@@ -33,5 +35,6 @@ class AppModule extends Module {
           WeatherDataModule(),
         ]),
         FormsPresentationModule(),
+        WebViewPresentationModule(),
       ];
 }

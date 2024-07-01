@@ -36,6 +36,8 @@ dependencies:
     path: "features/reddit_posts/presentation"
   features_forms_presentation:
     path: "features/forms/presentation"
+  features_webview_presentation:
+    path: "features/webview/presentation"
   cupertino_icons: ^1.0.8
 
 dev_dependencies:

@@ -22,6 +22,8 @@ dependencies:
     path: "../../../features/reddit_posts/presentation"
   features_forms_presentation:
     path: "../../../features/forms/presentation"
+  features_webview_presentation:
+    path: "../../../features/webview/presentation"
 
 dev_dependencies:
   flutter_test:

@@ -28,5 +28,9 @@
     "forms_password": "Password",
     "forms_repeat_password": "Repeat Password",
     "forms_agree_to_terms": "I agree to Terms and Conditions",
-    "forms_form_has_error": "There are errors in the form. Please check all fields."
+    "forms_form_has_error": "There are errors in the form. Please check all fields.",
+
+    "webview_home_page": "WebView",
+    "webview_embedded": "Embedded",
+    "webview_fullscreen": "Fullscreen"
 }
