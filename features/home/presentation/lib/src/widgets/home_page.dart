@@ -38,20 +38,25 @@ class _HomePageState extends State<HomePage> {
       ),
     ];
     return Scaffold(
-      appBar: AppBar(title: _getPageTitle(context, _selectedIndex)),
+      appBar: AppBar(title: _getPageTitle(context, _selectedScreen)),
       body: _body(context),
-      drawer: Drawer(child: DrawerPage(onDestinationSelected: (e) => _onDestinationSelected(e.id))),
+      drawer: Drawer(
+          child: DrawerPage(
+        selectedScreen: _selectedScreen,
+        onDestinationSelected: (e) => _onDestinationSelected(e.id),
+      )),
       bottomNavigationBar: NavigationBar(
         destinations: destinations,
-        selectedIndex: _selectedIndex.id.clamp(0, destinations.length - 1),
+        selectedIndex: _selectedScreen.id.clamp(0, destinations.length - 1),
         onDestinationSelected: _onDestinationSelected,
+        indicatorColor: destinations.length <= _selectedScreen.id ? Colors.transparent : null,
       ),
     );
   }
 
   final _pageController = PageController(initialPage: SelectedScreen.posts.id);
   final _bucket = PageStorageBucket();
-  SelectedScreen _selectedIndex = SelectedScreen.posts;
+  SelectedScreen _selectedScreen = SelectedScreen.posts;
 
   Widget _getPageTitle(BuildContext context, SelectedScreen index) => {
         SelectedScreen.posts: Text(AppLocalizations.of(context)!.reddit_posts_home_page),
@@ -79,7 +84,7 @@ class _HomePageState extends State<HomePage> {
 
   _onDestinationSelected(int selectedIndex) {
     setState(() {
-      _selectedIndex = SelectedScreen.values.firstWhere((e) => e.id == selectedIndex);
+      _selectedScreen = SelectedScreen.values.firstWhere((e) => e.id == selectedIndex);
       _pageController.jumpToPage(selectedIndex);
     });
   }

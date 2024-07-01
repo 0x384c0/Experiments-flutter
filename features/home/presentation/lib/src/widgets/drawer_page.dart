@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 import 'home_page.dart';
 
 class DrawerPage extends StatelessWidget {
-  const DrawerPage({super.key, required this.onDestinationSelected});
+  const DrawerPage({
+    super.key,
+    required this.selectedScreen,
+    required this.onDestinationSelected,
+  });
 
+  final SelectedScreen selectedScreen;
   final Function(SelectedScreen) onDestinationSelected;
 
   @override
@@ -18,6 +23,7 @@ class DrawerPage extends StatelessWidget {
           ListTile(
             title: const Text('WebView'),
             onTap: () => _onDestinationSelected(context, SelectedScreen.webView),
+            tileColor: selectedScreen == SelectedScreen.webView ? Theme.of(context).colorScheme.surfaceContainerHighest : null,
           ),
         ],
       );
