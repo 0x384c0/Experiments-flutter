@@ -11,28 +11,22 @@ class WebViewManager {
   static const _fileUrlsQueueSize = 20;
   static final _lastInterceptedFileUrls = Queue<Uri>();
 
-  static InAppWebViewGroupOptions get options => InAppWebViewGroupOptions(
-      crossPlatform: InAppWebViewOptions(
+  static InAppWebViewSettings get initialSettings => InAppWebViewSettings(
         useShouldOverrideUrlLoading: true,
         mediaPlaybackRequiresUserGesture: false,
         useOnDownloadStart: true,
-      ),
-      android: AndroidInAppWebViewOptions(
         useHybridComposition: true,
-      ),
-      ios: IOSInAppWebViewOptions(
         allowsInlineMediaPlayback: true,
-      ));
+      );
 
-  static get androidOnPermissionRequest => (
-        InAppWebViewController controller,
-        String origin,
-        List<String> resources,
-      ) async =>
-          PermissionRequestResponse(
-            resources: resources,
-            action: PermissionRequestResponseAction.GRANT,
-          );
+  static Future<PermissionResponse?> onPermissionRequest(
+    InAppWebViewController controller,
+    PermissionRequest permissionRequest,
+  ) async =>
+      PermissionResponse(
+        action: PermissionResponseAction.GRANT,
+        resources: permissionRequest.resources,
+      );
 
   static getShouldOverrideUrlLoading(OnNavigateAction Function(Uri uri)? onNavigate, Function reload) =>
       (InAppWebViewController controller, NavigationAction navigationAction) async {
@@ -44,7 +38,7 @@ class WebViewManager {
             return NavigationActionPolicy.CANCEL;
           }
         } else {
-          final isFile = _isFile(uri);
+          final isFile = _isDocFile(uri);
           final canCancel = navigationAction.isForMainFrame && !isFile && onNavigate != null;
           if (canCancel) {
             final onNavigateAction = onNavigate(Uri.parse(url));
@@ -102,7 +96,7 @@ class WebViewManager {
       .map((cookie) => '${cookie.name}=${cookie.value}')
       .join('; ');
 
-  static bool _isFile(Uri uri) {
+  static bool _isDocFile(Uri uri) {
     if (_lastInterceptedFileUrls.contains(uri)) return true;
     final fileString = [
       ".doc",
@@ -117,7 +111,6 @@ class WebViewManager {
       ".ppt",
       ".pptx",
       "pdf",
-      "downlod-proof",
     ];
     final isFile = fileString.any(uri.toString().contains);
     return isFile;
@@ -125,10 +118,9 @@ class WebViewManager {
 
   static bool shouldIgnoreError(
     Uri? url,
-    int code,
-    String message,
+    WebResourceError error,
   ) =>
-      url != null ? _isFile(url) : false || code == 102;
+      url != null ? _isDocFile(url) : false;
 }
 
 enum OnNavigateAction {

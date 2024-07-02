@@ -49,12 +49,7 @@ class _WebViewEmbeddedPageState extends State<WebViewEmbeddedPage>
   void initState() {
     super.initState();
 
-    _pullToRefreshController = PullToRefreshController(
-      options: PullToRefreshOptions(
-        color: Colors.blue,
-      ),
-      onRefresh: _refresh,
-    );
+    _pullToRefreshController = PullToRefreshController(onRefresh: _refresh);
   }
 
   @override
@@ -64,7 +59,7 @@ class _WebViewEmbeddedPageState extends State<WebViewEmbeddedPage>
       InAppWebView(
         key: _webViewKey,
         initialUrlRequest: URLRequest(url: widget.uri, headers: widget.headers),
-        initialOptions: WebViewManager.options,
+        initialSettings: WebViewManager.initialSettings,
         pullToRefreshController: _pullToRefreshController,
         onWebViewCreated: (controller) {
           _webViewController = controller;
@@ -74,7 +69,7 @@ class _WebViewEmbeddedPageState extends State<WebViewEmbeddedPage>
             debugPrint("WebViewEmbeddedPage.onLoadStart $url");
           }
         },
-        androidOnPermissionRequest: WebViewManager.androidOnPermissionRequest,
+        onPermissionRequest: WebViewManager.onPermissionRequest,
         shouldOverrideUrlLoading: WebViewManager.getShouldOverrideUrlLoading(widget.onNavigate, _refresh),
         onLoadStop: (controller, url) async {
           _pullToRefreshController.endRefreshing();
@@ -86,12 +81,12 @@ class _WebViewEmbeddedPageState extends State<WebViewEmbeddedPage>
             widget.onStopLoading!(url, await WebViewManager.getCookies(url));
           }
         },
-        onLoadError: (controller, url, code, message) {
+        onReceivedError: (controller, request, error) {
           _pullToRefreshController.endRefreshing();
-          if (WebViewManager.shouldIgnoreError(url, code, message)) return;
+          if (WebViewManager.shouldIgnoreError(request.url, error)) return;
           setState(() {
             _initialLoading = false;
-            _errorMessage = message;
+            _errorMessage = error.description;
           });
         },
         onDownloadStartRequest: _onDownloadStartRequest,

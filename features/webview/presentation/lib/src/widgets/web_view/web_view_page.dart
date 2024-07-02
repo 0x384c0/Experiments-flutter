@@ -44,18 +44,12 @@ class _WebViewPageState extends State<WebViewPage> {
   InAppWebViewController? _webViewController;
 
   late PullToRefreshController _pullToRefreshController;
-  String _url = "";
 
   @override
   void initState() {
     super.initState();
 
-    _pullToRefreshController = PullToRefreshController(
-      options: PullToRefreshOptions(
-        color: Colors.blue,
-      ),
-      onRefresh: _refresh,
-    );
+    _pullToRefreshController = PullToRefreshController(onRefresh: _refresh);
   }
 
   @override
@@ -82,20 +76,13 @@ class _WebViewPageState extends State<WebViewPage> {
           InAppWebView(
             key: _webViewKey,
             initialUrlRequest: URLRequest(url: widget.uri, headers: widget.headers),
-            initialOptions: WebViewManager.options,
+            initialSettings: WebViewManager.initialSettings,
             pullToRefreshController: _pullToRefreshController,
             onWebViewCreated: (controller) {
               _webViewController = controller;
             },
-            onLoadStart: (controller, url) {
-              if (mounted) {
-                debugPrint("WebViewPage.onLoadStart $url");
-                setState(() {
-                  this._url = url.toString();
-                });
-              }
-            },
-            androidOnPermissionRequest: WebViewManager.androidOnPermissionRequest,
+            onLoadStart: (controller, url) => debugPrint("WebViewPage.onLoadStart $url"),
+            onPermissionRequest: WebViewManager.onPermissionRequest,
             shouldOverrideUrlLoading: WebViewManager.getShouldOverrideUrlLoading(widget.onNavigate, _refresh),
             onLoadStop: (controller, url) async {
               final bool canGoBack = await _webViewController?.canGoBack() ?? false;
@@ -105,24 +92,18 @@ class _WebViewPageState extends State<WebViewPage> {
                 _initialLoading = false;
                 _canGoBack = canGoBack;
                 _canGoForward = canGoForward;
-                _url = url.toString();
               });
               if (url case var url?) await WebViewManager.preventCookiesFromExpire(url);
               if (widget.onStopLoading != null && url != null) {
                 widget.onStopLoading!(url, await WebViewManager.getCookies(url));
               }
             },
-            onLoadError: (controller, url, code, message) {
+            onReceivedError: (controller, request, error) {
               _pullToRefreshController.endRefreshing();
-              if (WebViewManager.shouldIgnoreError(url, code, message)) return;
+              if (WebViewManager.shouldIgnoreError(request.url, error)) return;
               setState(() {
                 _initialLoading = false;
-                _errorMessage = message;
-              });
-            },
-            onUpdateVisitedHistory: (controller, url, androidIsReload) {
-              setState(() {
-                _url = url.toString();
+                _errorMessage = error.description;
               });
             },
             onDownloadStartRequest: _onDownloadStartRequest,
