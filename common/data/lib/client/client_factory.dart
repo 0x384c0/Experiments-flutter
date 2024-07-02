@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:features_common_data/interfaces/oauth_tokens_entity.dart';
 
 import 'content_type_interceptor.dart';
 import 'oauth_interceptor.dart';
 
-Dio _createOauthClient(
-  OauthInterceptor oauthInterceptor,
+Dio _createOauthClient<T extends OauthTokensEntity>(
+  OauthInterceptor<T> oauthInterceptor,
   ContentTypeInterceptor contentTypeInterceptor,
 ) {
   var dio = Dio();

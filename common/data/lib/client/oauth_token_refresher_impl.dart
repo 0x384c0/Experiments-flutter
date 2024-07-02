@@ -1,18 +1,18 @@
 import 'dart:async';
 
-import 'package:features_common_data/data/oauth_tokens_entity.dart';
 import 'package:features_common_data/interfaces/oauth_token_refresher.dart';
+import 'package:features_common_data/interfaces/oauth_tokens_entity.dart';
 
 /// This class must be a singleton, because only one token can be refreshed at time
-class OAuthTokenRefresherImpl implements OAuthTokenRefresher {
+class OAuthTokenRefresherImpl<T extends OauthTokensEntity> implements OAuthTokenRefresher<T> {
   OAuthTokenRefresherImpl(this.repository);
 
-  final TokenRefreshRemoteRepository repository;
+  final TokenRefreshRemoteRepository<T> repository;
   static const _expirationTimeLimit = Duration(minutes: 1);
-  Completer<OauthTokensEntity?>? _refreshCompleter;
+  Completer<T?>? _refreshCompleter;
 
   @override
-  Future<OauthTokensEntity?> getRefreshedTokensIfNeeded(OauthTokensEntity oldTokens) async {
+  Future<T?> getRefreshedTokensIfNeeded(T oldTokens) async {
     // tokens already refreshing, so thread must wait for its result
     if (_refreshCompleter != null) {
       return _refreshCompleter!.future;
@@ -20,7 +20,7 @@ class OAuthTokenRefresherImpl implements OAuthTokenRefresher {
 
     // try to refresh tokens
     if (await _needToRefreshTokens(oldTokens)) {
-      _refreshCompleter = Completer<OauthTokensEntity?>();
+      _refreshCompleter = Completer<T?>();
 
       try {
         final newTokens = await repository.refreshTokens(oldTokens);
@@ -37,13 +37,13 @@ class OAuthTokenRefresherImpl implements OAuthTokenRefresher {
     return null;
   }
 
-  Future<bool> _needToRefreshTokens(OauthTokensEntity tokens) async {
+  Future<bool> _needToRefreshTokens(T tokens) async {
     return tokens.expirationDate != null
         ? tokens.expirationDate!.difference(DateTime.now()) < _expirationTimeLimit
         : false;
   }
 }
 
-abstract class TokenRefreshRemoteRepository {
-  Future<OauthTokensEntity?> refreshTokens(OauthTokensEntity oldTokens);
+abstract class TokenRefreshRemoteRepository<T extends OauthTokensEntity> {
+  Future<T?> refreshTokens(T oldTokens);
 }
