@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'form_inputs/picker_form_input.dart';
+
 class MaterialValidationPage extends StatefulWidget {
   const MaterialValidationPage({super.key});
 
@@ -47,9 +49,24 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
                 builder: (context, constraints) => DropdownMenu(
                   dropdownMenuEntries: dropdownMenuEntries,
                   width: constraints.maxWidth,
-                  hintText: "Dropdown picker",
+                  hintText: "Dropdown menu",
                   inputDecorationTheme: Theme.of(context).inputDecorationTheme,
                 ),
+              ),
+              PickerFormInput(
+                labelText: "Picker",
+                viewHintText: "Search hint",
+                getSuggestions: (text) async {
+                  final millisecondsSinceEpoch = DateTime.now().millisecondsSinceEpoch;
+                  return List.generate(
+                    5,
+                    (i) => PickerMenuEntry(label: "Label $i $text", value: i + millisecondsSinceEpoch),
+                  );
+                },
+                validator: (value) {
+                  if (value?.isEmpty == true) return locale.common_empty_field;
+                  return null;
+                },
               ),
               const SizedBox(height: 24),
               ElevatedButton(onPressed: _onSubmit, child: Text(locale.forms_submit)),
