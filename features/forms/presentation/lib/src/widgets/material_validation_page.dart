@@ -15,6 +15,7 @@ class MaterialValidationPage extends StatefulWidget {
 class _MaterialValidationPageState extends State<MaterialValidationPage> {
   final _formKey = GlobalKey<FormState>();
   late final FormsNavigator _navigator = Modular.get();
+  final dropdownMenuEntries = List.generate(5, (i) => DropdownMenuEntry(label: "label $i", value: "value $i"));
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +42,14 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
                   if (value?.isEmpty == true) return locale.common_empty_field;
                   return null;
                 },
+              ),
+              LayoutBuilder(
+                builder: (context, constraints) => DropdownMenu(
+                  dropdownMenuEntries: dropdownMenuEntries,
+                  width: constraints.maxWidth,
+                  hintText: "Dropdown picker",
+                  inputDecorationTheme: Theme.of(context).inputDecorationTheme,
+                ),
               ),
               const SizedBox(height: 24),
               ElevatedButton(onPressed: _onSubmit, child: Text(locale.forms_submit)),
