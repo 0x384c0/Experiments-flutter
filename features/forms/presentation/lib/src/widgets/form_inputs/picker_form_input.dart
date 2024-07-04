@@ -53,16 +53,15 @@ class _PickerFormInputState<T> extends State<PickerFormInput<T>> {
         suggestionsBuilder: (BuildContext context, SearchController controller) async {
           final suggestions = (await widget.getSuggestions(controller.text));
           return List.generate(
-            suggestions.length,
-            (int index) => (widget.listItemBuilder ?? _defaultListItemBuilder).call(
-              suggestions.elementAt(index),
-              () {
-                controller.closeView(null);
-                controller.clear();
-                _onEntitySelected(suggestions.elementAt(index));
-              },
-            ),
-          );
+              suggestions.length,
+              (int index) => (widget.listItemBuilder ?? _defaultListItemBuilder).call(
+                    suggestions.elementAt(index),
+                    () {
+                      controller.closeView(null);
+                      controller.clear();
+                      _onEntitySelected(suggestions.elementAt(index));
+                    },
+                  ));
         },
       );
 
@@ -71,13 +70,23 @@ class _PickerFormInputState<T> extends State<PickerFormInput<T>> {
 
   _onChipDeleted(PickerMenuEntry<T> entry) => setState(() {
         _selection.remove(entry);
-        _textController.updateValues(_selection);
+        _updateValues();
       });
 
   _onEntitySelected(PickerMenuEntry<T> entry) => setState(() {
         _selection.add(entry);
-        _textController.updateValues(_selection);
+        _updateValues();
       });
+
+  _updateValues() {
+    _textController.updateValues(_selection);
+    if (_selection.isEmpty && _textController.text.isNotEmpty) {
+      _textController.text = '';
+    }
+    if (_selection.isNotEmpty && _textController.text.isEmpty) {
+      _textController.text = ' '; // force hint always float at the top of the field above the content
+    }
+  }
 
   Widget _defaultChipBuilder(PickerMenuEntry<T> entry, Function() onChipDeleted) =>
       ToppingInputChip(label: entry.label, onDeleted: onChipDeleted);
