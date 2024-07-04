@@ -8,14 +8,18 @@ class PickerFormInput<T> extends StatefulWidget {
     required this.labelText,
     required this.viewHintText,
     required this.getSuggestions,
-    this.chipBuilder = _defaultChipBuilder,
+    this.listItemBuilder,
+    this.chipBuilder,
+    this.chipSeparator = const SizedBox(width: 6),
     this.validator,
   });
 
   final String labelText;
   final String viewHintText;
   final Future<Iterable<PickerMenuEntry<T>>> Function(String text) getSuggestions;
-  final Widget Function(PickerMenuEntry<T> entry, Function onChipDeleted) chipBuilder;
+  final Function(PickerMenuEntry<T> entry, GestureTapCallback onTap)? listItemBuilder;
+  final Widget Function(PickerMenuEntry<T> entry, Function() onChipDeleted)? chipBuilder;
+  final Widget chipSeparator;
   final FormFieldValidator<List<PickerMenuEntry<T>>>? validator;
 
   @override
@@ -25,7 +29,11 @@ class PickerFormInput<T> extends StatefulWidget {
 class _PickerFormInputState<T> extends State<PickerFormInput<T>> {
   final List<PickerMenuEntry<T>> _selection = [];
 
-  late final _textController = ChipsInputEditingController(values: _selection, chipBuilder: _chipBuilder);
+  late final _textController = ChipsInputEditingController(
+    values: _selection,
+    chipBuilder: _chipBuilder,
+    separator: widget.chipSeparator,
+  );
 
   @override
   Widget build(BuildContext context) => SearchAnchor(
@@ -46,11 +54,11 @@ class _PickerFormInputState<T> extends State<PickerFormInput<T>> {
           final suggestions = (await widget.getSuggestions(controller.text));
           return List.generate(
             suggestions.length,
-            (int index) => ListTile(
-              title: Text(suggestions.elementAt(index).label),
-              onTap: () {
+            (int index) => (widget.listItemBuilder ?? _defaultListItemBuilder).call(
+              suggestions.elementAt(index),
+              () {
                 controller.closeView(null);
-                controller.text = "";
+                controller.clear();
                 _onEntitySelected(suggestions.elementAt(index));
               },
             ),
@@ -59,20 +67,26 @@ class _PickerFormInputState<T> extends State<PickerFormInput<T>> {
       );
 
   Widget _chipBuilder(BuildContext context, PickerMenuEntry<T> entry) =>
-      widget.chipBuilder(entry, () => _onChipDeleted(entry));
+      (widget.chipBuilder ?? _defaultChipBuilder).call(entry, () => _onChipDeleted(entry));
 
   _onChipDeleted(PickerMenuEntry<T> entry) => setState(() {
         _selection.remove(entry);
         _textController.updateValues(_selection);
       });
 
-  _onEntitySelected(PickerMenuEntry<T> entity) => setState(() {
-        _selection.add(entity);
+  _onEntitySelected(PickerMenuEntry<T> entry) => setState(() {
+        _selection.add(entry);
         _textController.updateValues(_selection);
       });
-}
 
-Widget _defaultChipBuilder(entry, onChipDeleted) => ToppingInputChip(label: entry.label, onDeleted: onChipDeleted);
+  Widget _defaultChipBuilder(PickerMenuEntry<T> entry, Function() onChipDeleted) =>
+      ToppingInputChip(label: entry.label, onDeleted: onChipDeleted);
+
+  Widget _defaultListItemBuilder(PickerMenuEntry<T> entry, GestureTapCallback onTap) => ListTile(
+        title: Text(entry.label),
+        onTap: onTap,
+      );
+}
 
 class PickerMenuEntry<T> {
   PickerMenuEntry({

@@ -4,21 +4,22 @@ class ChipsInputEditingController<T> extends TextEditingController {
   ChipsInputEditingController({
     required this.values,
     required this.chipBuilder,
-  }) : super(text: String.fromCharCode(kObjectReplacementChar) * values.length);
+    this.separator,
+  }) : super(text: String.fromCharCode(_kObjectReplacementChar) * values.length);
 
   // This constant character acts as a placeholder in the TextField text value.
   // There will be one character for each of the InputChip displayed.
-  static const int kObjectReplacementChar = 0xFFFE;
+  static const int _kObjectReplacementChar = 0xFFFE;
 
   List<T> values;
-
   final Widget Function(BuildContext context, T data) chipBuilder;
+  final Widget? separator;
 
   /// Called whenever chip is either added or removed
   /// from the outside the context of the text field.
   void updateValues(List<T> values) {
     if (values.length != this.values.length) {
-      final String char = String.fromCharCode(kObjectReplacementChar);
+      final String char = String.fromCharCode(_kObjectReplacementChar);
       final int length = values.length;
       value = TextEditingValue(
         text: char * length,
@@ -29,7 +30,7 @@ class ChipsInputEditingController<T> extends TextEditingController {
   }
 
   String get textWithoutReplacements {
-    final String char = String.fromCharCode(kObjectReplacementChar);
+    final String char = String.fromCharCode(_kObjectReplacementChar);
     return text.replaceAll(RegExp(char), '');
   }
 
@@ -37,14 +38,34 @@ class ChipsInputEditingController<T> extends TextEditingController {
 
   @override
   TextSpan buildTextSpan({required BuildContext context, TextStyle? style, required bool withComposing}) {
-    final Iterable<WidgetSpan> chipWidgets = values.map((T v) => WidgetSpan(child: chipBuilder(context, v)));
+    final chipWidgets = separator != null
+        ? _buildChipWidgetsWithSeparator(context, values, chipBuilder, separator!)
+        : values.map((T v) => WidgetSpan(child: chipBuilder(context, v)));
 
     return TextSpan(
       style: style,
-      children: <InlineSpan>[
+      children: [
         ...chipWidgets,
         if (textWithoutReplacements.isNotEmpty) TextSpan(text: textWithoutReplacements),
       ],
     );
+  }
+
+  _buildChipWidgetsWithSeparator(
+    BuildContext context,
+    List<T> values,
+    Widget Function(BuildContext, T) chipBuilder,
+    Widget separator,
+  ) {
+    List<WidgetSpan> chipWidgets = [];
+
+    for (int i = 0; i < values.length; i++) {
+      if (i > 0) {
+        chipWidgets.add(WidgetSpan(child: separator));
+      }
+      chipWidgets.add(WidgetSpan(child: chipBuilder(context, values[i])));
+    }
+
+    return chipWidgets;
   }
 }
