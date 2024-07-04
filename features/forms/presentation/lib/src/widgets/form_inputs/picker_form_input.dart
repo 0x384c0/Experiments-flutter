@@ -36,8 +36,8 @@ class _PickerFormInputState<T> extends State<PickerFormInput<T>> {
   );
 
   @override
-  Widget build(BuildContext context) => SearchAnchor(
-        builder: (BuildContext context, SearchController controller) => GestureDetector(
+  Widget build(context) => SearchAnchor(
+        builder: (context, controller) => GestureDetector(
           onTap: controller.openView,
           child: TextFormField(
             controller: _textController,
@@ -50,18 +50,19 @@ class _PickerFormInputState<T> extends State<PickerFormInput<T>> {
           ),
         ),
         viewHintText: widget.viewHintText,
-        suggestionsBuilder: (BuildContext context, SearchController controller) async {
+        suggestionsBuilder: (context, controller) async {
           final suggestions = (await widget.getSuggestions(controller.text));
           return List.generate(
-              suggestions.length,
-              (int index) => (widget.listItemBuilder ?? _defaultListItemBuilder).call(
-                    suggestions.elementAt(index),
-                    () {
-                      controller.closeView(null);
-                      controller.clear();
-                      _onEntitySelected(suggestions.elementAt(index));
-                    },
-                  ));
+            suggestions.length,
+            (int index) => (widget.listItemBuilder ?? _defaultListItemBuilder).call(
+              suggestions.elementAt(index),
+              () {
+                controller.closeView(null);
+                controller.clear();
+                _onEntitySelected(suggestions.elementAt(index));
+              },
+            ),
+          );
         },
       );
 
