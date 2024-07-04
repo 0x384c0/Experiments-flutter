@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ChipsInputEditingController<T> extends TextEditingController {
-  ChipsInputEditingController(this.values, this.chipBuilder)
-      : super(
-          text: String.fromCharCode(kObjectReplacementChar) * values.length,
-        );
+  ChipsInputEditingController({
+    required this.values,
+    required this.chipBuilder,
+  }) : super(text: String.fromCharCode(kObjectReplacementChar) * values.length);
 
   // This constant character acts as a placeholder in the TextField text value.
   // There will be one character for each of the InputChip displayed.
@@ -45,37 +45,6 @@ class ChipsInputEditingController<T> extends TextEditingController {
         ...chipWidgets,
         if (textWithoutReplacements.isNotEmpty) TextSpan(text: textWithoutReplacements),
       ],
-    );
-  }
-}
-
-class ToppingInputChip extends StatelessWidget {
-  const ToppingInputChip({
-    super.key,
-    required this.label,
-    this.onDeleted,
-    this.onSelected,
-  });
-
-  final String label;
-  final VoidCallback? onDeleted;
-  final VoidCallback? onSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(right: 3),
-      child: InputChip(
-        key: ObjectKey(label),
-        label: Text(label),
-        avatar: CircleAvatar(
-          child: Text(label[0].toUpperCase()),
-        ),
-        onDeleted: onDeleted,
-        onSelected: (value) => onSelected?.call(),
-        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        padding: const EdgeInsets.all(2),
-      ),
     );
   }
 }
