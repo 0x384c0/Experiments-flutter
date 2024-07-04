@@ -4,6 +4,7 @@ import 'package:features_forms_presentation/src/validators/email.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'form_inputs/picker_form_input.dart';
 
@@ -56,13 +57,7 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
               PickerFormInput(
                 labelText: "Picker",
                 viewHintText: "Search hint",
-                getSuggestions: (text) async {
-                  final millisecondsSinceEpoch = DateTime.now().millisecondsSinceEpoch;
-                  return List.generate(
-                    5,
-                    (i) => PickerMenuEntry(label: "Label $i $text", value: i + millisecondsSinceEpoch),
-                  );
-                },
+                getSuggestions: _debouncedGetSuggestions,
                 validator: (value) {
                   if (value?.isEmpty == true) return locale.common_empty_field;
                   return null;
@@ -79,5 +74,29 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
 
   _onSubmit() {
     if (_formKey.currentState!.validate()) _navigator.back();
+  }
+
+  Future<Iterable<PickerMenuEntry<int>>> _getSuggestions(String text) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    final millisecondsSinceEpoch = DateTime.now().millisecondsSinceEpoch;
+    return List.generate(5, (i) => PickerMenuEntry(label: "Label $i $text", value: i + millisecondsSinceEpoch));
+  }
+
+  final _suggestionsSubject = PublishSubject<String>();
+  late final _suggestionsSubscription =
+      _suggestionsSubject.debounceTime(const Duration(milliseconds: 300)).asyncMap(_getSuggestions);
+
+  Future<Iterable<PickerMenuEntry<int>>> _debouncedGetSuggestions(String text) {
+    try {
+      return _suggestionsSubscription.first;
+    } finally {
+      _suggestionsSubject.add(text); //TODO: find another way to add item to stream after subscription
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _suggestionsSubject.close();
   }
 }
