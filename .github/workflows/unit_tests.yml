@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Install and set Flutter version
         uses: subosito/flutter-action@v2
@@ -19,6 +19,12 @@ jobs:
 
       - name: Install project dependencies
         run: sh scripts/pub_get_all.sh
+
+      - name: Localizations
+        run: sh scripts/generate_translate_file.sh
+
+      - name: Build Runner
+        run: sh scripts/build_runner.sh
 
       - name: Run unit tests
         run: sh scripts/run_tests.sh
