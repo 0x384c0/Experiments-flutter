@@ -68,11 +68,7 @@ class _PickerFormInputState<T> extends State<PickerFormInput<T>> {
 
   _onEntitySelected(PickerMenuEntry<T> entity) => setState(() {
         _selection.add(entity);
-        if (_selection.isEmpty) {
-          _textController.clear();
-        } else {
-          _textController.updateValues(_selection);
-        }
+        _textController.updateValues(_selection);
       });
 }
 
