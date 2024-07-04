@@ -77,6 +77,7 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
   }
 
   Future<Iterable<PickerMenuEntry<int>>> _getSuggestions(String text) async {
+    if (text.isEmpty) return [];
     await Future.delayed(const Duration(milliseconds: 500));
     final millisecondsSinceEpoch = DateTime.now().millisecondsSinceEpoch;
     return List.generate(5, (i) => PickerMenuEntry(label: "Label $i $text", value: i + millisecondsSinceEpoch));
