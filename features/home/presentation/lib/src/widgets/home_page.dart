@@ -25,16 +25,16 @@ class _HomePageState extends State<HomePage> {
     final locale = AppLocalizations.of(context)!;
     final destinations = [
       NavigationDestination(
+        icon: const Icon(Icons.edit_note),
+        label: locale.forms_home_page,
+      ),
+      NavigationDestination(
         icon: const Icon(Icons.web),
         label: locale.reddit_posts_home_page,
       ),
       NavigationDestination(
         icon: const Icon(Icons.cloud),
         label: locale.weather_home_page,
-      ),
-      NavigationDestination(
-        icon: const Icon(Icons.edit_note),
-        label: locale.forms_home_page,
       ),
     ];
     return Scaffold(

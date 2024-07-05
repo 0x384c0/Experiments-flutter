@@ -50,13 +50,13 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
                 builder: (context, constraints) => DropdownMenu(
                   dropdownMenuEntries: dropdownMenuEntries,
                   width: constraints.maxWidth,
-                  hintText: "Dropdown menu",
+                  hintText: locale.forms_dropdown_menu,
                   inputDecorationTheme: Theme.of(context).inputDecorationTheme,
                 ),
               ),
               PickerFormInput(
-                labelText: "Picker",
-                viewHintText: "Search hint",
+                labelText: locale.forms_picker,
+                viewHintText: locale.forms_search_hint,
                 getSuggestions: _debouncedGetSuggestions,
                 validator: (value) {
                   if (value?.isEmpty == true) return locale.common_empty_field;
