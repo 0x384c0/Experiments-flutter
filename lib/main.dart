@@ -14,9 +14,15 @@ void main() async {
     storageDirectory: kIsWeb ? HydratedStorage.webStorageDirectory : await getTemporaryDirectory(),
   );
 
+  var isRealDevice = true;
+
+  try {
+    isRealDevice = await SafeDevice.isRealDevice;
+  } catch (_) {}
+
   runApp(
     ModularApp(
-      module: AppModule(isRealDevice: await SafeDevice.isRealDevice),
+      module: AppModule(isRealDevice: isRealDevice),
       child: const AppView(),
     ),
   );
