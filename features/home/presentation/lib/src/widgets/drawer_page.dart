@@ -1,6 +1,9 @@
+import 'package:common_presentation/extensions/flutterui_modifiers.dart';
 import 'package:flutter/material.dart';
 
 import 'home_page.dart';
+
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class DrawerPage extends StatelessWidget {
   const DrawerPage({
@@ -22,9 +25,10 @@ class DrawerPage extends StatelessWidget {
           ),
           ListTile(
             title: const Text('WebView'),
-            onTap: () => _onDestinationSelected(context, SelectedScreen.webView),
-            tileColor: selectedScreen == SelectedScreen.webView ? Theme.of(context).colorScheme.surfaceContainerHighest : null,
-          ),
+            onTap: kIsWeb ? null : () => _onDestinationSelected(context, SelectedScreen.webView),
+            tileColor:
+                selectedScreen == SelectedScreen.webView ? Theme.of(context).colorScheme.surfaceContainerHighest : null,
+          ).opacity(kIsWeb ? 0.5 : 1),
         ],
       );
 

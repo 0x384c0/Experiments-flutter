@@ -15,13 +15,13 @@ class FormsPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ElevatedButton(
-          onPressed: _navigator.toMaterialValidation,
-          child: Text(locale.forms_material_validation),
+        ListTile(
+          title: Text(locale.forms_material_validation),
+          onTap: _navigator.toMaterialValidation,
         ),
-        ElevatedButton(
-          onPressed: _navigator.toFormzzValidation,
-          child: Text(locale.forms_formzz_validation),
+        ListTile(
+          title: Text(locale.forms_formzz_validation),
+          onTap: _navigator.toFormzzValidation,
         ),
       ],
     ).padding(all: 8);
