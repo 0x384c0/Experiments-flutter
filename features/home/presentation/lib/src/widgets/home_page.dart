@@ -56,7 +56,7 @@ class _HomePageState extends State<HomePage> {
 
   final _pageController = PageController(initialPage: SelectedScreen.posts.id);
   final _bucket = PageStorageBucket();
-  SelectedScreen _selectedScreen = SelectedScreen.posts;
+  SelectedScreen _selectedScreen = SelectedScreen.forms;
 
   Widget _getPageTitle(BuildContext context, SelectedScreen index) => {
         SelectedScreen.posts: Text(AppLocalizations.of(context)!.reddit_posts_home_page),
