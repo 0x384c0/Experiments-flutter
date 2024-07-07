@@ -12,8 +12,8 @@ class DrawerPage extends StatelessWidget {
     required this.onDestinationSelected,
   });
 
-  final SelectedScreen selectedScreen;
-  final Function(SelectedScreen) onDestinationSelected;
+  final SelectedPage selectedScreen;
+  final Function(SelectedPage) onDestinationSelected;
 
   @override
   Widget build(BuildContext context) => ListView(
@@ -25,15 +25,15 @@ class DrawerPage extends StatelessWidget {
           ),
           ListTile(
             title: const Text('WebView'),
-            onTap: kIsWeb ? null : () => _onDestinationSelected(context, SelectedScreen.webView),
+            onTap: kIsWeb ? null : () => _onDestinationSelected(context, SelectedPage.webView),
             tileColor:
-                selectedScreen == SelectedScreen.webView ? Theme.of(context).colorScheme.surfaceContainerHighest : null,
+                selectedScreen == SelectedPage.webView ? Theme.of(context).colorScheme.surfaceContainerHighest : null,
           ).opacity(kIsWeb ? 0.5 : 1),
         ],
       );
 
-  _onDestinationSelected(BuildContext context, SelectedScreen screen) {
+  _onDestinationSelected(BuildContext context, SelectedPage screen) {
     Navigator.pop(context);
-    onDestinationSelected(SelectedScreen.webView);
+    onDestinationSelected(SelectedPage.webView);
   }
 }

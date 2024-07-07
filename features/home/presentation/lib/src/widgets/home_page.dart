@@ -54,49 +54,52 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  final _pageController = PageController(initialPage: SelectedScreen.posts.id);
+  SelectedPage _selectedScreen = SelectedPage.defaultPage;
+  final _pageController = PageController(initialPage: SelectedPage.defaultPage.id);
   final _bucket = PageStorageBucket();
-  SelectedScreen _selectedScreen = SelectedScreen.forms;
 
-  Widget _getPageTitle(BuildContext context, SelectedScreen index) => {
-        SelectedScreen.posts: Text(AppLocalizations.of(context)!.reddit_posts_home_page),
-        SelectedScreen.weather: Text(AppLocalizations.of(context)!.weather_home_page),
-        SelectedScreen.forms: Text(AppLocalizations.of(context)!.forms_home_page),
-        SelectedScreen.webView: Text(AppLocalizations.of(context)!.webview_home_page),
+  Widget _getPageTitle(BuildContext context, SelectedPage index) => {
+        SelectedPage.posts: Text(AppLocalizations.of(context)!.reddit_posts_home_page),
+        SelectedPage.weather: Text(AppLocalizations.of(context)!.weather_home_page),
+        SelectedPage.forms: Text(AppLocalizations.of(context)!.forms_home_page),
+        SelectedPage.webView: Text(AppLocalizations.of(context)!.webview_home_page),
       }[index]!;
 
+  late final List<Widget> _pages = [
+    formsNavigator.homePage(),
+    redditPostsNavigator.homePage(),
+    weatherNavigator.homePage(),
+    webViewNavigator.homePage(),
+  ];
+
   Widget _body(BuildContext context) {
-    final pages = [
-      formsNavigator.homePage(),
-      redditPostsNavigator.homePage(),
-      weatherNavigator.homePage(),
-      webViewNavigator.homePage(),
-    ];
     return PageStorage(
       bucket: _bucket,
       child: PageView(
         controller: _pageController,
         physics: const NeverScrollableScrollPhysics(),
-        children: pages,
+        children: _pages,
       ),
     );
   }
 
   _onDestinationSelected(int selectedIndex) {
     setState(() {
-      _selectedScreen = SelectedScreen.values.firstWhere((e) => e.id == selectedIndex);
+      _selectedScreen = SelectedPage.values.firstWhere((e) => e.id == selectedIndex);
       _pageController.jumpToPage(selectedIndex);
     });
   }
 }
 
-enum SelectedScreen {
+enum SelectedPage {
   forms(0),
   posts(1),
   weather(2),
   webView(3);
 
-  const SelectedScreen(this.id);
+  const SelectedPage(this.id);
 
   final int id;
+
+  static SelectedPage defaultPage = SelectedPage.forms;
 }

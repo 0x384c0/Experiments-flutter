@@ -5,7 +5,7 @@ import '../api/weather_api.dart';
 class RemoteRepositoryImpl implements WeatherRemoteRepository {
   RemoteRepositoryImpl(this._weatherApi);
 
-  final String _key = "0bab7dd1bacc418689b143833220304"; //TODO: move to config
+  final String _key = "0bab7dd1bacc418689b143833220304";
   final WeatherApi _weatherApi;
 
   @override
