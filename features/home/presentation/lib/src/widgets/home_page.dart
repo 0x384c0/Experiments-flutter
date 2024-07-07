@@ -91,9 +91,9 @@ class _HomePageState extends State<HomePage> {
 }
 
 enum SelectedScreen {
-  posts(0),
-  weather(1),
-  forms(2),
+  forms(0),
+  posts(1),
+  weather(2),
   webView(3);
 
   const SelectedScreen(this.id);
