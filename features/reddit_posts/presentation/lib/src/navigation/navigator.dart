@@ -19,10 +19,13 @@ class NavigatorImpl implements PostsNavigator {
   @override
   homePage() => const PostsPage();
 
+  /// https://github.com/flutter/flutter/issues/147857
+  /// Flutter Web engine removes query parameter encoding, so this url cannot be opened manually in browser
   @override
-  toPostDetails(PostItemState state) =>
-      Modular.to.pushNamed('${RoutesModule.path}${RoutesModule.postDetails}?${Params.permalink}=${state.permalink}',
-          arguments: state);
+  toPostDetails(PostItemState state) => Modular.to.pushNamed(
+        '${RoutesModule.path}${RoutesModule.postDetails}?${Params.permalink}=${state.permalink}',
+        arguments: state,
+      );
 
   @override
   back() => Modular.to.pop();
