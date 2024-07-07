@@ -67,9 +67,9 @@ class _HomePageState extends State<HomePage> {
 
   Widget _body(BuildContext context) {
     final pages = [
+      formsNavigator.homePage(),
       redditPostsNavigator.homePage(),
       weatherNavigator.homePage(),
-      formsNavigator.homePage(),
       webViewNavigator.homePage(),
     ];
     return PageStorage(
