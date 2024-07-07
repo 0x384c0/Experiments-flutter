@@ -14,5 +14,5 @@ class PostDetailsCubit extends Cubit<PageState<PostDetailsState>> with BlocPageS
   late final Mapper<PostModel, PostDetailsState> _postModelMapper = Modular.get();
 
   @override
-  onRefresh() async => _interactor.getPost(stateData?.permalink).then(_postModelMapper.map).then(emitData);
+  onRefresh() async => _interactor.getPost(permalink:stateData?.permalink).then(_postModelMapper.map).then(emitData);
 }

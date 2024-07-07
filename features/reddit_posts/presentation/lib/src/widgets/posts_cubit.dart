@@ -44,8 +44,12 @@ class PostsCubit extends Cubit<PageState<PostsPageState>>
 
   //region CubitPaginationMixin
   @override
-  Future<Iterable<PostItemState>> loadPage(int pageNumber) async =>
-      _interactor.getPosts(after: _lastAfter).then(_saveLastAfter).then(_postModelMapper.map);
+  Future<Iterable<PostItemState>> loadPage(int pageNumber) => _interactor
+      .getPosts(
+        after: _lastAfter,
+      )
+      .then(_saveLastAfter)
+      .then(_postModelMapper.map);
 
   // endregion
 

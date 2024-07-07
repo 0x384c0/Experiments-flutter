@@ -19,7 +19,7 @@ abstract class RedditApi {
   });
 
   @GET("{permalink}")
-  Future<List<RedditPostListingDTO>> getPost(
-    @Path("permalink") String permalink,
-  );
+  Future<List<RedditPostListingDTO>> getPost({
+    @Path("permalink") required String permalink,
+  });
 }

@@ -34,8 +34,14 @@ class RemoteRepositoryImpl implements PostsRemoteRepository {
   }
 
   @override
-  Future<PostModel> getPost(String permalink) => redditApi
-      .getPost(permalink)
-      .then((dto) => redditPostListingDTOMapper.map({permalink: dto}))
-      .mapError(errorDtoMapper.map);
+  Future<PostModel> getPost({
+    required String permalink,
+    String? commentsAfter,
+  }) =>
+      redditApi
+          .getPost(
+            permalink: permalink,
+          )
+          .then((dto) => redditPostListingDTOMapper.map({permalink: dto}))
+          .mapError(errorDtoMapper.map);
 }
