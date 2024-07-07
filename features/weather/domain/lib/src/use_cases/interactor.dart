@@ -1,6 +1,4 @@
-library interactor;
-
-import '../../features_weather_domain.dart';
+import 'package:features_weather_domain/features_weather_domain.dart';
 
 /// requests information about weather in area
 abstract class WeatherInteractor {

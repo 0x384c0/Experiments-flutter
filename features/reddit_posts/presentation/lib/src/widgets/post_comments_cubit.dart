@@ -11,17 +11,17 @@ import 'package:flutter_modular/flutter_modular.dart';
 typedef PostCommentsPageState = GenericPageState<Iterable<PostItemState>>;
 
 class PostCommentsCubit extends Cubit<PageState<PostCommentsPageState>> with BlocPageStateMixin {
-  PostCommentsCubit(this.permalink) : super(PageStateEmptyLoading());
+  PostCommentsCubit(this._permalink) : super(PageStateEmptyLoading());
 
-  final String? permalink;
+  final String? _permalink;
 
-  late PostsInteractor interactor = Modular.get();
-  late Mapper<PostModel, PostDetailsState> postModelMapper = Modular.get();
+  late final PostsInteractor _interactor = Modular.get();
+  late final Mapper<PostModel, PostDetailsState> _postModelMapper = Modular.get();
 
   @override
-  onRefresh() async => interactor
-      .getPost(permalink)
-      .then(postModelMapper.map)
+  onRefresh() async => _interactor
+      .getPost(_permalink)
+      .then(_postModelMapper.map)
       .then((value) => value.postItemState?.comments)
       .then(_newPaginationState)
       .then(emitData);

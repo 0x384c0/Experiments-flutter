@@ -15,20 +15,20 @@ typedef WeatherPageState = GenericPageState<WeatherState>;
 class WeatherCubit extends Cubit<PageState<WeatherPageState>> with BlocPageStateMixin {
   WeatherCubit() : super(PageStateEmptyLoading());
 
-  late WeatherInteractor interactor = Modular.get();
-  late WeatherNavigator navigator = Modular.get();
-  late GeoLocationProvider geoLocationManager = Modular.get();
-  late Mapper<ForecastModel, WeatherState> forecastModelMapper = Modular.get();
+  late final WeatherInteractor _interactor = Modular.get();
+  late final WeatherNavigator _navigator = Modular.get();
+  late final GeoLocationProvider _geoLocationManager = Modular.get();
+  late final Mapper<ForecastModel, WeatherState> _forecastModelMapper = Modular.get();
 
   @override
-  onRefresh() => geoLocationManager
+  onRefresh() => _geoLocationManager
       .getLocation()
-      .then((value) => interactor.getForecast(value))
-      .then(forecastModelMapper.map)
+      .then((value) => _interactor.getForecast(value))
+      .then(_forecastModelMapper.map)
       .then(_newState)
       .then(emitData);
 
-  void onForecastClick(ForecastWeatherState state) => navigator.toForecastDetails(state);
+  void onForecastClick(ForecastWeatherState state) => _navigator.toForecastDetails(state);
 
   GenericPageState<WeatherState> _newState(WeatherState data) => GenericPageState(data: data);
 }

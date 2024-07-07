@@ -1,13 +1,10 @@
-library data;
-
 import 'package:common_domain/extensions/future.dart';
 import 'package:common_domain/mapper/mapper.dart';
+import 'package:features_reddit_posts_data/src/api/reddit_api.dart';
+import 'package:features_reddit_posts_data/src/data/reddit_post_listing_dto.dart';
+import 'package:features_reddit_posts_data/src/data/reddit_posts_response_dto.dart';
+import 'package:features_reddit_posts_data/src/data/reddit_posts_sort_dto.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
-
-import '../api/reddit_api.dart';
-import '../data/reddit_post_listing_dto.dart';
-import '../data/reddit_posts_response_dto.dart';
-import '../data/reddit_posts_sort_dto.dart';
 
 class RemoteRepositoryImpl implements PostsRemoteRepository {
   static const String _defaultSubreddit = "all";

@@ -10,9 +10,9 @@ class PostDetailsCubit extends Cubit<PageState<PostDetailsState>> with BlocPageS
   PostDetailsCubit(PostDetailsState? state)
       : super(state != null ? PageStatePopulated(data: state) : PageStateEmptyLoading());
 
-  late PostsInteractor interactor = Modular.get();
-  late Mapper<PostModel, PostDetailsState> postModelMapper = Modular.get();
+  late final PostsInteractor _interactor = Modular.get();
+  late final Mapper<PostModel, PostDetailsState> _postModelMapper = Modular.get();
 
   @override
-  onRefresh() async => interactor.getPost(stateData?.permalink).then(postModelMapper.map).then(emitData);
+  onRefresh() async => _interactor.getPost(stateData?.permalink).then(_postModelMapper.map).then(emitData);
 }

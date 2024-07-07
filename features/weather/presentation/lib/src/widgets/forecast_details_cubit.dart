@@ -12,22 +12,22 @@ typedef ForecastDetailsPageState = GenericPageState<Map<String?, ForecastWeather
 
 class ForecastDetailsCubit extends Cubit<PageState<ForecastDetailsPageState>>
     with BlocPageStateMixin {
-  ForecastDetailsCubit(this.args) : super(PageStateEmptyLoading());
+  ForecastDetailsCubit(this._args) : super(PageStateEmptyLoading());
 
-  final Map<String?, ForecastWeatherState?> args;
+  final Map<String?, ForecastWeatherState?> _args;
 
-  late GeoLocationProvider geoLocationManager = Modular.get();
-  late WeatherInteractor interactor = Modular.get<WeatherInteractor>();
-  late Mapper<ForecastItemModel, ForecastWeatherState> forecastItemModelMapper = Modular.get();
+  late final GeoLocationProvider _geoLocationManager = Modular.get();
+  late final WeatherInteractor _interactor = Modular.get<WeatherInteractor>();
+  late final Mapper<ForecastItemModel, ForecastWeatherState> _forecastItemModelMapper = Modular.get();
 
   @override
   onRefresh() async {
-    final dateEpoch = args.entries.first.key;
+    final dateEpoch = _args.entries.first.key;
     return dateEpoch != null
-        ? geoLocationManager
+        ? _geoLocationManager
             .getLocation()
-            .then((value) => interactor.getForecastItem(value, dateEpoch))
-            .then(forecastItemModelMapper.mapOptional)
+            .then((value) => _interactor.getForecastItem(value, dateEpoch))
+            .then(_forecastItemModelMapper.mapOptional)
             .then((value) => {dateEpoch: value})
             .then(_newState)
             .then(emitData)

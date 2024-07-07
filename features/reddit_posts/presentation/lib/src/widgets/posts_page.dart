@@ -1,5 +1,3 @@
-library presentation;
-
 import 'package:common_presentation/extensions/flutterui_modifiers.dart';
 import 'package:common_presentation/mixins/widget_alert_mixin.dart';
 import 'package:common_presentation/widgets/page_state/page_state_bloc_builder.dart';
@@ -41,7 +39,6 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
     return RefreshIndicator(
       onRefresh: cubit.refresh,
       child: ScrollToEndListener(
-        controller: cubit.scrollController,
         onScrolledToEnd: cubit.loadNextPage,
         child: (controller) => CustomScrollView(
           physics: const AlwaysScrollableScrollPhysics(),

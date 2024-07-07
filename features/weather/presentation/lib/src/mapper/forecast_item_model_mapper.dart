@@ -6,7 +6,7 @@ import '../data/weather_state.dart';
 import 'condition_model_mapper.dart';
 
 class ForecastItemModelMapper extends Mapper<ForecastItemModel, ForecastWeatherState> {
-  var conditionModelMapper = ConditionModelMapper();
+  final _conditionModelMapper = ConditionModelMapper();
 
   @override
   ForecastWeatherState map(ForecastItemModel input) => ForecastWeatherState(
@@ -16,6 +16,6 @@ class ForecastItemModelMapper extends Mapper<ForecastItemModel, ForecastWeatherS
         "${input.chanceOfRain}%",
         "${input.averageHumidity}%",
         "${input.maxWind} km/h",
-        conditionModelMapper.map(input.condition),
+        _conditionModelMapper.map(input.condition),
       );
 }
