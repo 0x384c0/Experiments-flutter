@@ -6,11 +6,10 @@ import 'package:common_presentation/widgets/page_state/bloc_page_state_mixin.dar
 import 'package:common_presentation/widgets/page_state/generic_page_state.dart';
 import 'package:common_presentation/widgets/page_state/page_state.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
+import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
+import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-
-import '../data/post_state.dart';
-import '../navigation/navigator.dart';
 
 typedef PostsPageState = GenericPageState<Iterable<PostItemState>>;
 
@@ -23,9 +22,9 @@ class PostsCubit extends Cubit<PageState<PostsPageState>>
         CubitAlertMixin {
   PostsCubit() : super(PageStateEmptyLoading());
 
-  late PostsInteractor _interactor = Modular.get();
-  late PostsNavigator _navigator = Modular.get();
-  late Mapper<PostsModel, Iterable<PostItemState>> _postModelMapper = Modular.get();
+  late final PostsInteractor _interactor = Modular.get();
+  late final PostsNavigator _navigator = Modular.get();
+  late final Mapper<PostsModel, Iterable<PostItemState>> _postModelMapper = Modular.get();
 
   String? _lastAfter;
 
