@@ -1,9 +1,8 @@
 {
-    "button_ok": "OK",
-    "alert_error_title": "Error",
-    "loading": "Loading",
-
+    "common_ok": "OK",
     "common_error": "Error",
+    "common_loading": "Loading",
+    "common_cancel": "Cancel",
     "common_empty_field": "This field is mandatory.",
     "common_invalid_field": "Invalid data.",
 
@@ -32,6 +31,8 @@
     "forms_dropdown_menu": "Select option",
     "forms_picker": "Search and select option",
     "forms_search_hint": "Search for something",
+    "forms_camera": "Camera",
+    "forms_gallery": "Gallery",
 
     "webview_home_page": "WebView",
     "webview_embedded": "Embedded",

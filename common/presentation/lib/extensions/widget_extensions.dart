@@ -8,15 +8,15 @@ extension WidgetExtensions on Widget {
       if (locale == null) return Future.value(null);
       // set up the button
       Widget okButton = TextButton(
-        child: Text(locale.button_ok),
+        child: Text(locale.common_ok),
         onPressed: () {
-          Navigator.pop(context, locale.button_ok);
+          Navigator.pop(context, locale.common_ok);
         },
       );
 
       // set up the AlertDialog
       AlertDialog alert = AlertDialog(
-        title: Text(locale.alert_error_title),
+        title: Text(locale.common_error),
         content: Text(error.toString()),
         actions: [
           okButton,

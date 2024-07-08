@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'form_inputs/image_form_input.dart';
 import 'form_inputs/picker_form_input.dart';
 
 class MaterialValidationPage extends StatefulWidget {
@@ -19,6 +20,7 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
   final _formKey = GlobalKey<FormState>();
   late final FormsNavigator _navigator = Modular.get();
   final dropdownMenuEntries = List.generate(5, (i) => DropdownMenuEntry(label: "label $i", value: "value $i"));
+  String? _imagePath;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +31,13 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
         child: Form(
           key: _formKey,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              ImageFormInput(
+                imagePath: _imagePath,
+                onPick: (imagePath) => setState(() => _imagePath = imagePath),
+                onRemove: () => setState(() => _imagePath = null),
+              ).padding(all: 16),
               TextFormField(
                 decoration: InputDecoration(labelText: locale.forms_email),
                 validator: (value) {
