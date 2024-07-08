@@ -1,4 +1,4 @@
-name: deploy_app
+name: deploy_web
 
 on:
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
       - name: Build Runner
         run: sh scripts/build_runner.sh
 
-      - name: Deploy web app
+      - name: Deploy web
         uses: bluefireteam/flutter-gh-pages@v7
         with:
           baseHref: /Experiments-flutter/
