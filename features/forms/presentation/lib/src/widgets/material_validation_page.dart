@@ -45,7 +45,6 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
                   if (value?.isEmpty == true) return locale.common_empty_field;
                   return null;
                 },
-                onFileSelected: (path) {},
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: locale.forms_email),

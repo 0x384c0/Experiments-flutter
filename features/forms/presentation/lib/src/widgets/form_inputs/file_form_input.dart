@@ -1,17 +1,19 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class FileFormInput extends StatefulWidget {
   final String label;
-  final ValueChanged<String?> onFileSelected;
+  final ValueChanged<String?>? onFileSelected;
+  final ValueChanged<Uint8List?>? onFileSelectedWeb;
   final FormFieldValidator<String?>? validator;
 
   const FileFormInput({
     super.key,
     required this.label,
-    required this.onFileSelected,
+    this.onFileSelected,
+    this.onFileSelectedWeb,
     this.validator,
   });
 
@@ -54,22 +56,22 @@ class _FileFormInputState extends State<FileFormInput> {
     );
   }
 
-  String? _getFileName(String? path) => path?.split(Platform.pathSeparator).last;
-
   Future<void> _pickFile(BuildContext context) async {
     final result = await FilePicker.platform.pickFiles(type: FileType.custom, allowedExtensions: allowedExtensions);
-    final path = result?.files.single.path;
-
-    if (path != null) {
-      widget.onFileSelected(path);
-      setState(() {
-        _controller.text = _getFileName(path) ?? "";
-      });
+    try {
+      final path = result?.files.single.path;
+      if (path != null) widget.onFileSelected?.call(path);
+    } catch (_) {
+      final bytes = result?.files.single.bytes;
+      if (bytes != null) widget.onFileSelectedWeb?.call(bytes);
     }
+
+    setState(() => _controller.text = result?.files.single.name ?? "");
   }
 
   _clear() => setState(() {
         _controller.clear();
-        widget.onFileSelected(null);
+        widget.onFileSelected?.call(null);
+        widget.onFileSelectedWeb?.call(null);
       });
 }
