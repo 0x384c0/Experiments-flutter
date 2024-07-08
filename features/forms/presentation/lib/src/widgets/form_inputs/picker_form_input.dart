@@ -1,5 +1,5 @@
 import 'package:features_forms_presentation/src/utils/chips_input_editing_controller.dart';
-import 'package:features_forms_presentation/src/widgets/topping_input_chip.dart';
+import 'package:features_forms_presentation/src/widgets/form_inputs/topping_input_chip.dart';
 import 'package:flutter/material.dart';
 
 class PickerFormInput<T> extends StatefulWidget {
