@@ -33,6 +33,7 @@
     "forms_search_hint": "Search for something",
     "forms_camera": "Camera",
     "forms_gallery": "Gallery",
+    "forms_select_file": "Select File",
 
     "webview_home_page": "WebView",
     "webview_embedded": "Embedded",

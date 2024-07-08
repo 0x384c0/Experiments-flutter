@@ -7,13 +7,13 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ImageFormInput extends StatelessWidget {
   final String? imagePath;
-  final Function(String imagePath) onPick;
+  final Function(String imagePath) onImageSelected;
   final VoidCallback onRemove;
 
   ImageFormInput({
     super.key,
     required this.imagePath,
-    required this.onPick,
+    required this.onImageSelected,
     required this.onRemove,
   });
 
@@ -92,5 +92,5 @@ class ImageFormInput extends StatelessWidget {
 
   String? _mapFile(XFile? file) => file?.path;
 
-  _callback(String? path) => path?.isNotEmpty == true ? onPick(path!) : null;
+  _callback(String? path) => path?.isNotEmpty == true ? onImageSelected(path!) : null;
 }

@@ -6,6 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rxdart/rxdart.dart';
 
+import 'form_inputs/file_form_input.dart';
 import 'form_inputs/image_form_input.dart';
 import 'form_inputs/picker_form_input.dart';
 
@@ -35,9 +36,17 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
             children: [
               ImageFormInput(
                 imagePath: _imagePath,
-                onPick: (imagePath) => setState(() => _imagePath = imagePath),
+                onImageSelected: (path) => setState(() => _imagePath = path),
                 onRemove: () => setState(() => _imagePath = null),
               ).padding(all: 16),
+              FileFormInput(
+                label: locale.forms_select_file,
+                validator: (value) {
+                  if (value?.isEmpty == true) return locale.common_empty_field;
+                  return null;
+                },
+                onFileSelected: (path) {},
+              ),
               TextFormField(
                 decoration: InputDecoration(labelText: locale.forms_email),
                 validator: (value) {
