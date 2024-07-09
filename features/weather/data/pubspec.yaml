@@ -12,7 +12,6 @@ dependencies:
     sdk: flutter
   features_weather_domain:
     path: "../domain"
-  freezed_annotation: ^2.4.1
   json_annotation: ^4.9.0
   retrofit: ^4.1.0
   dio: ^5.4.3+1
@@ -26,7 +25,6 @@ dev_dependencies:
 
   flutter_lints: ^4.0.0
   build_runner: ^2.4.11
-  freezed: ^2.5.2
   json_serializable: ^6.8.0
   retrofit_generator: ^8.1.0
 
