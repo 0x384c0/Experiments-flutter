@@ -43,6 +43,7 @@ class PostCommentsCubit extends Cubit<PageState<PostCommentsPageState>>
   GenericPageState<Iterable<PostItemState>> _newPaginationState(Iterable<PostItemState>? data) =>
       GenericPageState(data: data ?? []);
 
+//region CubitPaginationMixin
   @override
   Future<Iterable<PostItemState>> loadPage(int pageNumber) => _interactor
       .getPost(
@@ -52,6 +53,11 @@ class PostCommentsCubit extends Cubit<PageState<PostCommentsPageState>>
       .then(_saveLastAfter)
       .then(_postModelMapper.map)
       .then((value) => value.postItemState?.comments ?? []);
+
+  @override
+  Iterable<PostItemState>? getPagesIterable() => stateData?.data;
+
+  // endregion
 
   PostModel _saveLastAfter(PostModel model) {
     _lastAfter = model.after;

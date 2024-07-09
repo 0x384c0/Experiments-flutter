@@ -51,6 +51,9 @@ class PostsCubit extends Cubit<PageState<PostsPageState>>
       .then(_saveLastAfter)
       .then(_postModelMapper.map);
 
+  @override
+  Iterable<PostItemState>? getPagesIterable() => stateData?.data;
+
   // endregion
 
   GenericPageState<Iterable<PostItemState>> _newPaginationState(Iterable<PostItemState> data) =>
