@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:features_reddit_posts_data/src/data/reddit_json_response_dto.dart';
 import '../data/reddit_post_listing_dto.dart';
 import '../data/reddit_posts_response_dto.dart';
 import '../data/reddit_posts_sort_dto.dart';
@@ -21,5 +22,12 @@ abstract class RedditApi {
   @GET("{permalink}")
   Future<List<RedditPostListingDTO>> getPost({
     @Path("permalink") required String permalink,
+  });
+
+  @GET("/api/morechildren")
+  Future<RedditJsonResponseDTO> getMoreChildren({
+    @Path("api_type") required String apiType,
+    @Path("link_id") required String linkId,
+    @Path("children") required String children,
   });
 }
