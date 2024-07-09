@@ -1,23 +1,19 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'reddit_posts_response_child_data_dto.g.dart';
 
-@JsonSerializable()
-class RedditPostsResponseChildDataDTO {
-  RedditPostsResponseChildDataDTO();
+part 'reddit_posts_response_child_data_dto.freezed.dart';
 
-  @JsonKey(name: "permalink")
-  String? permalink;
-  @JsonKey(name: "author")
-  String? author;
-  @JsonKey(name: "subreddit")
-  String? subreddit;
-  @JsonKey(name: "thumbnail")
-  String? thumbnail;
-  @JsonKey(name: "title")
-  String? title;
+@freezed
+class RedditPostsResponseChildDataDTO with _$RedditPostsResponseChildDataDTO {
+  const factory RedditPostsResponseChildDataDTO({
+    @JsonKey(name: "permalink") String? permalink,
+    @JsonKey(name: "author") String? author,
+    @JsonKey(name: "subreddit") String? subreddit,
+    @JsonKey(name: "thumbnail") String? thumbnail,
+    @JsonKey(name: "title") String? title,
+  }) = _RedditPostsResponseChildDataDTO;
 
-  factory RedditPostsResponseChildDataDTO.fromJson(Map<String, dynamic> json) => _$RedditPostsResponseChildDataDTOFromJson(json);
-
-  Map<String, dynamic> toJson() => _$RedditPostsResponseChildDataDTOToJson(this);
+  factory RedditPostsResponseChildDataDTO.fromJson(Map<String, dynamic> json) =>
+      _$RedditPostsResponseChildDataDTOFromJson(json);
 }
