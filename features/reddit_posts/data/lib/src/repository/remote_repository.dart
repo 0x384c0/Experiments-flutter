@@ -28,17 +28,16 @@ class RemoteRepositoryImpl implements PostsRemoteRepository {
   @override
   Future<PostsModel> getPosts({
     String? after,
-  }) {
-    return _redditApi
-        .getPosts(
-          subreddit: _defaultSubreddit,
-          sort: RedditPostsSortDTO.top,
-          limit: _pageLimit,
-          after: after,
-        )
-        .then(_redditPostsResponseDTOMapper.map)
-        .mapError(_errorDtoMapper.map);
-  }
+  }) =>
+      _redditApi
+          .getPosts(
+            subreddit: _defaultSubreddit,
+            sort: RedditPostsSortDTO.top,
+            limit: _pageLimit,
+            after: after,
+          )
+          .then(_redditPostsResponseDTOMapper.map)
+          .mapError(_errorDtoMapper.map);
 
   @override
   Future<PostModel> getPost({

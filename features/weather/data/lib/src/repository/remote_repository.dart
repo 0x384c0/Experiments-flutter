@@ -9,14 +9,11 @@ class RemoteRepositoryImpl implements WeatherRemoteRepository {
   final WeatherApi _weatherApi;
 
   @override
-  Future<CurrentModel> getCurrent() {
-    return _weatherApi.getCurrent(_key, "London", false);
-  }
+  Future<CurrentModel> getCurrent() => _weatherApi.getCurrent(_key, "London", false);
 
   @override
-  Future<ForecastModel> getForecast(LocationModel location) {
-    return _weatherApi.getForecast(_key, location.toString(), 10, false, false);
-  }
+  Future<ForecastModel> getForecast(LocationModel location) =>
+      _weatherApi.getForecast(_key, location.toString(), 10, false, false);
 
   getApi() => _weatherApi;
 }
