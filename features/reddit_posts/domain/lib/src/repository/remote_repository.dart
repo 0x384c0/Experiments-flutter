@@ -5,6 +5,11 @@ abstract class PostsRemoteRepository {
 
   Future<PostModel> getPost({
     required String permalink,
-    String? commentsAfter,
+  });
+
+  Future<PostModel> getMoreChildren({
+    required String apiType,
+    required String linkId,
+    required Iterable<String> children,
   });
 }

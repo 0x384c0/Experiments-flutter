@@ -8,6 +8,5 @@ abstract class PostsInteractor {
   /// return single [PostsModel] with comments from API
   Future<PostModel> getPost({
     required String? permalink,
-    String? commentsAfter,
   });
 }

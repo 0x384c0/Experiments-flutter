@@ -11,9 +11,8 @@ class PostsInteractorImpl implements PostsInteractor {
   @override
   Future<PostModel> getPost({
     required String? permalink,
-    String? commentsAfter,
   }) =>
       permalink != null
-          ? remoteRepository.getPost(permalink: permalink, commentsAfter: commentsAfter)
+          ? remoteRepository.getPost(permalink: permalink)
           : Future.error(const FormatException("permalink is null"));
 }

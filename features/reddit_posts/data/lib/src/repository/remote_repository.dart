@@ -1,6 +1,7 @@
 import 'package:common_domain/extensions/future.dart';
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:features_reddit_posts_data/src/api/reddit_api.dart';
+import 'package:features_reddit_posts_data/src/data/reddit_json_response_dto.dart';
 import 'package:features_reddit_posts_data/src/data/reddit_post_listing_dto.dart';
 import 'package:features_reddit_posts_data/src/data/reddit_posts_response_dto.dart';
 import 'package:features_reddit_posts_data/src/data/reddit_posts_sort_dto.dart';
@@ -11,37 +12,57 @@ class RemoteRepositoryImpl implements PostsRemoteRepository {
   static const int _pageLimit = 25;
 
   RemoteRepositoryImpl(
-      this.redditApi, this.redditPostsResponseDTOMapper, this.redditPostListingDTOMapper, this.errorDtoMapper);
+    this._redditApi,
+    this._redditPostsResponseDTOMapper,
+    this._redditPostListingDTOMapper,
+    this._redditJsonResponseDTOMapper,
+    this._errorDtoMapper,
+  );
 
-  RedditApi redditApi;
-  Mapper<RedditPostsResponseDTO, PostsModel> redditPostsResponseDTOMapper;
-  Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel> redditPostListingDTOMapper;
-  Mapper<dynamic, ErrorModel> errorDtoMapper;
+  final RedditApi _redditApi;
+  final Mapper<RedditPostsResponseDTO, PostsModel> _redditPostsResponseDTOMapper;
+  final Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel> _redditPostListingDTOMapper;
+  final Mapper<RedditJsonResponseDTO, PostModel> _redditJsonResponseDTOMapper;
+  final Mapper<dynamic, ErrorModel> _errorDtoMapper;
 
   @override
   Future<PostsModel> getPosts({
     String? after,
   }) {
-    return redditApi
+    return _redditApi
         .getPosts(
           subreddit: _defaultSubreddit,
           sort: RedditPostsSortDTO.top,
           limit: _pageLimit,
           after: after,
         )
-        .then(redditPostsResponseDTOMapper.map)
-        .mapError(errorDtoMapper.map);
+        .then(_redditPostsResponseDTOMapper.map)
+        .mapError(_errorDtoMapper.map);
   }
 
   @override
   Future<PostModel> getPost({
     required String permalink,
-    String? commentsAfter,
   }) =>
-      redditApi
+      _redditApi
           .getPost(
             permalink: permalink,
           )
-          .then((dto) => redditPostListingDTOMapper.map({permalink: dto}))
-          .mapError(errorDtoMapper.map);
+          .then((dto) => _redditPostListingDTOMapper.map({permalink: dto}))
+          .mapError(_errorDtoMapper.map);
+
+  @override
+  Future<PostModel> getMoreChildren({
+    required String apiType,
+    required String linkId,
+    required Iterable<String> children,
+  }) =>
+      _redditApi
+          .getMoreChildren(
+            apiType: apiType,
+            linkId: linkId,
+            children: children.join(","),
+          )
+          .then(_redditJsonResponseDTOMapper.map)
+          .mapError(_errorDtoMapper.map);
 }

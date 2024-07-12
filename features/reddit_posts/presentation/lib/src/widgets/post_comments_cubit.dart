@@ -25,15 +25,11 @@ class PostCommentsCubit extends Cubit<PageState<PostCommentsPageState>>
   late final PostsInteractor _interactor = Modular.get();
   late final Mapper<PostModel, PostDetailsState> _postModelMapper = Modular.get();
 
-  String? _lastAfter;
-
   @override
   onRefresh() async {
-    _lastAfter = null;
     onBeforeFirstPageLoad();
     await _interactor
         .getPost(permalink: _permalink)
-        .then(_saveLastAfter)
         .then(_postModelMapper.map)
         .then((value) => value.postItemState?.comments)
         .then(_newPaginationState)
@@ -45,22 +41,13 @@ class PostCommentsCubit extends Cubit<PageState<PostCommentsPageState>>
 
 //region CubitPaginationMixin
   @override
-  Future<Iterable<PostItemState>> loadPage(int pageNumber) => _interactor
-      .getPost(
-        permalink: _permalink,
-        commentsAfter: _lastAfter,
-      )
-      .then(_saveLastAfter)
-      .then(_postModelMapper.map)
-      .then((value) => value.postItemState?.comments ?? []);
+  Future<Iterable<PostItemState>> loadPage(int pageNumber) async {
+    print("loadPage pageNumber $pageNumber");
+    return [];
+  }
 
   @override
   Iterable<PostItemState>? getPagesIterable() => stateData?.data;
 
-  // endregion
-
-  PostModel _saveLastAfter(PostModel model) {
-    _lastAfter = model.after;
-    return model;
-  }
+// endregion
 }
