@@ -1,4 +1,5 @@
-import '../../features_reddit_posts_domain.dart';
+import 'package:features_reddit_posts_domain/src/data/more_model.dart';
+import 'package:features_reddit_posts_domain/src/data/post_model.dart';
 
 /// requests data from API
 abstract class PostsInteractor {
@@ -8,5 +9,10 @@ abstract class PostsInteractor {
   /// return single [PostsModel] with comments from API
   Future<PostModel> getPost({
     required String? permalink,
+  });
+
+  Future<PostModel> getMoreChildren({
+    required int page,
+    required MoreModel moreModel,
   });
 }

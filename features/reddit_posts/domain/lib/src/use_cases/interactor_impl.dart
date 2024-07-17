@@ -1,4 +1,7 @@
-import '../../features_reddit_posts_domain.dart';
+import 'package:features_reddit_posts_domain/src/data/more_model.dart';
+import 'package:features_reddit_posts_domain/src/data/post_model.dart';
+import 'package:features_reddit_posts_domain/src/repository/remote_repository.dart';
+import 'package:features_reddit_posts_domain/src/use_cases/interactor.dart';
 
 class PostsInteractorImpl implements PostsInteractor {
   PostsInteractorImpl(this.remoteRepository);
@@ -15,4 +18,11 @@ class PostsInteractorImpl implements PostsInteractor {
       permalink != null
           ? remoteRepository.getPost(permalink: permalink)
           : Future.error(const FormatException("permalink is null"));
+
+  @override
+  Future<PostModel> getMoreChildren({
+    required int page,
+    required MoreModel moreModel,
+  }) =>
+      throw UnimplementedError();
 }
