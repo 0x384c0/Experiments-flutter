@@ -9,6 +9,7 @@ part 'reddit_post_listing_child_dto.freezed.dart';
 @freezed
 class RedditPostListingChildDTO with _$RedditPostListingChildDTO {
   const factory RedditPostListingChildDTO({
+    @JsonKey(name: "kind") String? kind,
     @JsonKey(name: "data") RedditPostListingChildDataDTO? data,
   }) = _RedditPostListingChildDTO;
 

@@ -12,6 +12,8 @@ class RedditPostListingChildDataDTO with _$RedditPostListingChildDataDTO {
     @JsonKey(name: "body") String? body,
     @JsonKey(name: "thumbnail") String? thumbnail,
     @JsonKey(name: "subreddit") String? subreddit,
+    @JsonKey(name: "id") String? id,
+    @JsonKey(name: "children") List<String>? children,
   }) = _RedditPostListingChildDataDTO;
 
   factory RedditPostListingChildDataDTO.fromJson(Map<String, dynamic> json) =>

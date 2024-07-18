@@ -1,3 +1,5 @@
+import 'more_model.dart';
+
 class PostModel {
   final String? permalink;
   final String? author;
@@ -6,6 +8,7 @@ class PostModel {
   final String? title;
   final Iterable<PostModel>? comments;
   final String? after;
+  final MoreModel? moreModel;
 
   PostModel(
     this.permalink,
@@ -15,6 +18,7 @@ class PostModel {
     this.title,
     this.comments,
     this.after,
+    this.moreModel,
   );
 }
 

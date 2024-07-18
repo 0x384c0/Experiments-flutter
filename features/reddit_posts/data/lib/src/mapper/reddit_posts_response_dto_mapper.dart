@@ -16,6 +16,7 @@ class RedditPostsResponseDTOMapper extends Mapper<RedditPostsResponseDTO, PostsM
             e.data?.title,
             null,
             null,
+            null,
           );
         }) ??
         [];

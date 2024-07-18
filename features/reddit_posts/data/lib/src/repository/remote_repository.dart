@@ -44,9 +44,7 @@ class RemoteRepositoryImpl implements PostsRemoteRepository {
     required String permalink,
   }) =>
       _redditApi
-          .getPost(
-            permalink: permalink,
-          )
+          .getPost(permalink: permalink)
           .then((dto) => _redditPostListingDTOMapper.map({permalink: dto}))
           .mapError(_errorDtoMapper.map);
 
