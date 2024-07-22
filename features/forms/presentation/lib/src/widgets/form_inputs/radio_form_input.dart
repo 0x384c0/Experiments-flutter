@@ -1,5 +1,5 @@
-import 'package:common_presentation/extensions/flutterui_modifiers.dart';
 import 'package:flutter/material.dart';
+import 'package:widgets_modifiers/layout/single_child_layout_widgets_modifiers.dart';
 
 class RadioFormInput<T> extends StatelessWidget {
   final String text;
@@ -39,7 +39,7 @@ class RadioFormInput<T> extends StatelessWidget {
             onChanged(value);
           },
           child: Text(text, overflow: TextOverflow.fade),
-        ).flex(1),
+        ).flexible(flex: 1),
       ],
     );
   }

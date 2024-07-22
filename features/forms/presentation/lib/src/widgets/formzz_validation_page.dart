@@ -1,4 +1,4 @@
-import 'package:common_presentation/extensions/flutterui_modifiers.dart';
+import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
 import 'package:features_forms_presentation/src/data/formzz_validation_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,4 +1,4 @@
-import 'package:common_presentation/extensions/flutterui_modifiers.dart';
+import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
 import 'package:common_presentation/widgets/page_state/page_state_bloc_builder.dart';
 import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
 import 'package:features_reddit_posts_presentation/src/widgets/post_comments_cubit.dart';

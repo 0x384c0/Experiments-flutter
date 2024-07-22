@@ -842,6 +842,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
+  widgets_modifiers:
+    dependency: transitive
+    description:
+      name: widgets_modifiers
+      sha256: "640a3ab57717fefee798772f87a462f9714c36838853ae8f86c0e9d9e2a1310e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.42"
   win32:
     dependency: transitive
     description:

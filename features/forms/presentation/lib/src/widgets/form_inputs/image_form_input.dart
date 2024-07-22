@@ -1,9 +1,11 @@
 import 'dart:io';
 
-import 'package:common_presentation/extensions/flutterui_modifiers.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:widgets_modifiers/interaction/touch_interactions_widgets_modifiers.dart';
+import 'package:widgets_modifiers/painting/painting_effect_widgets_modifiers.dart';
+import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
 
 class ImageFormInput extends StatelessWidget {
   final String? imagePath;
@@ -40,16 +42,16 @@ class ImageFormInput extends StatelessWidget {
                     fit: BoxFit.fitHeight,
                     width: size,
                     height: size,
-                  ).backgroundColor(Theme.of(context).colorScheme.surface),
+                  ).ink(color: Theme.of(context).colorScheme.surface),
                   Icon(Icons.clear, color: Theme.of(context).colorScheme.surface, size: 32.0)
                       .padding(all: 5)
-                      .onTap(onRemove)
+                      .gesture(onTap: onRemove)
                 ],
               ),
           ],
         ),
       ),
-    ).onTap(() => _showDialog(context));
+    ).gesture(onTap: () => _showDialog(context));
   }
 
   Future _showDialog(BuildContext context) async {

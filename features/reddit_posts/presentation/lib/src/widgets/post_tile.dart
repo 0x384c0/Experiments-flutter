@@ -1,7 +1,8 @@
 import 'package:common_presentation/widgets/card_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:common_presentation/extensions/flutterui_modifiers.dart';
+import 'package:widgets_modifiers/layout/single_child_layout_widgets_modifiers.dart';
+import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
 
 import '../data/post_state.dart';
 
@@ -52,7 +53,7 @@ class PostTile extends CardTile {
               ],
             ),
           ],
-        ).flex(1),
+        ).flexible(flex: 1),
       ],
     ).padding(all: url?.isEmpty ?? true ? 8 : 0);
   }

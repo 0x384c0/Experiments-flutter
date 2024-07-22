@@ -5,7 +5,8 @@ import 'package:features_reddit_posts_presentation/src/widgets/post_comments_cub
 import 'package:features_reddit_posts_presentation/src/widgets/post_comments_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:common_presentation/extensions/flutterui_modifiers.dart';
+import 'package:widgets_modifiers/layout/single_child_layout_widgets_modifiers.dart';
+import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
 
 import 'post_details_cubit.dart';
 import 'post_tile.dart';
@@ -44,7 +45,7 @@ class _PostDetailsView extends StatelessWidget {
     return Column(
       children: [
         PostTile(cubit.stateData?.postItemState ?? state, () {}),
-        const PostCommentsView().flex(1),
+        const PostCommentsView().flexible(flex: 1),
       ],
     );
   }

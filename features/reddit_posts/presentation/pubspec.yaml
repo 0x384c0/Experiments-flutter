@@ -21,6 +21,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_modular: ^6.3.4
   transparent_image: 2.0.1
+  widgets_modifiers: ^0.3.42
 
 dev_dependencies:
   flutter_test:

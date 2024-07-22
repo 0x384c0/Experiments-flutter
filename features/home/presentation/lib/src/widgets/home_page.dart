@@ -41,10 +41,11 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(title: _getPageTitle(context, _selectedScreen)),
       body: _body(context),
       drawer: Drawer(
-          child: DrawerPage(
-        selectedScreen: _selectedScreen,
-        onDestinationSelected: (e) => _onDestinationSelected(e.id),
-      )),
+        child: DrawerPage(
+          selectedScreen: _selectedScreen,
+          onDestinationSelected: (e) => _onDestinationSelected(e.id),
+        ),
+      ),
       bottomNavigationBar: NavigationBar(
         destinations: destinations,
         selectedIndex: _selectedScreen.id.clamp(0, destinations.length - 1),
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
         SelectedPage.webView: Text(AppLocalizations.of(context)!.webview_home_page),
       }[index]!;
 
-  late final List<Widget> _pages = [
+  late final _pages = [
     formsNavigator.homePage(),
     redditPostsNavigator.homePage(),
     weatherNavigator.homePage(),
