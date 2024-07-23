@@ -30,6 +30,7 @@ class PostCommentsCubit extends Cubit<PageState<PostCommentsPageState>>
     onBeforeFirstPageLoad();
     await _interactor
         .getPost(permalink: _permalink)
+        .then(_storeMoreModel)
         .then(_postModelMapper.map)
         .then((value) => value.postItemState?.comments)
         .then(_newPaginationState)
@@ -38,6 +39,13 @@ class PostCommentsCubit extends Cubit<PageState<PostCommentsPageState>>
 
   GenericPageState<Iterable<PostItemState>> _newPaginationState(Iterable<PostItemState>? data) =>
       GenericPageState(data: data ?? []);
+
+  MoreModel? _moreModel;
+
+  PostModel _storeMoreModel(PostModel postModel) {
+    _moreModel = postModel.moreModel;
+    return postModel;
+  }
 
 //region CubitPaginationMixin
   @override
