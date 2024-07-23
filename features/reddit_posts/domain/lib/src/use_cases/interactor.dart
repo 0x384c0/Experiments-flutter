@@ -11,8 +11,8 @@ abstract class PostsInteractor {
     required String? permalink,
   });
 
-  Future<PostModel> getMoreChildren({
+  Future<Iterable<PostModel>> getMoreChildren({
     required int page,
-    required MoreModel moreModel,
+    required MoreModel? moreModel,
   });
 }

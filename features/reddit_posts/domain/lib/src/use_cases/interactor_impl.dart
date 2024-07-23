@@ -20,9 +20,9 @@ class PostsInteractorImpl implements PostsInteractor {
           : Future.error(const FormatException("permalink is null"));
 
   @override
-  Future<PostModel> getMoreChildren({
+  Future<Iterable<PostModel>> getMoreChildren({
     required int page,
-    required MoreModel moreModel,
+    required MoreModel? moreModel,
   }) =>
       throw UnimplementedError();
 }

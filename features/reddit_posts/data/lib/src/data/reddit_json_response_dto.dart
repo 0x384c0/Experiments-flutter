@@ -1,3 +1,4 @@
+import 'package:features_reddit_posts_data/src/data/reddit_post_listing_child_dto.dart';
 import 'package:features_reddit_posts_data/src/data/reddit_post_listing_data_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -26,7 +27,7 @@ class RedditJsonDTO with _$RedditJsonDTO {
 @freezed
 class RedditJsonDataDTO with _$RedditJsonDataDTO {
   const factory RedditJsonDataDTO({
-    @JsonKey(name: "things") List<RedditPostListingDataDTO>? things,
+    @JsonKey(name: "things") List<RedditPostListingChildDTO>? things,
   }) = _RedditJsonDataDTO;
 
   factory RedditJsonDataDTO.fromJson(Map<String, dynamic> json) => _$RedditJsonDataDTOFromJson(json);

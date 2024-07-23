@@ -7,7 +7,7 @@ abstract class PostsRemoteRepository {
     required String permalink,
   });
 
-  Future<PostModel> getMoreChildren({
+  Future<Iterable<PostModel>> getMoreChildren({
     required String apiType,
     required String linkId,
     required Iterable<String> children,

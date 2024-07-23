@@ -22,7 +22,7 @@ class RemoteRepositoryImpl implements PostsRemoteRepository {
   final RedditApi _redditApi;
   final Mapper<RedditPostsResponseDTO, PostsModel> _redditPostsResponseDTOMapper;
   final Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel> _redditPostListingDTOMapper;
-  final Mapper<RedditJsonResponseDTO, PostModel> _redditJsonResponseDTOMapper;
+  final Mapper<RedditJsonResponseDTO, Iterable<PostModel>> _redditJsonResponseDTOMapper;
   final Mapper<dynamic, ErrorModel> _errorDtoMapper;
 
   @override
@@ -49,7 +49,7 @@ class RemoteRepositoryImpl implements PostsRemoteRepository {
           .mapError(_errorDtoMapper.map);
 
   @override
-  Future<PostModel> getMoreChildren({
+  Future<Iterable<PostModel>> getMoreChildren({
     required String apiType,
     required String linkId,
     required Iterable<String> children,

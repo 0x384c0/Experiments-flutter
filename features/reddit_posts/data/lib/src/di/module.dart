@@ -19,7 +19,7 @@ class PostsDataModule extends Module {
     i.add<Mapper<dynamic, ErrorModel>>(ErrorDtoMapper.new);
     i.add<Mapper<RedditPostsResponseDTO, PostsModel>>(RedditPostsResponseDTOMapper.new);
     i.add<Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel>>(RedditPostListingDTOMapper.new);
-    i.add<Mapper<RedditJsonResponseDTO, PostModel>>(RedditJsonResponseDTOMapper.new);
+    i.add<Mapper<RedditJsonResponseDTO, Iterable<PostModel>>>(RedditJsonResponseDTOMapper.new);
     i.add(_provideDio);
     i.add(RedditApi.new);
   }
