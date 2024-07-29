@@ -1,9 +1,9 @@
 class MoreModel {
-  final String id;
+  final String parentId;
   final List<String> children;
 
   MoreModel(
-    this.id,
+    this.parentId,
     this.children,
   );
 }

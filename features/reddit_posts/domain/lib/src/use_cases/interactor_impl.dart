@@ -24,5 +24,10 @@ class PostsInteractorImpl implements PostsInteractor {
     required int page,
     required MoreModel? moreModel,
   }) =>
-      throw UnimplementedError();
+      moreModel != null && moreModel.children.isNotEmpty
+          ? remoteRepository.getMoreChildren(
+              linkId: moreModel.parentId,
+              children: moreModel.children,
+            )
+          : Future.value([]);
 }

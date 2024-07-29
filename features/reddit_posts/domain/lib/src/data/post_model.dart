@@ -10,7 +10,7 @@ class PostModel {
   final String? after;
   final MoreModel? moreModel;
 
-  PostModel(
+  PostModel({
     this.permalink,
     this.author,
     this.category,
@@ -19,7 +19,7 @@ class PostModel {
     this.comments,
     this.after,
     this.moreModel,
-  );
+  });
 }
 
 class PostsModel {

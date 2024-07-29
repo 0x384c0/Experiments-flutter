@@ -9,14 +9,11 @@ class RedditPostsResponseDTOMapper extends Mapper<RedditPostsResponseDTO, PostsM
   map(RedditPostsResponseDTO input) {
     final posts = input.data?.children?.map((e) {
           return PostModel(
-            e.data?.permalink,
-            e.data?.author,
-            e.data?.subreddit,
-            e.data?.thumbnail?.parseUri(),
-            e.data?.title,
-            null,
-            null,
-            null,
+            permalink: e.data?.permalink,
+            author: e.data?.author,
+            category: e.data?.subreddit,
+            icon: e.data?.thumbnail?.parseUri(),
+            title: e.data?.title,
           );
         }) ??
         [];

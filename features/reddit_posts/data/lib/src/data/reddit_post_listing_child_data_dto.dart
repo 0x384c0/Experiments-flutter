@@ -13,6 +13,7 @@ class RedditPostListingChildDataDTO with _$RedditPostListingChildDataDTO {
     @JsonKey(name: "thumbnail") String? thumbnail,
     @JsonKey(name: "subreddit") String? subreddit,
     @JsonKey(name: "id") String? id,
+    @JsonKey(name: "parent_id") String? parentId,
     @JsonKey(name: "children") List<String>? children,
   }) = _RedditPostListingChildDataDTO;
 

@@ -26,8 +26,8 @@ abstract class RedditApi {
 
   @GET("/api/morechildren")
   Future<RedditJsonResponseDTO> getMoreChildren({
-    @Path("api_type") required String apiType,
-    @Path("link_id") required String linkId,
-    @Path("children") required String children,
+    @Query("api_type") required String apiType,
+    @Query("link_id") required String linkId,
+    @Query("children") required String children,
   });
 }

@@ -6,14 +6,9 @@ class RedditJsonResponseDTOMapper extends Mapper<RedditJsonResponseDTO, Iterable
   @override
   Iterable<PostModel> map(RedditJsonResponseDTO input) =>
       input.json?.data?.things?.map((e) => PostModel(
-            null,
-            e.data?.author,
-            e.data?.subreddit,
-            null,
-            e.data?.title,
-            null,
-            null,
-            null,
+            author: e.data?.author,
+            category: e.data?.subreddit,
+            title: e.data?.body,
           )) ??
       [];
 }

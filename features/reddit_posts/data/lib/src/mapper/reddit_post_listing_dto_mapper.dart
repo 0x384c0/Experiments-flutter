@@ -8,29 +8,24 @@ import '../data/reddit_post_listing_dto.dart';
 class RedditPostListingDTOMapper extends Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel> {
   @override
   map(input) {
-    //TODO: get more model
     var permalink = input.keys.first;
     var dto = input.values.first;
     var post = dto.elementAt(0).data?.children?[0].data;
     var comments = dto.elementAt(1).data?.children?.where(_isComment).map((e) => PostModel(
-          null,
-          e.data?.author,
-          e.data?.subreddit,
-          e.data?.thumbnail?.parseUri(),
-          e.data?.body,
-          null,
-          null,
-          null,
+          author: e.data?.author,
+          category: e.data?.subreddit,
+          icon: e.data?.thumbnail?.parseUri(),
+          title: e.data?.body,
         ));
     return PostModel(
-      permalink,
-      post?.author,
-      post?.subreddit,
-      post?.thumbnail?.parseUri(),
-      post?.title,
-      comments,
-      dto.elementAt(0).data?.after,
-      _dataToMoreModel(dto.elementAt(1).data?.children?.firstWhere(_isMore)),
+      permalink: permalink,
+      author: post?.author,
+      category: post?.subreddit,
+      icon: post?.thumbnail?.parseUri(),
+      title: post?.title,
+      comments: comments,
+      after: dto.elementAt(0).data?.after,
+      moreModel: _dataToMoreModel(dto.elementAt(1).data?.children?.firstWhere(_isMore)),
     );
   }
 
@@ -40,7 +35,7 @@ class RedditPostListingDTOMapper extends Mapper<Map<String, Iterable<RedditPostL
 
   _dataToMoreModel(RedditPostListingChildDTO? child) => child?.data != null
       ? MoreModel(
-          child!.data!.id!,
+          child!.data!.parentId!,
           child.data!.children!,
         )
       : null;

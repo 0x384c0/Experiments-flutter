@@ -50,13 +50,12 @@ class RemoteRepositoryImpl implements PostsRemoteRepository {
 
   @override
   Future<Iterable<PostModel>> getMoreChildren({
-    required String apiType,
     required String linkId,
     required Iterable<String> children,
   }) =>
       _redditApi
           .getMoreChildren(
-            apiType: apiType,
+            apiType: "json",
             linkId: linkId,
             children: children.join(","),
           )

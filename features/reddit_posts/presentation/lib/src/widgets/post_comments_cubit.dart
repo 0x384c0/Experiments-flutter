@@ -23,7 +23,8 @@ class PostCommentsCubit extends Cubit<PageState<PostCommentsPageState>>
   final String? _permalink;
 
   late final PostsInteractor _interactor = Modular.get();
-  late final Mapper<PostModel, PostDetailsState> _postModelMapper = Modular.get();
+  late final Mapper<PostModel, PostDetailsState> _postModelToPostDetailsStateMapper = Modular.get();
+  late final Mapper<PostModel, PostItemState> _postModelToPostItemStateMapper = Modular.get();
 
   @override
   onRefresh() async {
@@ -31,7 +32,7 @@ class PostCommentsCubit extends Cubit<PageState<PostCommentsPageState>>
     await _interactor
         .getPost(permalink: _permalink)
         .then(_storeMoreModel)
-        .then(_postModelMapper.map)
+        .then(_postModelToPostDetailsStateMapper.map)
         .then((value) => value.postItemState?.comments)
         .then(_newPaginationState)
         .then(emitData);
@@ -49,11 +50,9 @@ class PostCommentsCubit extends Cubit<PageState<PostCommentsPageState>>
 
 //region CubitPaginationMixin
   @override
-  Future<Iterable<PostItemState>> loadPage(int pageNumber) async {
-    // _interactor.getMoreChildren(page: pageNumber, moreModel: _moreModel).then(_postModelMapper.mapIterable);
-    print("loadPage pageNumber $pageNumber");
-    return [];
-  }
+  Future<Iterable<PostItemState>> loadPage(int pageNumber) => _interactor
+      .getMoreChildren(page: pageNumber, moreModel: _moreModel)
+      .then(_postModelToPostItemStateMapper.mapIterable);
 
   @override
   Iterable<PostItemState>? getPagesIterable() => stateData?.data;
