@@ -103,6 +103,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.3+1"
+  features_experiments_presentation:
+    dependency: "direct main"
+    description:
+      path: "features/experiments/presentation"
+      relative: true
+    source: path
+    version: "0.0.1"
   features_forms_presentation:
     dependency: "direct main"
     description:
