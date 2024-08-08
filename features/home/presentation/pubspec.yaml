@@ -24,6 +24,8 @@ dependencies:
     path: "../../../features/forms/presentation"
   features_webview_presentation:
     path: "../../../features/webview/presentation"
+  features_experiments_presentation:
+    path: "../../../features/experiments/presentation"
   widgets_modifiers: ^0.3.42
 
 dev_dependencies:

@@ -1,3 +1,4 @@
+import 'package:features_experiments_presentation/features_experiments_presentation.dart';
 import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_home_presentation/src/widgets/drawer_page.dart';
 import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
@@ -19,6 +20,7 @@ class _HomePageState extends State<HomePage> {
   late WeatherNavigator weatherNavigator = Modular.get();
   late FormsNavigator formsNavigator = Modular.get();
   late WebViewNavigator webViewNavigator = Modular.get();
+  late ExperimentsNavigator experimentsNavigator = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +66,7 @@ class _HomePageState extends State<HomePage> {
         SelectedPage.weather: Text(AppLocalizations.of(context)!.weather_home_page),
         SelectedPage.forms: Text(AppLocalizations.of(context)!.forms_home_page),
         SelectedPage.webView: Text(AppLocalizations.of(context)!.webview_home_page),
+        SelectedPage.experiments: Text(AppLocalizations.of(context)!.experiments_home_page),
       }[index]!;
 
   late final _pages = [
@@ -71,6 +74,7 @@ class _HomePageState extends State<HomePage> {
     redditPostsNavigator.homePage(),
     weatherNavigator.homePage(),
     webViewNavigator.homePage(),
+    experimentsNavigator.homePage(),
   ];
 
   Widget _body(BuildContext context) {
@@ -96,7 +100,8 @@ enum SelectedPage {
   forms(0),
   posts(1),
   weather(2),
-  webView(3);
+  webView(3),
+  experiments(4);
 
   const SelectedPage(this.id);
 

@@ -37,5 +37,7 @@
 
     "webview_home_page": "WebView",
     "webview_embedded": "Embedded",
-    "webview_fullscreen": "Fullscreen"
+    "webview_fullscreen": "Fullscreen",
+
+    "experiments_home_page": "Experiments"
 }

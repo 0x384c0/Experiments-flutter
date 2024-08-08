@@ -29,6 +29,10 @@ class DrawerPage extends StatelessWidget {
             tileColor:
                 selectedScreen == SelectedPage.webView ? Theme.of(context).colorScheme.surfaceContainerHighest : null,
           ).opacity(opacity: kIsWeb ? 0.5 : 1),
+          ListTile(
+            title: Text(AppLocalizations.of(context)!.experiments_home_page),
+            onTap: () => _onDestinationSelected(context, SelectedPage.experiments),
+          ),
         ],
       );
 
