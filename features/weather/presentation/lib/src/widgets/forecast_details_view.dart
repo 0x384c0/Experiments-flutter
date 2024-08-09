@@ -1,8 +1,9 @@
+import 'package:common_presentation/extensions/build_context.dart';
 import 'package:common_presentation/widgets/page_state/page_state_bloc_builder.dart';
+import 'package:features_weather_presentation/l10n/app_localizations.g.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'forecast_details_cubit.dart';
 
@@ -28,7 +29,7 @@ class _ForecastDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(args.values.firstOrNull?.date ?? AppLocalizations.of(context)!.common_loading)),
+      appBar: AppBar(title: Text(args.values.firstOrNull?.date ?? context.commonLocalization!.common_loading)),
       body: createBlocPageStateBlocBuilder(
         getBloc: context.watch<ForecastDetailsCubit>,
         child: (ForecastDetailsPageState data) => Center(child: _list(context, data.data.values.first!)),

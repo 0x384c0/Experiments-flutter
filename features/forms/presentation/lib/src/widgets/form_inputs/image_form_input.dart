@@ -1,7 +1,8 @@
 import 'dart:io';
 
+import 'package:common_presentation/extensions/build_context.dart';
+import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:widgets_modifiers/interaction/touch_interactions_widgets_modifiers.dart';
 import 'package:widgets_modifiers/painting/painting_effect_widgets_modifiers.dart';
@@ -56,6 +57,7 @@ class ImageFormInput extends StatelessWidget {
 
   Future _showDialog(BuildContext context) async {
     final locale = AppLocalizations.of(context)!;
+    final commonLocale = context.commonLocalization!;
     await showDialog(
       context: context,
       builder: (BuildContext context) => Dialog(
@@ -80,7 +82,7 @@ class ImageFormInput extends StatelessWidget {
             TextButton(
               onPressed: () => Navigator.pop(context),
               style: TextButton.styleFrom(foregroundColor: Theme.of(context).colorScheme.error),
-              child: Text(locale.common_cancel),
+              child: Text(commonLocale.common_cancel),
             ),
           ],
         ),

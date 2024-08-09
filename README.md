@@ -1,4 +1,5 @@
 # Modular Flutter App
+
 A sample flutter app that has mutliple features.
 
 ![tests workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml/badge.svg)
@@ -6,13 +7,19 @@ A sample flutter app that has mutliple features.
 <img src="/media/mac_app_screenshot.jpg" height="300">
 
 ### Build Requirements
+
 * [flutter](https://github.com/flutter/flutter) 3.+
 * Android Studio
 
 ### Modules
-App has multiple features - [posts](/features/reddit_posts), [weather](/features/weather). Each feature split in to 3 modules
-- [Presentation](/features/reddit_posts/presentation) - contains Presentation Layer (widgets and cubits)
-- [Domain](/features/reddit_posts/domain) - contains Domain layer with business logic (interactors and interfaces)
+
+App has multiple features - [posts](/features/reddit_posts), [weather](/features/weather). Each
+feature split in to 3 modules
+
+- [Presentation](/features/reddit_posts/presentation) - contains Presentation Layer (widgets and
+  cubits)
+- [Domain](/features/reddit_posts/domain) - contains Domain layer with business logic (interactors
+  and interfaces)
 - [Data](/features/reddit_posts/data) - contains Data layer with REST API requests
 
 ### Layers Scheme
@@ -21,9 +28,12 @@ App has multiple features - [posts](/features/reddit_posts), [weather](/features
 
 ### Communication between layers
 
-1. [UI](/features/reddit_posts/presentation/lib/src/widgets/posts_page.dart) sends signals to [Cubit](/features/reddit_posts/presentation/lib/src/widgets/posts_cubit.dart)
-2. Cubit executes Use cases from [Interactor](/features/reddit_posts/domain/lib/src/use_cases/interactor.dart).
-3. Use case obtains data from [Repository](/features/reddit_posts/data/lib/repository/remote_repository.dart)
+1. [UI](/features/reddit_posts/presentation/lib/src/widgets/posts_page.dart) sends signals
+   to [Cubit](/features/reddit_posts/presentation/lib/src/widgets/posts_cubit.dart)
+2. Cubit executes Use cases
+   from [Interactor](/features/reddit_posts/domain/lib/src/use_cases/interactor.dart).
+3. Use case obtains data
+   from [Repository](/features/reddit_posts/data/lib/repository/remote_repository.dart)
 4. Repository returns data from a [Api](/features/reddit_posts/data/lib/api/reddit_api.dart).
 5. Information flows back to the UI to be displayed.
 
@@ -39,37 +49,34 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 1. [mocktail](https://pub.dev/packages/mocktail)
 
 ### Test coverage
+
 - [data](/features/weather/data/test)
 - [domain](/features/weather/domain/test/interactor_test.dart)
 - [widgets](/features/weather/presentation/test)
 - [UI tests](/ui_tests/features)
 
 ### [.run](.run) scripts
-* [build_runner](.run/build_runner.run.xml) - generate code for JSON Serializable 
+
+* [build_runner](.run/build_runner.run.xml) - generate code for JSON Serializable
 * [clean_all](.run/clean_all.run.xml) - run `flutter clean` in all modules
 * [pub_get_all](.run/pub_get_all.run.xml) - run `flutter pub get` in all modules
 * [generate_translate_file](.run/generate_translate_file.run.xml) - regenerate localized strings
 * [main.dart](.run/main.dart.run.xml) - run app
 
 ### Adding New module
-- run `flutter create` in feature directory with unique project name. For example: `flutter create --template=package --project-name features_weather_presentation presentation`
-- remove unused files. For example: `cd presentation && rm -rf android ios linux macos windows LICENSE CHANGELOG.md`
+
+- run `flutter create` in feature directory with unique project name. For
+  example: `flutter create --template=package --project-name features_weather_presentation presentation`
+- remove unused files. For
+  example: `cd presentation && rm -rf android ios linux macos windows LICENSE CHANGELOG.md`
 - replace `homepage:` with `publish_to: none` in `podspec.yaml`
 - add dependencies from other modules
 - add this module as dependency to other modules using `path:`
 
 ## TODO
-* replace flutter_modular with something usable
+
 * https://github.com/cfug/dio/issues/1653
-* move code to src directory and use export show for exposing package apis
-* add paging
-* on error dismiss previous errors and add option to refresh after error
-* add loading indicators using [Lottie](https://pub.dev/packages/lottie)
-* split localized string per module
 * https://pub.dev/packages/mapify_generator
-* https://pub.dev/packages/easy_localization
 * https://pub.dev/packages/auto_route
-* https://pub.dev/packages/freezed
-* create simple module as template
-* fature module should not depend on eachother, all communication via small interfaces in common module
-* replace helper methods with widgets
+* https://pub.dev/packages/app_links
+* add loading indicators using [Lottie](https://pub.dev/packages/lottie)

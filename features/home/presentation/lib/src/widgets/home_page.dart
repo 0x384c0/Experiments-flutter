@@ -1,11 +1,11 @@
 import 'package:features_experiments_presentation/features_experiments_presentation.dart';
 import 'package:features_forms_presentation/features_forms_presentation.dart';
+import 'package:features_home_presentation/l10n/app_localizations.g.dart' as home_localizations;
 import 'package:features_home_presentation/src/widgets/drawer_page.dart';
 import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
 import 'package:features_weather_presentation/features_weather_presentation.dart';
 import 'package:features_webview_presentation/features_webview_presentation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,19 +24,19 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final locale = AppLocalizations.of(context)!;
+    final locale = _getLocalization(context);
     final destinations = [
       NavigationDestination(
         icon: const Icon(Icons.edit_note),
-        label: locale.forms_home_page,
+        label: locale.home_forms,
       ),
       NavigationDestination(
         icon: const Icon(Icons.web),
-        label: locale.reddit_posts_home_page,
+        label: locale.home_posts,
       ),
       NavigationDestination(
         icon: const Icon(Icons.cloud),
-        label: locale.weather_home_page,
+        label: locale.home_weather,
       ),
     ];
     return Scaffold(
@@ -62,11 +62,11 @@ class _HomePageState extends State<HomePage> {
   final _bucket = PageStorageBucket();
 
   Widget _getPageTitle(BuildContext context, SelectedPage index) => {
-        SelectedPage.posts: Text(AppLocalizations.of(context)!.reddit_posts_home_page),
-        SelectedPage.weather: Text(AppLocalizations.of(context)!.weather_home_page),
-        SelectedPage.forms: Text(AppLocalizations.of(context)!.forms_home_page),
-        SelectedPage.webView: Text(AppLocalizations.of(context)!.webview_home_page),
-        SelectedPage.experiments: Text(AppLocalizations.of(context)!.experiments_home_page),
+        SelectedPage.posts: Text(_getLocalization(context).home_posts),
+        SelectedPage.weather: Text(_getLocalization(context).home_weather),
+        SelectedPage.forms: Text(_getLocalization(context).home_forms),
+        SelectedPage.webView: Text(_getLocalization(context).home_webview),
+        SelectedPage.experiments: Text(_getLocalization(context).home_experiments),
       }[index]!;
 
   late final _pages = [
@@ -94,6 +94,9 @@ class _HomePageState extends State<HomePage> {
       _pageController.jumpToPage(selectedIndex);
     });
   }
+
+  home_localizations.AppLocalizations _getLocalization(BuildContext context) =>
+      home_localizations.AppLocalizations.of(context)!;
 }
 
 enum SelectedPage {

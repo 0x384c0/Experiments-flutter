@@ -1,0 +1,8 @@
+{
+    "common_ok": "OK",
+    "common_error": "Error",
+    "common_loading": "Loading",
+    "common_cancel": "Cancel",
+    "common_empty_field": "This field is mandatory.",
+    "common_invalid_field": "Invalid data."
+}

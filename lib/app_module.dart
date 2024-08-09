@@ -17,7 +17,6 @@ class AppModule extends Module {
 
   @override
   void routes(r) {
-    // TODO: try https://pub.dev/packages/auto_route and https://pub.dev/packages/app_links
     r.module(HomeRoutesModule.path, module: HomeRoutesModule());
     r.module(RoutesModule.path, module: RoutesModule());
     r.module(WeatherRoutesModule.path, module: WeatherRoutesModule());

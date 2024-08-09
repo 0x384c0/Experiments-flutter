@@ -1,6 +1,6 @@
+import 'package:common_presentation/extensions/build_context.dart';
 import 'package:features_forms_presentation/src/validators/validation_error.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:formz/formz.dart';
 
 final emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
@@ -34,5 +34,5 @@ class EmailValidationError extends CommonValidationError {
   EmailValidationError(super.validationError, {super.apiError});
 
   @override
-  String errorFieldText(BuildContext context) => apiError ?? AppLocalizations.of(context)!.common_invalid_field;
+  String errorFieldText(BuildContext context) => apiError ?? context.commonLocalization!.common_invalid_field;
 }

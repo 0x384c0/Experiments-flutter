@@ -10,8 +10,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_localizations:
-    sdk: flutter
   features_reddit_posts_domain:
     path: "../domain"
   common_presentation:
@@ -27,6 +25,3 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
-
-flutter:
-  generate: true

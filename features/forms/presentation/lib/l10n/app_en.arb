@@ -1,19 +1,4 @@
 {
-    "common_ok": "OK",
-    "common_error": "Error",
-    "common_loading": "Loading",
-    "common_cancel": "Cancel",
-    "common_empty_field": "This field is mandatory.",
-    "common_invalid_field": "Invalid data.",
-
-    "weather_precipitation": "Precipitation",
-    "weather_humidity": "Humidity",
-    "weather_wind": "Wind",
-    "weather_chance_of_rain": "Chance of rain",
-    "weather_home_page": "Weather",
-
-    "reddit_posts_home_page": "Posts",
-
     "forms_home_page": "Forms",
     "forms_material_validation": "Material Validation",
     "forms_formzz_validation": "Formzz Validation",
@@ -33,11 +18,5 @@
     "forms_search_hint": "Search for something",
     "forms_camera": "Camera",
     "forms_gallery": "Gallery",
-    "forms_select_file": "Select File",
-
-    "webview_home_page": "WebView",
-    "webview_embedded": "Embedded",
-    "webview_fullscreen": "Fullscreen",
-
-    "experiments_home_page": "Experiments"
+    "forms_select_file": "Select File"
 }

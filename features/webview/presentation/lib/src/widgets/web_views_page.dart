@@ -1,8 +1,8 @@
-import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
 import 'package:features_webview_presentation/features_webview_presentation.dart';
+import 'package:features_webview_presentation/l10n/app_localizations.g.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
 
 class WebViewsPage extends StatelessWidget {
   const WebViewsPage({super.key});

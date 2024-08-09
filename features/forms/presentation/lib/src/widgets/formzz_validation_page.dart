@@ -1,8 +1,8 @@
-import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
+import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
 import 'package:features_forms_presentation/src/data/formzz_validation_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
 
 import 'form_inputs/check_box_form_input.dart';
 import 'form_inputs/radio_form_input.dart';
