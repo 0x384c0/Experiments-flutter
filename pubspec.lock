@@ -57,7 +57,7 @@ packages:
     source: path
     version: "0.0.1"
   common_presentation:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "common/presentation"
       relative: true
