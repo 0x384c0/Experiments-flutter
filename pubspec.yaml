@@ -17,6 +17,8 @@ dependencies:
   path_provider: ^2.1.3
   flutter_modular: ^6.3.4
   safe_device: ^1.1.7
+  common_presentation:
+    path: "common/presentation"
   features_home_presentation:
     path: "features/home/presentation"
   features_weather_domain:
