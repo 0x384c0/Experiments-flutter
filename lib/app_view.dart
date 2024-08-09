@@ -11,10 +11,11 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
-      theme: ThemeData(scaffoldBackgroundColor: Colors.grey[100]),
-      routerConfig: Modular.routerConfig,
-      localizationsDelegates: _localizationsDelegates,
-      supportedLocales: _supportedLocales);
+        theme: ThemeData(scaffoldBackgroundColor: Colors.grey[100]),
+        routerConfig: Modular.routerConfig,
+        localizationsDelegates: _localizationsDelegates,
+        supportedLocales: _supportedLocales,
+      );
 
   get _localizationsDelegates => const [
         ...forms.AppLocalizations.localizationsDelegates,
@@ -33,7 +34,8 @@ class AppView extends StatelessWidget {
       ...common.AppLocalizations.supportedLocales,
     ];
     final result = <Locale>[];
-    for (final value in allValues) { // remove duplicates
+    for (final value in allValues) {
+      // removing duplicates
       if (result.any((e) => e.languageCode == value.languageCode) == false) {
         result.add(value);
       }
