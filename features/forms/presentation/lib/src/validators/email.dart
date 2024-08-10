@@ -1,4 +1,5 @@
 import 'package:common_presentation/extensions/build_context.dart';
+import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
 import 'package:features_forms_presentation/src/validators/validation_error.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:formz/formz.dart';
@@ -34,5 +35,5 @@ class EmailValidationError extends CommonValidationError {
   EmailValidationError(super.validationError, {super.apiError});
 
   @override
-  String errorFieldText(BuildContext context) => apiError ?? context.commonLocalization!.common_invalid_field;
+  String errorFieldText(BuildContext context) => apiError ?? AppLocalizations.of(context)!.forms_invalid_field;
 }

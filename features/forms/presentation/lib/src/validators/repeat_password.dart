@@ -1,4 +1,5 @@
 import 'package:common_presentation/extensions/build_context.dart';
+import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
 import 'package:features_forms_presentation/src/validators/validation_error.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:formz/formz.dart';
@@ -23,5 +24,5 @@ class RepeatPasswordValidationError extends CommonValidationError {
   RepeatPasswordValidationError(super.validationError);
 
   @override
-  String errorFieldText(BuildContext context) => context.commonLocalization!.common_invalid_field;
+  String errorFieldText(BuildContext context) => AppLocalizations.of(context)!.forms_invalid_field;
 }

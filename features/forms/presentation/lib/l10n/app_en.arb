@@ -18,5 +18,7 @@
     "forms_search_hint": "Search for something",
     "forms_camera": "Camera",
     "forms_gallery": "Gallery",
-    "forms_select_file": "Select File"
+    "forms_select_file": "Select File",
+    "forms_empty_field": "This field is mandatory.",
+    "forms_invalid_field": "Invalid data."
 }

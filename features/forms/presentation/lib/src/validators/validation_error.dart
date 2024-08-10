@@ -1,4 +1,5 @@
 import 'package:common_presentation/extensions/build_context.dart';
+import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:flutter/material.dart';
 
 enum ValidationErrorType {
@@ -15,7 +16,7 @@ class CommonValidationError {
 
   String errorFieldText(BuildContext context) => context.commonLocalization!.common_error;
 
-  String emptyFieldText(BuildContext context) => context.commonLocalization!.common_empty_field;
+  String emptyFieldText(BuildContext context) => AppLocalizations.of(context)!.forms_empty_field;
 
   String? stringDescription(BuildContext context) {
     if (apiError?.isNotEmpty == true) return apiError;

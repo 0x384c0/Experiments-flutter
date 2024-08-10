@@ -1,4 +1,3 @@
-import 'package:common_presentation/extensions/build_context.dart';
 import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
 import 'package:features_forms_presentation/src/navigation/navigator.dart';
 import 'package:features_forms_presentation/src/validators/email.dart';
@@ -27,7 +26,6 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
-    final commonLocale = context.commonLocalization!;
     return Scaffold(
       appBar: AppBar(title: Text(locale.forms_material_validation)),
       body: SingleChildScrollView(
@@ -44,22 +42,22 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
               FileFormInput(
                 label: locale.forms_select_file,
                 validator: (value) {
-                  if (value?.isEmpty == true) return commonLocale.common_empty_field;
+                  if (value?.isEmpty == true) return AppLocalizations.of(context)!.forms_empty_field;
                   return null;
                 },
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: locale.forms_email),
                 validator: (value) {
-                  if (value?.isEmpty == true) return commonLocale.common_empty_field;
-                  if (!emailRegExp.hasMatch(value!)) return commonLocale.common_invalid_field;
+                  if (value?.isEmpty == true) return AppLocalizations.of(context)!.forms_empty_field;
+                  if (!emailRegExp.hasMatch(value!)) return AppLocalizations.of(context)!.forms_invalid_field;
                   return null;
                 },
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: locale.forms_password),
                 validator: (value) {
-                  if (value?.isEmpty == true) return commonLocale.common_empty_field;
+                  if (value?.isEmpty == true) return AppLocalizations.of(context)!.forms_empty_field;
                   return null;
                 },
               ),
@@ -76,7 +74,7 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
                 viewHintText: locale.forms_search_hint,
                 getSuggestions: _debouncedGetSuggestions,
                 validator: (value) {
-                  if (value?.isEmpty == true) return commonLocale.common_empty_field;
+                  if (value?.isEmpty == true) return AppLocalizations.of(context)!.forms_empty_field;
                   return null;
                 },
               ),
