@@ -1,8 +1,15 @@
 import 'package:features_experiments_presentation/src/utils/data_generators.dart';
 import 'package:flutter/material.dart';
 
-class WidgetsPage extends StatelessWidget {
+class WidgetsPage extends StatefulWidget {
   const WidgetsPage({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _WidgetsPageState();
+}
+
+class _WidgetsPageState extends State<WidgetsPage> {
+  final _statefulWidgetStateKey = GlobalKey<_TestStatefulWidgetState>();
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +20,20 @@ class WidgetsPage extends StatelessWidget {
         child: ListView(
           children: [
             _card(_testInheritedWidget()),
+            _card(_testStatefulWidget(context), onTap: () => _statefulWidgetStateKey.currentState?.grow()),
           ],
         ),
       ),
     );
   }
 
-  _card(Widget child) => Card.filled(child: Container(padding: const EdgeInsets.all(8.0), child: child));
+  _card(Widget child, {GestureTapCallback? onTap}) => Card.filled(
+        clipBehavior: Clip.hardEdge,
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(padding: const EdgeInsets.all(8.0), child: child),
+        ),
+      );
 
   _testInheritedWidget() {
     final testData = generateRandomString(10);
@@ -34,6 +48,12 @@ class WidgetsPage extends StatelessWidget {
       ),
     );
   }
+
+  _testStatefulWidget(BuildContext context) => _TestStatefulWidget(
+        key: _statefulWidgetStateKey,
+        color: Theme.of(context).colorScheme.primary,
+        child: const Text("Test Stateful Widget"),
+      );
 }
 
 class _TestInheritedWidget extends InheritedWidget {
@@ -57,4 +77,31 @@ class _DataFromInheritedWidget extends StatelessWidget {
     final testData = _TestInheritedWidget.maybeOf(context)?.testData;
     return Text("Data from InheritedWidget: $testData");
   }
+}
+
+class _TestStatefulWidget extends StatefulWidget {
+  const _TestStatefulWidget({
+    super.key,
+    required this.color,
+    required this.child,
+  });
+
+  final Color color;
+  final Widget child;
+
+  @override
+  State<_TestStatefulWidget> createState() => _TestStatefulWidgetState();
+}
+
+class _TestStatefulWidgetState extends State<_TestStatefulWidget> {
+  double _size = 1.0;
+
+  void grow() => setState(() => _size += 0.1);
+
+  @override
+  Widget build(BuildContext context) => Container(
+        color: widget.color,
+        transform: Matrix4.diagonal3Values(_size, _size, 1.0),
+        child: widget.child,
+      );
 }

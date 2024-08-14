@@ -28,7 +28,7 @@ class MasonryGridPage extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         child: InkWell(
           onTap: () => _onItemTap(context, index),
-          child: Container(
+          child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
               leading: const Icon(Icons.album),
