@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:features_experiments_presentation/src/utils/data_generators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -32,7 +33,7 @@ class MasonryGridPage extends StatelessWidget {
             child: ListTile(
               leading: const Icon(Icons.album),
               title: Text("Item: $index"),
-              subtitle: Text("Text: ${_generateRandomString(Random(index).nextInt(100))}"),
+              subtitle: Text("Text: ${generateRandomString(Random(index).nextInt(100))}"),
             ),
           ),
         ),
@@ -43,10 +44,5 @@ class MasonryGridPage extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text("Tapped item: $index")),
     );
-  }
-
-  String _generateRandomString(int len) {
-    var r = Random();
-    return String.fromCharCodes(List.generate(len, (index) => r.nextInt(25) + 97));
   }
 }

@@ -10,16 +10,21 @@ abstract class ExperimentsNavigator {
   back();
 
   toMasonryGrid();
+
+  toWidgets();
 }
 
 /// Private implementation of navigation
 class NavigatorImpl implements ExperimentsNavigator {
   @override
-  homePage() => FlutterLayoutPage();
+  homePage() => const FlutterLayoutPage();
 
   @override
   back() => Modular.to.pop();
 
   @override
   toMasonryGrid() => Modular.to.pushNamed(ExperimentsRoutesModule.path + ExperimentsRoutesModule.masonryGrid);
+
+  @override
+  toWidgets() => Modular.to.pushNamed(ExperimentsRoutesModule.path + ExperimentsRoutesModule.widgets);
 }
