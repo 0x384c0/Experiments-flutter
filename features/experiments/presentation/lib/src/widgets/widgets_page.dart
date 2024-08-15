@@ -145,9 +145,17 @@ class _CustomRenderObject extends RenderBox {
     _loadShaderIfNeeded();
     final shader = _program?.fragmentShader();
     if (shader == null) return;
-    shader.setFloat(0, size.width);
-    shader.setFloat(1, size.height);
+    shader.setFloat(0, size.width); // iResolution x
+    shader.setFloat(1, size.height); // iResolution y
+    shader.setFloat(3, (_startTime - DateTime.now().millisecondsSinceEpoch) / 1000);// iTime
     context.canvas.drawPaint(Paint()..shader = shader);
+    _drawNextFrame();
+  }
+
+  _drawNextFrame() async {
+    const fps = 24;
+    await Future.delayed(const Duration(milliseconds: 1000 ~/ fps));
+    markNeedsLayout();
   }
 
   FragmentProgram? _program;
@@ -158,4 +166,6 @@ class _CustomRenderObject extends RenderBox {
     markNeedsLayout();
   }
 }
+
+final _startTime = DateTime.now().millisecondsSinceEpoch;
 //endregion
