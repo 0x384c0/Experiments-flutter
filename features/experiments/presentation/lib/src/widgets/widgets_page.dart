@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:features_experiments_presentation/src/utils/data_generators.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +23,7 @@ class _WidgetsPageState extends State<WidgetsPage> {
           children: [
             _card(_testInheritedWidget()),
             _card(_testStatefulWidget(context), onTap: () => _statefulWidgetStateKey.currentState?.grow()),
+            _card(_CustomWidget()),
           ],
         ),
       ),
@@ -56,6 +59,7 @@ class _WidgetsPageState extends State<WidgetsPage> {
       );
 }
 
+//region InheritedWidget
 class _TestInheritedWidget extends InheritedWidget {
   const _TestInheritedWidget({
     required super.child,
@@ -78,7 +82,9 @@ class _DataFromInheritedWidget extends StatelessWidget {
     return Text("Data from InheritedWidget: $testData");
   }
 }
+//endregion
 
+//region StatefulWidget
 class _TestStatefulWidget extends StatefulWidget {
   const _TestStatefulWidget({
     super.key,
@@ -105,3 +111,51 @@ class _TestStatefulWidgetState extends State<_TestStatefulWidget> {
         child: widget.child,
       );
 }
+//endregion
+
+//region Custom widget
+class _CustomWidget extends LeafRenderObjectWidget {
+  final count = 3;
+
+  @override
+  RenderObject createRenderObject(BuildContext context) => _CustomRenderObject()..count = count;
+}
+
+class _CustomRenderObject extends RenderBox {
+  var _count = 3;
+
+  var _widgetChanged = false;
+
+  set count(int count) {
+    _count = count;
+    _widgetChanged = true;
+    markNeedsLayout();
+  }
+
+  @override
+  void performLayout() {
+    if (!_widgetChanged && hasSize) return;
+    _widgetChanged = false;
+
+    size = constraints.constrain(Size(_count * 10, 20));
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    _loadShaderIfNeeded();
+    final shader = _program?.fragmentShader();
+    if (shader == null) return;
+    shader.setFloat(0, size.width);
+    shader.setFloat(1, size.height);
+    context.canvas.drawPaint(Paint()..shader = shader);
+  }
+
+  FragmentProgram? _program;
+
+  void _loadShaderIfNeeded() async {
+    if (_program != null) return;
+    _program = await FragmentProgram.fromAsset('packages/features_experiments_presentation/shaders/rainbow.frag');
+    markNeedsLayout();
+  }
+}
+//endregion
