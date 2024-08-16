@@ -3,6 +3,7 @@
 A sample flutter app that has mutliple features.
 
 ![tests workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml/badge.svg)
+![deploy_web workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_web.yml/badge.svg)
 
 <img src="/media/mac_app_screenshot.jpg" height="300">
 
@@ -57,10 +58,10 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 
 ### [.run](.run) scripts
 
-* [build_runner](.run/build_runner.run.xml) - generate code for JSON Serializable
+* [build_runner](.run/build_runner.run.xml) - run `dart run build_runner build --delete-conflicting-outputs` in all modules with build_runner enabled
 * [clean_all](.run/clean_all.run.xml) - run `flutter clean` in all modules
 * [pub_get_all](.run/pub_get_all.run.xml) - run `flutter pub get` in all modules
-* [generate_translate_file](.run/generate_translate_file.run.xml) - regenerate localized strings
+* [generate_translate_file](.run/generate_translate_file.run.xml) - run `flutter gen-l10n` in all modules with l10n.yaml file
 * [main.dart](.run/main.dart.run.xml) - run app
 
 ### Adding New module
