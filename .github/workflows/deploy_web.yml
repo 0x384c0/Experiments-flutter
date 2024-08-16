@@ -17,6 +17,9 @@ jobs:
           flutter-version: '3.x'
           channel: 'stable'
 
+      - name: Flutter Doctor
+        run: flutter doctor
+
       - name: Install project dependencies
         run: sh scripts/pub_get_all.sh
 
