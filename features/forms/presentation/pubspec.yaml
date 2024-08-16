@@ -18,8 +18,8 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_modular: ^6.3.4
   formz: ^0.7.0
-  freezed_annotation: ^2.4.1
-  file_picker: ^8.0.5
+  freezed_annotation: ^2.4.4
+  file_picker: ^8.1.2
   rxdart: ^0.28.0
   image_picker: ^1.1.2
   widgets_modifiers: ^0.3.42
