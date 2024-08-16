@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:features_reddit_posts_data/src/data/reddit_json_response_dto.dart';
-import '../data/reddit_post_listing_dto.dart';
-import '../data/reddit_posts_response_dto.dart';
-import '../data/reddit_posts_sort_dto.dart';
+import 'package:features_reddit_posts_data/src/data/reddit_post_listing_dto.dart';
+import 'package:features_reddit_posts_data/src/data/reddit_posts_response_dto.dart';
+import 'package:features_reddit_posts_data/src/data/reddit_posts_sort_dto.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'reddit_api.g.dart';
