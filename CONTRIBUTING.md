@@ -15,7 +15,7 @@
 
 ## Localization Strings
 * app localization implemented with [flutter_localizations](https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html)
-* all localized strings located in [lib/l10n](/lib/l10n) directory
+* all localized strings located in `/lib/l10n` directories for each module
 * localized string key must start with module name, where it will be used
 
 ## Styles and Themes
