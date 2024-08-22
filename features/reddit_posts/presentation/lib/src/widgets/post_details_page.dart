@@ -31,13 +31,15 @@ class PostDetailsPage extends StatelessWidget {
 class _PostDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => createBlocPageStateBlocBuilder(
+        layoutBuilder: _scaffoldLayoutBuilder,
         getBloc: context.watch<PostDetailsCubit>,
-        child: (PostDetailsState data) => Scaffold(
-          appBar: AppBar(title: Text(data.postItemState?.category ?? "")),
-          body: ConnectionStatusView.withChild(Center(
-            child: data.postItemState != null ? _list(data.postItemState!, context) : _loadingIndicator(),
-          )),
-        ),
+        child: (PostDetailsState data) =>
+            data.postItemState != null ? _list(data.postItemState!, context) : _loadingIndicator(),
+      );
+
+  Widget _scaffoldLayoutBuilder(PostDetailsState? data, Widget child) => Scaffold(
+        appBar: AppBar(title: Text(data?.postItemState?.category ?? "")),
+        body: ConnectionStatusView.withChild(Center(child: child)),
       );
 
   Widget _list(PostItemState state, BuildContext context) {
