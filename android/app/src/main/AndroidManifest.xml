@@ -2,6 +2,9 @@
     package="com.example.flutter_experiments">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- Permissions for internet_connection_checker -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
    <application
         android:label="flutter_experiments"
         android:name="${applicationName}"
