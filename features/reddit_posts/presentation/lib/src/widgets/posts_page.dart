@@ -30,10 +30,9 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
     onBuild(context, cubit);
     return createBlocPageStateBlocBuilder(
       getBloc: context.watch<PostsCubit>,
-      child: (PostsPageState data) => Stack(children: [
-        Center(child: _list(context, data.data)),
-        const ConnectionStatusView(),
-      ]),
+      child: (PostsPageState data) => ConnectionStatusView.withChild(Center(
+        child: _list(context, data.data),
+      )),
     );
   }
 

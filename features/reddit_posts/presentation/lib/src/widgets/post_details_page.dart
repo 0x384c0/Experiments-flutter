@@ -1,3 +1,4 @@
+import 'package:common_presentation/widgets/connection_status_view.dart';
 import 'package:common_presentation/widgets/page_state/page_state_bloc_builder.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
@@ -33,9 +34,9 @@ class _PostDetailsView extends StatelessWidget {
         getBloc: context.watch<PostDetailsCubit>,
         child: (PostDetailsState data) => Scaffold(
           appBar: AppBar(title: Text(data.postItemState?.category ?? "")),
-          body: Center(
+          body: ConnectionStatusView.withChild(Center(
             child: data.postItemState != null ? _list(data.postItemState!, context) : _loadingIndicator(),
-          ),
+          )),
         ),
       );
 

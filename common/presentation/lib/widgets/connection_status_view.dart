@@ -9,6 +9,8 @@ class ConnectionStatusView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => _ConnectionStatusViewState();
+
+  static withChild(Widget child) => Stack(children: [child, const ConnectionStatusView()]);
 }
 
 class _ConnectionStatusViewState extends State<ConnectionStatusView> {
