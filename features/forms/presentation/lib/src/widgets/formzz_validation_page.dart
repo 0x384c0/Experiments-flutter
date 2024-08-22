@@ -23,7 +23,7 @@ class _FormzzValidationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final locale = AppLocalizations.of(context)!;
-    final FormzzValidationCubit cubit = context.watch();
+    final FormzzValidationCubit cubit = context.read();
     final formState = cubit.state;
     return Scaffold(
       appBar: AppBar(title: Text(locale.forms_formzz_validation)),

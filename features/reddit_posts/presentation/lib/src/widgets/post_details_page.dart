@@ -32,7 +32,7 @@ class _PostDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => createBlocPageStateBlocBuilder(
         layoutBuilder: _scaffoldLayoutBuilder,
-        getBloc: context.watch<PostDetailsCubit>,
+        getBloc: context.read<PostDetailsCubit>,
         child: (PostDetailsState data) =>
             data.postItemState != null ? _list(data.postItemState!, context) : _loadingIndicator(),
       );
@@ -43,7 +43,7 @@ class _PostDetailsView extends StatelessWidget {
       );
 
   Widget _list(PostItemState state, BuildContext context) {
-    final PostDetailsCubit cubit = context.watch();
+    final PostDetailsCubit cubit = context.read();
 
     return Column(
       children: [

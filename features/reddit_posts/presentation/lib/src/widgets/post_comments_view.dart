@@ -12,11 +12,11 @@ class PostCommentsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => createBlocPageStateBlocBuilder(
-        getBloc: context.watch<PostCommentsCubit>,
+        getBloc: context.read<PostCommentsCubit>,
         child: (PostCommentsPageState data) {
           final tiles = _mapDataToTiles(data);
           return ScrollToEndListener(
-            onScrolledToEnd: context.watch<PostCommentsCubit>().loadNextPage,
+            onScrolledToEnd: context.read<PostCommentsCubit>().loadNextPage,
             child: (controller) => CustomScrollView(
               physics: const AlwaysScrollableScrollPhysics(),
               controller: controller,
@@ -30,7 +30,7 @@ class PostCommentsView extends StatelessWidget {
                 ),
                 SliverToBoxAdapter(
                   child: _pageLoadingIndicator(
-                    context.watch<PostCommentsCubit>().stateData?.paginationState?.isLoadingPage ?? false,
+                    context.read<PostCommentsCubit>().stateData?.paginationState?.isLoadingPage ?? false,
                   ),
                 ),
               ],

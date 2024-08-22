@@ -26,10 +26,10 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<PostsCubit>();
+    final cubit = context.read<PostsCubit>();
     onBuild(context, cubit);
     return createBlocPageStateBlocBuilder(
-      getBloc: context.watch<PostsCubit>,
+      getBloc: context.read<PostsCubit>,
       child: (PostsPageState data) => ConnectionStatusView.withChild(Center(
         child: _list(context, data.data),
       )),
@@ -37,7 +37,7 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
   }
 
   Widget _list(BuildContext context, Iterable<PostItemState> posts) {
-    final cubit = context.watch<PostsCubit>();
+    final cubit = context.read<PostsCubit>();
     var widgets = posts.map((e) => PostTile(e, () => cubit.onPostTap(e)));
     return RefreshIndicator(
       onRefresh: cubit.refresh,
