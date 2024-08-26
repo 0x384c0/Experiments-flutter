@@ -9,6 +9,7 @@ import 'package:features_reddit_posts_data/src/mapper/error_dto_mapper.dart';
 import 'package:features_reddit_posts_data/src/mapper/reddit_json_response_dto_mapper.dart';
 import 'package:features_reddit_posts_data/src/mapper/reddit_post_listing_dto_mapper.dart';
 import 'package:features_reddit_posts_data/src/mapper/reddit_posts_response_dto_mapper.dart';
+import 'package:features_reddit_posts_data/src/repository/local_repository.dart';
 import 'package:features_reddit_posts_data/src/repository/remote_repository.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -27,6 +28,7 @@ class PostsDataModule extends Module {
   @override
   exportedBinds(Injector i) {
     i.add<PostsRemoteRepository>(RemoteRepositoryImpl.new);
+    i.addSingleton<PostsLocalRepository>(LocalRepositoryImpl.new);
   }
 
   Dio _provideDio() {
