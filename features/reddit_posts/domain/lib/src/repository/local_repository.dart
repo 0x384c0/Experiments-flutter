@@ -5,7 +5,7 @@ abstract class PostsLocalRepository {
     required String? after,
   });
 
-  Future setPosts(
+  Future insertPosts(
     PostsModel data, {
     required String? after,
   });
@@ -14,7 +14,7 @@ abstract class PostsLocalRepository {
     required String permalink,
   });
 
-  Future setPost(
+  Future insertPost(
     PostModel data, {
     required String permalink,
   });
@@ -24,7 +24,7 @@ abstract class PostsLocalRepository {
     required Iterable<String> children,
   });
 
-  Future setMoreChildren(
+  Future insertMoreChildren(
     Iterable<PostModel> data, {
     required String linkId,
     required Iterable<String> children,

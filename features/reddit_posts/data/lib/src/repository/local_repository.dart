@@ -5,7 +5,7 @@ class LocalRepositoryImpl implements PostsLocalRepository {
   final _moreChildrenCache = <int, Iterable<PostModel>>{};
 
   @override
-  Future setMoreChildren(
+  Future insertMoreChildren(
     Iterable<PostModel> data, {
     required String linkId,
     required Iterable<String> children,
@@ -29,7 +29,7 @@ class LocalRepositoryImpl implements PostsLocalRepository {
   final _postCache = <int, PostModel>{};
 
   @override
-  Future setPost(
+  Future insertPost(
     PostModel data, {
     required String permalink,
   }) async {
@@ -51,7 +51,7 @@ class LocalRepositoryImpl implements PostsLocalRepository {
   final _postsCache = <int?, PostsModel>{};
 
   @override
-  Future setPosts(
+  Future insertPosts(
     PostsModel data, {
     required String? after,
   }) async {

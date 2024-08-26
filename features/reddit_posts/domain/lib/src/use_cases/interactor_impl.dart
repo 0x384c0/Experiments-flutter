@@ -21,7 +21,7 @@ class PostsInteractorImpl implements PostsInteractor {
 
   @override
   Future<PostsModel> getPosts({required String? after}) => remoteRepository.getPosts(after: after).cached(
-        saveToCache: (data) => localRepository.setPosts(data, after: after),
+        saveToCache: (data) => localRepository.insertPosts(data, after: after),
         getFromCache: () => localRepository.getPosts(after: after),
       );
 
