@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:features_stackoverflow_presentation/src/data/question.dart';
-import 'package:html/parser.dart';
+import 'package:features_stackoverflow_presentation/src/provider/stackoverflow_api.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'client_provider.dart';
@@ -15,30 +15,7 @@ Future<QuestionsResponse> paginatedQuestions(PaginatedQuestionsRef ref, {require
   ref.onDispose(cancelToken.cancel);
   final dio = ref.watch(clientProvider);
 
-  final uri = Uri(
-    scheme: 'https',
-    host: 'api.stackexchange.com',
-    path: '/2.2/questions',
-    queryParameters: <String, Object>{
-      'order': 'desc',
-      'sort': 'creation',
-      'site': 'stackoverflow',
-      'filter': '!17vW1m9jnXcpKOO(p4a5Jj.QeqRQmvxcbquXIXJ1fJcKq4',
-      'tagged': 'flutter',
-      'pagesize': '50',
-      'page': '${pageIndex + 1}',
-    },
-  );
-
-  final response = await dio.getUri(uri, cancelToken: cancelToken);
-
-  final parsed = QuestionsResponse.fromJson(response.data!);
-  final page = parsed.copyWith(
-    items: parsed.items.map((e) {
-      final document = parse(e.body);
-      return e.copyWith(body: document.body!.text.replaceAll('\n', ' '));
-    }).toList(),
-  );
+  final page = getQuestionsResponse(pageIndex, dio, cancelToken);
 
   ref.keepAlive();
 
