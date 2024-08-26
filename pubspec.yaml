@@ -39,6 +39,8 @@ dependencies:
     path: "features/webview/presentation"
   features_experiments_presentation:
     path: "features/experiments/presentation"
+  features_stackoverflow_presentation:
+    path: "features/stackoverflow/presentation"
   cupertino_icons: ^1.0.8
 
 dev_dependencies:

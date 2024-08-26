@@ -8,6 +8,7 @@ import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:features_weather_presentation/features_weather_presentation.dart';
 import 'package:features_webview_presentation/features_webview_presentation.dart';
 import 'package:features_experiments_presentation/features_experiments_presentation.dart';
+import 'package:features_stackoverflow_presentation/features_stackoverflow_presentation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
@@ -23,6 +24,7 @@ class AppModule extends Module {
     r.module(FormsRoutesModule.path, module: FormsRoutesModule());
     r.module(WebViewRoutesModule.path, module: WebViewRoutesModule());
     r.module(ExperimentsRoutesModule.path, module: ExperimentsRoutesModule());
+    r.module(StackOverflowRoutesModule.path, module: StackOverflowRoutesModule());
   }
 
   // class names for modules cannot be same
@@ -39,5 +41,6 @@ class AppModule extends Module {
         FormsPresentationModule(),
         WebViewPresentationModule(),
         ExperimentsPresentationModule(),
+        StackOverflowPresentationModule(),
       ];
 }

@@ -1,0 +1,29 @@
+name: features_stackoverflow_presentation
+description: "A new Flutter package project."
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_modular: ^6.3.4
+  dio: ^5.6.0
+  flutter_hooks: ^0.18.0
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+  hooks_riverpod:
+  html: ^0.15.0
+  riverpod_annotation:
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+  build_runner: ^2.4.11
+  freezed: ^2.5.2
+  json_serializable: ^6.8.0
+  riverpod_generator:
+
+flutter:

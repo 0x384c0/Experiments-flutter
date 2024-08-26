@@ -5,6 +5,7 @@ import '../data/post_state.dart';
 import '../widgets/post_details_page.dart';
 import '../widgets/posts_page.dart';
 
+//TODO: rename to PostsRoutesModule
 class RoutesModule extends Module {
   static const path = '/posts';
   static const postDetails = '/post_details';

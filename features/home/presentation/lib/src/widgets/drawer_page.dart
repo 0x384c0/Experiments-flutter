@@ -33,6 +33,10 @@ class DrawerPage extends StatelessWidget {
             title: Text(_getLocalizations(context).home_experiments),
             onTap: () => _onDestinationSelected(context, SelectedPage.experiments),
           ),
+          ListTile(
+            title: Text(_getLocalizations(context).home_stackoverflow),
+            onTap: () => _onDestinationSelected(context, SelectedPage.stackoverflow),
+          ),
         ],
       );
 

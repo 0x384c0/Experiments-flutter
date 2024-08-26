@@ -27,6 +27,8 @@ dependencies:
     path: "../../../features/webview/presentation"
   features_experiments_presentation:
     path: "../../../features/experiments/presentation"
+  features_stackoverflow_presentation:
+    path: "../../../features/stackoverflow/presentation"
   widgets_modifiers: ^0.3.42
 
 dev_dependencies:

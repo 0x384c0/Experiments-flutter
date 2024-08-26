@@ -3,6 +3,7 @@ import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_home_presentation/l10n/app_localizations.g.dart' as home_localizations;
 import 'package:features_home_presentation/src/widgets/drawer_page.dart';
 import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
+import 'package:features_stackoverflow_presentation/features_stackoverflow_presentation.dart';
 import 'package:features_weather_presentation/features_weather_presentation.dart';
 import 'package:features_webview_presentation/features_webview_presentation.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   late FormsNavigator formsNavigator = Modular.get();
   late WebViewNavigator webViewNavigator = Modular.get();
   late ExperimentsNavigator experimentsNavigator = Modular.get();
+  late StackOverflowNavigator stackoverflowNavigator = Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +69,7 @@ class _HomePageState extends State<HomePage> {
         SelectedPage.forms: Text(_getLocalization(context).home_forms),
         SelectedPage.webView: Text(_getLocalization(context).home_webview),
         SelectedPage.experiments: Text(_getLocalization(context).home_experiments),
+        SelectedPage.stackoverflow: Text(_getLocalization(context).home_stackoverflow),
       }[index]!;
 
   late final _pages = [
@@ -75,6 +78,7 @@ class _HomePageState extends State<HomePage> {
     weatherNavigator.homePage(),
     webViewNavigator.homePage(),
     experimentsNavigator.homePage(),
+    stackoverflowNavigator.homePage(),
   ];
 
   Widget _body(BuildContext context) {
@@ -104,7 +108,8 @@ enum SelectedPage {
   posts(1),
   weather(2),
   webView(3),
-  experiments(4);
+  experiments(4),
+  stackoverflow(5);
 
   const SelectedPage(this.id);
 
