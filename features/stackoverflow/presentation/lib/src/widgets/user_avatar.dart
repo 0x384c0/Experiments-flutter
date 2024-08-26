@@ -1,6 +1,5 @@
+import 'package:features_stackoverflow_presentation/src/data/user.dart';
 import 'package:flutter/material.dart';
-
-import '../data/user.dart';
 
 /// Renders the profile picture of a user and their badges.
 class UserAvatar extends StatelessWidget {

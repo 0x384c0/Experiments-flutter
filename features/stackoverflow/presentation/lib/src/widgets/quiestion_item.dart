@@ -1,8 +1,9 @@
 import 'dart:async';
 
+import 'package:dio/dio.dart';
 import 'package:features_stackoverflow_presentation/src/data/question.dart';
-import 'package:features_stackoverflow_presentation/src/provider/quiestion_provider.dart';
 import 'package:features_stackoverflow_presentation/src/data/user.dart';
+import 'package:features_stackoverflow_presentation/src/provider/quiestion_provider.dart';
 import 'package:features_stackoverflow_presentation/src/widgets/user_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -16,14 +17,14 @@ class QuestionItem extends HookConsumerWidget {
   const QuestionItem({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final question = ref.watch(currentQuestion);
+  Widget build(BuildContext context, WidgetRef ref) => ref.watch(currentQuestion).when(
+        error: _errorView,
+        loading: _loadingView,
+        data: _body,
+      );
 
-    return question.when(
-      error: (error, stack) => const Center(child: Text('Error')),
-      loading: () => const Center(child: Text('loading')),
-      data: (question) {
-        return ListTile(
+  Widget _body(Question question) => Card(
+        child: ListTile(
           title: Text(question.title),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,14 +43,14 @@ class QuestionItem extends HookConsumerWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: PostInfo(
+                        child: _PostInfo(
                           originalPoster: question.owner,
                           postCreationDate: question.creationDate,
                         ),
                       ),
-                      UpvoteCount(question.score),
+                      _UpvoteCount(question.score),
                       const SizedBox(width: 10),
-                      AnswersCount(
+                      _AnswersCount(
                         question.answerCount,
                         accepted: question.acceptedAnswerId != null,
                       ),
@@ -59,9 +60,14 @@ class QuestionItem extends HookConsumerWidget {
               ),
             ],
           ),
-        );
-      },
-    );
+        ),
+      );
+
+  Widget _loadingView() => SizedBox(height: 200, child: const Center(child: CircularProgressIndicator()));
+
+  Widget _errorView(Object err, StackTrace stack) {
+    if (err is DioException) return Text(err.response!.data.toString());
+    return Text('Error $err\n$stack');
   }
 }
 
@@ -104,9 +110,8 @@ String _useAskedHowLongAgo(DateTime creationDate) {
   return label.value;
 }
 
-class PostInfo extends HookConsumerWidget {
-  const PostInfo({
-    super.key,
+class _PostInfo extends HookConsumerWidget {
+  const _PostInfo({
     required this.originalPoster,
     required this.postCreationDate,
   });
@@ -115,28 +120,23 @@ class PostInfo extends HookConsumerWidget {
   final DateTime postCreationDate;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final askedHowLongAgoLabel = _useAskedHowLongAgo(postCreationDate);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          askedHowLongAgoLabel,
-          style: const TextStyle(color: Color(0xFF9fa6ad), fontSize: 12),
-        ),
-        const SizedBox(height: 3),
-        UserAvatar(owner: originalPoster),
-      ],
-    );
-  }
+  Widget build(BuildContext context, WidgetRef ref) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            _useAskedHowLongAgo(postCreationDate),
+            style: const TextStyle(color: Color(0xFF9fa6ad), fontSize: 12),
+          ),
+          const SizedBox(height: 3),
+          UserAvatar(owner: originalPoster),
+        ],
+      );
 }
 
 /// A UI component for showing the answer count on a question
-class AnswersCount extends StatelessWidget {
-  const AnswersCount(
+class _AnswersCount extends StatelessWidget {
+  const _AnswersCount(
     this.answerCount, {
-    super.key,
     required this.accepted,
   });
 
@@ -170,8 +170,8 @@ class AnswersCount extends StatelessWidget {
 }
 
 /// A UI component for showing the upvotes count on a question
-class UpvoteCount extends StatelessWidget {
-  const UpvoteCount(this.upvoteCount, {super.key});
+class _UpvoteCount extends StatelessWidget {
+  const _UpvoteCount(this.upvoteCount);
 
   final int upvoteCount;
 

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:features_stackoverflow_presentation/src/widgets/quiestion_item.dart';
 import 'package:features_stackoverflow_presentation/src/provider/quiestion_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -23,7 +22,7 @@ class QuestionsPage extends HookConsumerWidget {
 
   Widget _list(int count, WidgetRef ref) => RefreshIndicator(
         onRefresh: () => _refresh(ref),
-        child: ListView.separated(
+        child: ListView.builder(
           itemCount: count,
           itemBuilder: (context, index) {
             return ProviderScope(
@@ -37,7 +36,6 @@ class QuestionsPage extends HookConsumerWidget {
               child: const QuestionItem(),
             );
           },
-          separatorBuilder: (context, _) => const Divider(height: 30, color: Color(0xff3d3d3d)),
         ),
       );
 
