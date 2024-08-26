@@ -1,19 +1,29 @@
+import 'dart:async';
 import 'dart:math';
 
+import 'package:common_domain/extensions/future.dart';
 import 'package:features_reddit_posts_domain/src/data/more_model.dart';
 import 'package:features_reddit_posts_domain/src/data/post_model.dart';
+import 'package:features_reddit_posts_domain/src/repository/local_repository.dart';
 import 'package:features_reddit_posts_domain/src/repository/remote_repository.dart';
 import 'package:features_reddit_posts_domain/src/use_cases/interactor.dart';
 
 class PostsInteractorImpl implements PostsInteractor {
-  PostsInteractorImpl(this.remoteRepository);
+  PostsInteractorImpl(
+    this.remoteRepository,
+    this.localRepository,
+  );
 
   final _perPage = 20;
 
   final PostsRemoteRepository remoteRepository;
+  final PostsLocalRepository localRepository;
 
   @override
-  Future<PostsModel> getPosts({required String? after}) => remoteRepository.getPosts(after: after);
+  Future<PostsModel> getPosts({required String? after}) => remoteRepository.getPosts(after: after).cached(
+        saveToCache: (data) => localRepository.setPosts(data, after: after),
+        getFromCache: () => localRepository.getPosts(after: after),
+      );
 
   @override
   Future<PostModel> getPost({

@@ -1,7 +1,7 @@
+import 'package:common_data/interfaces/oauth_local_repository.dart';
+import 'package:common_data/interfaces/oauth_token_refresher.dart';
+import 'package:common_data/interfaces/oauth_tokens_entity.dart';
 import 'package:dio/dio.dart';
-import 'package:features_common_data/interfaces/oauth_local_repository.dart';
-import 'package:features_common_data/interfaces/oauth_token_refresher.dart';
-import 'package:features_common_data/interfaces/oauth_tokens_entity.dart';
 
 class OauthInterceptor<T extends OauthTokensEntity> extends Interceptor {
   OauthInterceptor(this._tokensProvider, this._tokenRefresher);

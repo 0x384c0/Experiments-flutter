@@ -1,3 +1,4 @@
+import 'package:common_domain/data/error_model.dart';
 import 'package:common_domain/extensions/future.dart';
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:features_reddit_posts_data/src/api/reddit_api.dart';

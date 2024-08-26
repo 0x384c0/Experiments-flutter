@@ -1,4 +1,3 @@
-export 'src/data/error_model.dart';
 export 'src/data/more_model.dart';
 export 'src/data/post_model.dart';
 export 'src/di/module.dart';

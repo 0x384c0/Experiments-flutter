@@ -1,4 +1,4 @@
-name: features_common_data
+name: common_data
 description: "A new Flutter package project."
 version: 0.0.1
 publish_to: none
@@ -8,10 +8,12 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
-  dio: ^5.6.0
   flutter:
     sdk: flutter
+  dio: ^5.6.0
   flutter_secure_storage: ^9.2.2
+  common_domain:
+    path: "../../common/domain"
 
 dev_dependencies:
   flutter_lints: ^4.0.0

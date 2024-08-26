@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:features_common_data/interfaces/oauth_token_refresher.dart';
-import 'package:features_common_data/interfaces/oauth_tokens_entity.dart';
+import 'package:common_data/interfaces/oauth_token_refresher.dart';
+import 'package:common_data/interfaces/oauth_tokens_entity.dart';
 
 /// This class must be a singleton, because only one token can be refreshed at time
 class OAuthTokenRefresherImpl<T extends OauthTokensEntity> implements OAuthTokenRefresher<T> {
