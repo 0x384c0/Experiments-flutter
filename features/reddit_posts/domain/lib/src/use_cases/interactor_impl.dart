@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:common_domain/data/error_model.dart';
 import 'package:common_domain/extensions/future.dart';
 import 'package:features_reddit_posts_domain/src/data/more_model.dart';
 import 'package:features_reddit_posts_domain/src/data/post_model.dart';
@@ -23,6 +24,8 @@ class PostsInteractorImpl implements PostsInteractor {
   Future<PostsModel> getPosts({required String? after}) => remoteRepository.getPosts(after: after).cached(
         saveToCache: (data) => localRepository.insertPosts(data, after: after),
         getFromCache: () => localRepository.getPosts(after: after),
+        shouldInvalidateCache: () async => after == null,
+        invalidateCache: localRepository.deletePosts,
       );
 
   @override

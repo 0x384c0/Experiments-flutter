@@ -35,8 +35,8 @@ class RedditPostListingDTOMapper extends Mapper<Map<String, Iterable<RedditPostL
 
   _dataToMoreModel(RedditPostListingChildDTO? child) => child?.data != null
       ? MoreModel(
-          child!.data!.parentId!,
-          child.data!.children!,
+          parentId: child!.data!.parentId!,
+          children: child.data!.children!,
         )
       : null;
 }

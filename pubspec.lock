@@ -94,6 +94,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.1"
+  convert:
+    dependency: transitive
+    description:
+      name: convert
+      sha256: "0f08b14755d163f6e2134cb58222dd25ea2a2ee8a195e53983d57c075324d592"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.1"
   cross_file:
     dependency: transitive
     description:
@@ -158,6 +166,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.0"
+  drift:
+    dependency: transitive
+    description:
+      name: drift
+      sha256: "15b51e0ee1970455c0c3f7e560f3ac02ecb9c04711a9657586e470b234659dba"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.20.0"
+  drift_flutter:
+    dependency: transitive
+    description:
+      name: drift_flutter
+      sha256: "0bc2f1dde59e59cedde0df67a4ff7bd8f0d42274f18b50bf7e7dae7ca3d77801"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   features_experiments_presentation:
     dependency: "direct main"
     description:
@@ -911,6 +935,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "7.0.0"
+  sqlite3:
+    dependency: transitive
+    description:
+      name: sqlite3
+      sha256: "45f168ae2213201b54e09429ed0c593dc2c88c924a1488d6f9c523a255d567cb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.4.6"
+  sqlite3_flutter_libs:
+    dependency: transitive
+    description:
+      name: sqlite3_flutter_libs
+      sha256: "62bbb4073edbcdf53f40c80775f33eea01d301b7b81417e5b3fb7395416258c1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.5.24"
   stack_trace:
     dependency: transitive
     description:
@@ -927,6 +967,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  stream_channel:
+    dependency: transitive
+    description:
+      name: stream_channel
+      sha256: ba2aa5d8cc609d96bbb2899c28934f9e1af5cddbd60a827822ea467161eb54e7
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.2"
   string_scanner:
     dependency: transitive
     description:

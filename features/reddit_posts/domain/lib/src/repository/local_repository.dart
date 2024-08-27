@@ -1,6 +1,7 @@
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 
 abstract class PostsLocalRepository {
+  // PostsModel
   Future<PostsModel?> getPosts({
     required String? after,
   });
@@ -10,6 +11,9 @@ abstract class PostsLocalRepository {
     required String? after,
   });
 
+  Future deletePosts();
+
+  // PostModel
   Future<PostModel?> getPost({
     required String permalink,
   });
@@ -19,6 +23,7 @@ abstract class PostsLocalRepository {
     required String permalink,
   });
 
+  // More PostModel
   Future<Iterable<PostModel>?> getMoreChildren({
     required String linkId,
     required Iterable<String> children,

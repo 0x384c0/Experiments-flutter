@@ -1,6 +1,13 @@
+import 'package:features_reddit_posts_data/src/db/posts_dao.dart';
+import 'package:features_reddit_posts_data/src/db/posts_database.dart';
+import 'package:features_reddit_posts_data/src/mapper/posts_entity_to_model_mapper.dart';
+import 'package:features_reddit_posts_data/src/mapper/posts_model_to_entity_mapper.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
+import 'package:flutter/cupertino.dart';
 
 class LocalRepositoryImpl implements PostsLocalRepository {
+  LocalRepositoryImpl(this._postsModelToEntityMapper, this._postsEntityToModelMapper);
+
   //region MoreChildren
   final _moreChildrenCache = <int, Iterable<PostModel>>{};
 
@@ -48,23 +55,48 @@ class LocalRepositoryImpl implements PostsLocalRepository {
   //endregion
 
   //region Posts
-  final _postsCache = <int?, PostsModel>{};
+  final _postsDao = PostsDao(PostsDatabase());
+
+  static const _defaultPageId = 0;
+
+  final PostsModelToEntityMapper _postsModelToEntityMapper;
+  final PostsEntityToModelMapper _postsEntityToModelMapper;
 
   @override
   Future insertPosts(
     PostsModel data, {
     required String? after,
   }) async {
-    final id = after?.hashCode;
-    _postsCache[id] = data;
+    try {
+      final id = after?.hashCode ?? _defaultPageId;
+
+      final (postsEntity, postEntities) = _postsModelToEntityMapper.map((data, id));
+
+      await _postsDao.insertPostsEntity(postsEntity);
+      await _postsDao.insertPostEntities(postEntities);
+    } catch (e) {
+      debugPrint("$runtimeType.insertPosts e $e");
+      await deletePosts();
+    }
   }
 
   @override
   Future<PostsModel?> getPosts({
     required String? after,
   }) async {
-    final id = after?.hashCode;
-    return _postsCache[id];
+    final id = after?.hashCode ?? _defaultPageId;
+    try {
+      final postsEntityData = await _postsDao.getPostsEntityForId(id);
+      final postEntityData = await _postsDao.getPostEntityForPostsEntity(postsEntityData!);
+      return _postsEntityToModelMapper.map((postsEntityData, postEntityData));
+    } catch (e) {
+      debugPrint("LocalRepositoryImpl.getPosts e $e");
+      await deletePosts();
+      return null;
+    }
   }
+
+  @override
+  Future deletePosts() => _postsDao.deleteAll();
 //endregion
 }

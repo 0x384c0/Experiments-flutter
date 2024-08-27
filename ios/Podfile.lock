@@ -45,6 +45,8 @@ PODS:
   - flutter_inappwebview_ios/Core (0.0.1):
     - Flutter
     - OrderedSet (~> 5.0)
+  - flutter_secure_storage (6.0.0):
+    - Flutter
   - geolocator_apple (1.2.0):
     - Flutter
   - image_picker_ios (0.0.1):
@@ -61,6 +63,24 @@ PODS:
   - SDWebImage (5.19.1):
     - SDWebImage/Core (= 5.19.1)
   - SDWebImage/Core (5.19.1)
+  - "sqlite3 (3.46.1+1)":
+    - "sqlite3/common (= 3.46.1+1)"
+  - "sqlite3/common (3.46.1+1)"
+  - "sqlite3/dbstatvtab (3.46.1+1)":
+    - sqlite3/common
+  - "sqlite3/fts5 (3.46.1+1)":
+    - sqlite3/common
+  - "sqlite3/perf-threadsafe (3.46.1+1)":
+    - sqlite3/common
+  - "sqlite3/rtree (3.46.1+1)":
+    - sqlite3/common
+  - sqlite3_flutter_libs (0.0.1):
+    - Flutter
+    - "sqlite3 (~> 3.46.0+1)"
+    - sqlite3/dbstatvtab
+    - sqlite3/fts5
+    - sqlite3/perf-threadsafe
+    - sqlite3/rtree
   - SwiftyGif (5.4.5)
   - url_launcher_ios (0.0.1):
     - Flutter
@@ -70,11 +90,13 @@ DEPENDENCIES:
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - Flutter (from `Flutter`)
   - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
+  - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - open_file (from `.symlinks/plugins/open_file/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - safe_device (from `.symlinks/plugins/safe_device/ios`)
+  - sqlite3_flutter_libs (from `.symlinks/plugins/sqlite3_flutter_libs/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
@@ -84,6 +106,7 @@ SPEC REPOS:
     - DTTJailbreakDetection
     - OrderedSet
     - SDWebImage
+    - sqlite3
     - SwiftyGif
 
 EXTERNAL SOURCES:
@@ -95,6 +118,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_inappwebview_ios:
     :path: ".symlinks/plugins/flutter_inappwebview_ios/ios"
+  flutter_secure_storage:
+    :path: ".symlinks/plugins/flutter_secure_storage/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
   image_picker_ios:
@@ -105,6 +130,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/path_provider_foundation/darwin"
   safe_device:
     :path: ".symlinks/plugins/safe_device/ios"
+  sqlite3_flutter_libs:
+    :path: ".symlinks/plugins/sqlite3_flutter_libs/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
@@ -116,6 +143,7 @@ SPEC CHECKSUMS:
   file_picker: 09aa5ec1ab24135ccd7a1621c46c84134bfd6655
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
+  flutter_secure_storage: d33dac7ae2ea08509be337e775f6b59f1ff45f12
   geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
   image_picker_ios: c560581cceedb403a6ff17f2f816d7fea1421fc1
   open_file: 02eb5cb6b21264bd3a696876f5afbfb7ca4f4b7d
@@ -123,6 +151,8 @@ SPEC CHECKSUMS:
   path_provider_foundation: 2b6b4c569c0fb62ec74538f866245ac84301af46
   safe_device: 4539eb6bdbeb4b61a763a51c4e73e6b37dea4e3d
   SDWebImage: 40b0b4053e36c660a764958bff99eed16610acbb
+  sqlite3: 0bb0e6389d824e40296f531b858a2a0b71c0d2fb
+  sqlite3_flutter_libs: c00457ebd31e59fa6bb830380ddba24d44fbcd3b
   SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
 
