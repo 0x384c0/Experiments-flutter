@@ -47,7 +47,7 @@ class _PostDetailsView extends StatelessWidget {
 
     return Column(
       children: [
-        PostTile(cubit.stateData?.postItemState ?? state, () {}),
+        PostTile(cubit.stateData?.postItemState ?? state, null),
         const PostCommentsView().flexible(flex: 1),
       ],
     );

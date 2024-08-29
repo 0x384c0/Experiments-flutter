@@ -34,9 +34,8 @@ class PostTile extends CardTile {
           children: [
             Text(
               state.title,
-              overflow: TextOverflow.ellipsis,
               style: const TextStyle(fontSize: 16),
-            ),
+            ).padding(top: 4, bottom: 4),
             Row(
               children: [
                 Text(
