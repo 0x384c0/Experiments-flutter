@@ -51,15 +51,15 @@ class _PickerFormInputState<T> extends State<PickerFormInput<T>> {
         ),
         viewHintText: widget.viewHintText,
         suggestionsBuilder: (context, controller) async {
-          final suggestions = (await widget.getSuggestions(controller.text));
+          final suggestions = (await widget.getSuggestions(controller.text)).toList();
           return List.generate(
             suggestions.length,
             (int index) => (widget.listItemBuilder ?? _defaultListItemBuilder).call(
-              suggestions.elementAt(index),
+              suggestions[index],
               () {
                 controller.closeView(null);
                 controller.clear();
-                _onEntitySelected(suggestions.elementAt(index));
+                _onEntitySelected(suggestions[index]);
               },
             ),
           );

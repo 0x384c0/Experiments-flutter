@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:common_domain/data/error_model.dart';
 import 'package:common_domain/extensions/future.dart';
 import 'package:features_reddit_posts_domain/src/data/more_model.dart';
 import 'package:features_reddit_posts_domain/src/data/post_model.dart';

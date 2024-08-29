@@ -37,8 +37,8 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
   }
 
   Widget _list(BuildContext context, Iterable<PostItemState> posts) {
+    final postList = posts.toList();
     final cubit = context.read<PostsCubit>();
-    var widgets = posts.map((e) => PostTile(e, () => cubit.onPostTap(e)));
     return RefreshIndicator(
       onRefresh: cubit.refresh,
       child: ScrollToEndListener(
@@ -50,8 +50,13 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
             SliverPadding(
               padding: const EdgeInsets.all(8),
               sliver: SliverList.builder(
-                itemCount: widgets.length,
-                itemBuilder: (context, index) => widgets.elementAt(index),
+                itemCount: postList.length,
+                itemBuilder: (context, index) {
+                  return PostTile(
+                    postList[index],
+                    () => cubit.onPostTap(postList[index]),
+                  );
+                },
               ),
             ),
             SliverToBoxAdapter(child: _pageLoadingIndicator(cubit.stateData?.paginationState?.isLoadingPage ?? false)),

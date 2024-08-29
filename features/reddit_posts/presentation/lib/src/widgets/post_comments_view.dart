@@ -14,7 +14,7 @@ class PostCommentsView extends StatelessWidget {
   Widget build(BuildContext context) => createBlocPageStateBlocBuilder(
         getBloc: context.read<PostCommentsCubit>,
         child: (PostCommentsPageState data) {
-          final tiles = _mapDataToTiles(data);
+          final postList = data.data.toList();
           return ScrollToEndListener(
             onScrolledToEnd: context.read<PostCommentsCubit>().loadNextPage,
             child: (controller) => CustomScrollView(
@@ -24,8 +24,8 @@ class PostCommentsView extends StatelessWidget {
                 SliverPadding(
                   padding: const EdgeInsets.all(8),
                   sliver: SliverList.builder(
-                    itemCount: tiles.length,
-                    itemBuilder: (context, index) => tiles.elementAt(index),
+                    itemCount: data.data.length,
+                    itemBuilder: (context, index) => CommentTile(postList[index], null),
                   ),
                 ),
                 SliverToBoxAdapter(
@@ -43,6 +43,4 @@ class PostCommentsView extends StatelessWidget {
         visible: isLoadingPage,
         child: const Center(child: CircularProgressIndicator()).padding(all: 8),
       );
-
-  Iterable<Widget> _mapDataToTiles(PostCommentsPageState data) => data.data.map((e) => CommentTile(e, () {}));
 }

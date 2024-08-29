@@ -9,4 +9,12 @@ class PostItemState {
   bool get isComment => comments?.isEmpty ?? true;
 
   PostItemState(this.permalink, this.author, this.category, this.icon, this.title, this.comments);
+
+  const PostItemState.emtpy()
+      : permalink = "",
+        author = "",
+        category = "",
+        icon = null,
+        title = "",
+        comments = null;
 }
