@@ -1,4 +1,5 @@
 import 'package:common_domain/data/error_model.dart';
+import 'package:flutter/foundation.dart';
 
 extension MapErrorFuture<T> on Future<T> {
   Future<T> mapError<E extends Object>(E Function(dynamic error) mapError) =>
@@ -16,12 +17,26 @@ extension NetworkCacheFuture<T> on Future<T> {
     return then(
       (data) async {
         if (await shouldInvalidateCache?.call() ?? false) await invalidateCache?.call();
-        await saveToCache(data);
+        try {
+          await saveToCache(data);
+        } catch (e, stacktrace) {
+          debugPrint("Error saving to cache\n$e\n$stacktrace");
+          try {
+            await invalidateCache?.call();
+          } catch (e, stacktrace) {
+            debugPrint("Error invalidating cache\n$e\n$stacktrace");
+          }
+        }
         return data;
       },
     ).onError<ErrorModel>(
       (e, _) async {
-        final result = await getFromCache();
+        T? result;
+        try {
+          result = await getFromCache();
+        } catch (e, stacktrace) {
+          debugPrint("Error reading from cache\n$e\n$stacktrace");
+        }
         if (result == null) throw e;
         return result;
       },

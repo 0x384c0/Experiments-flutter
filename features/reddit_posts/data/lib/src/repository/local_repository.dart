@@ -3,7 +3,6 @@ import 'package:features_reddit_posts_data/src/db/posts_database.dart';
 import 'package:features_reddit_posts_data/src/mapper/posts_entity_to_model_mapper.dart';
 import 'package:features_reddit_posts_data/src/mapper/posts_model_to_entity_mapper.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
-import 'package:flutter/cupertino.dart';
 
 class LocalRepositoryImpl implements PostsLocalRepository {
   LocalRepositoryImpl(this._postsModelToEntityMapper, this._postsEntityToModelMapper);
@@ -67,17 +66,12 @@ class LocalRepositoryImpl implements PostsLocalRepository {
     PostsModel data, {
     required String? after,
   }) async {
-    try {
-      final id = after?.hashCode ?? _defaultPageId;
+    final id = after?.hashCode ?? _defaultPageId;
 
-      final (postsEntity, postEntities) = _postsModelToEntityMapper.map((data, id));
+    final (postsEntity, postEntities) = _postsModelToEntityMapper.map((data, id));
 
-      await _postsDao.insertPostsEntity(postsEntity);
-      await _postsDao.insertPostEntities(postEntities);
-    } catch (e) {
-      debugPrint("$runtimeType.insertPosts e $e");
-      await deletePosts();
-    }
+    await _postsDao.insertPostsEntity(postsEntity);
+    await _postsDao.insertPostEntities(postEntities);
   }
 
   @override
@@ -85,15 +79,9 @@ class LocalRepositoryImpl implements PostsLocalRepository {
     required String? after,
   }) async {
     final id = after?.hashCode ?? _defaultPageId;
-    try {
-      final postsEntityData = await _postsDao.getPostsEntityForId(id);
-      final postEntityData = await _postsDao.getPostEntityForPostsEntity(postsEntityData!);
-      return _postsEntityToModelMapper.map((postsEntityData, postEntityData));
-    } catch (e) {
-      debugPrint("LocalRepositoryImpl.getPosts e $e");
-      await deletePosts();
-      return null;
-    }
+    final postsEntityData = await _postsDao.getPostsEntityForId(id);
+    final postEntityData = await _postsDao.getPostEntityForPostsEntity(postsEntityData!);
+    return _postsEntityToModelMapper.map((postsEntityData, postEntityData));
   }
 
   @override
