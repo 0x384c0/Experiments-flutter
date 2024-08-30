@@ -20,3 +20,13 @@ echo "Npm is installed."
 
 check_command python3
 echo "python3 is installed."
+
+# Utils
+check_command awk
+echo "awk is installed."
+
+check_command grep
+echo "grep is installed."
+
+check_command curl
+echo "curl is installed."

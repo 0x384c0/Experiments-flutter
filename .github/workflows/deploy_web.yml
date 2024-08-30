@@ -23,6 +23,9 @@ jobs:
       - name: Install project dependencies
         run: sh scripts/pub_get_all.sh
 
+      - name: Download drift files for web
+        run: sh scripts/download_drift_for_web.sh
+
       - name: Localizations
         run: sh scripts/generate_translate_file.sh
 
