@@ -11,5 +11,11 @@ class PostsDatabase extends _$PostsDatabase {
   @override
   int get schemaVersion => 1;
 
-  static QueryExecutor _openConnection() => driftDatabase(name: 'posts_database');
+  static QueryExecutor _openConnection() => driftDatabase(
+        name: 'posts_database',
+        web: DriftWebOptions(
+          sqlite3Wasm: Uri.parse('drift/sqlite3.wasm'),
+          driftWorker: Uri.parse('drift/drift_worker.dart.js'),
+        ),
+      );
 }
