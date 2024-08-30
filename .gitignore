@@ -48,3 +48,9 @@ app.*.map.json
 # Generated files
 *.g.dart
 *.freezed.dart
+
+# Files for drift web. More at https://drift.simonbinder.eu/web/
+# Run sh scripts/download_drift_for_web.sh to get necessary files
+# Or dowload manually from https://github.com/simolus3/drift/releases and https://github.com/simolus3/sqlite3.dart/releases
+web/drift/*.js
+web/drift/*.wasm

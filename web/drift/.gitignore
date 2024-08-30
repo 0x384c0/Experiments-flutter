@@ -1,5 +1,0 @@
-# Use scripts/download_drift_for_web.sh to get necessary files
-# Or dowload manually from https://github.com/simolus3/drift/releases and https://github.com/simolus3/sqlite3.dart/releases
-# More at https://drift.simonbinder.eu/web/
-*.js
-*.wasm
