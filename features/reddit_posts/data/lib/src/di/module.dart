@@ -33,7 +33,7 @@ class PostsDataModule extends Module {
   @override
   exportedBinds(Injector i) {
     i.add<PostsRemoteRepository>(RemoteRepositoryImpl.new);
-    i.addSingleton<PostsLocalRepository>(LocalRepositoryImpl.new);
+    i.addLazySingleton<PostsLocalRepository>(LocalRepositoryImpl.new);
   }
 
   Dio _provideDio() {
