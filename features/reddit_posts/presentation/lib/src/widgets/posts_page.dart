@@ -2,6 +2,7 @@ import 'package:common_presentation/mixins/widget_alert_mixin.dart';
 import 'package:common_presentation/widgets/connection_status_view.dart';
 import 'package:common_presentation/widgets/page_state/page_state_bloc_builder.dart';
 import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
+import 'package:features_reddit_posts_presentation/l10n/app_localizations.g.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +18,10 @@ class PostsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider(
         create: (_) => PostsCubit()..refresh(),
-        child: const _PostsView(),
+        child: Scaffold(
+          appBar: AppBar(title: Text(AppLocalizations.of(context)!.posts_remote_first)),
+          body: const _PostsView(),
+        ),
       );
 }
 

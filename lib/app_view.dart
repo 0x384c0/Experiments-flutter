@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart' as reddit_posts;
 import 'package:features_forms_presentation/features_forms_presentation.dart' as forms;
 import 'package:features_weather_presentation/features_weather_presentation.dart' as weather;
 import 'package:features_webview_presentation/features_webview_presentation.dart' as web_view;
@@ -19,6 +20,7 @@ class AppView extends StatelessWidget {
 
   get _localizationsDelegates => const [
         ...forms.AppLocalizations.localizationsDelegates,
+        ...reddit_posts.AppLocalizations.localizationsDelegates,
         ...weather.AppLocalizations.localizationsDelegates,
         ...web_view.AppLocalizations.localizationsDelegates,
         ...home.AppLocalizations.localizationsDelegates,
@@ -28,6 +30,7 @@ class AppView extends StatelessWidget {
   get _supportedLocales {
     const allValues = [
       ...forms.AppLocalizations.supportedLocales,
+      ...reddit_posts.AppLocalizations.supportedLocales,
       ...weather.AppLocalizations.supportedLocales,
       ...web_view.AppLocalizations.supportedLocales,
       ...home.AppLocalizations.supportedLocales,
