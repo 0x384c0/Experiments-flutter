@@ -1,4 +1,5 @@
 #!/bin/bash
+# Automated drift web setup. More at: https://drift.simonbinder.eu/web/
 
 BASEDIR=$(realpath "$(dirname "$0")"/..)
 
@@ -35,4 +36,4 @@ SQLITE3_WASM_URL="https://github.com/simolus3/sqlite3.dart/releases/download/sql
 curl -L -o "$DEST_DIR/drift_worker.js" "$DRIFT_WORKER_URL"
 curl -L -o "$DEST_DIR/sqlite3.wasm" "$SQLITE3_WASM_URL"
 
-echo "Downloaded drift_worker.js and sqlite3.wasm to $DEST_DIR."
+echo "Downloaded drift_worker.js and sqlite3.wasm to $DEST_DIR"

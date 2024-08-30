@@ -4,6 +4,7 @@ import 'package:features_reddit_posts_data/src/data/entity/posts_entity.dart';
 
 part 'posts_database.g.dart';
 
+/// For web run at least once sh scripts/download_drift_for_web.sh
 @DriftDatabase(tables: [PostsEntity, PostEntity, PostComment])
 class PostsDatabase extends _$PostsDatabase {
   PostsDatabase() : super(_openConnection());

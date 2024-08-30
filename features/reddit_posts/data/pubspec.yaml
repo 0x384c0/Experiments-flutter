@@ -22,7 +22,7 @@ dependencies:
   retrofit: ^4.2.0
   dio: ^5.6.0
   curl_logger_dio_interceptor: ^1.0.0
-  drift: ^2.20.0
+  drift: ^2.20.0 # For web after changing version run sh scripts/download_drift_for_web.sh
   drift_flutter: ^0.1.0
 
 dev_dependencies:
