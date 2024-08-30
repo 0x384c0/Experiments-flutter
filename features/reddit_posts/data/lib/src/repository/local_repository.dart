@@ -3,9 +3,16 @@ import 'package:features_reddit_posts_data/src/db/posts_database.dart';
 import 'package:features_reddit_posts_data/src/mapper/posts_entity_to_model_mapper.dart';
 import 'package:features_reddit_posts_data/src/mapper/posts_model_to_entity_mapper.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
+import 'package:flutter/cupertino.dart';
 
 class LocalRepositoryImpl implements PostsLocalRepository {
-  LocalRepositoryImpl(this._postsModelToEntityMapper, this._postsEntityToModelMapper);
+  LocalRepositoryImpl(this._postsModelToEntityMapper, this._postsEntityToModelMapper) {
+    try {
+      _postsDao = PostsDao(PostsDatabase());
+    } catch (e) {
+      debugPrint("Failed to initialize database \n$e");
+    }
+  }
 
   //region MoreChildren
   final _moreChildrenCache = <int, Iterable<PostModel>>{};
@@ -54,7 +61,7 @@ class LocalRepositoryImpl implements PostsLocalRepository {
   //endregion
 
   //region Posts
-  final _postsDao = PostsDao(PostsDatabase());
+  late final PostsDao _postsDao;
 
   static const _defaultPageId = 0;
 

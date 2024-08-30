@@ -16,8 +16,8 @@ extension NetworkCacheFuture<T> on Future<T> {
     assert((shouldInvalidateCache == null) == (invalidateCache == null));
     return then(
       (data) async {
-        if (await shouldInvalidateCache?.call() ?? false) await invalidateCache?.call();
         try {
+          if (await shouldInvalidateCache?.call() ?? false) await invalidateCache?.call();
           await saveToCache(data);
         } catch (e, stacktrace) {
           debugPrint("Error saving to cache\n$e\n$stacktrace");
