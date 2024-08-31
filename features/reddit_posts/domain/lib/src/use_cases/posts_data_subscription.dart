@@ -35,6 +35,8 @@ abstract class DataSubscription<T, K> {
   disposeStream({K? key}) {
     _dataStreamControllerMap[key]?.close();
     _dataStreamControllerMap.remove(key);
+    _dataIsLoadingControllerMap[key]?.close();
+    _dataIsLoadingControllerMap.remove(key);
   }
 
   sync({

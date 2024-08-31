@@ -19,7 +19,7 @@ class AppModule extends Module {
   @override
   void routes(r) {
     r.module(HomeRoutesModule.path, module: HomeRoutesModule());
-    r.module(RoutesModule.path, module: RoutesModule());
+    r.module(PostsRoutesModule.path, module: PostsRoutesModule());
     r.module(WeatherRoutesModule.path, module: WeatherRoutesModule());
     r.module(FormsRoutesModule.path, module: FormsRoutesModule());
     r.module(WebViewRoutesModule.path, module: WebViewRoutesModule());

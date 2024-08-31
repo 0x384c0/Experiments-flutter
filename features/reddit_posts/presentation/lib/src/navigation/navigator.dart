@@ -26,15 +26,15 @@ class NavigatorImpl implements PostsNavigator {
   /// Flutter Web engine removes query parameter encoding, so this url cannot be opened manually in browser
   @override
   toPostDetails(PostItemState state) => Modular.to.pushNamed(
-        '${RoutesModule.path}${RoutesModule.postDetails}?${Params.permalink}=${state.permalink}',
+        '${PostsRoutesModule.path}${PostsRoutesModule.postDetails}?${Params.permalink}=${state.permalink}',
         arguments: state,
       );
 
   @override
-  toPostsLocalFirst() => Modular.to.pushNamed('${RoutesModule.path}${RoutesModule.postsLocalFirst}');
+  toPostsLocalFirst() => Modular.to.pushNamed('${PostsRoutesModule.path}${PostsRoutesModule.postsLocalFirst}');
 
   @override
-  toPostsRemoteFirst()  => Modular.to.pushNamed('${RoutesModule.path}${RoutesModule.postsRemoteFirst}');
+  toPostsRemoteFirst()  => Modular.to.pushNamed('${PostsRoutesModule.path}${PostsRoutesModule.postsRemoteFirst}');
 
   @override
   back() => Modular.to.pop();

@@ -6,8 +6,7 @@ import 'package:features_reddit_posts_presentation/src/widgets/post_details_page
 import 'package:features_reddit_posts_presentation/src/widgets/posts_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-//TODO: rename to PostsRoutesModule
-class RoutesModule extends Module {
+class PostsRoutesModule extends Module {
   static const path = '/posts';
   static const postDetails = '/post_details';
   static const postsRemoteFirst = '/posts_remote_first';

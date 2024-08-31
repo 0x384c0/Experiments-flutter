@@ -21,17 +21,20 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
   late final PostsNavigator _navigator = Modular.get();
   final PostsDataSubscription _sub = Modular.get();
   List<PostItemState> _listData = [];
-  bool _isLoading = false;
+  bool _isLoading = true;
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: Text(AppLocalizations.of(context)!.posts_local_first)),
         body: ConnectionStatusView.withChild(
-          AnimatedCrossFade(
-            duration: const Duration(milliseconds: 200),
-            firstChild: _loading(),
-            secondChild: _list(),
-            crossFadeState: _listData.isEmpty && _isLoading ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          Stack(
+            children: [
+              Visibility(
+                visible: _listData.isEmpty && _isLoading,
+                child: _loading(),
+              ),
+              _list(),
+            ],
           ),
         ),
       );
@@ -63,5 +66,11 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
           _isLoading = isLoading;
         }));
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _sub.disposeStream();
+    super.dispose();
   }
 }
