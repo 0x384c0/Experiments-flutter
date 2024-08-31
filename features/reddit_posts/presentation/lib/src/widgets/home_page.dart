@@ -1,3 +1,4 @@
+import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/l10n/app_localizations.g.dart';
 import 'package:features_reddit_posts_presentation/src/navigation/navigator.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,29 @@ class HomePage extends StatelessWidget {
           title: Text(locale.posts_local_first),
           onTap: _navigator.toPostsLocalFirst,
         ),
+        const Spacer(),
+        ElevatedButton(
+          onPressed: () => _initDb(context),
+          child: Text(locale.posts_initialize_sqlite_database),
+        ),
+        const SizedBox(height: 8),
       ],
     ).padding(all: 8);
+  }
+
+  _initDb(BuildContext context) async {
+    final locale = AppLocalizations.of(context)!;
+    PostsDataSubscription sub = Modular.get();
+    try {
+      await sub.initDb();
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(locale.posts_sqlite_database_initialized)));
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(locale.posts_sqlite_database_initialization_error(e))));
+      }
+    }
   }
 }

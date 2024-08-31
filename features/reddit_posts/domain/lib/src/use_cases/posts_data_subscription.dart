@@ -30,6 +30,9 @@ abstract class DataSubscription<T, K> {
     await _sendLocalToStream(key);
   }
 
+  //TODO: move to separate class, try make it faster
+  Future initDb() async => await getLocal(null);
+
   Stream<_T> _getStream<_T>(K? key, Map<K?, StreamController<_T>> map, bool syncOnListen) {
     final StreamController<_T> dataStreamController;
     if (map.containsKey(key)) {

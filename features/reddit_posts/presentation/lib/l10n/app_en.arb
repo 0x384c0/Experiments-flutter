@@ -1,4 +1,7 @@
 {
+    "posts_initialize_sqlite_database": "Initialize SQLite database",
+    "posts_sqlite_database_initialized": "SQLite database initialized",
+    "posts_sqlite_database_initialization_error": "SQLite database initialization error: {error}",
     "posts_remote_first": "Remote first",
     "posts_local_first": "Local first"
 }
