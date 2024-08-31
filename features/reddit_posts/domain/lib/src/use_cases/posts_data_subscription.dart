@@ -9,29 +9,10 @@ abstract class DataSubscription<T, K> {
   final _dataStreamControllerMap = <K?, StreamController<T?>>{};
   final _dataIsLoadingControllerMap = <K?, StreamController<bool>>{};
 
-  Stream<T?> getDataStream({K? key}) {
-    final StreamController<T?> dataStreamController;
-    if (_dataStreamControllerMap.containsKey(key)) {
-      dataStreamController = _dataStreamControllerMap[key]!;
-    } else {
-      dataStreamController = StreamController<T?>();
-      _dataStreamControllerMap[key] = dataStreamController;
-      dataStreamController.onListen = () => sync(key: key);
-    }
-    return dataStreamController.stream;
-  }
+  Stream<T?> getDataStream({K? key}) => _getStream(key, _dataStreamControllerMap, true);
 
-  Stream<bool> getDataIsLoadingStream({K? key}) {
-    final StreamController<bool> dataStreamController;
-    if (_dataIsLoadingControllerMap.containsKey(key)) {
-      dataStreamController = _dataIsLoadingControllerMap[key]!;
-    } else {
-      dataStreamController = StreamController<bool>();
-      _dataIsLoadingControllerMap[key] = dataStreamController;
-    }
-    return dataStreamController.stream;
-  }
-  
+  Stream<bool> getDataIsLoadingStream({K? key}) => _getStream(key, _dataIsLoadingControllerMap, false);
+
   disposeStream({K? key}) {
     _dataStreamControllerMap[key]?.close();
     _dataStreamControllerMap.remove(key);
@@ -47,6 +28,18 @@ abstract class DataSubscription<T, K> {
     await _sendLocalToStream(key);
     await _syncLocalWithRemote(key);
     await _sendLocalToStream(key);
+  }
+
+  Stream<_T> _getStream<_T>(K? key, Map<K?, StreamController<_T>> map, bool syncOnListen) {
+    final StreamController<_T> dataStreamController;
+    if (map.containsKey(key)) {
+      dataStreamController = map[key]!;
+    } else {
+      dataStreamController = StreamController<_T>();
+      map[key] = dataStreamController;
+      if (syncOnListen) dataStreamController.onListen = () => sync(key: key);
+    }
+    return dataStreamController.stream;
   }
 
   _sendLocalToStream(K? key) async {
