@@ -16,7 +16,7 @@ abstract class DataSubscription<T, K> {
     } else {
       dataStreamController = StreamController<T?>();
       _dataStreamControllerMap[key] = dataStreamController;
-      dataStreamController.onListen = () => _sync(key: key);
+      dataStreamController.onListen = () => sync(key: key);
     }
     return dataStreamController.stream;
   }
@@ -31,13 +31,13 @@ abstract class DataSubscription<T, K> {
     }
     return dataStreamController.stream;
   }
-
+  
   disposeStream({K? key}) {
     _dataStreamControllerMap[key]?.close();
     _dataStreamControllerMap.remove(key);
   }
 
-  _sync({
+  sync({
     K? key,
     bool invalidate = false,
   }) async {

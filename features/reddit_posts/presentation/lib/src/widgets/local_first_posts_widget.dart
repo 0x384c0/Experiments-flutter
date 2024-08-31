@@ -21,30 +21,47 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
   late final PostsNavigator _navigator = Modular.get();
   final PostsDataSubscription _sub = Modular.get();
   List<PostItemState> _listData = [];
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: Text(AppLocalizations.of(context)!.posts_local_first)),
         body: ConnectionStatusView.withChild(
-          ListView.builder(
-            itemCount: _listData.length,
-            itemBuilder: (c, index) => PostTile(
-              _listData[index],
-              () => _onPostTap(_listData[index]),
-            ),
+          AnimatedCrossFade(
+            duration: const Duration(milliseconds: 200),
+            firstChild: _loading(),
+            secondChild: _list(),
+            crossFadeState: _listData.isEmpty && _isLoading ? CrossFadeState.showFirst : CrossFadeState.showSecond,
           ),
         ),
       );
 
+  Widget _list() => RefreshIndicator(
+        onRefresh: _refreshAll,
+        child: ListView.builder(
+          itemCount: _listData.length,
+          itemBuilder: (c, index) => PostTile(
+            _listData[index],
+            () => _onPostTap(_listData[index]),
+          ),
+        ),
+      );
+
+  Widget _loading() => const Center(child: CircularProgressIndicator());
+
   _onPostTap(PostItemState state) => _navigator.toPostDetails(state);
+
+  Future<void> _refreshAll() => _sub.sync();
 
   @override
   void initState() {
-    _sub.getDataStream().listen(
-          (data) => setState(() {
-            _listData = data != null ? _postModelMapper.map(data).toList() : [];
-          }),
-        );
+    _sub.getDataStream().listen((data) => setState(() {
+          _listData = data != null ? _postModelMapper.map(data).toList() : [];
+        }));
+
+    _sub.getDataIsLoadingStream().listen((isLoading) => setState(() {
+          _isLoading = isLoading;
+        }));
     super.initState();
   }
 }
