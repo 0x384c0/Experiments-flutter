@@ -106,7 +106,7 @@ class _MaterialValidationPageState extends State<MaterialValidationPage> {
     try {
       return _suggestionsSubscription.first;
     } finally {
-      _suggestionsSubject.add(text); //TODO: find another way to add item to stream after subscription
+      _suggestionsSubject.add(text);
     }
   }
 
