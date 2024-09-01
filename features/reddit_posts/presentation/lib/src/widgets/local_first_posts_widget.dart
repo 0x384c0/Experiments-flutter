@@ -1,11 +1,13 @@
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:common_presentation/widgets/connection_status_view.dart';
+import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/l10n/app_localizations.g.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:features_reddit_posts_presentation/src/navigation/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
 
 import 'post_tile.dart';
 
@@ -20,7 +22,15 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
   late final Mapper<PostsModel, Iterable<PostItemState>> _postModelMapper = Modular.get();
   late final PostsNavigator _navigator = Modular.get();
   final PostsDataSubscription _sub = Modular.get();
-  List<PostItemState> _listData = [];
+
+  List<PostItemState> get _listData {
+    List<PostItemState> result = [];
+    for (var data in _loadedPages.values) {
+      result.addAll(_postModelMapper.map(data));
+    }
+    return result;
+  }
+
   bool _isLoading = true;
 
   @override
@@ -41,30 +51,83 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
 
   Widget _list() => RefreshIndicator(
         onRefresh: _refreshAll,
-        child: ListView.builder(
-          itemCount: _listData.length,
-          itemBuilder: (c, index) => PostTile(
-            _listData[index],
-            () => _onPostTap(_listData[index]),
+        child: ScrollToEndListener(
+          onScrolledToEnd: _loadNextPage,
+          child: (controller) => CustomScrollView(
+            physics: const AlwaysScrollableScrollPhysics(),
+            controller: controller,
+            slivers: [
+              SliverPadding(
+                padding: const EdgeInsets.all(8),
+                sliver: SliverList.builder(
+                  itemCount: _listData.length,
+                  itemBuilder: (c, index) => PostTile(
+                    _listData[index],
+                    () => _onPostTap(_listData[index]),
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(child: _pageLoadingIndicator(_nextPageLoading)),
+            ],
           ),
         ),
+      );
+
+  Widget _pageLoadingIndicator(bool isLoadingPage) => Visibility(
+        visible: isLoadingPage,
+        child: const Center(child: CircularProgressIndicator()).padding(all: 8),
       );
 
   Widget _loading() => const Center(child: CircularProgressIndicator());
 
   _onPostTap(PostItemState state) => _navigator.toPostDetails(state);
 
-  Future<void> _refreshAll() => _sub.sync();
+  Future<void> _refreshAll() async {
+    _loadedPages.clear();
+    final hasInternetConnection = true; //TODO: get value from system
+    await _sub.sync(invalidate: hasInternetConnection);
+  }
+
+  String? get _nextPageKey => _loadedPages.keys.last;
+
+  bool get _nextPageLoading {
+    try {
+      return _pagesLoadingState.values.contains(true);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  final Map<String?, PostsModel> _loadedPages = {};
+  final Map<String, bool> _pagesLoadingState = {};
+
+  _loadNextPage() {
+    if (_nextPageKey == null) return;
+    if (_nextPageLoading) return;
+    _listenPageData(_nextPageKey);
+  }
+
+  _listenPageData(String? key) {
+    if (!_sub.getDataStream(key: key).hasListener) {
+      _sub.getDataStream(key: key).stream.listen((data) => setState(() {
+            if (data != null) _loadedPages[data.after] = data;
+          }));
+    }
+
+    if (!_sub.getDataIsLoadingStream(key: key).hasListener) {
+      _sub.getDataIsLoadingStream(key: key).stream.listen((isLoading) => setState(() {
+            if (key == null) {
+              _isLoading = isLoading; // listen first page loading
+            } else {
+              _pagesLoadingState[key] = isLoading;
+            }
+          }));
+    }
+  }
 
   @override
   void initState() {
-    _sub.getDataStream().listen((data) => setState(() {
-          _listData = data != null ? _postModelMapper.map(data).toList() : [];
-        }));
-
-    _sub.getDataIsLoadingStream().listen((isLoading) => setState(() {
-          _isLoading = isLoading;
-        }));
+    _listenPageData(null);
     super.initState();
   }
 

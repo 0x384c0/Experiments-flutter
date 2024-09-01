@@ -9,9 +9,9 @@ abstract class DataSubscription<T, K> {
   final _dataStreamControllerMap = <K?, StreamController<T?>>{};
   final _dataIsLoadingControllerMap = <K?, StreamController<bool>>{};
 
-  Stream<T?> getDataStream({K? key}) => _getStream(key, _dataStreamControllerMap, true);
+  StreamController<T?> getDataStream({K? key}) => _getStream(key, _dataStreamControllerMap, true);
 
-  Stream<bool> getDataIsLoadingStream({K? key}) => _getStream(key, _dataIsLoadingControllerMap, false);
+  StreamController<bool> getDataIsLoadingStream({K? key}) => _getStream(key, _dataIsLoadingControllerMap, false);
 
   disposeStream({K? key}) {
     _dataStreamControllerMap[key]?.close();
@@ -33,7 +33,7 @@ abstract class DataSubscription<T, K> {
   //TODO: move to separate class, try make it faster
   Future initDb() async => await getLocal(null);
 
-  Stream<_T> _getStream<_T>(K? key, Map<K?, StreamController<_T>> map, bool syncOnListen) {
+  StreamController<_T> _getStream<_T>(K? key, Map<K?, StreamController<_T>> map, bool syncOnListen) {
     final StreamController<_T> dataStreamController;
     if (map.containsKey(key)) {
       dataStreamController = map[key]!;
@@ -42,7 +42,7 @@ abstract class DataSubscription<T, K> {
       map[key] = dataStreamController;
       if (syncOnListen) dataStreamController.onListen = () => sync(key: key);
     }
-    return dataStreamController.stream;
+    return dataStreamController;
   }
 
   _sendLocalToStream(K? key) async {

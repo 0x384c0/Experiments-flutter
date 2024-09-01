@@ -87,7 +87,8 @@ class LocalRepositoryImpl implements PostsLocalRepository {
   }) async {
     final id = after?.hashCode ?? _defaultPageId;
     final postsEntityData = await _postsDao.getPostsEntityForId(id);
-    final postEntityData = await _postsDao.getPostEntityForPostsEntity(postsEntityData!);
+    if (postsEntityData == null) return null;
+    final postEntityData = await _postsDao.getPostEntityForPostsEntity(postsEntityData);
     return _postsEntityToModelMapper.map((postsEntityData, postEntityData));
   }
 
