@@ -26,6 +26,10 @@ class HomePage extends StatelessWidget {
         ),
         const Spacer(),
         ElevatedButton(
+          onPressed: () => _clearDb(context),
+          child: Text(locale.posts_clear_sqlite_database),
+        ),
+        ElevatedButton(
           onPressed: () => _initDb(context),
           child: Text(locale.posts_initialize_sqlite_database),
         ),
@@ -46,6 +50,22 @@ class HomePage extends StatelessWidget {
       if (context.mounted) {
         ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(locale.posts_sqlite_database_initialization_error(e))));
+      }
+    }
+  }
+
+  _clearDb(BuildContext context) async {
+    final locale = AppLocalizations.of(context)!;
+    PostsDataSubscription sub = Modular.get();
+    try {
+      await sub.deleteLocal();
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(locale.posts_sqlite_database_cleared)));
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(locale.posts_sqlite_database_clear_error(e))));
       }
     }
   }
