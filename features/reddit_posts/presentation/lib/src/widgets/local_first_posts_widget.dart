@@ -46,6 +46,7 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
               _list(),
             ],
           ),
+          onConnectionStatusChanged: _onConnectionStatusChanged,
         ),
       );
 
@@ -123,6 +124,10 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
             }
           }));
     }
+  }
+
+  _onConnectionStatusChanged(bool isConnected) {
+    //TODO: re-sync on back online
   }
 
   @override

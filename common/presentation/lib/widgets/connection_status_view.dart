@@ -5,12 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class ConnectionStatusView extends StatefulWidget {
-  const ConnectionStatusView({super.key});
+  const ConnectionStatusView({super.key, this.onConnectionStatusChanged});
+
+  final Function(bool isConnected)? onConnectionStatusChanged;
 
   @override
   State<StatefulWidget> createState() => _ConnectionStatusViewState();
 
-  static withChild(Widget child) => Stack(children: [child, const ConnectionStatusView()]);
+  static withChild(
+    Widget child, {
+    Function(bool isConnected)? onConnectionStatusChanged,
+  }) =>
+      Stack(children: [
+        child,
+        ConnectionStatusView(
+          onConnectionStatusChanged: onConnectionStatusChanged,
+        )
+      ]);
 }
 
 class _ConnectionStatusViewState extends State<ConnectionStatusView> {
@@ -69,6 +80,7 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
   @override
   void initState() {
     _subscription = InternetConnectionChecker().onStatusChange.listen((status) => setState(() {
+          widget.onConnectionStatusChanged?.call(status == InternetConnectionStatus.connected);
           switch (_state) {
             case _ConnectionStatusState.hidden:
             case _ConnectionStatusState.backOnline:
