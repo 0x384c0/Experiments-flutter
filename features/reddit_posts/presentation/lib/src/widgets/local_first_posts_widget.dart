@@ -84,9 +84,8 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
   _onPostTap(PostItemState state) => _navigator.toPostDetails(state);
 
   Future<void> _refreshAll() async {
-    _loadedPages.clear();
-    final hasInternetConnection = true; //TODO: get value from system
-    await _sub.sync(invalidate: hasInternetConnection);
+    setState(() => _loadedPages.clear());
+    await _sub.sync(invalidate: _hasInternetConnection);
   }
 
   String? get _nextPageKey => _loadedPages.keys.last;
@@ -126,8 +125,16 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
     }
   }
 
+  var _hasInternetConnection = true;
+
   _onConnectionStatusChanged(bool isConnected) {
-    //TODO: re-sync on back online
+    final previousState = _hasInternetConnection;
+    _hasInternetConnection = isConnected;
+    final isNeedReSync = previousState == false && isConnected == true;
+    if (isNeedReSync) {
+      setState(() => _loadedPages.clear());
+      _sub.sync(invalidate: true);
+    }
   }
 
   @override
