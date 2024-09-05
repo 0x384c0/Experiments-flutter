@@ -141,7 +141,8 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
     if (isNeedReSync) {
       try {
         setState(() => _isReSyncing = true);
-        await _sub.reSync(keys: _loadedPages.keys);
+        final keys = _loadedPages.keys;
+        await _sub.reSync(keys: keys.isNotEmpty ? keys : [null]);
       } catch (e) {
         if (mounted) {
           final manager = ScaffoldMessenger.of(context);
