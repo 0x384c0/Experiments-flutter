@@ -29,6 +29,7 @@ class HomePage extends StatelessWidget {
           onPressed: () => _clearDb(context),
           child: Text(locale.posts_clear_sqlite_database),
         ),
+        const SizedBox(height: 8),
         ElevatedButton(
           onPressed: () => _initDb(context),
           child: Text(locale.posts_initialize_sqlite_database),
