@@ -63,4 +63,15 @@ class PostsCubit extends Cubit<PageState<PostsPageState>>
     _lastAfter = model.after;
     return model;
   }
+
+  var _hasInternetConnection = true;
+
+  onConnectionStatusChanged(bool isConnected) {
+    final previousState = _hasInternetConnection;
+    _hasInternetConnection = isConnected;
+    final isNeedReSync = previousState == false && isConnected == true;
+    if (isNeedReSync) {
+      onRefresh();
+    }
+  }
 }
