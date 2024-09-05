@@ -30,6 +30,13 @@ abstract class DataSubscription<T, K> {
     await _sendLocalToStream(key);
   }
 
+  reSync({required Iterable<K?> keys}) async {
+    for (var key in keys) {
+      await _syncLocalWithRemote(key);
+      await _sendLocalToStream(key);
+    }
+  }
+
   //TODO: move to separate class, try make it faster
   Future initDb() async => await getLocal(null);
 

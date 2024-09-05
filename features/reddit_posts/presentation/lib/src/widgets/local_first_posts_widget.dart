@@ -31,7 +31,7 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
     return result;
   }
 
-  bool _isLoading = true;
+  var _isLoading = true;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -39,11 +39,11 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
         body: ConnectionStatusView.withChild(
           Stack(
             children: [
+              _list(),
               Visibility(
-                visible: _listData.isEmpty && _isLoading,
+                visible: _listData.isEmpty && _isLoading || _isReSyncing,
                 child: _loading(),
               ),
-              _list(),
             ],
           ),
           onConnectionStatusChanged: _onConnectionStatusChanged,
@@ -79,7 +79,12 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
         child: const Center(child: CircularProgressIndicator()).padding(all: 8),
       );
 
-  Widget _loading() => const Center(child: CircularProgressIndicator());
+  Widget _loading() => Container(
+        color: Colors.white.withOpacity(0.5), // Semi-transparent white background
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
 
   _onPostTap(PostItemState state) => _navigator.toPostDetails(state);
 
@@ -127,13 +132,25 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
 
   var _hasInternetConnection = true;
 
-  _onConnectionStatusChanged(bool isConnected) {
+  var _isReSyncing = false;
+
+  _onConnectionStatusChanged(bool isConnected) async {
     final previousState = _hasInternetConnection;
     _hasInternetConnection = isConnected;
     final isNeedReSync = previousState == false && isConnected == true;
     if (isNeedReSync) {
-      setState(() => _loadedPages.clear());
-      _sub.sync(invalidate: true);
+      try {
+        setState(() => _isReSyncing = true);
+        await _sub.reSync(keys: _loadedPages.keys);
+      } catch (e) {
+        if (mounted) {
+          final manager = ScaffoldMessenger.of(context);
+          manager.removeCurrentSnackBar();
+          manager.showSnackBar(SnackBar(content: Text(e.toString())));
+        }
+      } finally {
+        setState(() => _isReSyncing = false);
+      }
     }
   }
 
