@@ -1,5 +1,5 @@
 import 'package:common_presentation/extensions/build_context.dart';
-import 'package:common_presentation/widgets/page_state/page_screen_bloc_builder.dart';
+import 'package:common_presentation/widgets/screen_state/screen_state_bloc_builder.dart';
 import 'package:features_weather_presentation/l10n/app_localizations.g.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'package:common_domain/mapper/mapper.dart';
-import 'package:common_presentation/widgets/page_state/bloc_screen_state_mixin.dart';
-import 'package:common_presentation/widgets/page_state/generic_screen_state.dart';
-import 'package:common_presentation/widgets/page_state/screen_state.dart';
+import 'package:common_presentation/widgets/screen_state/bloc_screen_state_mixin.dart';
+import 'package:common_presentation/widgets/screen_state/generic_screen_state.dart';
+import 'package:common_presentation/widgets/screen_state/screen_state.dart';
 import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';

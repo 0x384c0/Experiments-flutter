@@ -1,4 +1,4 @@
-import 'package:common_presentation/widgets/page_state/screen_state.dart';
+import 'package:common_presentation/widgets/screen_state/screen_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

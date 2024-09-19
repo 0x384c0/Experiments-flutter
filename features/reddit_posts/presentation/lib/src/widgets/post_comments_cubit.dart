@@ -1,9 +1,9 @@
 import 'package:common_domain/mapper/mapper.dart';
-import 'package:common_presentation/mixins/cubit_page_state_pagination_mixin.dart';
+import 'package:common_presentation/mixins/cubit_screen_state_pagination_mixin.dart';
 import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
-import 'package:common_presentation/widgets/page_state/bloc_screen_state_mixin.dart';
-import 'package:common_presentation/widgets/page_state/generic_screen_state.dart';
-import 'package:common_presentation/widgets/page_state/screen_state.dart';
+import 'package:common_presentation/widgets/screen_state/bloc_screen_state_mixin.dart';
+import 'package:common_presentation/widgets/screen_state/generic_screen_state.dart';
+import 'package:common_presentation/widgets/screen_state/screen_state.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
@@ -16,8 +16,8 @@ class PostCommentsCubit extends Cubit<ScreenState<PostCommentsPageState>>
     with
         BlocScreenStateMixin,
         CubitPaginationMixin<Iterable<PostItemState>, GenericScreenState<Iterable<PostItemState>>>,
-        CubitPageStatePaginationMixin,
-        CubitPageStatePaginationIterableMixin<PostItemState, GenericScreenState<Iterable<PostItemState>>> {
+        CubitScreenStatePaginationMixin,
+        CubitScreenStatePaginationIterableMixin<PostItemState, GenericScreenState<Iterable<PostItemState>>> {
   PostCommentsCubit(this._permalink) : super(ScreenStateEmptyLoading());
 
   final String? _permalink;

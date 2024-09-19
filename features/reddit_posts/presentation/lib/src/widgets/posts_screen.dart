@@ -1,6 +1,6 @@
 import 'package:common_presentation/mixins/widget_alert_mixin.dart';
 import 'package:common_presentation/widgets/connection_status_view.dart';
-import 'package:common_presentation/widgets/page_state/page_screen_bloc_builder.dart';
+import 'package:common_presentation/widgets/screen_state/screen_state_bloc_builder.dart';
 import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
 import 'package:features_reddit_posts_presentation/l10n/app_localizations.g.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';

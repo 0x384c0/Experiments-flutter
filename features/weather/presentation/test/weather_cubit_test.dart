@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:common_presentation/widgets/page_state/generic_screen_state.dart';
-import 'package:common_presentation/widgets/page_state/screen_state.dart';
+import 'package:common_presentation/widgets/screen_state/generic_screen_state.dart';
+import 'package:common_presentation/widgets/screen_state/screen_state.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:features_weather_presentation/src/widgets/weather_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';

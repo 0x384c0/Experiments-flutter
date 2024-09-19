@@ -1,5 +1,5 @@
 import 'package:common_presentation/widgets/alert_dialog.dart';
-import 'package:common_presentation/widgets/page_state/bloc_screen_state_mixin.dart';
+import 'package:common_presentation/widgets/screen_state/bloc_screen_state_mixin.dart';
 
 mixin CubitAlertMixin<T extends StateWithAlert> on BlocScreenStateMixin<T> {
   emitAlertWithText(String text) => emitAlert(alertDialogState: SuccessAlertDialogState(null, text));

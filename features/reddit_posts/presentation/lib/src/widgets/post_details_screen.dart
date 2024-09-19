@@ -1,5 +1,5 @@
 import 'package:common_presentation/widgets/connection_status_view.dart';
-import 'package:common_presentation/widgets/page_state/page_screen_bloc_builder.dart';
+import 'package:common_presentation/widgets/screen_state/screen_state_bloc_builder.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:features_reddit_posts_presentation/src/widgets/post_comments_cubit.dart';
