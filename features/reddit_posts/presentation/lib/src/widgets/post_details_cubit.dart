@@ -1,14 +1,14 @@
 import 'package:common_domain/mapper/mapper.dart';
-import 'package:common_presentation/widgets/page_state/bloc_page_state_mixin.dart';
-import 'package:common_presentation/widgets/page_state/page_state.dart';
+import 'package:common_presentation/widgets/page_state/bloc_screen_state_mixin.dart';
+import 'package:common_presentation/widgets/page_state/screen_state.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class PostDetailsCubit extends Cubit<PageState<PostDetailsState>> with BlocPageStateMixin {
+class PostDetailsCubit extends Cubit<ScreenState<PostDetailsState>> with BlocScreenStateMixin {
   PostDetailsCubit(PostDetailsState? state)
-      : super(state != null ? PageStatePopulated(data: state) : PageStateEmptyLoading());
+      : super(state != null ? ScreenStatePopulated(data: state) : ScreenStateEmptyLoading());
 
   late final PostsInteractor _interactor = Modular.get();
   late final Mapper<PostModel, PostDetailsState> _postModelMapper = Modular.get();

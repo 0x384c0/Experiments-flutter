@@ -30,7 +30,7 @@ feature split in to 3 modules
 
 ### Communication between layers
 
-1. [UI](/features/reddit_posts/presentation/lib/src/widgets/posts_page.dart) sends signals
+1. [UI](/features/reddit_posts/presentation/lib/src/widgets/posts_screen.dart) sends signals
    to [Cubit](/features/reddit_posts/presentation/lib/src/widgets/posts_cubit.dart)
 2. Cubit executes Use cases
    from [Interactor](/features/reddit_posts/domain/lib/src/use_cases/interactor.dart).
@@ -77,7 +77,6 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 
 ## TODO
 
-* replace word `page` with `screen`
 * https://pub.dev/packages/crdt
 * https://github.com/cfug/dio/issues/1653
 * https://pub.dev/packages/mapify_generator

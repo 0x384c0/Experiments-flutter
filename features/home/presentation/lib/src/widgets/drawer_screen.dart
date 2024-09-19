@@ -3,10 +3,10 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:widgets_modifiers/painting/painting_effect_widgets_modifiers.dart';
 
-import 'home_page.dart';
+import 'home_screen.dart';
 
-class DrawerPage extends StatelessWidget {
-  const DrawerPage({
+class DrawerScreen extends StatelessWidget {
+  const DrawerScreen({
     super.key,
     required this.selectedScreen,
     required this.onDestinationSelected,

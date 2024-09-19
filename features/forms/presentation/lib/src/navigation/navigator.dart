@@ -1,11 +1,11 @@
 import 'package:features_forms_presentation/features_forms_presentation.dart';
-import 'package:features_forms_presentation/src/widgets/forms_page.dart';
+import 'package:features_forms_presentation/src/widgets/forms_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 /// Navigation for feature
 abstract class FormsNavigator {
-  Widget homePage();
+  Widget home();
 
   Future<Object?> toFormzzValidation();
 
@@ -17,7 +17,7 @@ abstract class FormsNavigator {
 /// Private implementation of navigation
 class NavigatorImpl implements FormsNavigator {
   @override
-  homePage() => const FormsPage();
+  home() => const FormsScreen();
 
   @override
   toFormzzValidation() => Modular.to.pushNamed('${FormsRoutesModule.path}${FormsRoutesModule.formzzValidation}');

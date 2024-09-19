@@ -1,12 +1,12 @@
 import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
-import 'package:features_reddit_posts_presentation/src/widgets/home_page.dart';
+import 'package:features_reddit_posts_presentation/src/widgets/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 /// Navigation for weather feature
 abstract class PostsNavigator {
-  Widget homePage();
+  Widget home();
 
   toPostDetails(PostItemState state);
 
@@ -20,7 +20,7 @@ abstract class PostsNavigator {
 /// Private implementation if weather navigation
 class NavigatorImpl implements PostsNavigator {
   @override
-  homePage() => const HomePage();
+  home() => const HomeScreen();
 
   /// https://github.com/flutter/flutter/issues/147857
   /// Flutter Web engine removes query parameter encoding, so this url cannot be opened manually in browser

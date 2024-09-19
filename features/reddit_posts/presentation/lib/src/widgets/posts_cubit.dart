@@ -2,25 +2,25 @@ import 'package:common_domain/mapper/mapper.dart';
 import 'package:common_presentation/mixins/cubit_alert_mixin.dart';
 import 'package:common_presentation/mixins/cubit_page_state_pagination_mixin.dart';
 import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
-import 'package:common_presentation/widgets/page_state/bloc_page_state_mixin.dart';
-import 'package:common_presentation/widgets/page_state/generic_page_state.dart';
-import 'package:common_presentation/widgets/page_state/page_state.dart';
+import 'package:common_presentation/widgets/page_state/bloc_screen_state_mixin.dart';
+import 'package:common_presentation/widgets/page_state/generic_screen_state.dart';
+import 'package:common_presentation/widgets/page_state/screen_state.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-typedef PostsPageState = GenericPageState<Iterable<PostItemState>>;
+typedef PostsPageState = GenericScreenState<Iterable<PostItemState>>;
 
-class PostsCubit extends Cubit<PageState<PostsPageState>>
+class PostsCubit extends Cubit<ScreenState<PostsPageState>>
     with
-        BlocPageStateMixin,
-        CubitPaginationMixin<Iterable<PostItemState>, GenericPageState<Iterable<PostItemState>>>,
+        BlocScreenStateMixin,
+        CubitPaginationMixin<Iterable<PostItemState>, GenericScreenState<Iterable<PostItemState>>>,
         CubitPageStatePaginationMixin,
-        CubitPageStatePaginationIterableMixin<PostItemState, GenericPageState<Iterable<PostItemState>>>,
+        CubitPageStatePaginationIterableMixin<PostItemState, GenericScreenState<Iterable<PostItemState>>>,
         CubitAlertMixin {
-  PostsCubit() : super(PageStateEmptyLoading());
+  PostsCubit() : super(ScreenStateEmptyLoading());
 
   late final PostsInteractor _interactor = Modular.get();
   late final PostsNavigator _navigator = Modular.get();
@@ -56,8 +56,8 @@ class PostsCubit extends Cubit<PageState<PostsPageState>>
 
   // endregion
 
-  GenericPageState<Iterable<PostItemState>> _newPaginationState(Iterable<PostItemState> data) =>
-      GenericPageState(data: data);
+  GenericScreenState<Iterable<PostItemState>> _newPaginationState(Iterable<PostItemState> data) =>
+      GenericScreenState(data: data);
 
   PostsModel _saveLastAfter(PostsModel model) {
     _lastAfter = model.after;

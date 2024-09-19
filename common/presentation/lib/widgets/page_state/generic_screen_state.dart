@@ -2,8 +2,8 @@ import 'package:common_presentation/mixins/cubit_alert_mixin.dart';
 import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
 import 'package:common_presentation/widgets/alert_dialog.dart';
 
-class GenericPageState<T> implements StateWithPagination<T>, StateWithAlert {
-  GenericPageState({
+class GenericScreenState<T> implements StateWithPagination<T>, StateWithAlert {
+  GenericScreenState({
     required this.data,
     this.paginationState,
     this.alertDialogState,
@@ -19,12 +19,12 @@ class GenericPageState<T> implements StateWithPagination<T>, StateWithAlert {
   final AlertDialogState? alertDialogState;
 
   @override
-  GenericPageState<T> copyWith({
+  GenericScreenState<T> copyWith({
     T? data,
     PaginationState? paginationState,
     AlertDialogState? alertDialogState,
   }) {
-    return GenericPageState(
+    return GenericScreenState(
       data: data ?? this.data,
       paginationState: paginationState ?? this.paginationState,
       alertDialogState: alertDialogState ?? this.alertDialogState,

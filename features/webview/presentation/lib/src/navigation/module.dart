@@ -1,6 +1,6 @@
-import 'package:features_webview_presentation/src/widgets/embedded_web_view_page.dart';
-import 'package:features_webview_presentation/src/widgets/web_view/web_view_page.dart';
-import 'package:features_webview_presentation/src/widgets/web_views_page.dart';
+import 'package:features_webview_presentation/src/widgets/embedded_web_view_screen.dart';
+import 'package:features_webview_presentation/src/widgets/web_view/web_view_screen.dart';
+import 'package:features_webview_presentation/src/widgets/web_views_screen.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -13,8 +13,8 @@ class WebViewRoutesModule extends Module {
 
   @override
   void routes(r) {
-    r.child('/', child: (context) => const WebViewsPage());
+    r.child('/', child: (context) => const WebViewsScreen());
     r.child(embedded, child: (context) => EmbeddedWebViewPage(uri: _testUri));
-    r.child(fullscreen, child: (context) => WebViewPage(uri: _testUri));
+    r.child(fullscreen, child: (context) => WebViewScreen(uri: _testUri));
   }
 }

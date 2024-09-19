@@ -1,9 +1,9 @@
 import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
-import 'package:features_reddit_posts_presentation/src/widgets/home_page.dart';
+import 'package:features_reddit_posts_presentation/src/widgets/home_screen.dart';
 import 'package:features_reddit_posts_presentation/src/widgets/local_first_posts_widget.dart';
-import 'package:features_reddit_posts_presentation/src/widgets/post_details_page.dart';
-import 'package:features_reddit_posts_presentation/src/widgets/posts_page.dart';
+import 'package:features_reddit_posts_presentation/src/widgets/post_details_screen.dart';
+import 'package:features_reddit_posts_presentation/src/widgets/posts_screen.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class PostsRoutesModule extends Module {
@@ -14,14 +14,14 @@ class PostsRoutesModule extends Module {
 
   @override
   void routes(r) {
-    r.child('/', child: (context) => const HomePage());
-    r.child(postsRemoteFirst, child: (context) => const PostsPage());
+    r.child('/', child: (context) => const HomeScreen());
+    r.child(postsRemoteFirst, child: (context) => const PostsScreen());
     r.child(postsLocalFirst, child: (context) => const LocalFirstPostsWidget());
     r.child(postDetails, child: (context) {
       final permalink = r.args.queryParams[Params.permalink];
       final postItemState = r.args.data is PostItemState ? r.args.data : null;
       final state = PostDetailsState(permalink, postItemState);
-      return PostDetailsPage(state: state);
+      return PostDetailsScreen(state: state);
     });
   }
 }

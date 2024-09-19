@@ -1,7 +1,7 @@
 import 'package:common_domain/mapper/mapper.dart';
-import 'package:common_presentation/widgets/page_state/bloc_page_state_mixin.dart';
-import 'package:common_presentation/widgets/page_state/generic_page_state.dart';
-import 'package:common_presentation/widgets/page_state/page_state.dart';
+import 'package:common_presentation/widgets/page_state/bloc_screen_state_mixin.dart';
+import 'package:common_presentation/widgets/page_state/generic_screen_state.dart';
+import 'package:common_presentation/widgets/page_state/screen_state.dart';
 import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -10,10 +10,10 @@ import '../data/weather_state.dart';
 import '../navigation/navigator.dart';
 import '../utils/geo_location_provider.dart';
 
-typedef WeatherPageState = GenericPageState<WeatherState>;
+typedef WeatherPageState = GenericScreenState<WeatherState>;
 
-class WeatherCubit extends Cubit<PageState<WeatherPageState>> with BlocPageStateMixin {
-  WeatherCubit() : super(PageStateEmptyLoading());
+class WeatherCubit extends Cubit<ScreenState<WeatherPageState>> with BlocScreenStateMixin {
+  WeatherCubit() : super(ScreenStateEmptyLoading());
 
   late final WeatherInteractor _interactor = Modular.get();
   late final WeatherNavigator _navigator = Modular.get();
@@ -30,5 +30,5 @@ class WeatherCubit extends Cubit<PageState<WeatherPageState>> with BlocPageState
 
   void onForecastClick(ForecastWeatherState state) => _navigator.toForecastDetails(state);
 
-  GenericPageState<WeatherState> _newState(WeatherState data) => GenericPageState(data: data);
+  GenericScreenState<WeatherState> _newState(WeatherState data) => GenericScreenState(data: data);
 }

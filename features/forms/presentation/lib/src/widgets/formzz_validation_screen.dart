@@ -9,8 +9,8 @@ import 'form_inputs/radio_form_input.dart';
 import 'form_inputs/string_form_input.dart';
 import 'formzz_validation_cubit.dart';
 
-class FormzzValidationPage extends StatelessWidget {
-  const FormzzValidationPage({super.key});
+class FormzzValidationScreen extends StatelessWidget {
+  const FormzzValidationScreen({super.key});
 
   @override
   Widget build(BuildContext context) => BlocProvider(

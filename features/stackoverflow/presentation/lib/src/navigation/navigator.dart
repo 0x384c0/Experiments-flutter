@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../widgets/questions_page.dart';
+import '../widgets/questions_screen.dart';
 
 /// Navigation for stackoverflow feature
 abstract class StackOverflowNavigator {
-  Widget homePage();
+  Widget home();
 
   back();
 }
@@ -14,7 +14,7 @@ abstract class StackOverflowNavigator {
 /// Private implementation if stackoverflow navigation
 class NavigatorImpl implements StackOverflowNavigator {
   @override
-  homePage() => const ProviderScope(child: QuestionsPage());
+  home() => const ProviderScope(child: QuestionsScreen());
 
   @override
   back() => Modular.to.pop();

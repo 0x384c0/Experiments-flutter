@@ -1,18 +1,18 @@
 import 'package:common_domain/mapper/mapper.dart';
-import 'package:common_presentation/widgets/page_state/bloc_page_state_mixin.dart';
-import 'package:common_presentation/widgets/page_state/generic_page_state.dart';
-import 'package:common_presentation/widgets/page_state/page_state.dart';
+import 'package:common_presentation/widgets/page_state/bloc_screen_state_mixin.dart';
+import 'package:common_presentation/widgets/page_state/generic_screen_state.dart';
+import 'package:common_presentation/widgets/page_state/screen_state.dart';
 import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:features_weather_presentation/src/utils/geo_location_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-typedef ForecastDetailsPageState = GenericPageState<Map<String?, ForecastWeatherState?>>;
+typedef ForecastDetailsPageState = GenericScreenState<Map<String?, ForecastWeatherState?>>;
 
-class ForecastDetailsCubit extends Cubit<PageState<ForecastDetailsPageState>>
-    with BlocPageStateMixin {
-  ForecastDetailsCubit(this._args) : super(PageStateEmptyLoading());
+class ForecastDetailsCubit extends Cubit<ScreenState<ForecastDetailsPageState>>
+    with BlocScreenStateMixin {
+  ForecastDetailsCubit(this._args) : super(ScreenStateEmptyLoading());
 
   final Map<String?, ForecastWeatherState?> _args;
 
@@ -34,6 +34,6 @@ class ForecastDetailsCubit extends Cubit<PageState<ForecastDetailsPageState>>
         : Future.error(Exception("dateEpoch is null"));
   }
 
-  GenericPageState<Map<String?, ForecastWeatherState?>> _newState(Map<String?, ForecastWeatherState?> data) =>
-      GenericPageState(data: data);
+  GenericScreenState<Map<String?, ForecastWeatherState?>> _newState(Map<String?, ForecastWeatherState?> data) =>
+      GenericScreenState(data: data);
 }

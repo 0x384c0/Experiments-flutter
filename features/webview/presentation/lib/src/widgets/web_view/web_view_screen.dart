@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 /// Fullscreen WebView page with navigation components, like app bar
-class WebViewPage extends StatefulWidget {
+class WebViewScreen extends StatefulWidget {
   /// [WebUri] that will be loaded after WebView creation
   final WebUri uri;
 
@@ -21,7 +21,7 @@ class WebViewPage extends StatefulWidget {
   /// Used to get cookies after page load
   final Function(Uri uri, String cookies)? onStopLoading;
 
-  const WebViewPage({
+  const WebViewScreen({
     super.key,
     required this.uri,
     this.headers,
@@ -30,10 +30,10 @@ class WebViewPage extends StatefulWidget {
   });
 
   @override
-  State<WebViewPage> createState() => _WebViewPageState();
+  State<WebViewScreen> createState() => _WebViewScreenState();
 }
 
-class _WebViewPageState extends State<WebViewPage> {
+class _WebViewScreenState extends State<WebViewScreen> {
   final GlobalKey _webViewKey = GlobalKey();
   bool _canGoBack = false;
   bool _canGoForward = false;

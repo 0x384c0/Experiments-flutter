@@ -3,14 +3,14 @@ import 'dart:ui';
 import 'package:features_experiments_presentation/src/utils/data_generators.dart';
 import 'package:flutter/material.dart';
 
-class WidgetsPage extends StatefulWidget {
-  const WidgetsPage({super.key});
+class WidgetsScreen extends StatefulWidget {
+  const WidgetsScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _WidgetsPageState();
+  State<StatefulWidget> createState() => _WidgetsScreenState();
 }
 
-class _WidgetsPageState extends State<WidgetsPage> {
+class _WidgetsScreenState extends State<WidgetsScreen> {
   final _statefulWidgetStateKey = GlobalKey<_TestStatefulWidgetState>();
 
   @override

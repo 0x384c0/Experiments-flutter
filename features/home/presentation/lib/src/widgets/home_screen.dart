@@ -1,7 +1,7 @@
 import 'package:features_experiments_presentation/features_experiments_presentation.dart';
 import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_home_presentation/l10n/app_localizations.g.dart' as home_localizations;
-import 'package:features_home_presentation/src/widgets/drawer_page.dart';
+import 'package:features_home_presentation/src/widgets/drawer_screen.dart';
 import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
 import 'package:features_stackoverflow_presentation/features_stackoverflow_presentation.dart';
 import 'package:features_weather_presentation/features_weather_presentation.dart';
@@ -9,14 +9,14 @@ import 'package:features_webview_presentation/features_webview_presentation.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   late PostsNavigator redditPostsNavigator = Modular.get();
   late WeatherNavigator weatherNavigator = Modular.get();
   late FormsNavigator formsNavigator = Modular.get();
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(title: _getPageTitle(context, _selectedScreen)),
       body: _body(context),
       drawer: Drawer(
-        child: DrawerPage(
+        child: DrawerScreen(
           selectedScreen: _selectedScreen,
           onDestinationSelected: (e) => _onDestinationSelected(e.id),
         ),
@@ -73,12 +73,12 @@ class _HomePageState extends State<HomePage> {
       }[index]!;
 
   late final _pages = [
-    formsNavigator.homePage(),
-    redditPostsNavigator.homePage(),
-    weatherNavigator.homePage(),
-    webViewNavigator.homePage(),
-    experimentsNavigator.homePage(),
-    stackoverflowNavigator.homePage(),
+    formsNavigator.home(),
+    redditPostsNavigator.home(),
+    weatherNavigator.home(),
+    webViewNavigator.home(),
+    experimentsNavigator.home(),
+    stackoverflowNavigator.home(),
   ];
 
   Widget _body(BuildContext context) {

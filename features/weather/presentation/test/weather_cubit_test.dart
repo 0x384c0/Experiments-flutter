@@ -1,6 +1,6 @@
 import 'package:bloc_test/bloc_test.dart';
-import 'package:common_presentation/widgets/page_state/generic_page_state.dart';
-import 'package:common_presentation/widgets/page_state/page_state.dart';
+import 'package:common_presentation/widgets/page_state/generic_screen_state.dart';
+import 'package:common_presentation/widgets/page_state/screen_state.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:features_weather_presentation/src/widgets/weather_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -17,13 +17,13 @@ main() {
     sut = WeatherCubit();
   });
 
-  blocTest<WeatherCubit, PageState<GenericPageState<WeatherState>>>(
+  blocTest<WeatherCubit, ScreenState<GenericScreenState<WeatherState>>>(
     'refresh successful',
     build: () => sut,
     act: (cubit) => cubit.refresh(),
     verify: (bloc) => {
       expect(
-        (sut.state as PageStatePopulated).data.forecast.length,
+        (sut.state as ScreenStatePopulated).data.forecast.length,
         MockDatasourceImpl.forecastItems,
       )
     },

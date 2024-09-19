@@ -4,8 +4,8 @@ import 'package:features_stackoverflow_presentation/src/provider/quiestion_provi
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-class QuestionsPage extends HookConsumerWidget {
-  const QuestionsPage({super.key});
+class QuestionsScreen extends HookConsumerWidget {
+  const QuestionsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => HookConsumer(

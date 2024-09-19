@@ -8,7 +8,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'web_view_manager.dart';
 
 /// WebView without any navigation components, like app bar
-class WebViewEmbeddedPage extends StatefulWidget {
+class WebViewEmbeddedScreen extends StatefulWidget {
   /// [WebUri] that will be loaded after WebView creation
   final WebUri uri;
 
@@ -24,7 +24,7 @@ class WebViewEmbeddedPage extends StatefulWidget {
   /// Used to get cookies after page load
   final Function(WebUri uri, String cookies)? onStopLoading;
 
-  WebViewEmbeddedPage({
+  WebViewEmbeddedScreen({
     required this.uri,
     this.showLoading,
     this.onNavigate,
@@ -33,11 +33,11 @@ class WebViewEmbeddedPage extends StatefulWidget {
   }) : super(key: ValueKey(uri));
 
   @override
-  State<WebViewEmbeddedPage> createState() => _WebViewEmbeddedPageState();
+  State<WebViewEmbeddedScreen> createState() => _WebViewEmbeddedScreenState();
 }
 
-class _WebViewEmbeddedPageState extends State<WebViewEmbeddedPage>
-    with AutomaticKeepAliveClientMixin<WebViewEmbeddedPage> {
+class _WebViewEmbeddedScreenState extends State<WebViewEmbeddedScreen>
+    with AutomaticKeepAliveClientMixin<WebViewEmbeddedScreen> {
   final GlobalKey _webViewKey = GlobalKey();
   InAppWebViewController? _webViewController;
   bool _initialLoading = true;

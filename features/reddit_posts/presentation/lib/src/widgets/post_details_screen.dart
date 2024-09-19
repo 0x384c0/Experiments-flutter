@@ -1,5 +1,5 @@
 import 'package:common_presentation/widgets/connection_status_view.dart';
-import 'package:common_presentation/widgets/page_state/page_state_bloc_builder.dart';
+import 'package:common_presentation/widgets/page_state/page_screen_bloc_builder.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:features_reddit_posts_presentation/src/widgets/post_comments_cubit.dart';
@@ -13,8 +13,8 @@ import 'post_details_cubit.dart';
 import 'post_tile.dart';
 
 /// Screen with post details
-class PostDetailsPage extends StatelessWidget {
-  const PostDetailsPage({super.key, required this.state});
+class PostDetailsScreen extends StatelessWidget {
+  const PostDetailsScreen({super.key, required this.state});
 
   final PostDetailsState state;
 

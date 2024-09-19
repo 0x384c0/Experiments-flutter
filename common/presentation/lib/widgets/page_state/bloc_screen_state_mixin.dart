@@ -1,13 +1,13 @@
-import 'package:common_presentation/widgets/page_state/page_state.dart';
+import 'package:common_presentation/widgets/page_state/screen_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// [Bloc], that can emit [PageState]
-mixin BlocPageStateMixin<T> on BlocBase<PageState<T>> {
+/// [Bloc], that can emit [ScreenState]
+mixin BlocScreenStateMixin<T> on BlocBase<ScreenState<T>> {
   /// Returns data if type [T] if loaded, null otherwise
   T? get stateData {
-    if (state is PageStatePopulated<T>) {
-      return (state as PageStatePopulated<T>).data;
+    if (state is ScreenStatePopulated<T>) {
+      return (state as ScreenStatePopulated<T>).data;
     } else {
       return null;
     }
@@ -19,21 +19,21 @@ mixin BlocPageStateMixin<T> on BlocBase<PageState<T>> {
   }
 
   emitEmpty() {
-    if (!isClosed) emit(PageStateEmpty());
+    if (!isClosed) emit(ScreenStateEmpty());
   }
 
   emitEmptyError(String errorDescription) {
-    if (!isClosed) emit(PageStateEmptyError(errorDescription: errorDescription));
+    if (!isClosed) emit(ScreenStateEmptyError(errorDescription: errorDescription));
   }
 
   emitEmptyLoading() {
-    if (!isClosed) emit(PageStateEmptyLoading());
+    if (!isClosed) emit(ScreenStateEmptyLoading());
   }
 
-  PageState<T> _getNewStateFromData({T? data}) {
-    if (data == null) return PageStateEmptyLoading<T>();
-    if (data is List && data.isEmpty) return PageStateEmpty<T>();
-    return PageStatePopulated<T>(data: data);
+  ScreenState<T> _getNewStateFromData({T? data}) {
+    if (data == null) return ScreenStateEmptyLoading<T>();
+    if (data is List && data.isEmpty) return ScreenStateEmpty<T>();
+    return ScreenStatePopulated<T>(data: data);
   }
 
   /// override to intercept errors

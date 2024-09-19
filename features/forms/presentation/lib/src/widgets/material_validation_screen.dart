@@ -10,14 +10,14 @@ import 'form_inputs/file_form_input.dart';
 import 'form_inputs/image_form_input.dart';
 import 'form_inputs/picker_form_input.dart';
 
-class MaterialValidationPage extends StatefulWidget {
-  const MaterialValidationPage({super.key});
+class MaterialValidationScreen extends StatefulWidget {
+  const MaterialValidationScreen({super.key});
 
   @override
-  createState() => _MaterialValidationPageState();
+  createState() => _MaterialValidationScreenState();
 }
 
-class _MaterialValidationPageState extends State<MaterialValidationPage> {
+class _MaterialValidationScreenState extends State<MaterialValidationScreen> {
   final _formKey = GlobalKey<FormState>();
   late final FormsNavigator _navigator = Modular.get();
   final dropdownMenuEntries = List.generate(5, (i) => DropdownMenuEntry(label: "label $i", value: "value $i"));

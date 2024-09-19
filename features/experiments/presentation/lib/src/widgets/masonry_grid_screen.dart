@@ -4,8 +4,8 @@ import 'package:features_experiments_presentation/src/utils/data_generators.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-class MasonryGridPage extends StatelessWidget {
-  const MasonryGridPage({super.key});
+class MasonryGridScreen extends StatelessWidget {
+  const MasonryGridScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

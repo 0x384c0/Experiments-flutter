@@ -1,6 +1,6 @@
 import 'package:features_weather_presentation/src/data/weather_state.dart';
-import 'package:features_weather_presentation/src/widgets/forecast_details_view.dart';
-import 'package:features_weather_presentation/src/widgets/weather_page.dart';
+import 'package:features_weather_presentation/src/widgets/forecast_details_screen.dart';
+import 'package:features_weather_presentation/src/widgets/weather_screen.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class WeatherRoutesModule extends Module {
@@ -9,10 +9,10 @@ class WeatherRoutesModule extends Module {
 
   @override
   void routes(r) {
-    r.child('/', child: (context) => const WeatherPage());
+    r.child('/', child: (context) => const WeatherScreen());
     r.child(
       forecast,
-      child: (context) => ForecastDetailsPage(args: {
+      child: (context) => ForecastDetailsScreen(args: {
         r.args.queryParams[Params.timeEpoch]: r.args.data is ForecastWeatherState ? r.args.data : null,
       }),
     );

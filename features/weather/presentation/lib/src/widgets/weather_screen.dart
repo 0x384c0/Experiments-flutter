@@ -1,4 +1,4 @@
-import 'package:common_presentation/widgets/page_state/page_state_bloc_builder.dart';
+import 'package:common_presentation/widgets/page_state/page_screen_bloc_builder.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,8 +8,8 @@ import 'weather_cubit.dart';
 import 'weather_tile.dart';
 
 /// Screen with current weather and forecast
-class WeatherPage extends StatelessWidget {
-  const WeatherPage({super.key});
+class WeatherScreen extends StatelessWidget {
+  const WeatherScreen({super.key});
 
   @override
   Widget build(BuildContext context) => BlocProvider(

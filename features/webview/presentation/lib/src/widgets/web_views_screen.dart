@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
 
-class WebViewsPage extends StatelessWidget {
-  const WebViewsPage({super.key});
+class WebViewsScreen extends StatelessWidget {
+  const WebViewsScreen({super.key});
 
   WebViewNavigator get _navigator => Modular.get();
 

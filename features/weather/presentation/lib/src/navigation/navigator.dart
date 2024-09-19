@@ -1,5 +1,5 @@
 import '../data/weather_state.dart';
-import '../widgets/weather_page.dart';
+import '../widgets/weather_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -7,7 +7,7 @@ import 'module.dart';
 
 /// Navigation for weather feature
 abstract class WeatherNavigator {
-  Widget homePage();
+  Widget home();
 
   toForecastDetails(ForecastWeatherState state);
 
@@ -17,7 +17,7 @@ abstract class WeatherNavigator {
 /// Private implementation if weather navigation
 class NavigatorImpl implements WeatherNavigator {
   @override
-  homePage() => const WeatherPage();
+  home() => const WeatherScreen();
 
   @override
   toForecastDetails(ForecastWeatherState state) => Modular.to.pushNamed(

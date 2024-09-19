@@ -1,11 +1,11 @@
 import 'package:features_experiments_presentation/src/navigation/module.dart';
-import 'package:features_experiments_presentation/src/widgets/flutter_layout_page.dart';
+import 'package:features_experiments_presentation/src/widgets/flutter_layout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 /// Navigation for feature
 abstract class ExperimentsNavigator {
-  Widget homePage();
+  Widget home();
 
   back();
 
@@ -17,7 +17,7 @@ abstract class ExperimentsNavigator {
 /// Private implementation of navigation
 class NavigatorImpl implements ExperimentsNavigator {
   @override
-  homePage() => const FlutterLayoutPage();
+  home() => const FlutterLayoutScreen();
 
   @override
   back() => Modular.to.pop();
