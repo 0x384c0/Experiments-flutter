@@ -77,6 +77,7 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 
 ## TODO
 
+* add Oauth2
 * https://pub.dev/packages/crdt
 * https://github.com/cfug/dio/issues/1653
 * https://pub.dev/packages/mapify_generator
