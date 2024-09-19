@@ -16,14 +16,13 @@ dependencies:
   common_presentation:
     path: "../../../common/presentation"
   flutter_modular: ^6.3.4
-  flutter_inappwebview: ^6.0.0
   path_provider: ^2.1.4
+  widgets_modifiers: ^0.3.42
+  url_launcher: ^6.3.0
+  flutter_inappwebview: ^6.0.0
   open_file: ^3.3.2
   mime: ^1.0.5
   file_picker: ^8.1.2
-  url_launcher: ^6.3.0
-  flutter_easyloading: ^3.0.5
-  widgets_modifiers: ^0.3.42
 
 dev_dependencies:
   flutter_lints: ^4.0.0
