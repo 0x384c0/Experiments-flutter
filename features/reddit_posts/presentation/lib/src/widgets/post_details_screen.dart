@@ -30,7 +30,7 @@ class PostDetailsScreen extends StatelessWidget {
 
 class _PostDetailsView extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => createBlocPageStateBlocBuilder(
+  Widget build(BuildContext context) => createBlocScreenStateBlocBuilder(
         layoutBuilder: _scaffoldLayoutBuilder,
         getBloc: context.read<PostDetailsCubit>,
         child: (PostDetailsState data) =>

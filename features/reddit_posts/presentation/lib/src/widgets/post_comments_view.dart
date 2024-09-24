@@ -11,7 +11,7 @@ class PostCommentsView extends StatelessWidget {
   const PostCommentsView({super.key});
 
   @override
-  Widget build(BuildContext context) => createBlocPageStateBlocBuilder(
+  Widget build(BuildContext context) => createBlocScreenStateBlocBuilder(
         getBloc: context.read<PostCommentsCubit>,
         child: (PostCommentsPageState data) {
           final postList = data.data.toList();

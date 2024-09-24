@@ -44,7 +44,7 @@ Widget createScreenStateBlocBuilder<B extends BlocBase<ScreenState<T>>, T>({
 Widget _defaultLayoutBuilder(_, child) => child;
 
 /// convenience method for passing [BlocScreenStateMixin] only
-Widget createBlocPageStateBlocBuilder<B extends BlocScreenStateMixin<T>, T>({
+Widget createBlocScreenStateBlocBuilder<B extends BlocScreenStateMixin<T>, T>({
   Key? key,
   Widget Function(T? data, Widget child) layoutBuilder = _defaultLayoutBuilder,
   required B Function() getBloc,
