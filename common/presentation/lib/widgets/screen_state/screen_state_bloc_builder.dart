@@ -1,6 +1,6 @@
 import 'package:common_presentation/widgets/screen_state/screen_state.dart';
 import 'package:common_presentation/widgets/screen_state/bloc_screen_state_mixin.dart';
-import 'package:common_presentation/widgets/empty_view.dart';
+import 'package:common_presentation/widgets/empty_state_view.dart';
 import 'package:common_presentation/widgets/error_view.dart';
 import 'package:common_presentation/widgets/loading_indicator.dart';
 import 'package:flutter/widgets.dart';
