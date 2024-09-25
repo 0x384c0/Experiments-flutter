@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:widgets_modifiers/painting/painting_effect_widgets_modifiers.dart';
 
+import '../data/selected_page_state.dart';
 import 'home_screen.dart';
 
 class DrawerScreen extends StatelessWidget {
@@ -12,8 +13,8 @@ class DrawerScreen extends StatelessWidget {
     required this.onDestinationSelected,
   });
 
-  final SelectedPage selectedScreen;
-  final Function(SelectedPage) onDestinationSelected;
+  final SelectedPageState selectedScreen;
+  final Function(SelectedPageState) onDestinationSelected;
 
   @override
   Widget build(BuildContext context) => ListView(
@@ -25,22 +26,23 @@ class DrawerScreen extends StatelessWidget {
           ),
           ListTile(
             title: Text(_getLocalizations(context).home_webview),
-            onTap: kIsWeb ? null : () => _onDestinationSelected(context, SelectedPage.webView),
-            tileColor:
-                selectedScreen == SelectedPage.webView ? Theme.of(context).colorScheme.surfaceContainerHighest : null,
+            onTap: kIsWeb ? null : () => _onDestinationSelected(context, SelectedPageState.webView),
+            tileColor: selectedScreen == SelectedPageState.webView
+                ? Theme.of(context).colorScheme.surfaceContainerHighest
+                : null,
           ).opacity(opacity: kIsWeb ? 0.5 : 1),
           ListTile(
             title: Text(_getLocalizations(context).home_experiments),
-            onTap: () => _onDestinationSelected(context, SelectedPage.experiments),
+            onTap: () => _onDestinationSelected(context, SelectedPageState.experiments),
           ),
           ListTile(
             title: Text(_getLocalizations(context).home_stackoverflow),
-            onTap: () => _onDestinationSelected(context, SelectedPage.stackoverflow),
+            onTap: () => _onDestinationSelected(context, SelectedPageState.stackoverflow),
           ),
         ],
       );
 
-  _onDestinationSelected(BuildContext context, SelectedPage screen) {
+  _onDestinationSelected(BuildContext context, SelectedPageState screen) {
     Navigator.pop(context);
     onDestinationSelected(screen);
   }

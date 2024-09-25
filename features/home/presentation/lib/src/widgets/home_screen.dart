@@ -9,6 +9,8 @@ import 'package:features_webview_presentation/features_webview_presentation.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../data/selected_page_state.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -59,17 +61,17 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  SelectedPage _selectedScreen = SelectedPage.defaultPage;
-  final _pageController = PageController(initialPage: SelectedPage.defaultPage.id);
+  SelectedPageState _selectedScreen = SelectedPageState.defaultPage;
+  final _pageController = PageController(initialPage: SelectedPageState.defaultPage.id);
   final _bucket = PageStorageBucket();
 
-  Widget _getPageTitle(BuildContext context, SelectedPage index) => {
-        SelectedPage.posts: Text(_getLocalization(context).home_posts),
-        SelectedPage.weather: Text(_getLocalization(context).home_weather),
-        SelectedPage.forms: Text(_getLocalization(context).home_forms),
-        SelectedPage.webView: Text(_getLocalization(context).home_webview),
-        SelectedPage.experiments: Text(_getLocalization(context).home_experiments),
-        SelectedPage.stackoverflow: Text(_getLocalization(context).home_stackoverflow),
+  Widget _getPageTitle(BuildContext context, SelectedPageState index) => {
+        SelectedPageState.posts: Text(_getLocalization(context).home_posts),
+        SelectedPageState.weather: Text(_getLocalization(context).home_weather),
+        SelectedPageState.forms: Text(_getLocalization(context).home_forms),
+        SelectedPageState.webView: Text(_getLocalization(context).home_webview),
+        SelectedPageState.experiments: Text(_getLocalization(context).home_experiments),
+        SelectedPageState.stackoverflow: Text(_getLocalization(context).home_stackoverflow),
       }[index]!;
 
   late final _pages = [
@@ -94,26 +96,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _onDestinationSelected(int selectedIndex) {
     setState(() {
-      _selectedScreen = SelectedPage.values.firstWhere((e) => e.id == selectedIndex);
+      _selectedScreen = SelectedPageState.values.firstWhere((e) => e.id == selectedIndex);
       _pageController.jumpToPage(selectedIndex);
     });
   }
 
   home_localizations.AppLocalizations _getLocalization(BuildContext context) =>
       home_localizations.AppLocalizations.of(context)!;
-}
-
-enum SelectedPage {
-  forms(0),
-  posts(1),
-  weather(2),
-  webView(3),
-  experiments(4),
-  stackoverflow(5);
-
-  const SelectedPage(this.id);
-
-  final int id;
-
-  static SelectedPage defaultPage = SelectedPage.forms;
 }
