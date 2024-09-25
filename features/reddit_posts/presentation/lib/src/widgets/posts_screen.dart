@@ -32,11 +32,10 @@ class _PostsView extends StatelessWidget with WidgetAlertMixin {
   Widget build(BuildContext context) {
     final cubit = context.read<PostsCubit>();
     onBuild(context, cubit);
-    return createBlocScreenStateBlocBuilder(
-      getBloc: context.read<PostsCubit>,
-      child: (PostsPageState data) => ConnectionStatusView.withChild(
+    return ScreenStateBlocBuilder<PostsCubit, PostsPageState>(
+      builder: (context, data) => ConnectionStatusView.withChild(
         Center(child: _list(context, data.data)),
-        onConnectionStatusChanged: cubit.onConnectionStatusChanged
+        onConnectionStatusChanged: cubit.onConnectionStatusChanged,
       ),
     );
   }

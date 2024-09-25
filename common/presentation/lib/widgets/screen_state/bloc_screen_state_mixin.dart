@@ -1,6 +1,7 @@
-import 'package:common_presentation/widgets/screen_state/screen_state.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'screen_state.dart';
 
 /// [Bloc], that can emit [ScreenState]
 mixin BlocScreenStateMixin<T> on BlocBase<ScreenState<T>> {
@@ -22,12 +23,26 @@ mixin BlocScreenStateMixin<T> on BlocBase<ScreenState<T>> {
     if (!isClosed) emit(ScreenStateEmpty());
   }
 
-  emitEmptyError(String errorDescription) {
-    if (!isClosed) emit(ScreenStateEmptyError(errorDescription: errorDescription));
+  emitError(String errorDescription) {
+    if (!isClosed) {
+      final data = stateData;
+      if (data != null) {
+        emit(ScreenStatePopulatedError(data: data, errorDescription: errorDescription));
+      } else {
+        emit(ScreenStateEmptyError(errorDescription: errorDescription));
+      }
+    }
   }
 
-  emitEmptyLoading() {
-    if (!isClosed) emit(ScreenStateEmptyLoading());
+  emitLoading() {
+    if (!isClosed) {
+      final data = stateData;
+      if (data != null) {
+        emit(ScreenStatePopulatedLoading(data: data));
+      } else {
+        emit(ScreenStateEmptyLoading());
+      }
+    }
   }
 
   ScreenState<T> _getNewStateFromData({T? data}) {
@@ -40,19 +55,19 @@ mixin BlocScreenStateMixin<T> on BlocBase<ScreenState<T>> {
   /// For example logout on Unauthorized errors
   Future<bool> interceptError(Object e) async => false;
 
-  /// Should be called after creation of [PageStateView]
+  /// Should be called after creation of [Bloc] or manually to reload all data
   @nonVirtual
   Future refresh({bool? showLoading}) async {
     try {
-      if (showLoading == true) emitEmptyLoading();
+      if (showLoading == true) emitLoading();
       await onRefresh();
     } catch (e) {
       if (!(await interceptError(e))) {
-        emitEmptyError(e.toString());
+        emitError(e.toString());
       }
     }
   }
 
-  /// Will be called after creation of [PageStateView]
-  Future onRefresh();
+  /// Will be called after calling [refresh]
+  Future onRefresh() async {}
 }

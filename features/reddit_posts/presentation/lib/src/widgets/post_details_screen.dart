@@ -30,10 +30,9 @@ class PostDetailsScreen extends StatelessWidget {
 
 class _PostDetailsView extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => createBlocScreenStateBlocBuilder(
+  Widget build(BuildContext context) => ScreenStateBlocBuilder<PostDetailsCubit, PostDetailsState>(
         layoutBuilder: _scaffoldLayoutBuilder,
-        getBloc: context.read<PostDetailsCubit>,
-        child: (PostDetailsState data) =>
+        builder: (context, data) =>
             data.postItemState != null ? _list(data.postItemState!, context) : _loadingIndicator(),
       );
 

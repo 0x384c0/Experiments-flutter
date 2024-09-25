@@ -22,9 +22,8 @@ class _WeatherView extends StatelessWidget {
   const _WeatherView();
 
   @override
-  Widget build(BuildContext context) => createBlocScreenStateBlocBuilder(
-        getBloc: context.read<WeatherCubit>,
-        child: (WeatherPageState data) => Center(child: _list(context, data.data)),
+  Widget build(BuildContext context) => ScreenStateBlocBuilder<WeatherCubit, WeatherPageState>(
+        builder: (context, data) => Center(child: _list(context, data.data)),
       );
 
   Widget _list(BuildContext context, WeatherState state) {

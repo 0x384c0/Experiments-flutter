@@ -1,6 +1,6 @@
-import 'package:common_presentation/mixins/cubit_alert_mixin.dart';
-import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
-import 'package:common_presentation/widgets/alert_dialog.dart';
+import '../../mixins/cubit_alert_mixin.dart';
+import '../../mixins/cubit_pagination_mixin.dart';
+import '../alert_dialog.dart';
 
 class GenericScreenState<T> implements StateWithPagination<T>, StateWithAlert {
   GenericScreenState({

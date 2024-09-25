@@ -15,3 +15,16 @@ final class ScreenStatePopulated<T> extends ScreenState<T> {
 
   T data;
 }
+
+final class ScreenStatePopulatedLoading<T> extends ScreenStatePopulated<T> {
+  ScreenStatePopulatedLoading({required super.data});
+}
+
+final class ScreenStatePopulatedError<T> extends ScreenStatePopulated<T> {
+  ScreenStatePopulatedError({
+    required super.data,
+    required this.errorDescription,
+  });
+
+  final String errorDescription;
+}
