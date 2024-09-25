@@ -24,13 +24,10 @@ class PostDetailsScreen extends StatelessWidget {
           BlocProvider(create: (_) => PostDetailsCubit(state)..refresh()),
           BlocProvider(create: (_) => PostCommentsCubit(state.permalink)..refresh()),
         ],
-        child: _PostDetailsView(),
+        child: _buildBody(context),
       );
-}
 
-class _PostDetailsView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) => ScreenStateBlocBuilder<PostDetailsCubit, PostDetailsState>(
+  Widget _buildBody(BuildContext context) => ScreenStateBlocBuilder<PostDetailsCubit, PostDetailsState>(
         layoutBuilder: _scaffoldLayoutBuilder,
         builder: (context, data) =>
             data.postItemState != null ? _list(data.postItemState!, context) : _loadingIndicator(),

@@ -16,18 +16,11 @@ class ForecastDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => ForecastDetailsCubit(args)..refresh(),
-      child: _ForecastDetails(args),
+      child: _buildBody(context),
     );
   }
-}
 
-class _ForecastDetails extends StatelessWidget {
-  const _ForecastDetails(this.args);
-
-  final Map<String?, ForecastWeatherState?> args;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildBody(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(args.values.firstOrNull?.date ?? context.commonLocalization!.common_loading)),
       body: ScreenStateBlocBuilder<ForecastDetailsCubit, ForecastDetailsPageState>(

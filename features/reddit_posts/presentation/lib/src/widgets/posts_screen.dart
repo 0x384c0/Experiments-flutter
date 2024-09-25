@@ -12,7 +12,7 @@ import 'post_tile.dart';
 import 'posts_cubit.dart';
 
 /// A PostsView Page.
-class PostsScreen extends StatelessWidget {
+class PostsScreen extends StatelessWidget with WidgetAlertMixin {
   const PostsScreen({super.key});
 
   @override
@@ -20,16 +20,11 @@ class PostsScreen extends StatelessWidget {
         create: (_) => PostsCubit()..refresh(),
         child: Scaffold(
           appBar: AppBar(title: Text(AppLocalizations.of(context)!.posts_remote_first)),
-          body: const _PostsView(),
+          body: _buildBody(context),
         ),
       );
-}
 
-class _PostsView extends StatelessWidget with WidgetAlertMixin {
-  const _PostsView();
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildBody(BuildContext context) {
     final cubit = context.read<PostsCubit>();
     onBuild(context, cubit);
     return ScreenStateBlocBuilder<PostsCubit, PostsPageState>(

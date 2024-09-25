@@ -14,15 +14,10 @@ class WeatherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => BlocProvider(
         create: (_) => WeatherCubit()..refresh(),
-        child: const _WeatherView(),
+        child: _buildBody(context),
       );
-}
 
-class _WeatherView extends StatelessWidget {
-  const _WeatherView();
-
-  @override
-  Widget build(BuildContext context) => ScreenStateBlocBuilder<WeatherCubit, WeatherPageState>(
+  Widget _buildBody(BuildContext context) => ScreenStateBlocBuilder<WeatherCubit, WeatherPageState>(
         builder: (context, data) => Center(child: _list(context, data.data)),
       );
 
