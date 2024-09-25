@@ -1,7 +1,7 @@
+import 'package:common_data/client/curl_logger_dio_interceptor.dart';
 import 'package:common_data/mapper/error_dto_mapper.dart';
 import 'package:common_domain/data/error_model.dart';
 import 'package:common_domain/mapper/mapper.dart';
-import 'package:curl_logger_dio_interceptor/curl_logger_dio_interceptor.dart';
 import 'package:dio/dio.dart';
 import 'package:features_reddit_posts_data/src/api/reddit_api.dart';
 import 'package:features_reddit_posts_data/src/data/reddit_json_response_dto.dart';
