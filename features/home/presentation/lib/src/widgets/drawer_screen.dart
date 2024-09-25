@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:widgets_modifiers/painting/painting_effect_widgets_modifiers.dart';
 
 import '../data/selected_page_state.dart';
-import 'home_screen.dart';
 
 class DrawerScreen extends StatelessWidget {
   const DrawerScreen({
