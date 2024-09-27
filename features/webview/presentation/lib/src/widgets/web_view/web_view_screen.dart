@@ -2,14 +2,15 @@ import 'dart:io';
 
 import 'package:common_presentation/widgets/error_view.dart';
 import 'package:common_presentation/widgets/loading_indicator.dart';
-import 'package:features_webview_presentation/src/widgets/web_view/web_view_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+import 'web_view_manager.dart';
+
 /// Fullscreen WebView page with navigation components, like app bar
 class WebViewScreen extends StatefulWidget {
-  /// [WebUri] that will be loaded after WebView creation
-  final WebUri uri;
+  /// [Uri] that will be loaded after WebView creation
+  final Uri uri;
 
   /// headers that will be injected to initialUrlRequest
   final Map<String, String>? headers;
@@ -35,10 +36,11 @@ class WebViewScreen extends StatefulWidget {
 
 class _WebViewScreenState extends State<WebViewScreen> {
   final GlobalKey _webViewKey = GlobalKey();
-  bool _canGoBack = false;
-  bool _canGoForward = false;
-  bool _initialLoading = true;
-  bool _isLoading = false;
+  var _canGoBack = false;
+  var _canGoForward = false;
+  var _initialLoading = true;
+  var _isLoading = false;
+  var _loadingProgress = 0;
   String? _errorMessage;
 
   InAppWebViewController? _webViewController;
@@ -75,7 +77,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
             child: Stack(children: [
           InAppWebView(
             key: _webViewKey,
-            initialUrlRequest: URLRequest(url: widget.uri, headers: widget.headers),
+            initialUrlRequest: URLRequest(url: WebUri.uri(widget.uri), headers: widget.headers),
             initialSettings: WebViewManager.initialSettings,
             pullToRefreshController: _pullToRefreshController,
             onWebViewCreated: (controller) {
@@ -107,8 +109,10 @@ class _WebViewScreenState extends State<WebViewScreen> {
               });
             },
             onDownloadStartRequest: _onDownloadStartRequest,
+            onProgressChanged: (_, progress) => setState(() => _loadingProgress = progress),
           ),
-          if (_initialLoading || _isLoading) const LoadingIndicator(),
+          if (_initialLoading || _isLoading)
+            LoadingIndicator(value: _loadingProgress == 0 ? null : _loadingProgress.toDouble() / 100.0),
           if (_errorMessage?.isNotEmpty == true)
             ErrorView(
               errorDescription: _errorMessage,
@@ -135,7 +139,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   _refresh() async {
     try {
       if (widget.onNavigate != null) {
-        _webViewController?.loadUrl(urlRequest: URLRequest(url: widget.uri, headers: widget.headers));
+        _webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri.uri(widget.uri), headers: widget.headers));
       } else if (Platform.isAndroid) {
         _webViewController?.reload();
       } else if (Platform.isIOS) {

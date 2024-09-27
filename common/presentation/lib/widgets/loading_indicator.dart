@@ -4,9 +4,11 @@ class LoadingIndicator extends StatelessWidget {
   const LoadingIndicator({
     super.key,
     this.opacity = 1,
+    this.value,
   });
 
   final double opacity;
+  final double? value;
 
   @override
   Widget build(BuildContext context) => Semantics(
@@ -14,7 +16,7 @@ class LoadingIndicator extends StatelessWidget {
     child: Container(
       alignment: AlignmentDirectional.center,
       color: Theme.of(context).colorScheme.surface.withOpacity(opacity),
-      child: const CircularProgressIndicator(),
+      child: CircularProgressIndicator(value: value),
     ),
   );
 }

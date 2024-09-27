@@ -9,8 +9,8 @@ import 'web_view_manager.dart';
 
 /// WebView without any navigation components, like app bar
 class WebViewEmbeddedScreen extends StatefulWidget {
-  /// [WebUri] that will be loaded after WebView creation
-  final WebUri uri;
+  /// [Uri] that will be loaded after WebView creation
+  final Uri uri;
 
   /// if true, a [LoadingIndicator] will be shown before first page loaded
   final bool? showLoading;
@@ -40,8 +40,9 @@ class _WebViewEmbeddedScreenState extends State<WebViewEmbeddedScreen>
     with AutomaticKeepAliveClientMixin<WebViewEmbeddedScreen> {
   final GlobalKey _webViewKey = GlobalKey();
   InAppWebViewController? _webViewController;
-  bool _initialLoading = true;
-  bool _isLoading = false;
+  var _initialLoading = true;
+  var _isLoading = false;
+  var _loadingProgress = 0;
   String? _errorMessage;
   late PullToRefreshController _pullToRefreshController;
 
@@ -58,7 +59,7 @@ class _WebViewEmbeddedScreenState extends State<WebViewEmbeddedScreen>
     return Stack(children: [
       InAppWebView(
         key: _webViewKey,
-        initialUrlRequest: URLRequest(url: widget.uri, headers: widget.headers),
+        initialUrlRequest: URLRequest(url: WebUri.uri(widget.uri), headers: widget.headers),
         initialSettings: WebViewManager.initialSettings,
         pullToRefreshController: _pullToRefreshController,
         onWebViewCreated: (controller) {
@@ -90,8 +91,10 @@ class _WebViewEmbeddedScreenState extends State<WebViewEmbeddedScreen>
           });
         },
         onDownloadStartRequest: _onDownloadStartRequest,
+        onProgressChanged: (_, progress) => setState(() => _loadingProgress = progress),
       ),
-      if ((widget.showLoading ?? false) && (_initialLoading || _isLoading)) const LoadingIndicator(),
+      if ((widget.showLoading ?? false) && (_initialLoading || _isLoading))
+        LoadingIndicator(value: _loadingProgress == 0 ? null : _loadingProgress.toDouble() / 100.0),
       if (_errorMessage?.isNotEmpty == true)
         ErrorView(
           errorDescription: _errorMessage,
@@ -122,7 +125,7 @@ class _WebViewEmbeddedScreenState extends State<WebViewEmbeddedScreen>
   _refresh() async {
     try {
       if (widget.onNavigate != null) {
-        _webViewController?.loadUrl(urlRequest: URLRequest(url: widget.uri, headers: widget.headers));
+        _webViewController?.loadUrl(urlRequest: URLRequest(url: WebUri.uri(widget.uri), headers: widget.headers));
       } else if (Platform.isAndroid) {
         _webViewController?.reload();
       } else if (Platform.isIOS) {
