@@ -1,7 +1,7 @@
 import 'package:features_experiments_presentation/features_experiments_presentation.dart';
 import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_home_presentation/l10n/app_localizations.g.dart' as home_localizations;
-import 'package:features_home_presentation/src/widgets/drawer_screen.dart';
+import 'package:features_home_presentation/src/screens/drawer_screen.dart';
 import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
 import 'package:features_stackoverflow_presentation/features_stackoverflow_presentation.dart';
 import 'package:features_weather_presentation/features_weather_presentation.dart';
@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../data/selected_page_state.dart';
+import 'widgets/home_pages_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -49,13 +50,13 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(
         child: DrawerScreen(
           selectedScreen: _selectedScreen,
-          onDestinationSelected: (e) => _onDestinationSelected(e.id),
+          onDestinationSelected: (e) => _onDestinationSelected(e),
         ),
       ),
       bottomNavigationBar: NavigationBar(
         destinations: destinations,
         selectedIndex: _selectedScreen.id.clamp(0, destinations.length - 1),
-        onDestinationSelected: _onDestinationSelected,
+        onDestinationSelected: _onDestinationSelectedIndex,
         indicatorColor: destinations.length <= _selectedScreen.id ? Colors.transparent : null,
       ),
     );
@@ -86,15 +87,20 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _body(BuildContext context) {
     return PageStorage(
       bucket: _bucket,
-      child: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: _pages,
+      child: HomePagesProvider(
+        onDestinationSelected: _onDestinationSelected,
+        child: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: _pages,
+        ),
       ),
     );
   }
 
-  _onDestinationSelected(int selectedIndex) {
+  _onDestinationSelected(SelectedPageState selection) => _onDestinationSelectedIndex(selection.id);
+
+  _onDestinationSelectedIndex(int selectedIndex) {
     setState(() {
       _selectedScreen = SelectedPageState.values.firstWhere((e) => e.id == selectedIndex);
       _pageController.jumpToPage(selectedIndex);
