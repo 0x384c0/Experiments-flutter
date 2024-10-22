@@ -14,45 +14,50 @@ Widget _createScreenStateBlocBuilder<B extends BlocBase<ScreenState<T>>, T>({
   Widget Function(T? data, Widget child) layoutBuilder = _defaultLayoutBuilder,
   required Future<void> Function({bool? showLoading}) refresh,
   required Widget Function(T data) builder,
-}) =>
-    BlocBuilder<B, ScreenState<T>>(
-      builder: (context, state) {
-        late Widget widget;
-        T? data;
-        switch (state) {
-          case final ScreenStateEmptyError state:
-            widget = ErrorView(
-              errorDescription: state.errorDescription,
-              refresh: () => refresh(showLoading: true),
-            );
-            break;
-          case final ScreenStateEmptyLoading _:
-            widget = const LoadingIndicator();
-            break;
-          case final ScreenStatePopulatedError<T> state:
-            data = state.data;
-            widget = LoadingOverlayView(isLoading: false, child: builder(state.data));
-            _showSnackBar(context, state.errorDescription);
-            break;
-          case final ScreenStatePopulatedLoading<T> state:
-            data = state.data;
-            widget = LoadingOverlayView(isLoading: true, child: builder(state.data));
-            break;
-          case final ScreenStatePopulated<T> state:
-            data = state.data;
-            widget = LoadingOverlayView(isLoading: false, child: builder(state.data));
-            break;
-          case final ScreenStateEmpty _:
-            widget = EmptyStateView(refresh: refresh);
-            break;
-          default:
-            widget = EmptyStateView(refresh: refresh);
-        }
-        return layoutBuilder(data, widget);
-      },
-    );
+  required bool isSliver,
+  required ScreenState<T> state,
+  required BuildContext context,
+}) {
+  late Widget widget;
+  T? data;
+  switch (state) {
+    case final ScreenStateEmptyError state:
+      widget = ErrorView(
+        errorDescription: state.errorDescription,
+        refresh: () => refresh(showLoading: true),
+      );
+      break;
+    case final ScreenStateEmptyLoading _:
+      widget = const LoadingIndicator();
+      break;
+    case final ScreenStatePopulatedError<T> state:
+      data = state.data;
+      widget = LoadingOverlayView(isLoading: false, child: builder(state.data));
+      _showSnackBar(context, state.errorDescription);
+      break;
+    case final ScreenStatePopulatedLoading<T> state:
+      data = state.data;
+      widget = LoadingOverlayView(isLoading: true, child: builder(state.data));
+      break;
+    case final ScreenStatePopulated<T> state:
+      data = state.data;
+      widget = LoadingOverlayView(isLoading: false, child: builder(state.data));
+      break;
+    case final ScreenStateEmpty _:
+      widget = EmptyStateView(refresh: refresh);
+      break;
+    default:
+      widget = EmptyStateView(refresh: refresh);
+  }
 
-_showSnackBar(BuildContext context, String message) => WidgetsBinding.instance.addPostFrameCallback((_) {
+  if (isSliver && state is! ScreenStatePopulated<T>) {
+    widget = SliverToBoxAdapter(child: SizedBox(height: 400, child: widget));
+  }
+  return layoutBuilder(data, widget);
+}
+
+_showSnackBar(BuildContext context, String message) =>
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       final messenger = ScaffoldMessenger.of(context);
       messenger.clearSnackBars();
       messenger.showSnackBar(SnackBar(content: Text(message)));
@@ -66,12 +71,18 @@ Widget _createBlocScreenStateBlocBuilder<B extends BlocScreenStateMixin<T>, T>({
   Widget Function(T? data, Widget child) layoutBuilder = _defaultLayoutBuilder,
   required B Function() getBloc,
   required Widget Function(T data) builder,
+  required bool isSliver,
+  required ScreenState<T> state,
+  required BuildContext context,
 }) =>
     _createScreenStateBlocBuilder<B, T>(
       key: key,
       layoutBuilder: layoutBuilder,
       refresh: ({bool? showLoading}) async => await getBloc().refresh(showLoading: showLoading),
       builder: builder,
+      isSliver: isSliver,
+      state: state,
+      context: context,
     );
 
 /// [BlocBuilder] for single screen, that automatically show [LoadingIndicator], [EmptyStateView] or child [Widget] depending of [ScreenState]
@@ -79,13 +90,18 @@ Widget _createBlocScreenStateBlocBuilder<B extends BlocScreenStateMixin<T>, T>({
 class ScreenStateBlocBuilder<B extends BlocScreenStateMixin<S>, S> extends BlocBuilder<B, ScreenState<S>> {
   ScreenStateBlocBuilder({
     super.key,
+    bool isSliver = false,
     Widget Function(S? data, Widget child) layoutBuilder = _defaultLayoutBuilder,
     required Widget Function(BuildContext context, S data) builder,
   }) : super(
-          builder: (context, _) => _createBlocScreenStateBlocBuilder<B, S>(
-            getBloc: context.read<B>,
-            layoutBuilder: _defaultLayoutBuilder,
-            builder: (data) => builder(context, data),
-          ),
-        );
+    builder: (context, state) =>
+        _createBlocScreenStateBlocBuilder<B, S>(
+          getBloc: context.read<B>,
+          layoutBuilder: _defaultLayoutBuilder,
+          builder: (data) => builder(context, data),
+          isSliver: isSliver,
+          context: context,
+          state: state,
+        ),
+  );
 }
