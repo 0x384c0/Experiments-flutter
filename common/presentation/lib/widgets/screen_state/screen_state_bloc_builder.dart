@@ -12,7 +12,7 @@ import 'screen_state.dart';
 Widget _createScreenStateBlocBuilder<B extends BlocBase<ScreenState<T>>, T>({
   Key? key,
   Widget Function(T? data, Widget child) layoutBuilder = _defaultLayoutBuilder,
-  required Future<void> Function({bool? showLoading}) refresh,
+  required Future<void> Function({bool? showLoading})? refresh,
   required Widget Function(T data) builder,
   required bool isSliver,
   required ScreenState<T> state,
@@ -24,7 +24,7 @@ Widget _createScreenStateBlocBuilder<B extends BlocBase<ScreenState<T>>, T>({
     case final ScreenStateEmptyError state:
       widget = ErrorView(
         errorDescription: state.errorDescription,
-        refresh: () => refresh(showLoading: true),
+        refresh: refresh != null ? () => refresh(showLoading: true) : null,
       );
       break;
     case final ScreenStateEmptyLoading _:
@@ -56,12 +56,11 @@ Widget _createScreenStateBlocBuilder<B extends BlocBase<ScreenState<T>>, T>({
   return layoutBuilder(data, widget);
 }
 
-_showSnackBar(BuildContext context, String message) =>
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final messenger = ScaffoldMessenger.of(context);
-      messenger.clearSnackBars();
-      messenger.showSnackBar(SnackBar(content: Text(message)));
-    });
+_showSnackBar(BuildContext context, String message) => WidgetsBinding.instance.addPostFrameCallback((_) {
+  final messenger = ScaffoldMessenger.of(context);
+  messenger.clearSnackBars();
+  messenger.showSnackBar(SnackBar(content: Text(message)));
+});
 
 Widget _defaultLayoutBuilder(_, child) => child;
 
@@ -69,7 +68,7 @@ Widget _defaultLayoutBuilder(_, child) => child;
 Widget _createBlocScreenStateBlocBuilder<B extends BlocScreenStateMixin<T>, T>({
   Key? key,
   Widget Function(T? data, Widget child) layoutBuilder = _defaultLayoutBuilder,
-  required B Function() getBloc,
+  required Future<void> Function({bool? showLoading})? refresh,
   required Widget Function(T data) builder,
   required bool isSliver,
   required ScreenState<T> state,
@@ -78,7 +77,7 @@ Widget _createBlocScreenStateBlocBuilder<B extends BlocScreenStateMixin<T>, T>({
     _createScreenStateBlocBuilder<B, T>(
       key: key,
       layoutBuilder: layoutBuilder,
-      refresh: ({bool? showLoading}) async => await getBloc().refresh(showLoading: showLoading),
+      refresh: refresh,
       builder: builder,
       isSliver: isSliver,
       state: state,
@@ -91,17 +90,19 @@ class ScreenStateBlocBuilder<B extends BlocScreenStateMixin<S>, S> extends BlocB
   ScreenStateBlocBuilder({
     super.key,
     bool isSliver = false,
+    bool isCanRefreshSelf = true,
     Widget Function(S? data, Widget child) layoutBuilder = _defaultLayoutBuilder,
     required Widget Function(BuildContext context, S data) builder,
   }) : super(
-    builder: (context, state) =>
-        _createBlocScreenStateBlocBuilder<B, S>(
-          getBloc: context.read<B>,
-          layoutBuilder: _defaultLayoutBuilder,
-          builder: (data) => builder(context, data),
-          isSliver: isSliver,
-          context: context,
-          state: state,
-        ),
+    builder: (context, state) => _createBlocScreenStateBlocBuilder<B, S>(
+      refresh: isCanRefreshSelf
+          ? ({bool? showLoading}) async => await context.read<B>().refresh(showLoading: showLoading)
+          : null,
+      layoutBuilder: _defaultLayoutBuilder,
+      builder: (data) => builder(context, data),
+      isSliver: isSliver,
+      context: context,
+      state: state,
+    ),
   );
 }
