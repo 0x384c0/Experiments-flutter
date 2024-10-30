@@ -5,23 +5,39 @@ import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class ConnectionStatusView extends StatefulWidget {
-  const ConnectionStatusView({super.key, this.onConnectionStatusChanged});
+  const ConnectionStatusView({
+    super.key,
+    this.safeAreaTop = false,
+    this.safeAreaBottom = true,
+    this.onConnectionStatusChanged,
+  });
 
+  final bool safeAreaTop;
+  final bool safeAreaBottom;
   final Function(bool isConnected)? onConnectionStatusChanged;
 
   @override
   State<StatefulWidget> createState() => _ConnectionStatusViewState();
 
-  static withChild(
-    Widget child, {
+  static withChild(Widget child, {
+    ThemeData? theme,
+    AlignmentDirectional alignment = AlignmentDirectional.bottomCenter,
     Function(bool isConnected)? onConnectionStatusChanged,
-  }) =>
-      Stack(children: [
+  }) {
+    Widget result = Stack(
+      alignment: alignment,
+      children: [
         child,
         ConnectionStatusView(
+          safeAreaTop: alignment != AlignmentDirectional.bottomCenter,
+          safeAreaBottom: alignment == AlignmentDirectional.bottomCenter,
           onConnectionStatusChanged: onConnectionStatusChanged,
         )
-      ]);
+      ],
+    );
+    if (theme != null) result = Theme(data: theme, child: Material(child: result));
+    return result;
+  }
 }
 
 class _ConnectionStatusViewState extends State<ConnectionStatusView> {
@@ -31,9 +47,11 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
   var _state = _ConnectionStatusState.hidden;
   Timer? _hideTimer;
   late final StreamSubscription<InternetConnectionStatus> _subscription;
+  static const _opacity = 0.8;
 
   @override
-  Widget build(BuildContext context) => AnimatedSwitcher(
+  Widget build(BuildContext context) =>
+      AnimatedSwitcher(
         duration: _animationDuration,
         layoutBuilder: _defaultLayoutBuilder,
         child: body(),
@@ -57,21 +75,29 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
       case _ConnectionStatusState.noConnection:
         return DecoratedBox(
           key: const ValueKey(_ConnectionStatusState.noConnection),
-          decoration: BoxDecoration(color: Theme.of(context).colorScheme.error),
-          child: Text(
-            commonLocale.common_no_connection,
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Theme.of(context).colorScheme.onError),
+          decoration: BoxDecoration(color: context.theme.colorScheme.error.withOpacity(_opacity)),
+          child: SafeArea(
+            top: widget.safeAreaTop,
+            bottom: widget.safeAreaBottom,
+            child: Text(
+              commonLocale.common_no_connection,
+              textAlign: TextAlign.center,
+              style: context.theme.textTheme.bodySmall?.copyWith(color: context.theme.colorScheme.onError),
+            ),
           ),
         );
       case _ConnectionStatusState.backOnline:
         return DecoratedBox(
           key: const ValueKey(_ConnectionStatusState.backOnline),
-          decoration: BoxDecoration(color: Theme.of(context).colorScheme.tertiary),
-          child: Text(
-            commonLocale.common_back_online,
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Theme.of(context).colorScheme.onTertiary),
+          decoration: BoxDecoration(color: context.theme.colorScheme.tertiary.withOpacity(_opacity)),
+          child: SafeArea(
+            top: widget.safeAreaTop,
+            bottom: widget.safeAreaBottom,
+            child: Text(
+              commonLocale.common_back_online,
+              textAlign: TextAlign.center,
+              style: context.theme.textTheme.bodySmall?.copyWith(color: context.theme.colorScheme.onTertiary),
+            ),
           ),
         );
     }
@@ -79,7 +105,8 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
 
   @override
   void initState() {
-    _subscription = InternetConnectionChecker().onStatusChange.listen((status) => setState(() {
+    _subscription = InternetConnectionChecker().onStatusChange.listen((status) =>
+        setState(() {
           widget.onConnectionStatusChanged?.call(status == InternetConnectionStatus.connected);
           switch (_state) {
             case _ConnectionStatusState.hidden:
@@ -102,9 +129,10 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
     _cancelHide();
     _hideTimer = Timer(
       _hideDuration,
-      () => setState(() {
-        _state = _ConnectionStatusState.hidden;
-      }),
+          () =>
+          setState(() {
+            _state = _ConnectionStatusState.hidden;
+          }),
     );
   }
 
@@ -116,4 +144,8 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
   }
 }
 
-enum _ConnectionStatusState { hidden, noConnection, backOnline }
+enum _ConnectionStatusState {
+  hidden,
+  noConnection,
+  backOnline,
+}
