@@ -21,13 +21,4 @@ class OauthInterceptor<T extends OauthTokensEntity> extends Interceptor {
     options.headers.addAll(_tokensProvider.headers);
     handler.next(options);
   }
-
-  @override
-  onError(DioException err, ErrorInterceptorHandler handler) {
-    if (err.response?.statusCode == unauthorizedCode) {
-      handler.next(DioException(error: unauthorizedCode, requestOptions: err.requestOptions));
-    } else {
-      handler.next(err);
-    }
-  }
 }
