@@ -54,3 +54,6 @@ app.*.map.json
 # Or dowload manually from https://github.com/simolus3/drift/releases and https://github.com/simolus3/sqlite3.dart/releases
 web/drift/*.js
 web/drift/*.wasm
+
+# FVM Version Cache
+.fvm/
