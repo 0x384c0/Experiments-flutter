@@ -46,7 +46,8 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
               ),
             ],
           ),
-          onConnectionStatusChanged: _onConnectionStatusChanged,
+          onBackOnline: _onBackOnline,
+          onNoConnection: _onNoConnection,
         ),
       );
 
@@ -134,24 +135,22 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
 
   var _isReSyncing = false;
 
-  _onConnectionStatusChanged(bool isConnected) async {
-    final previousState = _hasInternetConnection;
-    _hasInternetConnection = isConnected;
-    final isNeedReSync = previousState == false && isConnected == true;
-    if (isNeedReSync) {
-      try {
-        setState(() => _isReSyncing = true);
-        final keys = _loadedPages.keys;
-        await _sub.reSync(keys: keys.isNotEmpty ? keys : [null]);
-      } catch (e) {
-        if (mounted) {
-          final manager = ScaffoldMessenger.of(context);
-          manager.removeCurrentSnackBar();
-          manager.showSnackBar(SnackBar(content: Text(e.toString())));
-        }
-      } finally {
-        setState(() => _isReSyncing = false);
+  _onNoConnection() => _hasInternetConnection = false;
+
+  _onBackOnline() async {
+    _hasInternetConnection = true;
+    try {
+      setState(() => _isReSyncing = true);
+      final keys = _loadedPages.keys;
+      await _sub.reSync(keys: keys.isNotEmpty ? keys : [null]);
+    } catch (e) {
+      if (mounted) {
+        final manager = ScaffoldMessenger.of(context);
+        manager.removeCurrentSnackBar();
+        manager.showSnackBar(SnackBar(content: Text(e.toString())));
       }
+    } finally {
+      setState(() => _isReSyncing = false);
     }
   }
 

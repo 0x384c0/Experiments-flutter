@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
 import 'package:common_presentation/extensions/build_context.dart';
 import 'package:flutter/material.dart';
@@ -9,20 +10,24 @@ class ConnectionStatusView extends StatefulWidget {
     super.key,
     this.safeAreaTop = false,
     this.safeAreaBottom = true,
-    this.onConnectionStatusChanged,
+    this.onBackOnline,
+    this.onNoConnection,
   });
 
   final bool safeAreaTop;
   final bool safeAreaBottom;
-  final Function(bool isConnected)? onConnectionStatusChanged;
+  final VoidCallback? onBackOnline;
+  final VoidCallback? onNoConnection;
 
   @override
   State<StatefulWidget> createState() => _ConnectionStatusViewState();
 
-  static withChild(Widget child, {
+  static withChild(
+    Widget child, {
     ThemeData? theme,
     AlignmentDirectional alignment = AlignmentDirectional.bottomCenter,
-    Function(bool isConnected)? onConnectionStatusChanged,
+    VoidCallback? onBackOnline,
+    VoidCallback? onNoConnection,
   }) {
     Widget result = Stack(
       alignment: alignment,
@@ -31,7 +36,8 @@ class ConnectionStatusView extends StatefulWidget {
         ConnectionStatusView(
           safeAreaTop: alignment != AlignmentDirectional.bottomCenter,
           safeAreaBottom: alignment == AlignmentDirectional.bottomCenter,
-          onConnectionStatusChanged: onConnectionStatusChanged,
+          onBackOnline: onBackOnline,
+          onNoConnection: onNoConnection,
         )
       ],
     );
@@ -50,8 +56,7 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
   static const _opacity = 0.8;
 
   @override
-  Widget build(BuildContext context) =>
-      AnimatedSwitcher(
+  Widget build(BuildContext context) => AnimatedSwitcher(
         duration: _animationDuration,
         layoutBuilder: _defaultLayoutBuilder,
         child: body(),
@@ -105,17 +110,21 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
 
   @override
   void initState() {
-    _subscription = InternetConnectionChecker().onStatusChange.listen((status) =>
-        setState(() {
-          widget.onConnectionStatusChanged?.call(status == InternetConnectionStatus.connected);
+    _subscription = InternetConnectionChecker().onStatusChange.listen((status) => setState(() {
           switch (_state) {
             case _ConnectionStatusState.hidden:
             case _ConnectionStatusState.backOnline:
-              if (status == InternetConnectionStatus.disconnected) _state = _ConnectionStatusState.noConnection;
+              if (status == InternetConnectionStatus.disconnected) {
+                _state = _ConnectionStatusState.noConnection;
+                widget.onNoConnection?.call();
+              }
               _cancelHide();
               break;
             case _ConnectionStatusState.noConnection:
-              if (status == InternetConnectionStatus.connected) _state = _ConnectionStatusState.backOnline;
+              if (status == InternetConnectionStatus.connected) {
+                _state = _ConnectionStatusState.backOnline;
+                widget.onBackOnline?.call();
+              }
               _hideDelayed();
               break;
           }
@@ -129,10 +138,7 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
     _cancelHide();
     _hideTimer = Timer(
       _hideDuration,
-          () =>
-          setState(() {
-            _state = _ConnectionStatusState.hidden;
-          }),
+      () => setState(() => _state = _ConnectionStatusState.hidden),
     );
   }
 

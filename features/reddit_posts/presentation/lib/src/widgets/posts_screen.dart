@@ -30,7 +30,7 @@ class PostsScreen extends StatelessWidget with WidgetAlertMixin {
     return ScreenStateBlocBuilder<PostsCubit, PostsPageState>(
       builder: (context, data) => ConnectionStatusView.withChild(
         Center(child: _list(context, data.data)),
-        onConnectionStatusChanged: cubit.onConnectionStatusChanged,
+        onBackOnline: cubit.refresh,
       ),
     );
   }
