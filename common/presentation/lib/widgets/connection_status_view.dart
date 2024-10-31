@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'dart:nativewrappers/_internal/vm/lib/ffi_allocation_patch.dart';
 
 import 'package:common_presentation/extensions/build_context.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 class ConnectionStatusView extends StatefulWidget {
   const ConnectionStatusView({
@@ -52,7 +51,7 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
 
   var _state = _ConnectionStatusState.hidden;
   Timer? _hideTimer;
-  late final StreamSubscription<InternetConnectionStatus> _subscription;
+  late final StreamSubscription<InternetStatus> _subscription;
   static const _opacity = 0.8;
 
   @override
@@ -110,18 +109,18 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
 
   @override
   void initState() {
-    _subscription = InternetConnectionChecker().onStatusChange.listen((status) => setState(() {
+    _subscription = InternetConnection().onStatusChange.listen((status) => setState(() {
           switch (_state) {
             case _ConnectionStatusState.hidden:
             case _ConnectionStatusState.backOnline:
-              if (status == InternetConnectionStatus.disconnected) {
+              if (status == InternetStatus.disconnected) {
                 _state = _ConnectionStatusState.noConnection;
                 widget.onNoConnection?.call();
               }
               _cancelHide();
               break;
             case _ConnectionStatusState.noConnection:
-              if (status == InternetConnectionStatus.connected) {
+              if (status == InternetStatus.connected) {
                 _state = _ConnectionStatusState.backOnline;
                 widget.onBackOnline?.call();
               }
