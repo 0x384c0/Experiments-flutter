@@ -13,8 +13,8 @@ dependencies:
   features_weather_domain:
     path: "../domain"
   json_annotation: ^4.9.0
-  retrofit: ^4.2.0
-  dio: ^5.6.0
+  retrofit: ^4.4.1
+  dio: ^5.7.0
   flutter_modular: ^6.3.4
 
 dev_dependencies:
