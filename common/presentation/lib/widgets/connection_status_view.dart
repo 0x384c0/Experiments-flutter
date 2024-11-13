@@ -46,6 +46,7 @@ class ConnectionStatusView extends StatefulWidget {
 }
 
 class _ConnectionStatusViewState extends State<ConnectionStatusView> {
+  static final _serverConnectionInstance = InternetConnection.createInstance();
   final _animationDuration = const Duration(milliseconds: 400);
   final _hideDuration = const Duration(seconds: 2);
 
@@ -109,27 +110,34 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
 
   @override
   void initState() {
-    _subscription = InternetConnection().onStatusChange.listen((status) => setState(() {
-          switch (_state) {
-            case _ConnectionStatusState.hidden:
-            case _ConnectionStatusState.backOnline:
-              if (status == InternetStatus.disconnected) {
-                _state = _ConnectionStatusState.noConnection;
-                widget.onNoConnection?.call();
-              }
-              _cancelHide();
-              break;
-            case _ConnectionStatusState.noConnection:
-              if (status == InternetStatus.connected) {
-                _state = _ConnectionStatusState.backOnline;
-                widget.onBackOnline?.call();
-              }
-              _hideDelayed();
-              break;
-          }
-        }));
+    Future.delayed(const Duration(seconds: 10), _listenConnectionStatus);
     super.initState();
   }
+
+  _listenConnectionStatus() {
+    if (!mounted) return;
+    _subscription = _serverConnectionInstance.onStatusChange.listen(_onStatusChange);
+  }
+
+  _onStatusChange(InternetStatus status) => setState(() {
+        switch (_state) {
+          case _ConnectionStatusState.hidden:
+          case _ConnectionStatusState.backOnline:
+            if (status == InternetStatus.disconnected) {
+              _state = _ConnectionStatusState.noConnection;
+              widget.onNoConnection?.call();
+            }
+            _cancelHide();
+            break;
+          case _ConnectionStatusState.noConnection:
+            if (status == InternetStatus.connected) {
+              _state = _ConnectionStatusState.backOnline;
+              widget.onBackOnline?.call();
+            }
+            _hideDelayed();
+            break;
+        }
+      });
 
   _cancelHide() => _hideTimer?.cancel();
 
