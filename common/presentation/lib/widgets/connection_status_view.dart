@@ -49,6 +49,7 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
   static final _serverConnectionInstance = InternetConnection.createInstance();
   final _animationDuration = const Duration(milliseconds: 400);
   final _hideDuration = const Duration(seconds: 2);
+  final _startDelayDuration = const Duration(seconds: 10);
 
   var _state = _ConnectionStatusState.hidden;
   Timer? _hideTimer;
@@ -110,7 +111,7 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(seconds: 10), _listenConnectionStatus);
+    Future.delayed(_startDelayDuration, _listenConnectionStatus);
     super.initState();
   }
 
