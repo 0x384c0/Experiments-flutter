@@ -22,6 +22,7 @@ class DropdownMenuButton extends StatelessWidget {
   Widget _build(BuildContext context) => MenuAnchor(
         childFocusNode: _buttonFocusNode,
         menuChildren: menuChildren,
+        crossAxisUnconstrained: false,
         builder: (context, controller, _) => OutlinedButton.icon(
           style: OutlinedButton.styleFrom(tapTargetSize: MaterialTapTargetSize.shrinkWrap),
           focusNode: _buttonFocusNode,
