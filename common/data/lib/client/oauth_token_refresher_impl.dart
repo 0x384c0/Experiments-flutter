@@ -13,9 +13,9 @@ class OAuthTokenRefresherImpl<T extends OauthTokensEntity> implements OAuthToken
 
   @override
   Future<T?> getRefreshedTokensIfNeeded(T oldTokens) async {
-    // tokens already refreshing, so thread must wait for its result
     if (_refreshCompleter != null) {
-      return _refreshCompleter!.future;
+      // tokens already refreshing, so thread must wait for its result
+      return _refreshCompleter!.future.onError((e, s) => null);
     }
 
     // try to refresh tokens
