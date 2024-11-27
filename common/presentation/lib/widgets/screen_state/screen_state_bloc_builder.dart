@@ -17,6 +17,8 @@ Widget _createScreenStateBlocBuilder<B extends BlocBase<ScreenState<T>>, T>({
   required bool isSliver,
   required ScreenState<T> state,
   required BuildContext context,
+  Widget? loadingView,
+  Widget? emptyView,
 }) {
   late Widget widget;
   T? data;
@@ -28,7 +30,7 @@ Widget _createScreenStateBlocBuilder<B extends BlocBase<ScreenState<T>>, T>({
       );
       break;
     case final ScreenStateEmptyLoading _:
-      widget = const LoadingIndicator();
+      widget = loadingView ?? const LoadingIndicator();
       break;
     case final ScreenStatePopulatedError<T> state:
       data = state.data;
@@ -41,13 +43,13 @@ Widget _createScreenStateBlocBuilder<B extends BlocBase<ScreenState<T>>, T>({
       break;
     case final ScreenStatePopulated<T> state:
       data = state.data;
-      widget = LoadingOverlayView(isLoading: false, child: builder(state.data));
+      widget = LoadingOverlayView(isLoading: false, child: builder(state.data)); //TODO: use ZStack instead of providing child to LoadingOverlayView
       break;
     case final ScreenStateEmpty _:
-      widget = EmptyStateView(refresh: refresh);
+      widget = emptyView ?? EmptyStateView(refresh: refresh);  //TODO: use builders instead of using views like this directly
       break;
     default:
-      widget = EmptyStateView(refresh: refresh);
+      widget = emptyView ?? EmptyStateView(refresh: refresh);
   }
 
   if (isSliver && state is! ScreenStatePopulated<T>) {
@@ -72,6 +74,8 @@ Widget _createBlocScreenStateBlocBuilder<B extends BlocScreenStateMixin<T>, T>({
   required Widget Function(T data) builder,
   required bool isSliver,
   required ScreenState<T> state,
+  Widget? loadingView,
+  Widget? emptyView,
   required BuildContext context,
 }) =>
     _createScreenStateBlocBuilder<B, T>(
@@ -81,6 +85,8 @@ Widget _createBlocScreenStateBlocBuilder<B extends BlocScreenStateMixin<T>, T>({
       builder: builder,
       isSliver: isSliver,
       state: state,
+      loadingView: loadingView,
+      emptyView: emptyView,
       context: context,
     );
 
@@ -93,6 +99,8 @@ class ScreenStateBlocBuilder<B extends BlocScreenStateMixin<S>, S> extends BlocB
     bool isCanRefreshSelf = true,
     Widget Function(S? data, Widget child) layoutBuilder = _defaultLayoutBuilder,
     required Widget Function(BuildContext context, S data) builder,
+    Widget? loadingView,
+    Widget? emptyView,
   }) : super(
     builder: (context, state) => _createBlocScreenStateBlocBuilder<B, S>(
       refresh: isCanRefreshSelf
@@ -103,6 +111,8 @@ class ScreenStateBlocBuilder<B extends BlocScreenStateMixin<S>, S> extends BlocB
       isSliver: isSliver,
       context: context,
       state: state,
+      loadingView: loadingView,
+      emptyView: emptyView,
     ),
   );
 }
