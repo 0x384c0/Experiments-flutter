@@ -69,14 +69,14 @@ class WebViewManager {
     OpenFile.open(downloadedFile?.path);
   }
 
-  static preventCookiesFromExpire(WebUri url) async {
+  static preventCookiesFromExpire(Uri url) async {
     final cookieManager = CookieManager.instance();
     final expiresDate = DateTime.now().add(const Duration(days: 365)).millisecondsSinceEpoch;
 
-    (await cookieManager.getCookies(url: url))
+    (await cookieManager.getCookies(url: WebUri.uri(url)))
         .where((cookie) => cookie.expiresDate == null)
         .forEach((cookie) => cookieManager.setCookie(
-              url: url,
+              url: WebUri.uri(url),
               name: cookie.name,
               value: cookie.value,
               path: cookie.path ?? '/',
@@ -90,9 +90,9 @@ class WebViewManager {
 
   static deleteAllCookies() => CookieManager.instance().deleteAllCookies();
 
-  static getCookie(WebUri url, String name) => CookieManager.instance().getCookie(url: url, name: name);
+  static getCookie(Uri url, String name) => CookieManager.instance().getCookie(url: WebUri.uri(url), name: name);
 
-  static getCookies(WebUri url) async => (await CookieManager.instance().getCookies(url: url))
+  static getCookies(Uri url) async => (await CookieManager.instance().getCookies(url: WebUri.uri(url)))
       .map((cookie) => '${cookie.name}=${cookie.value}')
       .join('; ');
 
