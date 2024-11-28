@@ -42,7 +42,14 @@ class WebViewManager {
           final canCancel = navigationAction.isForMainFrame && !isFile && onNavigate != null;
           if (canCancel) {
             final onNavigateAction = onNavigate(Uri.parse(url));
-            if (onNavigateAction == OnNavigateAction.cancelAndReload) {
+            if (onNavigateAction == OnNavigateAction.redirect && onNavigateAction.uri != null) {
+              try {
+                return NavigationActionPolicy.CANCEL;
+              } finally {
+                await Future.delayed(const Duration(milliseconds: 300));
+                controller.loadUrl(urlRequest: URLRequest(url: WebUri.uri(onNavigateAction.uri!)));
+              }
+            } else if (onNavigateAction == OnNavigateAction.cancelAndReload) {
               try {
                 return NavigationActionPolicy.CANCEL;
               } finally {
@@ -123,8 +130,27 @@ class WebViewManager {
       url != null ? _isDocFile(url) : false;
 }
 
-enum OnNavigateAction {
-  allow,
-  cancel,
-  cancelAndReload,
+class OnNavigateAction {
+  final String action;
+  final Uri? uri;
+
+  const OnNavigateAction._(this.action, this.uri);
+
+  // Enum-like options
+  static const OnNavigateAction allow = OnNavigateAction._('allow', null);
+  static const OnNavigateAction cancel = OnNavigateAction._('cancel', null);
+  static const OnNavigateAction cancelAndReload = OnNavigateAction._('cancelAndReload', null);
+  static const OnNavigateAction redirect = OnNavigateAction._('redirect', null);
+
+  // Factory for redirect case
+  factory OnNavigateAction.redirectWithUrl(Uri uri) => OnNavigateAction._('redirect', uri);
+
+  @override
+  String toString() => action;
+
+  @override
+  bool operator ==(other) => other is OnNavigateAction ? other.action == action : false;
+
+  @override
+  int get hashCode => action.hashCode;
 }
