@@ -3,6 +3,4 @@ import 'package:flutter/material.dart';
 
 extension CommonLocalizationBuildContext on BuildContext {
   AppLocalizations? get commonLocalization => AppLocalizations.of(this);
-
-  ThemeData get theme => Theme.of(this);
 }

@@ -1,3 +1,4 @@
+import 'package:common_presentation/extensions/build_context_theme.dart';
 import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
 import 'package:features_forms_presentation/src/navigation/navigator.dart';
 import 'package:features_forms_presentation/src/validators/email.dart';
@@ -45,7 +46,7 @@ class _MaterialValidationScreenState extends State<MaterialValidationScreen> {
                   if (value?.isEmpty == true) return AppLocalizations.of(context)!.forms_empty_field;
                   return null;
                 },
-              ),
+              ).padding(bottom: context.dimensions.medium),
               TextFormField(
                 decoration: InputDecoration(labelText: locale.forms_email),
                 validator: (value) {
@@ -53,14 +54,14 @@ class _MaterialValidationScreenState extends State<MaterialValidationScreen> {
                   if (!emailRegExp.hasMatch(value!)) return AppLocalizations.of(context)!.forms_invalid_field;
                   return null;
                 },
-              ),
+              ).padding(bottom: context.dimensions.medium),
               TextFormField(
                 decoration: InputDecoration(labelText: locale.forms_password),
                 validator: (value) {
                   if (value?.isEmpty == true) return AppLocalizations.of(context)!.forms_empty_field;
                   return null;
                 },
-              ),
+              ).padding(bottom: context.dimensions.medium),
               LayoutBuilder(
                 builder: (context, constraints) => DropdownMenu(
                   dropdownMenuEntries: dropdownMenuEntries,

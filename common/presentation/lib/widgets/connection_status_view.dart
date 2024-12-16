@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:common_presentation/extensions/build_context.dart';
+import 'package:common_presentation/extensions/build_context_localization.dart';
+import 'package:common_presentation/extensions/build_context_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 

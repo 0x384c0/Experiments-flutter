@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:common_presentation/extensions/build_context.dart';
+import 'package:common_presentation/extensions/build_context_localization.dart';
 import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';

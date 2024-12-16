@@ -41,10 +41,10 @@ When contributing to this project, please ensure that your code adheres to the f
 * all modules are instantiated in [AppModule](lib/app_module.dart)
 
 ## Theme and Styles
-* App theme provided by [ThemeProvider](lib/common/presentation/theme/theme_provider.dart) and can be accessed as `context.theme`
-* Custom colors can be added to [ThemeColors](lib/common/presentation/theme/theme_colors.dart) and can be accessed as `context.themeColors.{color name}`
-* Custom styles can be added to [Styles](lib/common/presentation/theme/styles.dart) and can be accessed as `context.style.{style name}`
-* Common dimensions, paddings stored in [Dimensions](lib/common/presentation/theme/dimensions.dart) and can be accessed as `context.dimensions.{dimension name}`
+* App theme provided by [ThemeProvider](common/presentation/lib/theme/theme_provider.dart) and can be accessed as `context.theme`
+* Custom colors can be added to [ThemeColors](common/presentation/lib/theme/theme_colors.dart) and can be accessed as `context.themeColors.{color name}`
+* Custom styles can be added to [Styles](common/presentation/lib/theme/styles.dart) and can be accessed as `context.style.{style name}`
+* Common dimensions, paddings stored in [Dimensions](common/presentation/lib/theme/dimensions.dart) and can be accessed as `context.dimensions.{dimension name}`
 
 ## Navigation
 * for navigation [flutter_modular](https://modular.flutterando.com.br/docs/flutter_modular/navegation/) is used

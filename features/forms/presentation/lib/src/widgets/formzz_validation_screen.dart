@@ -1,3 +1,4 @@
+import 'package:common_presentation/extensions/build_context_theme.dart';
 import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
 import 'package:features_forms_presentation/src/data/formzz_validation_state.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,7 @@ class _FormzzValidationView extends StatelessWidget {
               error: formState.firstName.error?.stringDescription(context),
               onChanged: cubit.onFirstNameChanged,
               label: locale.forms_first_name,
-            ),
+            ).padding(bottom: context.dimensions.medium),
             if (formState.isValidateCompanyName)
               StringFormField(
                 initialValue: formState.companyName.value,
@@ -61,20 +62,20 @@ class _FormzzValidationView extends StatelessWidget {
                 error: formState.companyName.error?.stringDescription(context),
                 onChanged: cubit.onCompanyNameChanged,
                 label: locale.forms_company_name,
-              ),
+              ).padding(bottom: context.dimensions.medium),
             StringFormField(
               initialValue: formState.phone,
               isRequired: false,
               onChanged: cubit.onPhoneChanged,
               label: locale.forms_phone,
-            ),
+            ).padding(bottom: context.dimensions.medium),
             StringFormField(
               initialValue: formState.email.value,
               isRequired: true,
               error: formState.email.error?.stringDescription(context),
               onChanged: cubit.onEmailChanged,
               label: locale.forms_email,
-            ),
+            ).padding(bottom: context.dimensions.medium),
             StringFormField(
               initialValue: formState.password.value,
               isRequired: true,
@@ -84,7 +85,7 @@ class _FormzzValidationView extends StatelessWidget {
               hints: const [AutofillHints.newPassword],
               keyboardType: TextInputType.visiblePassword,
               obscureText: true,
-            ),
+            ).padding(bottom: context.dimensions.medium),
             StringFormField(
               initialValue: formState.repeatPassword.value,
               isRequired: true,
@@ -94,13 +95,13 @@ class _FormzzValidationView extends StatelessWidget {
               hints: const [AutofillHints.newPassword],
               keyboardType: TextInputType.visiblePassword,
               obscureText: true,
-            ),
+            ).padding(bottom: context.dimensions.medium),
             CheckBoxFormInput(
               value: cubit.state.userAgreement.value,
               label: Text(locale.forms_agree_to_terms),
               error: cubit.state.userAgreement.error?.stringDescription(context),
               onChanged: cubit.onUserAgreementChanged,
-            ),
+            ).padding(bottom: context.dimensions.medium),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: cubit.onSubmit,

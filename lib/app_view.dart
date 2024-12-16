@@ -1,3 +1,4 @@
+import 'package:common_presentation/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart' as reddit_posts;
@@ -12,7 +13,7 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
-        theme: ThemeData(scaffoldBackgroundColor: Colors.grey[100]),
+        theme: ThemeProvider.theme,
         routerConfig: Modular.routerConfig,
         localizationsDelegates: _localizationsDelegates,
         supportedLocales: _supportedLocales,
