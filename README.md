@@ -8,12 +8,33 @@ Inspired by [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/1
 
 <img src="/media/mac_app_screenshot.jpg" height="300">
 
-### Build Requirements
+## Environment
+```
+[✓] Flutter (Channel stable, 3.24.5, on macOS 15.1 24B83 darwin-arm64, locale en-KG)
+    • Flutter version 3.24.5 on channel stable at /Users/user/fvm/versions/3.24.5
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision dec2ee5c1f (6 days ago), 2024-11-13 11:13:06 -0800
+    • Engine revision a18df97ca5
+    • Dart version 3.5.4
+    • DevTools version 2.37.3
 
-* [flutter](https://github.com/flutter/flutter) 3.+
-* Android Studio
+[✓] Android toolchain - develop for Android devices (Android SDK version 34.0.0)
+    • Android SDK at /Users/user/Library/Android/sdk
+    • Platform android-34, build-tools 34.0.0
+    • ANDROID_HOME = /Users/user/Library/Android/sdk
+    • Java binary at: /opt/homebrew/opt/openjdk@17/bin/java
+    • Java version OpenJDK Runtime Environment Homebrew (build 17.0.13+0)
+    • All Android licenses accepted.
 
-### Modules
+[✓] Xcode - develop for iOS and macOS (Xcode 16.1)
+    • Xcode at /Applications/Xcode.app/Contents/Developer
+    • Build 16B40
+    • CocoaPods version 1.15.2
+
+[✓] Android Studio (version 2024.2)
+```
+
+## Modules
 
 App has multiple features - [posts](/features/reddit_posts), [weather](/features/weather). Each
 feature split in to 3 modules
@@ -24,11 +45,11 @@ feature split in to 3 modules
   and interfaces)
 - [Data](/features/reddit_posts/data) - contains Data layer with REST API requests
 
-### Layers Scheme
+## Layers Scheme
 
 ![layers](/media/layers.jpg)
 
-### Communication between layers
+## Communication between layers
 
 1. [UI](/features/reddit_posts/presentation/lib/src/widgets/posts_screen.dart) sends signals
    to [Cubit](/features/reddit_posts/presentation/lib/src/widgets/posts_cubit.dart)
@@ -41,7 +62,7 @@ feature split in to 3 modules
 
 Presentation and Data depends on Domain, but Domain know nothing about them.
 
-### Dependencies
+## Dependencies
 
 1. [rxdart](https://pub.dev/packages/rxdart)
 1. [flutter_modular](https://pub.dev/packages/flutter_modular)
@@ -50,14 +71,14 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 1. [json_annotation](https://pub.dev/packages/json_annotation)
 1. [mocktail](https://pub.dev/packages/mocktail)
 
-### Test coverage
+## Test coverage
 
 - [data](/features/weather/data/test)
 - [domain](/features/weather/domain/test/interactor_test.dart)
 - [widgets](/features/weather/presentation/test)
 - [UI tests](/ui_tests/features)
 
-### [.run](.run) scripts
+## [.run](.run) scripts
 
 * [build_runner](.run/build_runner.run.xml) - run `dart run build_runner build --delete-conflicting-outputs` in all modules with build_runner enabled
 * [clean_all](.run/clean_all.run.xml) - run `flutter clean` in all modules
@@ -65,17 +86,7 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 * [generate_translate_file](.run/generate_translate_file.run.xml) - run `flutter gen-l10n` in all modules with l10n.yaml file
 * [main.dart](.run/main.dart.run.xml) - run app
 
-### Adding New module
-
-- run `flutter create` in feature directory with unique project name. For
-  example: `flutter create --template=package --project-name features_weather_presentation presentation`
-- remove unused files. For
-  example: `cd presentation && rm -rf android ios linux macos windows LICENSE CHANGELOG.md`
-- replace `homepage:` with `publish_to: none` in `podspec.yaml`
-- add dependencies from other modules
-- add this module as dependency to other modules using `path:`
-
-## TODO
+# TODO
 
 * add Oauth2
 * https://pub.dev/packages/melos

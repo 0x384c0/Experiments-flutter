@@ -18,6 +18,18 @@ When contributing to this project, please ensure that your code adheres to the f
 * Complex Logic: Unit tests should be provided for any code containing complex logic. This helps ensure that the intricate parts of the codebase are well-tested and can catch potential issues.
 * Trivial and Boilerplate Code: Trivial and boilerplate code, which is straightforward and contains no custom logic, does not need to be covered with unit tests. However, if you believe unit tests would provide value, feel free to add them at your discretion.
 
+
+### Adding New module
+
+- run `flutter create` in feature directory with unique project name. For
+  example: `flutter create --template=package --project-name features_weather_presentation presentation`
+- remove unused files. For
+  example: `cd presentation && rm -rf android ios linux macos windows LICENSE CHANGELOG.md`
+- replace `homepage:` with `publish_to: none` in `podspec.yaml`
+- add dependencies from other modules
+- add this module as dependency to other modules using `path:`
+
+
 # Frameworks and libraries
 
 ## Dependency Injection
