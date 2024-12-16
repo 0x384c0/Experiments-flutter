@@ -19,7 +19,7 @@ dependencies:
   widgets_modifiers: ^0.3.42
   path_provider: ^2.1.4
   url_launcher: ^6.3.0
-  flutter_inappwebview: ^6.0.0
+  flutter_inappwebview: ^6.1.5
   open_file: ^3.3.2
   mime: ^1.0.5
   file_picker: ^8.1.2

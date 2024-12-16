@@ -41,6 +41,8 @@ dependencies:
     path: "features/experiments/presentation"
   features_stackoverflow_presentation:
     path: "features/stackoverflow/presentation"
+  features_firebase_chat_presentation:
+    path: "features/firebase_chat/presentation"
   cupertino_icons: ^1.0.8
 
 dev_dependencies:

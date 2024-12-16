@@ -29,6 +29,8 @@ dependencies:
     path: "../../../features/experiments/presentation"
   features_stackoverflow_presentation:
     path: "../../../features/stackoverflow/presentation"
+  features_firebase_chat_presentation:
+    path: "../../../features/firebase_chat/presentation"
   widgets_modifiers: ^0.3.42
 
 dev_dependencies:

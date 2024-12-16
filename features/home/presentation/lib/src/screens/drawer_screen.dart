@@ -38,6 +38,10 @@ class DrawerScreen extends StatelessWidget {
             title: Text(_getLocalizations(context).home_stackoverflow),
             onTap: () => _onDestinationSelected(context, SelectedPageState.stackoverflow),
           ),
+          ListTile(
+            title: Text(_getLocalizations(context).home_others),
+            onTap: () => _onDestinationSelected(context, SelectedPageState.others),
+          ),
         ],
       );
 

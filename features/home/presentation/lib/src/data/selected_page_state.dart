@@ -4,7 +4,8 @@ enum SelectedPageState {
   weather(2),
   webView(3),
   experiments(4),
-  stackoverflow(5);
+  stackoverflow(5),
+  others(6);
 
   const SelectedPageState(this.id);
 

@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../data/selected_page_state.dart';
+import 'others_screen.dart';
 import 'widgets/home_pages_provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -73,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
         SelectedPageState.webView: Text(_getLocalization(context).home_webview),
         SelectedPageState.experiments: Text(_getLocalization(context).home_experiments),
         SelectedPageState.stackoverflow: Text(_getLocalization(context).home_stackoverflow),
+        SelectedPageState.others: Text(_getLocalization(context).home_others),
       }[index]!;
 
   late final _pages = [
@@ -82,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
     webViewNavigator.home(),
     experimentsNavigator.home(),
     stackoverflowNavigator.home(),
+    const OthersScreen(),
   ];
 
   Widget _body(BuildContext context) {
