@@ -76,7 +76,7 @@ When contributing to this project, please ensure that your code adheres to the f
 * screens implemented with utilities from [screen_state](common/presentation/lib/widgets/screen_state/screen_state.dart) will automatically show loading indicators, errors and handle pagination, errors from API
   * it requires the use of [flutter_bloc](https://pub.dev/packages/flutter_bloc)
 * App uses FCM for push notification and this logic is stored in [push_notification_provider.dart](lib/common/presentation/providers/push_notification_provider.dart)
-* [wrapInEventListeners()](lib/common/presentation/extensions/widget_listener.dart) can recreate widgets when [AppStateNotifier.triggerEvent] is called or when locale is changed.
+* [wrapInEventListeners()](common/presentation/lib/extensions/widget_listener.dart) can recreate widgets when [AppStateNotifier.triggerEvent] is called or when locale is changed.
   * Configurable via function arguments
 * [ErrorDtoMapper](common/data/lib/mapper/error_dto_mapper.dart) contains logic that tries to handle error from HTTP API and maps them to [ErrorModel](common/domain/lib/data/error_model.dart)
   * `.mapError(_errorDtoMapper.map)` is used to invoke tha mapper
