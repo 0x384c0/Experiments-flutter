@@ -18,7 +18,9 @@ class PostCommentsCubit extends Cubit<ScreenState<PostCommentsPageState>>
         CubitPaginationMixin<Iterable<PostItemState>, GenericScreenState<Iterable<PostItemState>>>,
         CubitScreenStatePaginationMixin,
         CubitScreenStatePaginationIterableMixin<PostItemState, GenericScreenState<Iterable<PostItemState>>> {
-  PostCommentsCubit(this._permalink) : super(ScreenStateEmptyLoading());
+  PostCommentsCubit(this._permalink) : super(ScreenStateEmptyLoading()) {
+    refresh();
+  }
 
   final String? _permalink;
 

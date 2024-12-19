@@ -19,21 +19,27 @@ class PostDetailsScreen extends StatelessWidget {
   final PostDetailsState state;
 
   @override
-  Widget build(BuildContext context) => MultiBlocProvider(
+  Widget build(BuildContext context) =>
+      MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => PostDetailsCubit(state)..refresh()),
-          BlocProvider(create: (_) => PostCommentsCubit(state.permalink)..refresh()),
+          BlocProvider(create: (_) => PostDetailsCubit(state)),
+          BlocProvider(create: (_) => PostCommentsCubit(state.permalink)
+          ),
         ],
-        child: _buildBody(context),
+        child: _buildBloc(context),
       );
 
-  Widget _buildBody(BuildContext context) => ScreenStateBlocBuilder<PostDetailsCubit, PostDetailsState>(
-        layoutBuilder: _scaffoldLayoutBuilder,
-        builder: (context, data) =>
-            data.postItemState != null ? _list(data.postItemState!, context) : _loadingIndicator(),
+  Widget _buildBloc(BuildContext context) =>
+      ScreenStateBlocBuilder<PostDetailsCubit, PostDetailsState>(
+        layoutBuilder: _buildScaffold,
+        builder: _buildBody,
       );
 
-  Widget _scaffoldLayoutBuilder(PostDetailsState? data, Widget child) => Scaffold(
+  Widget _buildBody(BuildContext context, PostDetailsState data) =>
+      data.postItemState != null ? _list(data.postItemState!, context) : _loadingIndicator();
+
+  Widget _buildScaffold(PostDetailsState? data, Widget child) =>
+      Scaffold(
         appBar: AppBar(title: Text(data?.postItemState?.category ?? "")),
         body: ConnectionStatusView.withChild(Center(child: child)),
       );

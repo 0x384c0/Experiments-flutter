@@ -8,11 +8,13 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class PostDetailsCubit extends Cubit<ScreenState<PostDetailsState>> with BlocScreenStateMixin {
   PostDetailsCubit(PostDetailsState? state)
-      : super(state != null ? ScreenStatePopulated(data: state) : ScreenStateEmptyLoading());
+      : super(state != null ? ScreenStatePopulated(data: state) : ScreenStateEmptyLoading()) {
+    refresh();
+  }
 
   late final PostsInteractor _interactor = Modular.get();
   late final Mapper<PostModel, PostDetailsState> _postModelMapper = Modular.get();
 
   @override
-  onRefresh() async => _interactor.getPost(permalink:stateData?.permalink).then(_postModelMapper.map).then(emitData);
+  onRefresh() async => _interactor.getPost(permalink: stateData?.permalink).then(_postModelMapper.map).then(emitData);
 }
