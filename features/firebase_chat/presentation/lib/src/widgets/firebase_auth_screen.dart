@@ -53,28 +53,30 @@ class _FirebaseAuthScreenState extends State<FirebaseAuthScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: const Text("FirebaseAuthScreen")),
-        body: LoadingOverlayView(
-          isLoading: _isLoading,
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(labelText: 'forms_email'),
-                  validator: (value) {
-                    if (value?.isEmpty == true) return 'forms_empty_field';
-                    if (!_emailRegExp.hasMatch(value!)) return 'forms_invalid_field';
-                    return null;
-                  },
-                ),
-                ElevatedButton(
-                  onPressed: _createUser,
-                  child: const Text('SignIn to Chat'),
-                ),
-              ],
-            ).padding(all: 8),
-          ),
+        body: Stack(
+          children: [
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: _emailController,
+                    decoration: const InputDecoration(labelText: 'forms_email'),
+                    validator: (value) {
+                      if (value?.isEmpty == true) return 'forms_empty_field';
+                      if (!_emailRegExp.hasMatch(value!)) return 'forms_invalid_field';
+                      return null;
+                    },
+                  ),
+                  ElevatedButton(
+                    onPressed: _createUser,
+                    child: const Text('SignIn to Chat'),
+                  ),
+                ],
+              ).padding(all: 8),
+            ),
+            LoadingOverlayView(isLoading: _isLoading),
+          ],
         ),
       );
 
