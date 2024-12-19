@@ -20,8 +20,8 @@ abstract interface class FirebaseTokenRepository {
 
 class PushNotificationModel {
   PushNotificationModel(
-      this.data,
-      );
+    this.data,
+  );
 
   final Map<String, dynamic>? data;
 }
@@ -33,12 +33,15 @@ abstract interface class PushNotificationNavigator {
 class PushNotificationProviderImpl implements PushNotificationProvider {
   static const _defaultTitle = 'Notification';
   static const _notificationChannel = 'app_notifications';
+
+  // Generate icons with https://romannurik.github.io/AndroidAssetStudio/icons-notification.html
   static const _androidIcon = '@drawable/launch_background';
+  static const _notificationIcon = '@drawable/ic_notification';
 
   PushNotificationProviderImpl(
-      this._firebaseTokenRepository,
-      this._pushNotificationNavigator,
-      );
+    this._firebaseTokenRepository,
+    this._pushNotificationNavigator,
+  );
 
   final FirebaseTokenRepository _firebaseTokenRepository;
   final PushNotificationNavigator _pushNotificationNavigator;
@@ -142,6 +145,7 @@ class PushNotificationProviderImpl implements PushNotificationProvider {
       message.notification?.title ?? _defaultTitle,
       importance: Importance.max,
       priority: Priority.high,
+      icon: _notificationIcon,
     );
 
     final details = NotificationDetails(android: androidDetails);
