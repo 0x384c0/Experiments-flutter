@@ -17,21 +17,21 @@ class PostsScreen extends StatelessWidget with WidgetAlertMixin {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-        create: (_) => PostsCubit()..refresh(),
+        create: (_) => PostsCubit(),
         child: Scaffold(
           appBar: AppBar(title: Text(AppLocalizations.of(context)!.posts_remote_first)),
-          body: _buildBody(context),
+          body: _buildBloc(context),
         ),
       );
 
-  Widget _buildBody(BuildContext context) {
+  Widget _buildBloc(BuildContext context) => ScreenStateBlocBuilder<PostsCubit, PostsPageState>(builder: _buildBody);
+
+  Widget _buildBody(BuildContext context, PostsPageState data) {
     final cubit = context.read<PostsCubit>();
     onBuild(context, cubit);
-    return ScreenStateBlocBuilder<PostsCubit, PostsPageState>(
-      builder: (context, data) => ConnectionStatusView.withChild(
-        Center(child: _list(context, data.data)),
-        onBackOnline: cubit.refresh,
-      ),
+    return ConnectionStatusView.withChild(
+      Center(child: _list(context, data.data)),
+      onBackOnline: cubit.refresh,
     );
   }
 

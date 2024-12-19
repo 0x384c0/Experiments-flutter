@@ -20,7 +20,9 @@ class PostsCubit extends Cubit<ScreenState<PostsPageState>>
         CubitScreenStatePaginationMixin,
         CubitScreenStatePaginationIterableMixin<PostItemState, GenericScreenState<Iterable<PostItemState>>>,
         CubitAlertMixin {
-  PostsCubit() : super(ScreenStateEmptyLoading());
+  PostsCubit() : super(ScreenStateEmptyLoading()){
+    refresh();
+  }
 
   late final PostsInteractor _interactor = Modular.get();
   late final PostsNavigator _navigator = Modular.get();
