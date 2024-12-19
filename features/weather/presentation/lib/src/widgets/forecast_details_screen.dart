@@ -22,7 +22,7 @@ class ForecastDetailsScreen extends StatelessWidget {
 
   Widget _buildBody(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(args.values.firstOrNull?.date ?? context.commonLocalization!.common_loading)),
+      appBar: AppBar(title: Text(args.values.firstOrNull?.date ?? context.commonLocalization.common_loading)),
       body: ScreenStateBlocBuilder<ForecastDetailsCubit, ForecastDetailsPageState>(
         builder: (context, data) => Center(child: _list(context, data.data.values.first!)),
       ),

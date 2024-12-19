@@ -57,7 +57,7 @@ class ImageFormInput extends StatelessWidget {
 
   Future _showDialog(BuildContext context) async {
     final locale = AppLocalizations.of(context)!;
-    final commonLocale = context.commonLocalization!;
+    final commonLocale = context.commonLocalization;
     await showDialog(
       context: context,
       builder: (BuildContext context) => Dialog(

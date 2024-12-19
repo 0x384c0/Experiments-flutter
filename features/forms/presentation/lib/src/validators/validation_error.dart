@@ -14,7 +14,7 @@ class CommonValidationError {
 
   final String? apiError;
 
-  String errorFieldText(BuildContext context) => context.commonLocalization!.common_error;
+  String errorFieldText(BuildContext context) => context.commonLocalization.common_error;
 
   String emptyFieldText(BuildContext context) => AppLocalizations.of(context)!.forms_empty_field;
 

@@ -12,12 +12,14 @@ class ConnectionStatusView extends StatefulWidget {
     this.safeAreaBottom = true,
     this.onBackOnline,
     this.onNoConnection,
+    this.uri,
   });
 
   final bool safeAreaTop;
   final bool safeAreaBottom;
   final VoidCallback? onBackOnline;
   final VoidCallback? onNoConnection;
+  final Uri? uri;
 
   @override
   State<StatefulWidget> createState() => _ConnectionStatusViewState();
@@ -47,14 +49,14 @@ class ConnectionStatusView extends StatefulWidget {
 }
 
 class _ConnectionStatusViewState extends State<ConnectionStatusView> {
-  static final _serverConnectionInstance = InternetConnection.createInstance();
+  late final InternetConnection _serverConnectionInstance;
   final _animationDuration = const Duration(milliseconds: 400);
   final _hideDuration = const Duration(seconds: 2);
-  final _startDelayDuration = const Duration(seconds: 10);
+  final _startDelayDuration = const Duration(seconds: 5);
 
   var _state = _ConnectionStatusState.hidden;
   Timer? _hideTimer;
-  late final StreamSubscription<InternetStatus> _subscription;
+  StreamSubscription<InternetStatus>? _subscription;
   static const _opacity = 0.8;
 
   @override
@@ -75,7 +77,6 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
   }
 
   Widget body() {
-    final commonLocale = context.commonLocalization!;
     switch (_state) {
       case _ConnectionStatusState.hidden:
         return const SizedBox.shrink();
@@ -87,7 +88,7 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
             top: widget.safeAreaTop,
             bottom: widget.safeAreaBottom,
             child: Text(
-              commonLocale.common_no_connection,
+              context.commonLocalization.common_no_connection,
               textAlign: TextAlign.center,
               style: context.theme.textTheme.bodySmall?.copyWith(color: context.theme.colorScheme.onError),
             ),
@@ -101,7 +102,7 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
             top: widget.safeAreaTop,
             bottom: widget.safeAreaBottom,
             child: Text(
-              commonLocale.common_back_online,
+              context.commonLocalization.common_back_online,
               textAlign: TextAlign.center,
               style: context.theme.textTheme.bodySmall?.copyWith(color: context.theme.colorScheme.onTertiary),
             ),
@@ -112,6 +113,15 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
 
   @override
   void initState() {
+    final baseUrl = widget.uri;
+    if (baseUrl != null) {
+      _serverConnectionInstance = InternetConnection.createInstance(
+        customCheckOptions: [InternetCheckOption(uri: baseUrl)],
+        useDefaultOptions: false,
+      );
+    } else {
+      _serverConnectionInstance = InternetConnection.createInstance();
+    }
     Future.delayed(_startDelayDuration, _listenConnectionStatus);
     super.initState();
   }
@@ -154,7 +164,7 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
   @override
   void dispose() {
     _cancelHide();
-    _subscription.cancel();
+    _subscription?.cancel();
     super.dispose();
   }
 }
