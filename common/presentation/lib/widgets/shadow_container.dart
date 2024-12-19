@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ShadowContainer extends StatelessWidget {
   final Widget child;
