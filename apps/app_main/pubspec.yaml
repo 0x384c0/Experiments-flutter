@@ -1,0 +1,39 @@
+name: modular_app
+description: Modular App.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+  hydrated_bloc: ^9.1.5
+  path_provider: ^2.1.4
+  flutter_modular: ^6.3.4
+  safe_device: ^1.1.7
+  common_presentation:
+  features_home_presentation:
+  features_weather_domain:
+  features_weather_data:
+  features_weather_presentation:
+  features_reddit_posts_domain:
+  features_reddit_posts_data:
+  features_reddit_posts_presentation:
+  features_forms_presentation:
+  features_webview_presentation:
+  features_experiments_presentation:
+  features_stackoverflow_presentation:
+  features_firebase_chat_presentation:
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

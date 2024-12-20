@@ -8,6 +8,51 @@ Inspired by [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/1
 
 <img src="/media/mac_app_screenshot.jpg" height="300">
 
+## Modules
+
+App has multiple features - [posts](packages/features/reddit_posts), [weather](packages/features/weather). Each
+feature split in to 3 layers
+
+- [Presentation](packages/features/reddit_posts/presentation) - contains Presentation Layer (widgets and
+  cubits)
+- [Domain](packages/features/reddit_posts/domain) - contains Domain layer with business logic (interactors
+  and interfaces)
+- [Data](packages/features/reddit_posts/data) - contains Data layer with REST API requests
+
+## Layers Scheme
+
+![layers](/media/layers.jpg)
+
+## Communication between layers
+
+1. [UI](packages/features/reddit_posts/presentation/lib/src/widgets/posts_screen.dart) sends signals
+   to [Cubit](packages/features/reddit_posts/presentation/lib/src/widgets/posts_cubit.dart)
+2. Cubit executes Use cases
+   from [Interactor](packages/features/reddit_posts/domain/lib/src/use_cases/interactor.dart).
+3. Use case obtains data
+   from [Repository](packages/features/reddit_posts/data/lib/repository/remote_repository.dart)
+4. Repository returns data from a [Api](packages/features/reddit_posts/data/lib/api/reddit_api.dart).
+5. Information flows back to the UI to be displayed.
+
+Presentation and Data depends on Domain, but Domain know nothing about them.
+
+## Dependencies
+
+1. [melos](https://pub.dev/packages/melos)
+1. [rxdart](https://pub.dev/packages/rxdart)
+1. [flutter_modular](https://pub.dev/packages/flutter_modular)
+1. [flutter_cubit](https://pub.dev/documentation/flutter_cubit/latest/)
+1. [retrofit](https://pub.dev/packages/retrofit)
+1. [json_annotation](https://pub.dev/packages/json_annotation)
+1. [mocktail](https://pub.dev/packages/mocktail)
+
+## Test coverage
+
+- [data](packages/features/weather/data/test)
+- [domain](packages/features/weather/domain/test/interactor_test.dart)
+- [widgets](packages/features/weather/presentation/test)
+- [UI tests](apps/app_main/ui_tests/features)
+
 ## Environment
 ```
 [✓] Flutter (Channel stable, 3.24.5, on macOS 15.1 24B83 darwin-arm64, locale en-KG)
@@ -34,49 +79,8 @@ Inspired by [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/1
 [✓] Android Studio (version 2024.2)
 ```
 
-## Modules
-
-App has multiple features - [posts](/features/reddit_posts), [weather](/features/weather). Each
-feature split in to 3 modules
-
-- [Presentation](/features/reddit_posts/presentation) - contains Presentation Layer (widgets and
-  cubits)
-- [Domain](/features/reddit_posts/domain) - contains Domain layer with business logic (interactors
-  and interfaces)
-- [Data](/features/reddit_posts/data) - contains Data layer with REST API requests
-
-## Layers Scheme
-
-![layers](/media/layers.jpg)
-
-## Communication between layers
-
-1. [UI](/features/reddit_posts/presentation/lib/src/widgets/posts_screen.dart) sends signals
-   to [Cubit](/features/reddit_posts/presentation/lib/src/widgets/posts_cubit.dart)
-2. Cubit executes Use cases
-   from [Interactor](/features/reddit_posts/domain/lib/src/use_cases/interactor.dart).
-3. Use case obtains data
-   from [Repository](/features/reddit_posts/data/lib/repository/remote_repository.dart)
-4. Repository returns data from a [Api](/features/reddit_posts/data/lib/api/reddit_api.dart).
-5. Information flows back to the UI to be displayed.
-
-Presentation and Data depends on Domain, but Domain know nothing about them.
-
-## Dependencies
-
-1. [rxdart](https://pub.dev/packages/rxdart)
-1. [flutter_modular](https://pub.dev/packages/flutter_modular)
-1. [flutter_cubit](https://pub.dev/documentation/flutter_cubit/latest/)
-1. [retrofit](https://pub.dev/packages/retrofit)
-1. [json_annotation](https://pub.dev/packages/json_annotation)
-1. [mocktail](https://pub.dev/packages/mocktail)
-
-## Test coverage
-
-- [data](/features/weather/data/test)
-- [domain](/features/weather/domain/test/interactor_test.dart)
-- [widgets](/features/weather/presentation/test)
-- [UI tests](/ui_tests/features)
+## Build project
+* TODO:
 
 ## [.run](.run) scripts
 
@@ -89,6 +93,11 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 # TODO
 
 * https://pub.dev/packages/melos
+  * all platforms
+  * run scripts
+  * lib versions
+  * CI
+  * docs
 * add Oauth2
 * https://github.com/cfug/dio/issues/1653
 * https://pub.dev/packages/auto_route

@@ -1,7 +1,7 @@
 #!/bin/bash
 # Automated drift web setup. More at: https://drift.simonbinder.eu/web/
 
-BASEDIR=$(realpath "$(dirname "$0")"/..)
+BASEDIR=$(realpath "$(dirname "$0")"/../apps/app_main)
 
 # Define the file path for pubspec.lock
 LOCKFILE=$BASEDIR"/pubspec.lock"
