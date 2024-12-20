@@ -12,9 +12,17 @@ class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
         case DioExceptionType.badResponse:
           if (input.response?.data case var data?) {
             if (data is Map<String, dynamic>) {
-              return ErrorModel("${data["error"]} ${data["message"]}", ErrorModelType.badResponse);
+              return ErrorModel(
+                message: "${data["error"] ?? data["message"] ?? data["title"]}",
+                type: ErrorModelType.badResponse,
+                code: input.response?.statusCode,
+              );
             } else {
-              return ErrorModel(data, ErrorModelType.badResponse);
+              return ErrorModel(
+                message: data,
+                type: ErrorModelType.badResponse,
+                code: input.response?.statusCode,
+              );
             }
           }
           break;
@@ -23,14 +31,23 @@ class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
         case DioExceptionType.sendTimeout:
         case DioExceptionType.receiveTimeout:
           final error = input.error;
-          return ErrorModel(error is SocketException ? error.message : input.message, ErrorModelType.connectionError);
+          return ErrorModel(
+            message: error is SocketException ? error.message : input.message,
+            type: ErrorModelType.connectionError,
+          );
         case DioExceptionType.cancel:
         case DioExceptionType.badCertificate:
         case DioExceptionType.unknown:
           final error = input.error;
-          return ErrorModel(error is SocketException ? error.message : input.message, ErrorModelType.unknown);
+          return ErrorModel(
+            message: error is SocketException ? error.message : input.message,
+            type: ErrorModelType.unknown,
+          );
       }
     }
-    return ErrorModel(input.toString(), ErrorModelType.unknown);
+    return ErrorModel(
+      message: input.toString(),
+      type: ErrorModelType.unknown,
+    );
   }
 }

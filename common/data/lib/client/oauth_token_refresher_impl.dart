@@ -4,15 +4,15 @@ import 'package:common_data/interfaces/oauth_token_refresher.dart';
 import 'package:common_data/interfaces/oauth_tokens_entity.dart';
 
 /// This class must be a singleton, because only one token can be refreshed at time
-class OAuthTokenRefresherImpl<T extends OauthTokensEntity> implements OAuthTokenRefresher<T> {
+class OAuthTokenRefresherImpl implements OAuthTokenRefresher {
   OAuthTokenRefresherImpl(this.repository);
 
-  final TokenRefreshRemoteRepository<T> repository;
+  final TokenRefreshRemoteRepository repository;
   static const _expirationTimeLimit = Duration(minutes: 1);
-  Completer<T?>? _refreshCompleter;
+  Completer<OauthTokensEntity?>? _refreshCompleter;
 
   @override
-  Future<T?> getRefreshedTokensIfNeeded(T oldTokens) async {
+  Future<OauthTokensEntity?> getRefreshedTokensIfNeeded(OauthTokensEntity oldTokens) async {
     if (_refreshCompleter != null) {
       // tokens already refreshing, so thread must wait for its result
       return _refreshCompleter!.future.onError((e, s) => null);
@@ -20,7 +20,7 @@ class OAuthTokenRefresherImpl<T extends OauthTokensEntity> implements OAuthToken
 
     // try to refresh tokens
     if (await _needToRefreshTokens(oldTokens)) {
-      _refreshCompleter = Completer<T?>();
+      _refreshCompleter = Completer<OauthTokensEntity?>();
 
       try {
         final newTokens = await repository.refreshTokens(oldTokens);
@@ -37,13 +37,13 @@ class OAuthTokenRefresherImpl<T extends OauthTokensEntity> implements OAuthToken
     return null;
   }
 
-  Future<bool> _needToRefreshTokens(T tokens) async {
+  Future<bool> _needToRefreshTokens(OauthTokensEntity tokens) async {
     return tokens.expirationDate != null
         ? tokens.expirationDate!.difference(DateTime.now()) < _expirationTimeLimit
         : false;
   }
 }
 
-abstract class TokenRefreshRemoteRepository<T extends OauthTokensEntity> {
-  Future<T?> refreshTokens(T oldTokens);
+abstract class TokenRefreshRemoteRepository {
+  Future<OauthTokensEntity?> refreshTokens(OauthTokensEntity oldTokens);
 }

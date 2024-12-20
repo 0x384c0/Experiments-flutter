@@ -1,15 +1,14 @@
 import 'package:common_data/interfaces/oauth_local_repository.dart';
 import 'package:common_data/interfaces/oauth_token_refresher.dart';
 import 'package:common_data/interfaces/oauth_tokens_entity.dart';
+import 'package:common_domain/data/error_model.dart';
 import 'package:dio/dio.dart';
 
 class OauthInterceptor<T extends OauthTokensEntity> extends Interceptor {
   OauthInterceptor(this._tokensProvider, this._tokenRefresher);
 
-  static int unauthorizedCode = 401;
-
-  final OAuthLocalRepository<T> _tokensProvider;
-  final OAuthTokenRefresher<T> _tokenRefresher;
+  final OAuthLocalRepository _tokensProvider;
+  final OAuthTokenRefresher _tokenRefresher;
 
   @override
   onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
@@ -24,8 +23,11 @@ class OauthInterceptor<T extends OauthTokensEntity> extends Interceptor {
 
   @override
   onError(DioException err, ErrorInterceptorHandler handler) {
-    if (err.response?.statusCode == unauthorizedCode) {
-      handler.next(DioException(error: unauthorizedCode, requestOptions: err.requestOptions));
+    if (err.response?.statusCode == ErrorModel.unauthorizedCode) {
+      handler.next(DioException(
+        error: ErrorModel(type: ErrorModelType.badResponse, code: err.response?.statusCode),
+        requestOptions: err.requestOptions,
+      ));
     } else {
       handler.next(err);
     }

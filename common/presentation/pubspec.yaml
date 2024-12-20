@@ -16,6 +16,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   internet_connection_checker_plus: ^2.5.2
   shimmer: ^3.0.0
+  shared_preferences: ^2.3.4
 
 dev_dependencies:
   flutter_test:
