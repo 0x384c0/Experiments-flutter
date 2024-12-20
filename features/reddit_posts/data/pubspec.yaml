@@ -34,4 +34,12 @@ dev_dependencies:
   retrofit_generator: ^8.2.0
   drift_dev: ^2.20.0
 
+global_options:
+  freezed:
+    runs_before:
+      - json_serializable
+  json_serializable:
+    runs_before:
+      - retrofit_generator
+
 flutter:

@@ -88,11 +88,10 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 
 # TODO
 
-* add Oauth2
 * https://pub.dev/packages/melos
-* https://pub.dev/packages/crdt
+* add Oauth2
 * https://github.com/cfug/dio/issues/1653
-* https://pub.dev/packages/mapify_generator
 * https://pub.dev/packages/auto_route
 * https://pub.dev/packages/app_links
+* https://pub.dev/packages/mapify_generator
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)
