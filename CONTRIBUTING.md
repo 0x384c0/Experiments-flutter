@@ -41,42 +41,42 @@ When contributing to this project, please ensure that your code adheres to the f
 * all modules are instantiated in [AppModule](lib/app_module.dart)
 
 ## Theme and Styles
-* App theme provided by [ThemeProvider](common/presentation/lib/theme/theme_provider.dart) and can be accessed as `context.theme`
-* Custom colors can be added to [ThemeColors](common/presentation/lib/theme/theme_colors.dart) and can be accessed as `context.themeColors.{color name}`
-* Custom styles can be added to [Styles](common/presentation/lib/theme/styles.dart) and can be accessed as `context.style.{style name}`
-* Common dimensions, paddings stored in [Dimensions](common/presentation/lib/theme/dimensions.dart) and can be accessed as `context.dimensions.{dimension name}`
+* App theme provided by [ThemeProvider](packages/common/presentation/lib/theme/theme_provider.dart) and can be accessed as `context.theme`
+* Custom colors can be added to [ThemeColors](packages/common/presentation/lib/theme/theme_colors.dart) and can be accessed as `context.themeColors.{color name}`
+* Custom styles can be added to [Styles](packages/common/presentation/lib/theme/styles.dart) and can be accessed as `context.style.{style name}`
+* Common dimensions, paddings stored in [Dimensions](packages/common/presentation/lib/theme/dimensions.dart) and can be accessed as `context.dimensions.{dimension name}`
 
 ## Navigation
 * for navigation [flutter_modular](https://modular.flutterando.com.br/docs/flutter_modular/navegation/) is used
-* classes for navigation are placed in `lib/features/{feature name}/navigation`
-* to add new route modify `lib/features/{feature name}/navigation/module.dart` by providing route name, widget
-* then add method to execute this route in `lib/features/{feature name}/navigation/navigator.dart` by its name and, optionally, arguments
+* classes for navigation are placed in `lib/packages/features/{feature name}/navigation`
+* to add new route modify `lib/packages/features/{feature name}/navigation/module.dart` by providing route name, widget
+* then add method to execute this route in `lib/packages/features/{feature name}/navigation/navigator.dart` by its name and, optionally, arguments
 * after that navigator can be accessed with Dependency Injection
-* **Note:** Drawer menu navigation in [home_screen.dart](features/home/presentation/lib/src/screens/home_screen.dart) is not using any navigation library. It is a single screen with [PageView](https://api.flutter.dev/flutter/widgets/PageView-class.html)
-  * new options in to drawer added by modifying [SelectedPageState](features/home/presentation/lib/src/data/selected_page_state.dart) and `HomeScreen._page`
+* **Note:** Drawer menu navigation in [home_screen.dart](packages/features/home/presentation/lib/src/screens/home_screen.dart) is not using any navigation library. It is a single screen with [PageView](https://api.flutter.dev/flutter/widgets/PageView-class.html)
+  * new options in to drawer added by modifying [SelectedPageState](packages/features/home/presentation/lib/src/data/selected_page_state.dart) and `HomeScreen._page`
 
 ## Localization
 * app uses [flutter_localizations](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization)
-* translation stored in [lib/l10n](features/home/presentation/lib/l10n) directory in arb files
+* translation stored in [lib/l10n](packages/features/home/presentation/lib/l10n) directory in arb files
 * translation can be accessed as `context.localizations`
 * app supports switching language by user without changing system language
   * call `context.read<AppLocaleProvider>().changeLanguage(locale)` to switch locale
   * localized string will be changed automatically
-  * By default data from API will not reload, but if widget wrapped in [wrapInEventListeners(localeChange = true, )](lib/common/presentation/extensions/widget_listener.dart) it will be recreated upon locale change and data from API will be reloaded
+  * By default data from API will not reload, but if widget wrapped in [wrapInEventListeners(localeChange = true, )](packages/common/presentation/extensions/widget_listener.dart) it will be recreated upon locale change and data from API will be reloaded
 
 ## API and Oauth2
 * app uses [retrofit](https://pub.dev/packages/retrofit) to generate HTTP requests to API
 * app uses [Dio interceptors](https://pub.dev/packages/dio#interceptors) to inject `access_token` to every HTTP request
-* `access_token` management is performed in [oauth_interceptor.dart](common/data/lib/client/oauth_interceptor.dart) and [oauth_token_refresher_impl.dart](common/data/lib/client/oauth_token_refresher_impl.dart)
+* `access_token` management is performed in [oauth_interceptor.dart](packages/common/data/lib/client/oauth_interceptor.dart) and [oauth_token_refresher_impl.dart](packages/common/data/lib/client/oauth_token_refresher_impl.dart)
 * instance of `Dio` is provided by Dependency Injection and used in almost every Api class, generated by [retrofit](https://pub.dev/packages/retrofit)
 
 ## Custom Utilities
-* Utility classes, extensions and widgets are placed in [common](common/presentation/lib/widgets)
-* [web_view](features/webview/presentation/lib/src/widgets/web_view) is a wrapper for [flutter_inappwebview](https://pub.dev/packages/flutter_inappwebview) and allows the creation of full screen WebViews (with navigation bar) and embed them in to other screens
-* screens implemented with utilities from [screen_state](common/presentation/lib/widgets/screen_state/screen_state.dart) will automatically show loading indicators, errors and handle pagination, errors from API
+* Utility classes, extensions and widgets are placed in [common](packages/common/presentation/lib/widgets)
+* [web_view](packages/features/webview/presentation/lib/src/widgets/web_view) is a wrapper for [flutter_inappwebview](https://pub.dev/packages/flutter_inappwebview) and allows the creation of full screen WebViews (with navigation bar) and embed them in to other screens
+* screens implemented with utilities from [screen_state](packages/common/presentation/lib/widgets/screen_state/screen_state.dart) will automatically show loading indicators, errors and handle pagination, errors from API
   * it requires the use of [flutter_bloc](https://pub.dev/packages/flutter_bloc)
-* App uses FCM for push notification and this logic is stored in [push_notification_provider.dart](features/firebase_chat/presentation/lib/src/widgets/push_notification_provider.dart)
-* [wrapInEventListeners()](common/presentation/lib/extensions/widget_listener.dart) can recreate widgets when [AppStateNotifier.triggerEvent] is called or when locale is changed.
+* App uses FCM for push notification and this logic is stored in [push_notification_provider.dart](packages/features/firebase_chat/presentation/lib/src/widgets/push_notification_provider.dart)
+* [wrapInEventListeners()](packages/common/presentation/lib/extensions/widget_listener.dart) can recreate widgets when [AppStateNotifier.triggerEvent] is called or when locale is changed.
   * Configurable via function arguments
-* [ErrorDtoMapper](common/data/lib/mapper/error_dto_mapper.dart) contains logic that tries to handle error from HTTP API and maps them to [ErrorModel](common/domain/lib/data/error_model.dart)
+* [ErrorDtoMapper](packages/common/data/lib/mapper/error_dto_mapper.dart) contains logic that tries to handle error from HTTP API and maps them to [ErrorModel](packages/common/domain/lib/data/error_model.dart)
   * `.mapError(_errorDtoMapper.map)` is used to invoke tha mapper
