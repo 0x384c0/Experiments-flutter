@@ -54,3 +54,8 @@ scripts:
       dirExists:
         - test
     exec: flutter test
+
+  deploy:android:firebase_app_distribution:
+    run: |
+      cd apps/app_main/android
+      ./gradlew assembleRelease appDistributionUploadRelease

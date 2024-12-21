@@ -11,11 +11,11 @@ default:
 
 .build_flutter:
   before_script:
-    - sh scripts/validate_environment.sh
-    - sh scripts/set_version.sh
-    - sh scripts/pub_get_all.sh
-    - sh scripts/build_runner.sh
-    - sh scripts/generate_translate_file.sh
+    - sh scripts/ci/validate_environment.sh
+    - sh scripts/ci/set_version.sh
+    - sh scripts/ci/pub_get_all.sh
+    - sh scripts/ci/build_runner.sh
+    - sh scripts/ci/generate_translate_file.sh
 
 # Unit tests
 unit_tests:
@@ -28,7 +28,7 @@ unit_tests:
     - develop
     - master
   script:
-    - sh scripts/run_tests.sh
+    - sh scripts/ci/run_tests.sh
 
 # UI tests
 ui_tests:
@@ -47,14 +47,14 @@ ui_tests:
       - ui_tests/venv
       - ios/Pods
   script:
-    - sh scripts/ui_tests_setup.sh
-    - sh scripts/build_debug_ios.sh
-    - sh scripts/ui_tests_run.sh
+    - sh scripts/ci/ui_tests_setup.sh
+    - sh scripts/ci/build_ios_simulator.sh
+    - sh scripts/ci/ui_tests_run.sh
   after_script:
-    - sh scripts/ui_tests_stop_simulator.sh
+    - sh scripts/ci/ui_tests_stop_simulator.sh
 
 # Android
-compile_android:
+build_android:
   extends: .build_flutter
   stage: build
   tags:
@@ -72,7 +72,7 @@ compile_android:
     paths:
       - build/app/outputs/flutter-apk/app-release.apk
   script:
-    sh scripts/compile_android.sh
+    sh scripts/ci/build_android_apk.sh
 
 deploy_to_stage_android:
   stage: deploy
@@ -80,7 +80,7 @@ deploy_to_stage_android:
     - mobile
   needs:
     - unit_tests
-    - compile_android
+    - build_android
   rules:
     - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_REF_NAME == "develop"'
       when: on_success
@@ -88,7 +88,5 @@ deploy_to_stage_android:
       when: manual
       allow_failure: true
   cache: []
-  before_script:
-    - sh scripts/init_bundler.sh
   script:
-    - sh scripts/deploy_to_stage_android.sh
+    - sh scripts/ci/deploy_android_firebase.sh
