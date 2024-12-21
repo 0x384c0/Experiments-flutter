@@ -29,7 +29,9 @@ jobs:
           dart run melos run prebuild:android
 
       - name: Build Android
-        run: flutter build apk --release
+        run:
+          cd apps/app_main
+          flutter build apk --release
 
       - name: Upload Release
         uses: actions/upload-release-asset@v1
