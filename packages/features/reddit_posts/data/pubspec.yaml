@@ -18,7 +18,7 @@ dependencies:
   json_annotation: ^4.9.0
   retrofit: ^4.4.1
   dio: ^5.7.0
-  drift: ^2.20.0 # For web after changing version run sh scripts/download_drift_for_web.sh
+  drift: ^2.21.0 # For web after changing version run sh scripts/download_drift_for_web.sh
   drift_flutter: ^0.2.3
 
 dev_dependencies:
@@ -29,7 +29,7 @@ dev_dependencies:
   freezed: ^2.5.2
   json_serializable: ^6.8.0
   retrofit_generator: ^8.2.0
-  drift_dev: ^2.22.1
+  drift_dev: ^2.21.0
 
 global_options:
   freezed:

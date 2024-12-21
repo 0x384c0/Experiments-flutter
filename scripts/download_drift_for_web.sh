@@ -32,6 +32,9 @@ mkdir -p "$DEST_DIR"
 DRIFT_WORKER_URL="https://github.com/simolus3/drift/releases/download/drift-$DRIFT_VERSION/drift_worker.js"
 SQLITE3_WASM_URL="https://github.com/simolus3/sqlite3.dart/releases/download/sqlite3-$SQLITE3_VERSION/sqlite3.wasm"
 
+echo $DRIFT_WORKER_URL
+echo $SQLITE3_WASM_URL
+
 # Download files to destination directory
 curl -L -o "$DEST_DIR/drift_worker.js" "$DRIFT_WORKER_URL"
 curl -L -o "$DEST_DIR/sqlite3.wasm" "$SQLITE3_WASM_URL"
