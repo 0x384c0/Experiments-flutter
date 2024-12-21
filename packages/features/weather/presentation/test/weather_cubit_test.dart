@@ -23,7 +23,7 @@ main() {
     act: (cubit) => cubit.refresh(),
     verify: (bloc) => {
       expect(
-        (sut.state as ScreenStatePopulated).data.forecast.length,
+        (sut.state as ScreenStatePopulated<GenericScreenState<WeatherState>>).data.data.forecast.length,
         MockDatasourceImpl.forecastItems,
       )
     },
