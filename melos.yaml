@@ -28,7 +28,6 @@ scripts:
 
   build_runner:
     packageFilters:
-      diff: "origin/main...HEAD"
       dependsOn:
         - build_runner
     exec: dart run build_runner build --delete-conflicting-outputs
