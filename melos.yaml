@@ -14,3 +14,6 @@ scripts:
     run: |
       melos exec --depends-on="build_runner"          -- dart run build_runner build --delete-conflicting-outputs
       melos exec --depends-on="flutter_localizations" -- flutter gen-l10n
+
+  setup:web:
+    run: dart scripts/download_drift_for_web.dart
