@@ -28,8 +28,16 @@ scripts:
 
   build_runner:
     packageFilters:
+      diff: "origin/main...HEAD"
       dependsOn:
         - build_runner
+    exec: dart run build_runner build --delete-conflicting-outputs
+
+  build_runner_changed:
+    packageFilters:
+      dependsOn:
+        - build_runner
+      diff: "origin/master...HEAD"
     exec: dart run build_runner build --delete-conflicting-outputs
 
   flutter_localizations:
@@ -37,6 +45,9 @@ scripts:
       dependsOn:
         - flutter_localizations
     exec: flutter gen-l10n
+
+  set_version:
+    run: dart scripts/set_version.dart
 
   test:
     packageFilters:
