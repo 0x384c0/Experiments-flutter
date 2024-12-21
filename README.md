@@ -93,7 +93,6 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 # TODO
 
 * https://pub.dev/packages/melos
-  * all platforms
   * run scripts
   * lib versions
   * CI
