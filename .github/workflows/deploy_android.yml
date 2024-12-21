@@ -26,7 +26,6 @@ jobs:
       - name: Melos Bootstrap
         run:
           dart run melos bootstrap
-          dart run melos run prebuild:android
 
       - name: Build Android
         run:
