@@ -1,0 +1,40 @@
+name: deploy_android
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install and set Flutter version
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.x'
+          channel: 'stable'
+
+      - name: Flutter Doctor
+        run: flutter doctor
+
+      - name: Install Melos
+        run: dart pub global activate melos
+
+      - name: Melos Bootstrap
+        run:
+          dart run melos bootstrap
+          dart run melos run prebuild:android
+
+      - name: Build Android
+        run: flutter build apk --release
+
+      - name: Upload Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: build/app/outputs/flutter-apk/app-release.apk
+          asset_name: app-release.apk
+          asset_content_type: application/vnd.android.package-archive
