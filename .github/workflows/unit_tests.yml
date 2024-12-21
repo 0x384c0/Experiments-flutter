@@ -20,14 +20,11 @@ jobs:
       - name: Flutter Doctor
         run: flutter doctor
 
-      - name: Install project dependencies
-        run: sh scripts/pub_get_all.sh
+      - name: Install Melos
+        run: dart pub global activate melos
 
-      - name: Localizations
-        run: sh scripts/generate_translate_file.sh
-
-      - name: Build Runner
-        run: sh scripts/build_runner.sh
+      - name: Melos Bootstrap
+        run: dart run melos bootstrap
 
       - name: Run unit tests
-        run: sh scripts/run_tests.sh
+        run: dart run melos run test
