@@ -28,6 +28,9 @@ jobs:
           dart run melos bootstrap
           dart run melos run prebuild:web
 
+      - name: Set version
+        run: dart run melos set_version
+
       - name: Deploy web
         uses: bluefireteam/flutter-gh-pages@v7
         with:
