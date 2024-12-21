@@ -82,21 +82,11 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 ## Build project
 * TODO:
 
-## [.run](.run) scripts
-
-* [build_runner](.run/build_runner.run.xml) - run `dart run build_runner build --delete-conflicting-outputs` in all modules with build_runner enabled
-* [clean_all](.run/clean_all.run.xml) - run `flutter clean` in all modules
-* [pub_get_all](.run/pub_get_all.run.xml) - run `flutter pub get` in all modules
-* [generate_translate_file](.run/generate_translate_file.run.xml) - run `flutter gen-l10n` in all modules with l10n.yaml file
-* [main.dart](.run/main.dart.run.xml) - run app
-
 # TODO
 
 * https://pub.dev/packages/melos
-  * run scripts
-  * lib versions
-  * CI
   * docs
+  * lib versions
 * add Oauth2
 * https://github.com/cfug/dio/issues/1653
 * https://pub.dev/packages/auto_route
