@@ -20,17 +20,13 @@ jobs:
       - name: Flutter Doctor
         run: flutter doctor
 
-      - name: Install project dependencies
-        run: sh scripts/pub_get_all.sh
+      - name: Install Melos
+        run: dart pub global activate melos
 
-      - name: Download drift files for web
-        run: sh scripts/download_drift_for_web.sh
-
-      - name: Localizations
-        run: sh scripts/generate_translate_file.sh
-
-      - name: Build Runner
-        run: sh scripts/build_runner.sh
+      - name: Melos Bootstrap
+        run:
+          dart run melos bootstrap
+          dart run melos run prebuild:web
 
       - name: Deploy web
         uses: bluefireteam/flutter-gh-pages@v7
