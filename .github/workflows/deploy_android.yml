@@ -24,12 +24,30 @@ jobs:
         run: dart pub global activate melos
 
       - name: Melos Bootstrap
-        run:
-          dart run melos bootstrap
+        run: dart run melos bootstrap
+
+      - name: Set version
+        run: dart run melos set_version
 
       - name: Build Android
-        run:
-          cd apps/app_main && flutter build apk --release
+        run: cd apps/app_main && flutter build apk --release
+
+      - name: Extract version from pubspec.yaml
+        id: extract_version
+        run: |
+          version=$(grep '^version:' apps/app_main/pubspec.yaml | sed 's/version: //')
+          echo "version=$version" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ env.version }}
+          release_name: Release v${{ env.version }}
+          draft: false
+          prerelease: false
 
       - name: Upload Release
         uses: actions/upload-release-asset@v1
