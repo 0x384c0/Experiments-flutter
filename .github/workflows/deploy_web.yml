@@ -32,3 +32,4 @@ jobs:
         uses: bluefireteam/flutter-gh-pages@v7
         with:
           baseHref: /Experiments-flutter/
+          workingDir: apps/app_main
