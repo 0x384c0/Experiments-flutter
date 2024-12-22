@@ -3,9 +3,9 @@
 A sample flutter app that has multiple features.\
 Inspired by [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) from [Uncle Bob](https://x.com/unclebobmartin)
 
-![tests workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml/badge.svg)
-![deploy_web workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_web.yml/badge.svg)
-![deploy_android workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_android.yml/badge.svg)
+[![tests workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml)
+[![deploy_web workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_web.yml/badge.svg)](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_web.yml)
+[![deploy_android workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_android.yml/badge.svg)](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_android.yml)
 
 <img src="/media/mac_app_screenshot.jpg" height="300">
 
