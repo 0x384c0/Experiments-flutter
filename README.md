@@ -81,12 +81,14 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 ```
 
 ## Build project
-* TODO:
+* install [flutter](https://docs.flutter.dev/get-started/install)
+* `dart pub global activate melos`
+* `dart run melos bootstrap`
+* `cd apps/app_main` 
+* `flutter run `
 
 # TODO
-
 * https://pub.dev/packages/melos
-  * docs
   * lib versions
 * add Oauth2
 * https://github.com/cfug/dio/issues/1653
