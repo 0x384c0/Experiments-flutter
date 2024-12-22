@@ -5,6 +5,7 @@ Inspired by [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/1
 
 ![tests workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml/badge.svg)
 ![deploy_web workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_web.yml/badge.svg)
+![deploy_android workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_android.yml/badge.svg)
 
 <img src="/media/mac_app_screenshot.jpg" height="300">
 
