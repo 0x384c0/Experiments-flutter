@@ -1,6 +1,6 @@
 # Clean Architecture Modular Flutter App
 
-A sample flutter app that has multiple features.\
+A sample Flutter app that has multiple features.\
 Inspired by [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) from [Uncle Bob](https://x.com/unclebobmartin)
 
 [![tests workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml)
@@ -12,7 +12,7 @@ Inspired by [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/1
 ## Modules
 
 App has multiple features - [posts](packages/features/reddit_posts), [weather](packages/features/weather). Each
-feature split in to 3 layers
+feature is split into 3 layers
 
 - [Presentation](packages/features/reddit_posts/presentation) - contains Presentation Layer (widgets and
   cubits)
@@ -28,14 +28,14 @@ feature split in to 3 layers
 
 1. [UI](packages/features/reddit_posts/presentation/lib/src/widgets/posts_screen.dart) sends signals
    to [Cubit](packages/features/reddit_posts/presentation/lib/src/widgets/posts_cubit.dart)
-2. Cubit executes Use cases
+1. Cubit executes use cases
    from [Interactor](packages/features/reddit_posts/domain/lib/src/use_cases/interactor.dart).
-3. Use case obtains data
+1. Use case obtains data
    from [Repository](packages/features/reddit_posts/data/lib/repository/remote_repository.dart)
-4. Repository returns data from a [Api](packages/features/reddit_posts/data/lib/api/reddit_api.dart).
-5. Information flows back to the UI to be displayed.
+1. Repository returns data from an [Api](packages/features/reddit_posts/data/lib/api/reddit_api.dart).
+1. Information flows back to the UI to be displayed.
 
-Presentation and Data depends on Domain, but Domain know nothing about them.
+Presentation and Data depend on Domain, but Domain knows nothing about them.
 
 ## Dependencies
 
