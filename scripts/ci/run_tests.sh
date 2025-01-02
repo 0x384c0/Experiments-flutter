@@ -1,5 +1,5 @@
 # !/bin/sh
-BASEDIR=$(realpath "$(dirname "$0")"/..)
+BASEDIR=$(realpath "$(dirname "$0")"/../apps/app_main)
 
 info () {
 	echo "$(tput setaf 2; tput bold;)INFO: $1$(tput sgr0)"

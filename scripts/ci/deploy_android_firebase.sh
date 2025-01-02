@@ -1,4 +1,6 @@
 # !/bin/sh
+BASEDIR=$(realpath "$(dirname "$0")"/../apps/app_main/adnroid)
 
-cd apps/app_main/android
+cd $BASEDIR
+
 ./gradlew assembleRelease appDistributionUploadRelease
