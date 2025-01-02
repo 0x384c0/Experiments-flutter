@@ -12,10 +12,7 @@ default:
 .build_flutter:
   before_script:
     - sh scripts/ci/validate_environment.sh
-    - sh scripts/ci/set_version.sh
-    - sh scripts/ci/pub_get_all.sh
-    - sh scripts/ci/build_runner.sh
-    - sh scripts/ci/generate_translate_file.sh
+    - dart run melos bootstrap
 
 # Unit tests
 unit_tests:

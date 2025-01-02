@@ -10,6 +10,10 @@ check_command() {
 check_command flutter
 echo "Flutter is installed."
 
+check_command dart
+dart pub global activate melos
+echo "Dart is installed."
+
 # Deploy
 check_command bundle
 echo "Bundler is installed."
