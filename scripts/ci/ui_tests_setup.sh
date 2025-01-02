@@ -1,5 +1,5 @@
 # !/bin/sh
-BASEDIR=$(realpath "$(dirname "$0")"/../ui_tests)
+BASEDIR=$(realpath "$(dirname "$0")"/../apps/app_main/ui_tests)
 
 cd $BASEDIR
 

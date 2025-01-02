@@ -43,8 +43,8 @@ ui_tests:
   cache:
     <<: *flutter_cache
     paths:
-      - ui_tests/node_modules
-      - ui_tests/venv
+      - apps/app_main/ui_tests/node_modules
+      - apps/app_main/ui_tests/venv
       - ios/Pods
   script:
     - sh scripts/ci/ui_tests_setup.sh
