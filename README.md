@@ -87,9 +87,11 @@ Presentation and Data depends on Domain, but Domain know nothing about them.
 * `cd apps/app_main` 
 * `flutter run `
 
+## Contributing
+* [CONTRIBUTING.md](CONTRIBUTING.md) contains information about frameworks and libraries in app
+
 # TODO
-* https://pub.dev/packages/melos
-  * lib versions
+* fix UI tests
 * add Oauth2
 * https://github.com/cfug/dio/issues/1653
 * https://pub.dev/packages/auto_route
