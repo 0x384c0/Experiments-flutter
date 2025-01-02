@@ -7,9 +7,9 @@ environment:
   sdk: ^3.5.4
 
 dependencies:
-  common_presentation:
+  common_presentation: ^0.0.1
   firebase_auth: ^5.3.4
-  firebase_core: ^3.8.1
+  firebase_core: ^3.9.0
   firebase_messaging: ^15.1.6
   flutter:
     sdk: flutter

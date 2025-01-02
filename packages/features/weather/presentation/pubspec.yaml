@@ -12,12 +12,12 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.19.0
-  features_weather_domain:
-  common_presentation:
-  common_domain:
+  features_weather_domain: ^0.0.1
+  common_presentation: ^0.0.1
+  common_domain: ^0.0.1
   flutter_bloc: ^8.1.6
   flutter_modular: ^6.3.4
-  geolocator: ^13.0.1
+  geolocator: ^13.0.2
   rxdart: ^0.28.0
 
 dev_dependencies:

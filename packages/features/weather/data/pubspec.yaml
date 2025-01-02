@@ -9,9 +9,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  features_weather_domain:
+  features_weather_domain: ^0.0.1
   json_annotation: ^4.9.0
-  retrofit: ^4.4.1
+  retrofit: ^4.4.2
   dio: ^5.7.0
   flutter_modular: ^6.3.4
 
@@ -22,8 +22,8 @@ dev_dependencies:
   mocktail: ^1.0.4
 
   flutter_lints: ^5.0.0
-  build_runner: ^2.4.11
+  build_runner: ^2.4.14
   json_serializable: ^6.8.0
-  retrofit_generator: ^8.2.0
+  retrofit_generator: ^9.1.7
 
 flutter:

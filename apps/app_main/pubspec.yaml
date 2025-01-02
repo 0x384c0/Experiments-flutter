@@ -16,20 +16,20 @@ dependencies:
   hydrated_bloc: ^9.1.5
   path_provider: ^2.1.5
   flutter_modular: ^6.3.4
-  safe_device: ^1.1.7
-  common_presentation:
-  features_home_presentation:
-  features_weather_domain:
-  features_weather_data:
-  features_weather_presentation:
-  features_reddit_posts_domain:
-  features_reddit_posts_data:
-  features_reddit_posts_presentation:
-  features_forms_presentation:
-  features_webview_presentation:
-  features_experiments_presentation:
-  features_stackoverflow_presentation:
-  features_firebase_chat_presentation:
+  safe_device: ^1.1.9
+  common_presentation: ^0.0.1
+  features_home_presentation: ^0.0.1
+  features_weather_domain: ^0.0.1
+  features_weather_data: ^0.0.1
+  features_weather_presentation: ^0.0.1
+  features_reddit_posts_domain: ^0.0.1
+  features_reddit_posts_data: ^0.0.1
+  features_reddit_posts_presentation: ^0.0.1
+  features_forms_presentation: ^0.0.1
+  features_webview_presentation: ^0.0.1
+  features_experiments_presentation: ^0.0.1
+  features_stackoverflow_presentation: ^0.0.1
+  features_firebase_chat_presentation: ^0.0.1
   cupertino_icons: ^1.0.8
 
 dev_dependencies:

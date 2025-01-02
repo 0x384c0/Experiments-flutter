@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_modular: ^6.3.4
-  common_domain:
+  common_domain: ^0.0.1
 
 dev_dependencies:
   flutter_test:

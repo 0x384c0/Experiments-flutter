@@ -14,14 +14,14 @@ dependencies:
   intl: ^0.19.0
   flutter_bloc: ^8.1.6
   flutter_modular: ^6.3.4
-  common_presentation:
-  features_weather_presentation:
-  features_reddit_posts_presentation:
-  features_forms_presentation:
-  features_webview_presentation:
-  features_experiments_presentation:
-  features_stackoverflow_presentation:
-  features_firebase_chat_presentation:
+  common_presentation: ^0.0.1
+  features_weather_presentation: ^0.0.1
+  features_reddit_posts_presentation: ^0.0.1
+  features_forms_presentation: ^0.0.1
+  features_webview_presentation: ^0.0.1
+  features_experiments_presentation: ^0.0.1
+  features_stackoverflow_presentation: ^0.0.1
+  features_firebase_chat_presentation: ^0.0.1
   widgets_modifiers: ^0.3.42
 
 dev_dependencies:
