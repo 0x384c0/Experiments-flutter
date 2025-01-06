@@ -44,11 +44,11 @@ ui_tests:
       - apps/app_main/ui_tests/venv
       - ios/Pods
   script:
-    - sh scripts/ci/ui_tests_setup.sh
+    - sh scripts/ci/ui_tests/setup.sh
     - sh scripts/ci/build_ios_simulator.sh
-    - sh scripts/ci/ui_tests_run.sh
+    - sh scripts/ci/ui_tests/run.sh
   after_script:
-    - sh scripts/ci/ui_tests_stop_simulator.sh
+    - sh scripts/ci/ui_tests/stop_ios.sh
 
 # Android
 build_android:
