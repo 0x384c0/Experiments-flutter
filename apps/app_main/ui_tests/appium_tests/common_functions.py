@@ -19,7 +19,7 @@ def wait_for_disappear(driver, xpath):
 def scroll_for_visible(driver, xpath):
     return get_impl(driver).scroll_for_visible(xpath)
 
-def if_visible(driver, xpath):
+def is_visible(driver, xpath):
     return get_impl(driver).if_visible(xpath)
 
 def fill_field(driver, xpath, value):

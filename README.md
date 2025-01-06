@@ -91,6 +91,9 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 * [CONTRIBUTING.md](CONTRIBUTING.md) contains information about frameworks and libraries in app
 
 # TODO
+* UI tests
+  * refactor and add android runner
+  * add doc
 * add Oauth2
 * https://github.com/cfug/dio/issues/1653
 * https://pub.dev/packages/auto_route
