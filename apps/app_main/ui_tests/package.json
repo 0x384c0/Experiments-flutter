@@ -1,0 +1,12 @@
+{
+  "name": "ui_tests",
+  "version": "1.0.0",
+  "description": "Set of tools to run UI tests",
+  "dependencies": {
+    "appium": "^2.14.0",
+    "appium-doctor": "^1.16.2"
+  },
+  "devDependencies": {
+    "appium-xcuitest-driver": "^7.35.1"
+  }
+}

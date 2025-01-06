@@ -21,7 +21,7 @@ def appium_service():
 
 def create_ios_driver(custom_opts=None):
     options = XCUITestOptions()
-    options.platformVersion = '16.4'
+    options.platformVersion = '18.1'
     if custom_opts is not None:
         options.load_capabilities(custom_opts)
     return webdriver.Remote(f'http://{APPIUM_HOST}:{APPIUM_PORT}', options=options)
