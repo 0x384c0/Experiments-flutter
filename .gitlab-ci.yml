@@ -46,7 +46,7 @@ ui_tests:
   script:
     - sh apps/app_main/ui_tests/scripts/setup.sh
     - sh scripts/ci/build_ios_simulator.sh
-    - sh apps/app_main/ui_tests/scripts/run.sh
+    - sh apps/app_main/ui_tests/scripts/run_ios.sh
   after_script:
     - sh apps/app_main/ui_tests/scripts/stop_ios.sh
 
