@@ -92,7 +92,7 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 
 # TODO
 * UI tests
-  * refactor and add android runner
+  * add actions for adnroid
   * add doc
 * add Oauth2
 * https://github.com/cfug/dio/issues/1653

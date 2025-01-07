@@ -31,7 +31,7 @@ def appium_service():
 def get_ios_simulator():
     result = subprocess.run(['xcrun', 'simctl', 'list', 'devices', 'available'], capture_output=True, text=True)
     for line in result.stdout.splitlines():
-        if 'iOS' in line:  # Add further filtering if needed
+        if 'iOS' in line:
             platform_version = line.split('(')[-1].strip(')')
             logger.info(f"Using ios simulator: {platform_version}")
             return platform_version
@@ -39,7 +39,7 @@ def get_ios_simulator():
 
 def create_ios_driver(app_path):
     options = XCUITestOptions() # https://appium.github.io/appium-xcuitest-driver/4.24/capabilities/
-    options.platformVersion = '18.1' # TODO: automatically find ios simulator
+    options.platformVersion = get_ios_simulator()
     options.app = app_path
     options.load_capabilities({
         'appium:fullReset': True,
@@ -50,8 +50,9 @@ def get_android_emulator():
     result = subprocess.run(['emulator', '-list-avds'], capture_output=True, text=True)
     emulators = result.stdout.splitlines()
     if emulators:
-        logger.info(f"Using android emulator: {emulators[0]}")
-        return emulators[0]  # Select the first available emulator or implement further selection logic
+        emulator = emulators[0]
+        logger.info(f"Using android emulator: {emulator}")
+        return emulator
     raise Exception("No available Android emulator found")
 
 def create_android_driver(app_path):
