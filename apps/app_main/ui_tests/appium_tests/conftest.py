@@ -35,9 +35,16 @@ def create_ios_driver(app_path):
     })
     return webdriver.Remote(f'http://{APPIUM_HOST}:{APPIUM_PORT}', options=options)
 
+def get_android_emulator():
+    result = subprocess.run(['emulator', '-list-avds'], capture_output=True, text=True)
+    emulators = result.stdout.splitlines()
+    if emulators:
+        return emulators[0]  # Select the first available emulator or implement further selection logic
+    raise Exception("No available Android emulator found")
+
 def create_android_driver(app_path):
     options = UiAutomator2Options() # https://github.com/appium/appium-uiautomator2-driver
-    options.avd = 'Pixel_4_API_34' # TODO: automatically find android emulator
+    options.avd = get_android_emulator()
     options.avdReadyTimeout = 5 * 60 * 1000
     options.app = app_path
     options.load_capabilities({

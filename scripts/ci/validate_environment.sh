@@ -25,6 +25,13 @@ echo "Npm is installed."
 check_command python3
 echo "python3 is installed."
 
+# Mobile Devices
+check_command emulator
+echo "emulator is installed."
+
+check_command xcrun
+echo "xcrun is installed."
+
 # Utils
 check_command awk
 echo "awk is installed."
