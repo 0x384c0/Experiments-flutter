@@ -81,7 +81,27 @@ scripts:
         - test
     exec: flutter test
 
+  ui_test:ios:
+    run: |
+      melos run build:ios_simulator
+      sh apps/app_main/ui_tests/scripts/run_ios.sh
+
+  ui_test:android:
+    run: |
+      melos run build:android_apk
+      sh apps/app_main/ui_tests/scripts/run_android.sh
+
   deploy:android:firebase_app_distribution:
     run: |
       cd apps/app_main/android
       ./gradlew assembleRelease appDistributionUploadRelease
+
+  build:ios_simulator:
+    run: |
+      cd apps/app_main/
+      flutter build ios --simulator
+
+  build:android_apk:
+    run: |
+      cd apps/app_main/
+      flutter build apk
