@@ -1,6 +1,7 @@
 import pytest
 import subprocess
 import os
+import logging
 from appium import webdriver
 from appium.options.ios import XCUITestOptions
 from appium.options.android import UiAutomator2Options
@@ -8,6 +9,7 @@ from appium.webdriver.appium_service import AppiumService
 
 APPIUM_PORT = 4723
 APPIUM_HOST = '127.0.0.1'
+logger = logging.getLogger()
 
 def pytest_addoption(parser):
     parser.addoption("--app-path", action="store", required=True, help="Path to the app file (.app for iOS, .apk for Android)")
@@ -26,6 +28,15 @@ def appium_service():
     yield service
     service.stop()
 
+def get_ios_simulator():
+    result = subprocess.run(['xcrun', 'simctl', 'list', 'devices', 'available'], capture_output=True, text=True)
+    for line in result.stdout.splitlines():
+        if 'iOS' in line:  # Add further filtering if needed
+            platform_version = line.split('(')[-1].strip(')')
+            logger.info(f"Using ios simulator: {platform_version}")
+            return platform_version
+    raise Exception("No available iOS simulator found")
+
 def create_ios_driver(app_path):
     options = XCUITestOptions() # https://appium.github.io/appium-xcuitest-driver/4.24/capabilities/
     options.platformVersion = '18.1' # TODO: automatically find ios simulator
@@ -39,6 +50,7 @@ def get_android_emulator():
     result = subprocess.run(['emulator', '-list-avds'], capture_output=True, text=True)
     emulators = result.stdout.splitlines()
     if emulators:
+        logger.info(f"Using android emulator: {emulators[0]}")
         return emulators[0]  # Select the first available emulator or implement further selection logic
     raise Exception("No available Android emulator found")
 
