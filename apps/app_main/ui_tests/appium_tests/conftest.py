@@ -27,17 +27,22 @@ def appium_service():
     service.stop()
 
 def create_ios_driver(app_path):
-    options = XCUITestOptions()
-    options.platformVersion = '18.1'
+    options = XCUITestOptions() # https://appium.github.io/appium-xcuitest-driver/4.24/capabilities/
+    options.platformVersion = '18.1' # TODO: automatically find ios simulator
     options.app = app_path
     options.load_capabilities({
-        'appium:fullReset': True, # https://appium.github.io/appium-xcuitest-driver/4.24/capabilities/
+        'appium:fullReset': True,
     })
     return webdriver.Remote(f'http://{APPIUM_HOST}:{APPIUM_PORT}', options=options)
 
 def create_android_driver(app_path):
-    options = UiAutomator2Options()
+    options = UiAutomator2Options() # https://github.com/appium/appium-uiautomator2-driver
+    options.avd = 'Pixel_4_API_34' # TODO: automatically find android emulator
+    options.avdReadyTimeout = 5 * 60 * 1000
     options.app = app_path
+    options.load_capabilities({
+        'appium:fullReset': True,
+    })
     return webdriver.Remote(f'http://{APPIUM_HOST}:{APPIUM_PORT}', options=options)
 
 @pytest.fixture(scope='session')

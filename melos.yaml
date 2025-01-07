@@ -84,11 +84,13 @@ scripts:
   ui_test:ios:
     run: |
       melos run build:ios_simulator
+      sh apps/app_main/ui_tests/scripts/setup.sh
       sh apps/app_main/ui_tests/scripts/run_ios.sh
 
   ui_test:android:
     run: |
       melos run build:android_apk
+      sh apps/app_main/ui_tests/scripts/setup.sh
       sh apps/app_main/ui_tests/scripts/run_android.sh
 
   deploy:android:firebase_app_distribution:
