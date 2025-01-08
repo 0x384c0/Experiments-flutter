@@ -1,14 +1,17 @@
-import pytest
-import subprocess
-import os
 import logging
+import os
+import subprocess
+
+import pytest
 from appium import webdriver
-from appium.options.ios import XCUITestOptions
 from appium.options.android import UiAutomator2Options
+from appium.options.ios import XCUITestOptions
 from appium.webdriver.appium_service import AppiumService
 
-from .appium_driver_wrapper import AppiumDriverWrapper
-from .posts_actions_mobile_impl import PostsActionsMobileImpl
+# noinspection PyUnresolvedReferences
+from .actions.actions_fixtures import *
+# noinspection PyUnresolvedReferences
+from .utils.utils_fixtures import *
 
 APPIUM_PORT = 4723
 APPIUM_HOST = '127.0.0.1'
@@ -89,13 +92,3 @@ def driver(request, app_path):
         return create_android_driver(app_path)
     else:
         raise Exception(f"Unsupported app: {app_path}")
-
-
-@pytest.fixture(scope='session')
-def driver_wrapper(driver):
-    return AppiumDriverWrapper(driver)
-
-
-@pytest.fixture(scope='session')
-def posts_actions(driver_wrapper):
-    return PostsActionsMobileImpl(driver_wrapper)

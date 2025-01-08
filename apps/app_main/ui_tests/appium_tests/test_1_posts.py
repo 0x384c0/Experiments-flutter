@@ -1,5 +1,4 @@
 from pytest_bdd import scenarios, given, when, then, parsers
-from .posts_actions_mobile_impl import PostsActionsMobileImpl
 
 # Load the scenarios from the feature file
 scenarios('../features/posts.feature')
