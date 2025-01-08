@@ -3,6 +3,7 @@
 A sample Flutter app that has multiple features.\
 Inspired by [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) from [Uncle Bob](https://x.com/unclebobmartin)
 
+[![melos](https://img.shields.io/badge/maintained%20with-melos-f700ff.svg?style=flat-square)](https://github.com/invertase/melos)
 [![tests workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml/badge.svg)](https://github.com/0x384c0/Experiments-flutter/actions/workflows/unit_tests.yml)
 [![deploy_web workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_web.yml/badge.svg)](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_web.yml)
 [![deploy_android workflow](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_android.yml/badge.svg)](https://github.com/0x384c0/Experiments-flutter/actions/workflows/deploy_android.yml)
@@ -53,6 +54,7 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 - [domain](packages/features/weather/domain/test/interactor_test.dart)
 - [widgets](packages/features/weather/presentation/test)
 - [UI tests](apps/app_main/ui_tests/features)
+  - see [ui_tests/Readme.md](apps/app_main/ui_tests/Readme.md) for details
 
 ## Environment
 ```
@@ -91,9 +93,6 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 * [CONTRIBUTING.md](CONTRIBUTING.md) contains information about frameworks and libraries in app
 
 # TODO
-* UI tests
-  * add actions for adnroid
-  * add doc
 * add Oauth2
 * https://github.com/cfug/dio/issues/1653
 * https://pub.dev/packages/auto_route
