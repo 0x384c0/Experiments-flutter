@@ -10,29 +10,7 @@ WAIT_SECONDS_SHORT = 1
 WAIT_SECONDS = 30
 
 
-def wait_for_visible(driver, xpath):
-    return get_impl(driver).wait_for_visible(xpath)
-
-def wait_for_disappear(driver, xpath):
-    get_impl(driver).wait_for_disappear(xpath)
-
-def scroll_for_visible(driver, xpath):
-    return get_impl(driver).scroll_for_visible(xpath)
-
-def is_visible(driver, xpath):
-    return get_impl(driver).if_visible(xpath)
-
-def fill_field(driver, xpath, value):
-    return get_impl(driver).fill_field(xpath, value)
-
-def clear_field(driver, xpath, value):
-    return get_impl(driver).clear_field(xpath, value)
-
-def get_impl(driver):
-    return CommonFunctionsIOSImpl(driver)
-
-
-class CommonFunctionsIOSImpl:
+class AppiumDriverWrapper:
     def __init__(self, driver):
         self.driver = driver
 
@@ -65,7 +43,7 @@ class CommonFunctionsIOSImpl:
 
         raise TimeoutError(f"Element {xpath} not found within {WAIT_SECONDS} seconds")
 
-    def if_visible(self, xpath):
+    def is_visible(self, xpath):
         try:
             wait = WebDriverWait(self.driver, WAIT_SECONDS_SHORT)
             wait.until(EC.visibility_of_element_located((AppiumBy.XPATH, xpath)))
@@ -74,14 +52,14 @@ class CommonFunctionsIOSImpl:
         return True
 
     def fill_field(self, xpath, value):
-        wait_for_visible(self.driver, xpath).click()
+        self.wait_for_visible(xpath).click()
         sleep(0.6)
-        wait_for_visible(self.driver, xpath).send_keys(value)
+        self.wait_for_visible(xpath).send_keys(value)
         sleep(0.1)
 
     def clear_field(self, xpath, value):
-        wait_for_visible(self.driver, xpath).click()
+        self.wait_for_visible(xpath).click()
         sleep(0.6)
         for iter in range(value):
             sleep(0.05)
-            wait_for_visible(self.driver, xpath).send_keys(Keys.BACKSPACE)
+            self.wait_for_visible(xpath).send_keys(Keys.BACKSPACE)
