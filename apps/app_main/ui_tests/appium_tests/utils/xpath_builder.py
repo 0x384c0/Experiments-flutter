@@ -14,7 +14,7 @@ class XPathBuilder:
     def back(self):
         raise NotImplementedError()
 
-    def nav_menu(self):
+    def menu(self):
         raise NotImplementedError()
 
 
@@ -34,7 +34,7 @@ class AndroidXPathBuilder(XPathBuilder):
     def back(self):
         return f'//android.widget.Button[@content-desc="Back"]'
 
-    def nav_menu(self):
+    def menu(self):
         return f'//android.widget.Button[@content-desc="Open navigation menu"]'
 
 
@@ -54,5 +54,5 @@ class IOSXPathBuilder(XPathBuilder):
     def back(self):
         return f'//XCUIElementTypeButton[@name="Back"]'
 
-    def nav_menu(self):
+    def menu(self):
         return f'//XCUIElementTypeButton[@name="Open navigation menu"]'
