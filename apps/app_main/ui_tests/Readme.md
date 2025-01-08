@@ -25,7 +25,7 @@
 "appium:platformName": "XCUITest"
 }
 ```
-* install app on device/emulator with Appium Appium Inspector
+* Install app on device/emulator with Appium Driver
   * it can be done by running UI tests and stopping them after app installed
 * `sh apps/app_main/ui_tests/scripts/start_appium_server.sh`
-* start session in Appium Inspector
+* Start session in Appium Inspector
