@@ -18,11 +18,11 @@
 "appium:platformName": "Android"
 }
 ```
-* add ios capability sets
+* Add ios capability sets
 ```
 {
-"appium:automationName": "uiautomator2",
-"appium:platformName": "Android"
+"appium:automationName": "iOS",
+"appium:platformName": "XCUITest"
 }
 ```
 * install app on device/emulator with Appium Appium Inspector
