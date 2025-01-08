@@ -23,7 +23,7 @@ class AndroidXPathBuilder(XPathBuilder):
         return f'//*[contains(@content-desc, "{button_text}")]'
 
     def loading(self):
-        return '//XCUIElementTypeStaticText[@name="loading"]'
+        return '//XCUIElementTypeStaticText[@name="loading"]' # TODO: use android xpath
 
     def button(self, text):
         return f'//android.widget.Button[@content-desc="{text}"]'
