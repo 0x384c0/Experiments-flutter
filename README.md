@@ -32,8 +32,8 @@ feature is split into 3 layers
 1. Cubit executes use cases
    from [Interactor](packages/features/reddit_posts/domain/lib/src/use_cases/interactor.dart).
 1. Use case obtains data
-   from [Repository](packages/features/reddit_posts/data/lib/repository/remote_repository.dart)
-1. Repository returns data from an [Api](packages/features/reddit_posts/data/lib/api/reddit_api.dart).
+   from [Repository](packages/features/reddit_posts/data/lib/src/repository/remote_repository.dart)
+1. Repository returns data from an [Api](packages/features/reddit_posts/data/lib/src/api/reddit_api.dart).
 1. Information flows back to the UI to be displayed.
 
 Presentation and Data depend on Domain, but Domain knows nothing about them.
