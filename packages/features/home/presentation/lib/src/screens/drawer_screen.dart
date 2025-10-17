@@ -1,7 +1,8 @@
 import 'package:features_home_presentation/l10n/app_localizations.g.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-import 'package:widgets_modifiers/painting/painting_effect_widgets_modifiers.dart';
+import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
+
 
 import '../data/selected_page_state.dart';
 
@@ -29,7 +30,7 @@ class DrawerScreen extends StatelessWidget {
             tileColor: selectedScreen == SelectedPageState.webView
                 ? Theme.of(context).colorScheme.surfaceContainerHighest
                 : null,
-          ).opacity(opacity: kIsWeb ? 0.5 : 1),
+          ).withOpacity(kIsWeb ? 0.5 : 1),
           ListTile(
             title: Text(_getLocalizations(context).home_experiments),
             onTap: () => _onDestinationSelected(context, SelectedPageState.experiments),

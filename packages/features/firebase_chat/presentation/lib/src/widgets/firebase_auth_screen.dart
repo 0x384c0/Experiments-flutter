@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
+import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
 import '../navigation/navigator.dart';
 

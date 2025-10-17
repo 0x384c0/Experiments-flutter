@@ -2,7 +2,7 @@ import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
 import 'package:features_forms_presentation/src/navigation/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
+import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
 class FormsScreen extends StatelessWidget {
   const FormsScreen({super.key});

@@ -68,7 +68,7 @@ class ThemeProvider {
         ),
       ),
     )),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       shape: RoundedRectangleBorder(
         side: BorderSide(width: 1, color: _colors.grey.shade200),
         borderRadius: BorderRadius.circular(8),
@@ -92,7 +92,7 @@ class ThemeProvider {
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
-    dialogTheme: DialogTheme(
+    dialogTheme: DialogThemeData(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),

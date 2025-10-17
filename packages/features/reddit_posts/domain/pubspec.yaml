@@ -1,20 +1,20 @@
+resolution: workspace
 name: features_reddit_posts_domain
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ^3.5.4
+  sdk: ^3.8.0
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_modular: ^6.3.4
+  flutter_modular: ^6.4.1
   common_domain: ^0.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
 
 flutter:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:widgets_modifiers/layout/single_child_layout_widgets_modifiers.dart';
+import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
 class RadioFormInput<T> extends StatelessWidget {
   final String text;
@@ -26,7 +26,7 @@ class RadioFormInput<T> extends StatelessWidget {
           onChanged: (T? value) {
             if (value != null) onChanged(value);
           },
-        ).frame(height: 26),
+        ).withSize(height: 26),
         TextButton(
           style: TextButton.styleFrom(
             minimumSize: Size.zero,

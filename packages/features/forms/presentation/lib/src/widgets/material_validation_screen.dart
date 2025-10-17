@@ -5,7 +5,7 @@ import 'package:features_forms_presentation/src/validators/email.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
+import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
 import 'form_inputs/file_form_input.dart';
 import 'form_inputs/image_form_input.dart';
@@ -46,7 +46,7 @@ class _MaterialValidationScreenState extends State<MaterialValidationScreen> {
                   if (value?.isEmpty == true) return AppLocalizations.of(context)!.forms_empty_field;
                   return null;
                 },
-              ).padding(bottom: context.dimensions.medium),
+              ).paddingOnly(bottom: context.dimensions.medium),
               TextFormField(
                 decoration: InputDecoration(labelText: locale.forms_email),
                 validator: (value) {
@@ -54,14 +54,14 @@ class _MaterialValidationScreenState extends State<MaterialValidationScreen> {
                   if (!emailRegExp.hasMatch(value!)) return AppLocalizations.of(context)!.forms_invalid_field;
                   return null;
                 },
-              ).padding(bottom: context.dimensions.medium),
+              ).paddingOnly(bottom: context.dimensions.medium),
               TextFormField(
                 decoration: InputDecoration(labelText: locale.forms_password),
                 validator: (value) {
                   if (value?.isEmpty == true) return AppLocalizations.of(context)!.forms_empty_field;
                   return null;
                 },
-              ).padding(bottom: context.dimensions.medium),
+              ).paddingOnly(bottom: context.dimensions.medium),
               LayoutBuilder(
                 builder: (context, constraints) => DropdownMenu(
                   dropdownMenuEntries: dropdownMenuEntries,

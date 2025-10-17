@@ -1,7 +1,137 @@
 name: my_project
 
 environment:
-  sdk: ^3.5.4
+  sdk: ^3.8.0
+
+workspace:
+  - packages/common/data
+  - packages/common/domain
+  - packages/common/presentation
+  - packages/features/experiments/presentation
+  - packages/features/firebase_chat/presentation
+  - packages/features/forms/presentation
+  - packages/features/home/presentation
+  - packages/features/reddit_posts/data
+  - packages/features/reddit_posts/domain
+  - packages/features/reddit_posts/presentation
+  - packages/features/stackoverflow/presentation
+  - packages/features/weather/data
+  - packages/features/weather/domain
+  - packages/features/weather/presentation
+  - packages/features/webview/presentation
+  - apps/app_main
 
 dev_dependencies:
-  melos: ^6.2.0
+  melos: ^7.2.0
+
+melos:
+  packages:
+    - apps/**
+    - packages/**
+
+  command:
+    bootstrap:
+      hooks:
+        post: melos run prebuild
+
+      environment:
+        sdk: ^3.8.0
+      dependencies:
+        # Common
+        flutter_modular: ^6.4.1
+        # Presentation
+        intl: ^0.20.2
+        flutter_bloc: ^8.1.6
+        # Data
+        freezed_annotation: ^2.4.4
+        json_annotation: ^4.9.0
+        retrofit: ^4.4.2
+        dio: ^5.9.0
+        # For web after changing drift version run sh scripts/download_drift_for_web.sh
+        drift: ^2.23.0
+        drift_flutter: ^0.2.4
+        flutter_view_modifiers: 0.0.9
+
+      dev_dependencies:
+        flutter_lints: ^5.0.0
+        build_runner: ^2.4.14
+        freezed: ^2.5.7
+        json_serializable: ^6.8.0
+        retrofit_generator: ^9.1.7
+        drift_dev: ^2.23.0
+        bloc_test: ^9.1.7
+        mocktail: ^1.0.4
+
+  scripts:
+    prebuild:
+      run: |
+        melos run build_runner
+        melos run flutter_localizations
+
+    prebuild:web:
+      run: |
+        melos run prebuild
+        dart scripts/download_drift_for_web.dart
+
+    pub_get:
+      exec: dart pub get
+
+    pub_upgrade:
+      exec: dart pub upgrade --major-versions --tighten
+
+    build_runner:
+      packageFilters:
+        dependsOn:
+          - build_runner
+      exec: dart run build_runner build --delete-conflicting-outputs
+
+    build_runner_changed:
+      packageFilters:
+        dependsOn:
+          - build_runner
+        diff: "origin/master...HEAD"
+      exec: dart run build_runner build --delete-conflicting-outputs
+
+    flutter_localizations:
+      packageFilters:
+        dependsOn:
+          - flutter_localizations
+      run: flutter gen-l10n
+      exec:
+        concurrency: 1
+
+    set_version:
+      run: dart scripts/set_version.dart
+
+    test:
+      packageFilters:
+        dirExists:
+          - test
+      exec: flutter test
+
+    ui_test:ios:
+      run: |
+        melos run build:ios_simulator
+        sh apps/app_main/ui_tests/scripts/setup.sh
+        sh apps/app_main/ui_tests/scripts/run_ios.sh
+
+    ui_test:android:
+      run: |
+        melos run build:android_apk
+        sh apps/app_main/ui_tests/scripts/setup.sh
+        sh apps/app_main/ui_tests/scripts/run_android.sh
+
+    deploy:android:firebase_app_distribution:
+      run: |
+        cd apps/app_main/android
+        ./gradlew assembleRelease appDistributionUploadRelease
+
+    build:ios_simulator:
+      run: |
+        cd apps/app_main/
+        flutter build ios --simulator
+
+    build:android_apk:
+      run: |
+        cd apps/app_main/
+        flutter build apk

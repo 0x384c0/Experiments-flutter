@@ -7,7 +7,7 @@ import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:features_reddit_posts_presentation/src/navigation/navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
+import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
 import 'post_tile.dart';
 

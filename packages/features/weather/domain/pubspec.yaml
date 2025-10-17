@@ -1,15 +1,16 @@
+resolution: workspace
 name: features_weather_domain
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ^3.5.4
+  sdk: ^3.8.0
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_modular: ^6.3.4
+  flutter_modular: ^6.4.1
 
 dev_dependencies:
   flutter_test:
@@ -17,6 +18,5 @@ dev_dependencies:
   bloc_test: ^9.1.7
   mocktail: ^1.0.4
 
-  flutter_lints: ^5.0.0
 
 flutter:

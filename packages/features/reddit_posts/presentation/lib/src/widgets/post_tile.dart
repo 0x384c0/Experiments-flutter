@@ -1,8 +1,8 @@
 import 'package:common_presentation/widgets/card_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:widgets_modifiers/layout/single_child_layout_widgets_modifiers.dart';
-import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
+import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
+
 
 import '../data/post_state.dart';
 
@@ -35,7 +35,7 @@ class PostTile extends CardTile {
             Text(
               state.title,
               style: const TextStyle(fontSize: 16),
-            ).padding(top: 4, bottom: 4),
+            ).paddingOnly(top: 4, bottom: 4),
             Row(
               children: [
                 Text(

@@ -2,7 +2,7 @@ import 'package:features_webview_presentation/features_webview_presentation.dart
 import 'package:features_webview_presentation/l10n/app_localizations.g.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
+import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
 class WebViewsScreen extends StatelessWidget {
   const WebViewsScreen({super.key});

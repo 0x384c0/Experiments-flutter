@@ -58,28 +58,31 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 
 ## Environment
 ```
-[✓] Flutter (Channel stable, 3.24.5, on macOS 15.1 24B83 darwin-arm64, locale en-KG)
-    • Flutter version 3.24.5 on channel stable at /Users/user/fvm/versions/3.24.5
+[✓] Flutter (Channel stable, 3.35.2, on macOS 15.5 24F74 darwin-arm64, locale en-KG) [998ms]
+    • Flutter version 3.35.2 on channel stable at ~/fvm/versions/3.35.2
     • Upstream repository https://github.com/flutter/flutter.git
-    • Framework revision dec2ee5c1f (6 days ago), 2024-11-13 11:13:06 -0800
-    • Engine revision a18df97ca5
-    • Dart version 3.5.4
-    • DevTools version 2.37.3
+    • Framework revision 05db968908 (8 weeks ago), 2025-08-25 10:21:35 -0700
+    • Engine revision a8bfdfc394
+    • Dart version 3.9.0
+    • DevTools version 2.48.0
 
-[✓] Android toolchain - develop for Android devices (Android SDK version 34.0.0)
-    • Android SDK at /Users/user/Library/Android/sdk
-    • Platform android-34, build-tools 34.0.0
-    • ANDROID_HOME = /Users/user/Library/Android/sdk
+[✓] Android toolchain - develop for Android devices (Android SDK version 34.0.0) [1,965ms]
+    • Android SDK at ~/Library/Android/sdk
+    • Emulator version 36.1.9.0 (build_id 13823996) (CL:N/A)
+    • Platform android-36, build-tools 34.0.0
+    • ANDROID_HOME = ~/Library/Android/sdk
     • Java binary at: /opt/homebrew/opt/openjdk@17/bin/java
-    • Java version OpenJDK Runtime Environment Homebrew (build 17.0.13+0)
+      This JDK is specified in your Flutter configuration.
+      To change the current JDK, run: `flutter config --jdk-dir="path/to/jdk"`.
+    • Java version OpenJDK Runtime Environment Homebrew (build 17.0.14+0)
     • All Android licenses accepted.
 
-[✓] Xcode - develop for iOS and macOS (Xcode 16.1)
+[✓] Xcode - develop for iOS and macOS (Xcode 16.4) [1,658ms]
     • Xcode at /Applications/Xcode.app/Contents/Developer
-    • Build 16B40
-    • CocoaPods version 1.15.2
+    • Build 16F6
+    • CocoaPods version 1.16.2
 
-[✓] Android Studio (version 2024.2)
+[✓] Android Studio (version 2024.3) [7ms]
 ```
 
 ## Build project

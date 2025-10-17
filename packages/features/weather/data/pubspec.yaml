@@ -1,10 +1,11 @@
+resolution: workspace
 name: features_weather_data
 description: A new Flutter package project.
 version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ^3.5.4
+  sdk: ^3.8.0
 
 dependencies:
   flutter:
@@ -12,8 +13,8 @@ dependencies:
   features_weather_domain: ^0.0.1
   json_annotation: ^4.9.0
   retrofit: ^4.4.2
-  dio: ^5.7.0
-  flutter_modular: ^6.3.4
+  dio: ^5.9.0
+  flutter_modular: ^6.4.1
 
 dev_dependencies:
   flutter_test:
@@ -21,7 +22,6 @@ dev_dependencies:
   bloc_test: ^9.1.7
   mocktail: ^1.0.4
 
-  flutter_lints: ^5.0.0
   build_runner: ^2.4.14
   json_serializable: ^6.8.0
   retrofit_generator: ^9.1.7

@@ -3,7 +3,7 @@ import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
 import 'package:features_reddit_posts_presentation/src/widgets/post_comments_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:widgets_modifiers/style/styling_widgets_modifiers.dart';
+import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
 import 'comment_tile.dart';
 
