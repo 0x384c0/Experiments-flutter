@@ -32,7 +32,7 @@ jobs:
         run: dart run melos set_version
 
       - name: Deploy web
-        uses: bluefireteam/flutter-gh-pages@v7
+        uses: bluefireteam/flutter-gh-pages@v9
         with:
           baseHref: /Experiments-flutter/
           workingDir: apps/app_main
