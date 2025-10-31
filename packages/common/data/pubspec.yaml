@@ -11,8 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   dio: ^5.9.0
-  dio_cache_interceptor:
-  flutter_secure_storage:
+  dio_cache_interceptor: ^3.5.1
+  flutter_secure_storage: ^9.2.2
   common_domain:
 
 dev_dependencies:
