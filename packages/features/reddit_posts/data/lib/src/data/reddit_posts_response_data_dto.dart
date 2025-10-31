@@ -6,7 +6,7 @@ part 'reddit_posts_response_data_dto.g.dart';
 part 'reddit_posts_response_data_dto.freezed.dart';
 
 @freezed
-class RedditPostsResponseDataDTO with _$RedditPostsResponseDataDTO {
+sealed class RedditPostsResponseDataDTO with _$RedditPostsResponseDataDTO {
   const factory RedditPostsResponseDataDTO({
     @JsonKey(name: "children") List<RedditPostsResponseChildDTO>? children,
     @JsonKey(name: "after") String? after,

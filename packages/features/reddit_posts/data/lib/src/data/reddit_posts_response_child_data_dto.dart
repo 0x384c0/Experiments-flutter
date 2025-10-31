@@ -5,7 +5,7 @@ part 'reddit_posts_response_child_data_dto.g.dart';
 part 'reddit_posts_response_child_data_dto.freezed.dart';
 
 @freezed
-class RedditPostsResponseChildDataDTO with _$RedditPostsResponseChildDataDTO {
+sealed class RedditPostsResponseChildDataDTO with _$RedditPostsResponseChildDataDTO {
   const factory RedditPostsResponseChildDataDTO({
     @JsonKey(name: "permalink") String? permalink,
     @JsonKey(name: "author") String? author,

@@ -8,7 +8,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'formzz_validation_state.freezed.dart';
 
 @freezed
-class FormzzValidationState with _$FormzzValidationState {
+sealed class FormzzValidationState with _$FormzzValidationState {
   factory FormzzValidationState({
     required String profileImagePath,
     required EntityType entityType,

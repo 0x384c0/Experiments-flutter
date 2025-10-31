@@ -7,7 +7,7 @@ part 'reddit_json_response_dto.freezed.dart';
 part 'reddit_json_response_dto.g.dart';
 
 @freezed
-class RedditJsonResponseDTO with _$RedditJsonResponseDTO {
+sealed class RedditJsonResponseDTO with _$RedditJsonResponseDTO {
   const factory RedditJsonResponseDTO({
     @JsonKey(name: "json") RedditJsonDTO? json,
   }) = _RedditJsonResponseDTO;
@@ -16,7 +16,7 @@ class RedditJsonResponseDTO with _$RedditJsonResponseDTO {
 }
 
 @freezed
-class RedditJsonDTO with _$RedditJsonDTO {
+sealed class RedditJsonDTO with _$RedditJsonDTO {
   const factory RedditJsonDTO({
     @JsonKey(name: "data") RedditJsonDataDTO? data,
   }) = _RedditJsonDTO;
@@ -25,7 +25,7 @@ class RedditJsonDTO with _$RedditJsonDTO {
 }
 
 @freezed
-class RedditJsonDataDTO with _$RedditJsonDataDTO {
+sealed class RedditJsonDataDTO with _$RedditJsonDataDTO {
   const factory RedditJsonDataDTO({
     @JsonKey(name: "things") List<RedditPostListingChildDTO>? things,
   }) = _RedditJsonDataDTO;

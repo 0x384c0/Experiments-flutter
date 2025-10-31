@@ -7,7 +7,7 @@ part 'reddit_post_listing_dto.freezed.dart';
 part 'reddit_post_listing_dto.g.dart';
 
 @freezed
-class RedditPostListingDTO with _$RedditPostListingDTO {
+sealed class RedditPostListingDTO with _$RedditPostListingDTO {
   const factory RedditPostListingDTO({
     @JsonKey(name: "data") RedditPostListingDataDTO? data,
   }) = _RedditPostListingDTO;

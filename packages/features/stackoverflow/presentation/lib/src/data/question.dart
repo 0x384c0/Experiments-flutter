@@ -7,7 +7,7 @@ part 'question.freezed.dart';
 part 'question.g.dart';
 
 @freezed
-class QuestionsResponse with _$QuestionsResponse {
+sealed class QuestionsResponse with _$QuestionsResponse {
   factory QuestionsResponse({
     required List<Question> items,
     required int total,
@@ -17,7 +17,7 @@ class QuestionsResponse with _$QuestionsResponse {
 }
 
 @freezed
-class Question with _$Question {
+sealed class Question with _$Question {
   @JsonSerializable(fieldRename: FieldRename.snake)
   factory Question({
     required int viewCount,

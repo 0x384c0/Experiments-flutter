@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:features_stackoverflow_presentation/src/data/question.dart';
 import 'package:features_stackoverflow_presentation/src/provider/stackoverflow_api.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'client_provider.dart';
@@ -10,7 +11,7 @@ part 'quiestion_provider.g.dart';
 /// Can be created manually with
 /// final paginatedQuestionsProvider = FutureProvider.autoDispose.family<QuestionsResponse, int>((ref, index) async {  }));
 @riverpod
-Future<QuestionsResponse> paginatedQuestions(PaginatedQuestionsRef ref, {required int pageIndex}) async {
+Future<QuestionsResponse> paginatedQuestions(Ref ref, {required int pageIndex}) async {
   final cancelToken = CancelToken();
   ref.onDispose(cancelToken.cancel);
   final dio = ref.watch(clientProvider);
@@ -23,8 +24,9 @@ Future<QuestionsResponse> paginatedQuestions(PaginatedQuestionsRef ref, {require
 }
 
 /// A provider exposing the total count of questions
-final questionsCountProvider =
-    Provider.autoDispose((ref) => ref.watch(paginatedQuestionsProvider(pageIndex: 0)).whenData((page) => page.total));
+final questionsCountProvider = Provider.autoDispose(
+  (ref) => ref.watch(paginatedQuestionsProvider(pageIndex: 0)).whenData((page) => page.total),
+);
 
 /// A scoped provider, exposing the current question used by [QuestionItem].
 ///

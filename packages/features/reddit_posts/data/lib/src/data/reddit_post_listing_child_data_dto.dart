@@ -5,7 +5,7 @@ part 'reddit_post_listing_child_data_dto.freezed.dart';
 part 'reddit_post_listing_child_data_dto.g.dart';
 
 @freezed
-class RedditPostListingChildDataDTO with _$RedditPostListingChildDataDTO {
+sealed class RedditPostListingChildDataDTO with _$RedditPostListingChildDataDTO {
   const factory RedditPostListingChildDataDTO({
     @JsonKey(name: "author") String? author,
     @JsonKey(name: "title") String? title,

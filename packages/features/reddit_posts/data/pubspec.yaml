@@ -14,9 +14,9 @@ dependencies:
   common_data:
   common_domain:
   flutter_modular: ^6.4.1
-  freezed_annotation: ^2.4.4
+  freezed_annotation: ^3.0.0
   json_annotation: ^4.9.0
-  retrofit: ^4.4.2
+  retrofit: ^4.8.0
   dio: ^5.9.0
   # For web after changing version run sh scripts/download_drift_for_web.sh
   drift: ^2.23.0
@@ -24,9 +24,9 @@ dependencies:
 
 dev_dependencies:
   build_runner: ^2.4.14
-  freezed: ^2.5.7
-  json_serializable: ^6.8.0
-  retrofit_generator: ^9.1.7
+  freezed: ^3.0.0
+  json_serializable: ^6.11.1
+  retrofit_generator: ^10.0.0
   drift_dev: ^2.23.0
 
 global_options:

@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   features_weather_domain:
   json_annotation: ^4.9.0
-  retrofit: ^4.4.2
+  retrofit: ^4.8.0
   dio: ^5.9.0
   flutter_modular: ^6.4.1
 
@@ -23,7 +23,7 @@ dev_dependencies:
   mocktail: ^1.0.4
 
   build_runner: ^2.4.14
-  json_serializable: ^6.8.0
-  retrofit_generator: ^9.1.7
+  json_serializable: ^6.11.1
+  retrofit_generator: ^10.0.0
 
 flutter:
