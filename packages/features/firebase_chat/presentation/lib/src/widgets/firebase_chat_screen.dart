@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:flutter/material.dart';
+import 'package:flutter_chat_core/flutter_chat_core.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
@@ -17,6 +20,7 @@ class FirebaseChatScreen extends StatefulWidget {
 class _FirebaseChatScreenState extends State<FirebaseChatScreen> with WidgetsBindingObserver {
   final scrollController = ScrollController();
   final textEditingController = TextEditingController();
+  final _chatController = InMemoryChatController();
 
   @override
   void initState() {
@@ -28,50 +32,30 @@ class _FirebaseChatScreenState extends State<FirebaseChatScreen> with WidgetsBin
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('ChatScreen')),
-      body: _messagesStream == null
-          ? const Center(child: CircularProgressIndicator())
-          : StreamBuilder(
-              stream: _messagesStream,
-              builder: (context, snapshot) {
-                return Chat(
-                  messages: snapshot.data ?? [],
-                  user: _user,
-                  onSendPressed: _handleSendPressed,
-                  theme: _getChatTheme(context),
-                );
-              },
-            ),
-    );
-  }
-
-  ChatTheme _getChatTheme(BuildContext context) {
-    final theme = Theme.of(context);
-    final messageBodyTextStyle = theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.onSecondary);
-    return DefaultChatTheme(
-      primaryColor: theme.colorScheme.primary,
-      secondaryColor: theme.colorScheme.secondary,
-      errorColor: theme.colorScheme.error,
-      backgroundColor: theme.colorScheme.surface,
-      inputBackgroundColor: theme.colorScheme.tertiary,
-      inputTextColor: theme.colorScheme.onTertiary,
-      inputTextCursorColor: theme.colorScheme.onTertiary,
-      sentMessageBodyTextStyle: messageBodyTextStyle,
-      receivedMessageBodyTextStyle: messageBodyTextStyle,
-      sendButtonIcon: Icon(Icons.send, color: theme.colorScheme.onTertiary),
+      body: Chat(
+        chatController: _chatController,
+        currentUserId: 'user1',
+        onMessageSend: _handleSendPressed,
+        resolveUser: (UserID id) async {
+          return User(id: id, name: _user.firstName);
+        },
+      ),
     );
   }
 
   late final types.User _user;
   late final types.Room _room;
 
-  Stream<List<types.Message>>? _messagesStream;
-
-  void _handleSendPressed(types.PartialText message) {
-    try {
-      FirebaseChatCore.instance.sendMessage(message, _room.id);
-    } catch (e) {
-      _print(e.toString());
-    }
+  void _handleSendPressed(String text) {
+    FirebaseChatCore.instance.sendMessage(types.PartialText(text: text), _room.id);
+    _chatController.insertMessage(
+      TextMessage(
+        id: '${Random().nextInt(1000) + 1}',
+        authorId: _user.id,
+        createdAt: DateTime.now().toUtc(),
+        text: text,
+      ),
+    );
   }
 
   _initializeChat() async {
@@ -95,9 +79,8 @@ class _FirebaseChatScreenState extends State<FirebaseChatScreen> with WidgetsBin
       } else {
         _room = rooms.first;
       }
-      setState(() {
-        _messagesStream = FirebaseChatCore.instance.messages(_room);
-      });
+      final Iterable<types.Message> messages = await FirebaseChatCore.instance.messages(_room).first;
+      _chatController.messages.addAll(messages.map((e) => Message.fromJson(e.toJson())));
     } catch (e) {
       _print(e.toString());
     }
