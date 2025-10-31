@@ -24,10 +24,6 @@ dependencies:
   features_stackoverflow_presentation:
   features_firebase_chat_presentation:
   flutter_view_modifiers: 0.0.9
-  
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
 flutter:
   generate: true
