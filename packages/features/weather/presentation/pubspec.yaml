@@ -16,7 +16,7 @@ dependencies:
   features_weather_domain:
   common_presentation:
   common_domain:
-  flutter_bloc: ^8.1.6
+  flutter_bloc: ^9.1.1
   flutter_modular: ^6.4.1
   geolocator: ^13.0.2
   rxdart: ^0.28.0
@@ -24,7 +24,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  bloc_test: ^9.1.7
+  bloc_test: ^10.0.0
   mocktail: ^1.0.4
 
   hydrated_bloc:

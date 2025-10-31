@@ -12,9 +12,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  bloc: ^8.1.4
-  flutter_bloc: ^8.1.6
-  hydrated_bloc: ^9.1.5
+  bloc: ^9.1.0
+  flutter_bloc: ^9.1.1
+  hydrated_bloc: ^10.1.1
   path_provider: ^2.1.5
   flutter_modular: ^6.4.1
   safe_device: ^1.1.9
