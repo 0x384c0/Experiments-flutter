@@ -14,7 +14,7 @@ abstract class RedditApi {
   @GET("/r/{subreddit}/{sort}")
   Future<RedditPostsResponseDTO> getPosts({
     @Path("subreddit") required String subreddit,
-    @Path("sort") required RedditPostsSortDTO sort,
+    @Path("sort") required String sort,
     @Query("limit") required int limit,
     @Query("after") required String? after,
   });

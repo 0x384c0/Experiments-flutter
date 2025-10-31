@@ -33,7 +33,7 @@ class RemoteRepositoryImpl implements PostsRemoteRepository {
       _redditApi
           .getPosts(
             subreddit: _defaultSubreddit,
-            sort: RedditPostsSortDTO.top,
+            sort: RedditPostsSortDTO.top.name,
             limit: _pageLimit,
             after: after,
           )
