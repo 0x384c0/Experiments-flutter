@@ -16,7 +16,7 @@ dependencies:
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
   hooks_riverpod: ^2.6.1
-  html: ^0.15.5
+  html: ^0.15.6
   riverpod_annotation: ^2.6.1
 
 dev_dependencies:
