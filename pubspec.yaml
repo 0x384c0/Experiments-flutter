@@ -42,15 +42,43 @@ melos:
         # Presentation
         intl: ^0.20.2
         flutter_bloc: ^8.1.6
+        geolocator: ^13.0.2
+        rxdart: ^0.28.0
+        hydrated_bloc: ^9.1.5
+        drift: ^2.23.0
+        drift_flutter: ^0.2.4
+        flutter_view_modifiers: 0.0.9
+        transparent_image: 2.0.1
+        internet_connection_checker_plus: ^2.7.0
+        shimmer: ^3.0.0
+        shared_preferences: ^2.3.4
+        flutter_hooks: ^0.21.3+1
+        hooks_riverpod: ^2.6.1
+        html: ^0.15.5
+        riverpod_annotation: ^2.6.1
+        path_provider: ^2.1.5
+        url_launcher: ^6.3.1
+        flutter_inappwebview: ^6.1.5
+        open_file: ^3.5.10
+        mime: ^2.0.0
+        formz: ^0.8.0
+        file_picker: ^10.3.3
+        image_picker: ^1.1.2
+        flutter_staggered_grid_view: ^0.7.0
+        firebase_auth: ^5.3.4
+        firebase_core: ^3.9.0
+        firebase_messaging: ^15.1.6
+        flutter_chat_ui: ^1.6.15
+        flutter_firebase_chat_core: ^1.6.8
+        flutter_local_notifications: ^18.0.1
         # Data
         freezed_annotation: ^2.4.4
         json_annotation: ^4.9.0
         retrofit: ^4.4.2
         dio: ^5.9.0
+        dio_cache_interceptor: ^3.5.1
+        flutter_secure_storage: ^9.2.2
         # For web after changing drift version run sh scripts/download_drift_for_web.sh
-        drift: ^2.23.0
-        drift_flutter: ^0.2.4
-        flutter_view_modifiers: 0.0.9
 
       dev_dependencies:
         flutter_lints: ^5.0.0
@@ -61,6 +89,7 @@ melos:
         drift_dev: ^2.23.0
         bloc_test: ^9.1.7
         mocktail: ^1.0.4
+        riverpod_generator: ^2.6.3
 
   scripts:
     prebuild:

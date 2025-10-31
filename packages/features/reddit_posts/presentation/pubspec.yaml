@@ -13,9 +13,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl: ^0.20.2
-  features_reddit_posts_domain: ^0.0.1
-  common_presentation: ^0.0.1
-  common_domain: ^0.0.1
+  features_reddit_posts_domain:
+  common_presentation:
+  common_domain:
   flutter_bloc: ^8.1.6
   flutter_modular: ^6.4.1
   transparent_image: 2.0.1

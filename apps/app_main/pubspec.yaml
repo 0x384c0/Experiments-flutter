@@ -18,12 +18,12 @@ dependencies:
   path_provider: ^2.1.5
   flutter_modular: ^6.4.1
   safe_device: ^1.1.9
-  common_presentation: ^0.0.1
+  common_presentation:
   features_home_presentation: ^0.0.1
-  features_weather_domain: ^0.0.1
+  features_weather_domain:
   features_weather_data: ^0.0.1
   features_weather_presentation: ^0.0.1
-  features_reddit_posts_domain: ^0.0.1
+  features_reddit_posts_domain:
   features_reddit_posts_data: ^0.0.1
   features_reddit_posts_presentation: ^0.0.1
   features_forms_presentation: ^0.0.1

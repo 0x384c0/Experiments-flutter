@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  features_weather_domain: ^0.0.1
+  features_weather_domain:
   json_annotation: ^4.9.0
   retrofit: ^4.4.2
   dio: ^5.9.0
