@@ -1,0 +1,8 @@
+# https://github.com/cfug/dio/issues/1653
+global_options:
+  freezed:
+    runs_before:
+      - json_serializable
+  json_serializable:
+    runs_before:
+      - retrofit_generator
