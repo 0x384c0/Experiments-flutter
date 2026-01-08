@@ -8,6 +8,7 @@ class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
   @override
   ErrorModel map(dynamic input) {
     if (input is DioException) {
+      if (input.error is ErrorModel) return input.error as ErrorModel;
       switch (input.type) {
         case DioExceptionType.badResponse:
           if (input.response?.data case var data?) {
@@ -18,8 +19,9 @@ class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
                 code: input.response?.statusCode,
               );
             } else {
+              final message = data.toString();
               return ErrorModel(
-                message: data,
+                message: message.isNotEmpty ? message : (input.response?.statusCode?.toString() ?? input.message),
                 type: ErrorModelType.badResponse,
                 code: input.response?.statusCode,
               );
@@ -49,15 +51,9 @@ class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
           } else {
             message = input.toString();
           }
-          return ErrorModel(
-            message: message,
-            type: ErrorModelType.unknown,
-          );
+          return ErrorModel(message: message, type: ErrorModelType.unknown);
       }
     }
-    return ErrorModel(
-      message: input.toString(),
-      type: ErrorModelType.unknown,
-    );
+    return ErrorModel(message: input.toString(), type: ErrorModelType.unknown);
   }
 }

@@ -8,3 +8,7 @@ linter:
 
 formatter:
   trailing_commas: preserve
+
+analyzer:
+  errors:
+    invalid_annotation_target: ignore

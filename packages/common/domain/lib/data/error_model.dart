@@ -10,7 +10,7 @@ class ErrorModel {
   final ErrorModelType type;
 
   @override
-  String toString() => message ?? "";
+  String toString() => message ?? '';
 
   static int unauthorizedCode = 401;
 

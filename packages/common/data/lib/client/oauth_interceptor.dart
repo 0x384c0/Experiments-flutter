@@ -24,10 +24,16 @@ class OauthInterceptor<T extends OauthTokensEntity> extends Interceptor {
   @override
   onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == ErrorModel.unauthorizedCode) {
-      handler.next(DioException(
-        error: ErrorModel(type: ErrorModelType.badResponse, code: err.response?.statusCode),
-        requestOptions: err.requestOptions,
-      ));
+      handler.next(
+        DioException(
+          error: ErrorModel(
+            type: ErrorModelType.badResponse,
+            code: err.response?.statusCode,
+            message: err.response?.statusCode?.toString(),
+          ),
+          requestOptions: err.requestOptions,
+        ),
+      );
     } else {
       handler.next(err);
     }
