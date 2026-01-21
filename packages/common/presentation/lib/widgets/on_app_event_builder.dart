@@ -22,6 +22,7 @@ class _OnAppEventBuilderState extends State<OnAppEventBuilder> {
   Widget build(BuildContext context) {
     final appStateNotifier = context.watch<AppStateNotifier>();
     if (widget.events.contains(appStateNotifier.lastEvent)) _childKey = UniqueKey();
+    appStateNotifier.reset();
     return KeyedSubtree(
       key: _childKey,
       child: widget.child,
@@ -33,6 +34,10 @@ class AppStateNotifier extends ChangeNotifier {
   AppEvent? _lastEvent;
 
   AppEvent? get lastEvent => _lastEvent;
+
+  void reset() {
+    _lastEvent = null;
+  }
 
   void triggerEvent(AppEvent event) {
     _lastEvent = event;
