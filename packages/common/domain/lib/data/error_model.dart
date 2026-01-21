@@ -2,11 +2,13 @@ class ErrorModel {
   ErrorModel({
     this.message,
     this.code,
+    this.stackTrace,
     required this.type,
   });
 
   final String? message;
   final int? code;
+  final StackTrace? stackTrace;
   final ErrorModelType type;
 
   @override

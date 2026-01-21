@@ -1,3 +1,4 @@
+import 'package:common_domain/data/error_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,15 +16,15 @@ mixin BlocScreenStateMixin<T> on BlocBase<ScreenState<T>> {
   }
 
   /// Emit new state
-  emitData(T? data) {
+  void emitData(T? data) {
     if (!isClosed) emit(_getNewStateFromData(data: data));
   }
 
-  emitEmpty() {
+  void emitEmpty() {
     if (!isClosed) emit(ScreenStateEmpty());
   }
 
-  emitError(String errorDescription) {
+  void emitError(String errorDescription) {
     if (!isClosed) {
       final data = stateData;
       if (data != null) {
@@ -34,7 +35,7 @@ mixin BlocScreenStateMixin<T> on BlocBase<ScreenState<T>> {
     }
   }
 
-  emitLoading() {
+  void emitLoading() {
     if (!isClosed) {
       final data = stateData;
       if (data != null) {
@@ -61,7 +62,9 @@ mixin BlocScreenStateMixin<T> on BlocBase<ScreenState<T>> {
     try {
       if (showLoading == true) emitLoading();
       await onRefresh();
-    } catch (e) {
+    } catch (e, s) {
+      final stackTrace = e is ErrorModel ? e.stackTrace : null;
+      debugPrintStack(stackTrace: stackTrace ?? s, label: e.toString());
       if (!(await interceptError(e))) {
         emitError(e.toString());
       }

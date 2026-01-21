@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
   @override
   ErrorModel map(dynamic input) {
+    final stackTrace = input is Error ? input.stackTrace : null;
     if (input is DioException) {
       if (input.error is ErrorModel) return input.error as ErrorModel;
       switch (input.type) {
@@ -24,6 +25,7 @@ class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
                 message: message.isNotEmpty ? message : (input.response?.statusCode?.toString() ?? input.message),
                 type: ErrorModelType.badResponse,
                 code: input.response?.statusCode,
+                stackTrace: stackTrace,
               );
             }
           }
@@ -36,6 +38,7 @@ class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
           return ErrorModel(
             message: error is SocketException ? error.message : input.message,
             type: ErrorModelType.connectionError,
+            stackTrace: stackTrace,
           );
         case DioExceptionType.cancel:
         case DioExceptionType.badCertificate:
@@ -51,9 +54,18 @@ class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
           } else {
             message = input.toString();
           }
-          return ErrorModel(message: message, type: ErrorModelType.unknown);
+          return ErrorModel(
+            message: message,
+            type: ErrorModelType.unknown,
+            stackTrace: stackTrace,
+          );
       }
     }
-    return ErrorModel(message: input.toString(), type: ErrorModelType.unknown);
+
+    return ErrorModel(
+      message: input.toString(),
+      type: ErrorModelType.unknown,
+      stackTrace: stackTrace,
+    );
   }
 }
