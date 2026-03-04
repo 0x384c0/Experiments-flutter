@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:common_presentation/widgets/connection_status_view.dart';
 import 'package:common_presentation/widgets/screen_state/screen_state_bloc_builder.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
@@ -13,6 +14,7 @@ import 'post_details_cubit.dart';
 import 'post_tile.dart';
 
 /// Screen with post details
+@RoutePage() // TODO: add support for https://pub.dev/packages/auto_route#query-parameters
 class PostDetailsScreen extends StatelessWidget {
   const PostDetailsScreen({super.key, required this.state});
 

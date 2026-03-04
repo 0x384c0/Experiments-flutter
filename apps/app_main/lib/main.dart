@@ -25,7 +25,7 @@ void main() async {
   runApp(
     ModularApp(
       module: AppModule(isRealDevice: isRealDevice),
-      child: const AppView(),
+      child: AppView(),
     ),
   );
 }

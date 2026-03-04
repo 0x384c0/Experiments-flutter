@@ -1,9 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common_presentation/mixins/widget_alert_mixin.dart';
 import 'package:common_presentation/widgets/connection_status_view.dart';
 import 'package:common_presentation/widgets/screen_state/screen_state_bloc_builder.dart';
 import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
 import 'package:features_reddit_posts_presentation/l10n/app_localizations.g.dart';
+import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
+import 'package:features_reddit_posts_presentation/src/navigation/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
@@ -12,6 +15,7 @@ import 'post_tile.dart';
 import 'posts_cubit.dart';
 
 /// A PostsView Page.
+@RoutePage()
 class PostsScreen extends StatelessWidget with WidgetAlertMixin {
   const PostsScreen({super.key});
 
@@ -53,7 +57,7 @@ class PostsScreen extends StatelessWidget with WidgetAlertMixin {
                 itemBuilder: (context, index) {
                   return PostTile(
                     postList[index],
-                    () => cubit.onPostTap(postList[index]),
+                    () => _onPostTap(context, postList[index]),
                   );
                 },
               ),
@@ -69,4 +73,10 @@ class PostsScreen extends StatelessWidget with WidgetAlertMixin {
         visible: isLoadingPage,
         child: const Center(child: CircularProgressIndicator()).padding(all: 8),
       );
+
+  _onPostTap(BuildContext context, PostItemState postItemState) {
+    final router = AutoRouter.of(context); // TODO: get from DI
+    final state = PostDetailsState(postItemState.permalink, postItemState);
+    router.push(PostDetailsRoute(state: state));
+  }
 }

@@ -1,9 +1,11 @@
 import 'dart:math';
 
+import 'package:auto_route/annotations.dart';
 import 'package:features_experiments_presentation/src/utils/data_generators.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
+@RoutePage()
 class MasonryGridScreen extends StatelessWidget {
   const MasonryGridScreen({super.key});
 

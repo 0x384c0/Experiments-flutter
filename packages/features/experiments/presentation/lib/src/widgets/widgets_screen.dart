@@ -1,8 +1,10 @@
 import 'dart:ui';
 
+import 'package:auto_route/annotations.dart';
 import 'package:features_experiments_presentation/src/utils/data_generators.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class WidgetsScreen extends StatefulWidget {
   const WidgetsScreen({super.key});
 

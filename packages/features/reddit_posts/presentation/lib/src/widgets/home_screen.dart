@@ -1,28 +1,29 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/l10n/app_localizations.g.dart';
-import 'package:features_reddit_posts_presentation/src/navigation/navigator.dart';
+import 'package:features_reddit_posts_presentation/src/navigation/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  PostsNavigator get _navigator => Modular.get();
+@RoutePage()
+class PostsHomeScreen extends StatelessWidget {
+  const PostsHomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final router = AutoRouter.of(context); // TODO: get from DI
     final locale = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         ListTile(
           title: Text(locale.posts_remote_first),
-          onTap: _navigator.toPostsRemoteFirst,
+          onTap: () => router.push(PostsRoute()),
         ),
         ListTile(
           title: Text(locale.posts_local_first),
-          onTap: _navigator.toPostsLocalFirst,
+          onTap: () => router.push(LocalFirstPostsRoute()),
         ),
         const Spacer(),
         ElevatedButton(

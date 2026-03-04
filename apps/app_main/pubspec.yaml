@@ -32,6 +32,7 @@ dependencies:
   features_stackoverflow_presentation: ^0.0.1
   features_firebase_chat_presentation: ^0.0.1
   cupertino_icons: ^1.0.8
+  auto_route: ^11.1.0
 
 dev_dependencies:
 

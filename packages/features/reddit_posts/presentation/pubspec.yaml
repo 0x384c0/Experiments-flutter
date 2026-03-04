@@ -20,8 +20,10 @@ dependencies:
   flutter_modular: ^6.4.1
   transparent_image: 2.0.1
   flutter_view_modifiers: 0.0.9
-  
+  auto_route: ^11.1.0
+
 dev_dependencies:
+  auto_route_generator: ^10.4.0
   build_runner: ^2.4.14
 
 flutter:

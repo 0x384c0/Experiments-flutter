@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:features_experiments_presentation/features_experiments_presentation.dart';
 import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_home_presentation/l10n/app_localizations.g.dart' as home_localizations;
@@ -13,6 +14,7 @@ import '../data/selected_page_state.dart';
 import 'others_screen.dart';
 import 'widgets/home_pages_provider.dart';
 
+@RoutePage()
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 

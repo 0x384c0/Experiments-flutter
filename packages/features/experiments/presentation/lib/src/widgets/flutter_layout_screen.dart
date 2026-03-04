@@ -1,23 +1,18 @@
-import 'package:features_experiments_presentation/src/navigation/navigator.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:features_experiments_presentation/src/navigation/router.gr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
+@RoutePage()
 class FlutterLayoutScreen extends StatelessWidget {
   const FlutterLayoutScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    late final ExperimentsNavigator navigator = Modular.get();
+    final router = AutoRouter.of(context); // TODO: get from DI
     return ListView(
       children: [
-        ListTile(
-          title: Text("Masonry grid"),
-          onTap: navigator.toMasonryGrid,
-        ),
-        ListTile(
-          title: Text("Widgets"),
-          onTap: navigator.toWidgets,
-        ),
+        ListTile(title: Text("Masonry grid"), onTap: () => router.push(MasonryGridRoute())),
+        ListTile(title: Text("Widgets"), onTap: () => router.push(WidgetsRoute())),
       ],
     );
   }

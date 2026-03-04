@@ -1,24 +1,28 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:common_presentation/widgets/connection_status_view.dart';
 import 'package:common_presentation/widgets/scroll_to_end_listener.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/l10n/app_localizations.g.dart';
+import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:features_reddit_posts_presentation/src/navigation/navigator.dart';
+import 'package:features_reddit_posts_presentation/src/navigation/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
 import 'post_tile.dart';
 
-class LocalFirstPostsWidget extends StatefulWidget {
-  const LocalFirstPostsWidget({super.key});
+@RoutePage()
+class LocalFirstPostsScreen extends StatefulWidget {
+  const LocalFirstPostsScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _LocalFirstPostsWidgetState();
+  State<StatefulWidget> createState() => _LocalFirstPostsScreenState();
 }
 
-class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
+class _LocalFirstPostsScreenState extends State<LocalFirstPostsScreen> {
   late final Mapper<PostsModel, Iterable<PostItemState>> _postModelMapper = Modular.get();
   late final PostsNavigator _navigator = Modular.get();
   final PostsDataSubscription _sub = Modular.get();
@@ -65,7 +69,7 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
                   itemCount: _listData.length,
                   itemBuilder: (c, index) => PostTile(
                     _listData[index],
-                    () => _onPostTap(_listData[index]),
+                    () => _onPostTap(c,_listData[index]),
                   ),
                 ),
               ),
@@ -87,7 +91,11 @@ class _LocalFirstPostsWidgetState extends State<LocalFirstPostsWidget> {
         ),
       );
 
-  _onPostTap(PostItemState state) => _navigator.toPostDetails(state);
+  _onPostTap(BuildContext context, PostItemState postItemState) {
+    final router = AutoRouter.of(context); // TODO: get from DI
+    final state = PostDetailsState(postItemState.permalink, postItemState);
+    router.push(PostDetailsRoute(state: state));
+  }
 
   Future<void> _refreshAll() async {
     setState(() => _loadedPages.clear());
