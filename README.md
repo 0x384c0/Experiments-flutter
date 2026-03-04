@@ -58,18 +58,20 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 
 ## Environment
 ```
-[✓] Flutter (Channel stable, 3.35.2, on macOS 15.5 24F74 darwin-arm64, locale en-KG) [998ms]
-    • Flutter version 3.35.2 on channel stable at ~/fvm/versions/3.35.2
+[✓] Flutter (Channel stable, 3.41.3, on macOS 26.2 25C56 darwin-arm64, locale en-KG) [465ms]
+    • Flutter version 3.41.3 on channel stable at ~/fvm/versions/3.41.3
     • Upstream repository https://github.com/flutter/flutter.git
-    • Framework revision 05db968908 (8 weeks ago), 2025-08-25 10:21:35 -0700
-    • Engine revision a8bfdfc394
-    • Dart version 3.9.0
-    • DevTools version 2.48.0
+    • Framework revision 48c32af034 (5 days ago), 2026-02-27 17:09:06 -0500
+    • Engine revision 327ed81450
+    • Dart version 3.11.1
+    • DevTools version 2.54.1
+    • Feature flags: enable-web, enable-linux-desktop, enable-macos-desktop, enable-windows-desktop, enable-android, enable-ios, cli-animations, enable-native-assets, omit-legacy-version-file, enable-lldb-debugging,
+      enable-uiscene-migration
 
-[✓] Android toolchain - develop for Android devices (Android SDK version 34.0.0) [1,965ms]
+[✓] Android toolchain - develop for Android devices (Android SDK version 36.1.0) [2.8s]
     • Android SDK at ~/Library/Android/sdk
-    • Emulator version 36.1.9.0 (build_id 13823996) (CL:N/A)
-    • Platform android-36, build-tools 34.0.0
+    • Emulator version 36.4.9.0 (build_id 14788078) (CL:N/A)
+    • Platform android-36, build-tools 36.1.0
     • ANDROID_HOME = ~/Library/Android/sdk
     • Java binary at: /opt/homebrew/opt/openjdk@17/bin/java
       This JDK is specified in your Flutter configuration.
@@ -77,12 +79,10 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
     • Java version OpenJDK Runtime Environment Homebrew (build 17.0.14+0)
     • All Android licenses accepted.
 
-[✓] Xcode - develop for iOS and macOS (Xcode 16.4) [1,658ms]
+[✓] Xcode - develop for iOS and macOS (Xcode 26.1.1) [1,465ms]
     • Xcode at /Applications/Xcode.app/Contents/Developer
-    • Build 16F6
+    • Build 17B100
     • CocoaPods version 1.16.2
-
-[✓] Android Studio (version 2024.3) [7ms]
 ```
 
 ## Build project
