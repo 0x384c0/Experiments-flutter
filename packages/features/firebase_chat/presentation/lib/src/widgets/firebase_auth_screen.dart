@@ -4,11 +4,11 @@ import 'package:common_presentation/widgets/loading_overlay_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:features_firebase_chat_presentation/src/navigation/router.gr.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
-import '../navigation/navigator.dart';
-
+@RoutePage()
 class FirebaseAuthScreen extends StatefulWidget {
   const FirebaseAuthScreen({super.key});
 
@@ -20,7 +20,6 @@ class _FirebaseAuthScreenState extends State<FirebaseAuthScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailRegExp = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   final _emailController = TextEditingController(text: 'test_email@example.com');
-  late final FirebaseChatNavigator _navigator = Modular.get();
   var _isLoading = false;
 
   _showLoading() => setState(() {
@@ -116,7 +115,7 @@ class _FirebaseAuthScreenState extends State<FirebaseAuthScreen> {
       password: _createPasswordFromEmail(_emailController.text),
     );
     _print('signInUser ${credential.user?.uid}');
-    _navigator.toFirebaseChat(credential.user!);
+    AutoRouter.of(context).push(FirebaseChatRoute(firebaseUser: credential.user!));
   }
 
   _print(String message) {

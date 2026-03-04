@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common_presentation/extensions/build_context_localization.dart';
 import 'package:common_presentation/widgets/screen_state/screen_state_bloc_builder.dart';
 import 'package:features_weather_presentation/l10n/app_localizations.g.dart';
@@ -7,22 +8,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'forecast_details_cubit.dart';
 
+@RoutePage()
 class ForecastDetailsScreen extends StatelessWidget {
-  const ForecastDetailsScreen({super.key, required this.args});
+  const ForecastDetailsScreen({super.key, required this.state});
 
-  final Map<String?, ForecastWeatherState?> args;
+  final ForecastWeatherState state;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ForecastDetailsCubit(args)..refresh(),
+      create: (_) => ForecastDetailsCubit({state.dateEpoch: state})..refresh(),
       child: _buildBody(context),
     );
   }
 
   Widget _buildBody(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(args.values.firstOrNull?.date ?? context.commonLocalization.common_loading)),
+      appBar: AppBar(title: Text(state.date ?? context.commonLocalization.common_loading)),
       body: ScreenStateBlocBuilder<ForecastDetailsCubit, ForecastDetailsPageState>(
         builder: (context, data) => Center(child: _list(context, data.data.values.first!)),
       ),

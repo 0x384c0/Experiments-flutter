@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:features_stackoverflow_presentation/src/widgets/quiestion_item.dart';
 import 'package:features_stackoverflow_presentation/src/provider/quiestion_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+@RoutePage()
 class QuestionsScreen extends HookConsumerWidget {
   const QuestionsScreen({super.key});
 

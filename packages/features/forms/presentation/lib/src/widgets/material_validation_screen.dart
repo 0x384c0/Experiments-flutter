@@ -1,9 +1,8 @@
 import 'package:common_presentation/extensions/build_context_theme.dart';
 import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
-import 'package:features_forms_presentation/src/navigation/navigator.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:features_forms_presentation/src/validators/email.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
@@ -11,6 +10,7 @@ import 'form_inputs/file_form_input.dart';
 import 'form_inputs/image_form_input.dart';
 import 'form_inputs/picker_form_input.dart';
 
+@RoutePage()
 class MaterialValidationScreen extends StatefulWidget {
   const MaterialValidationScreen({super.key});
 
@@ -20,7 +20,6 @@ class MaterialValidationScreen extends StatefulWidget {
 
 class _MaterialValidationScreenState extends State<MaterialValidationScreen> {
   final _formKey = GlobalKey<FormState>();
-  late final FormsNavigator _navigator = Modular.get();
   final dropdownMenuEntries = List.generate(5, (i) => DropdownMenuEntry(label: "label $i", value: "value $i"));
   String? _imagePath;
 
@@ -89,7 +88,7 @@ class _MaterialValidationScreenState extends State<MaterialValidationScreen> {
   }
 
   _onSubmit() {
-    if (_formKey.currentState!.validate()) _navigator.back();
+    if (_formKey.currentState!.validate()) AutoRouter.of(context).pop();
   }
 
   Future<Iterable<PickerMenuEntry<int>>> _getSuggestions(String text) async {

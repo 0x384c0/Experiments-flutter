@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:common_presentation/widgets/error_view.dart';
 import 'package:common_presentation/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'web_view_manager.dart';
 
 /// Fullscreen WebView page with navigation components, like app bar
+@RoutePage()
 class WebViewScreen extends StatefulWidget {
   /// [Uri] that will be loaded after WebView creation
   final Uri uri;

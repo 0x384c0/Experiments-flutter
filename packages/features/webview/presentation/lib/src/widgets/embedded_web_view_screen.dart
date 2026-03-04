@@ -1,7 +1,9 @@
 import 'package:features_webview_presentation/src/widgets/web_view/web_view_embedded_screen.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
+@RoutePage()
 class EmbeddedWebViewPage extends StatelessWidget {
   const EmbeddedWebViewPage({super.key, required this.uri});
 

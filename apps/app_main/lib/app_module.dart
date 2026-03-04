@@ -1,5 +1,4 @@
 import 'package:features_experiments_presentation/features_experiments_presentation.dart';
-import 'package:features_firebase_chat_presentation/features_firebase_chat_presentation.dart';
 import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_reddit_posts_data/features_reddit_posts_data.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
@@ -16,16 +15,6 @@ class AppModule extends Module {
 
   AppModule({required this.isRealDevice});
 
-  @override
-  void routes(r) {
-    r.module(WeatherRoutesModule.path, module: WeatherRoutesModule());
-    r.module(FormsRoutesModule.path, module: FormsRoutesModule());
-    r.module(WebViewRoutesModule.path, module: WebViewRoutesModule());
-    r.module(StackOverflowRoutesModule.path, module: StackOverflowRoutesModule());
-    r.module(StackOverflowRoutesModule.path, module: StackOverflowRoutesModule());
-    r.module(FirebaseChatRoutesModule.path, module: FirebaseChatRoutesModule());
-  }
-
   // class names for modules cannot be same
   @override
   List<Module> get imports => [
@@ -41,6 +30,5 @@ class AppModule extends Module {
         WebViewPresentationModule(),
         ExperimentsPresentationModule(),
         StackOverflowPresentationModule(),
-        FirebaseChatPresentationModule(),
       ];
 }

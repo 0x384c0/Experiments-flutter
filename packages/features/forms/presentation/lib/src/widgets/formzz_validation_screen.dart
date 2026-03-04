@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common_presentation/extensions/build_context_theme.dart';
 import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
 import 'package:features_forms_presentation/src/data/formzz_validation_state.dart';
@@ -10,14 +11,13 @@ import 'form_inputs/radio_form_input.dart';
 import 'form_inputs/string_form_input.dart';
 import 'formzz_validation_cubit.dart';
 
+@RoutePage()
 class FormzzValidationScreen extends StatelessWidget {
   const FormzzValidationScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => BlocProvider(
-        create: (_) => FormzzValidationCubit(),
-        child: _FormzzValidationView(),
-      );
+  Widget build(BuildContext context) =>
+      BlocProvider(create: (_) => FormzzValidationCubit(), child: _FormzzValidationView());
 }
 
 class _FormzzValidationView extends StatelessWidget {
@@ -103,20 +103,18 @@ class _FormzzValidationView extends StatelessWidget {
               onChanged: cubit.onUserAgreementChanged,
             ).paddingOnly(bottom: context.dimensions.medium),
             const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: cubit.onSubmit,
-              child: Text(locale.forms_submit),
-            ),
+            ElevatedButton(onPressed: () => _onSubmit(context, cubit), child: Text(locale.forms_submit)),
             if (cubit.state.isFormHasInvalidFields) ...[
               const SizedBox(height: 16),
-              Text(
-                locale.forms_form_has_error,
-                style: TextStyle(color: Theme.of(context).colorScheme.error),
-              ),
+              Text(locale.forms_form_has_error, style: TextStyle(color: Theme.of(context).colorScheme.error)),
             ],
           ],
         ).padding(all: 16),
       ),
     );
+  }
+
+  _onSubmit(BuildContext context, FormzzValidationCubit cubit) {
+    if (cubit.validateForm()) return AutoRouter.of(context).pop();
   }
 }

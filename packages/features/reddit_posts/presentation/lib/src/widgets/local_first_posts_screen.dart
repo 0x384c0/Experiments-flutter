@@ -6,7 +6,6 @@ import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/l10n/app_localizations.g.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
-import 'package:features_reddit_posts_presentation/src/navigation/navigator.dart';
 import 'package:features_reddit_posts_presentation/src/navigation/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -24,7 +23,6 @@ class LocalFirstPostsScreen extends StatefulWidget {
 
 class _LocalFirstPostsScreenState extends State<LocalFirstPostsScreen> {
   late final Mapper<PostsModel, Iterable<PostItemState>> _postModelMapper = Modular.get();
-  late final PostsNavigator _navigator = Modular.get();
   final PostsDataSubscription _sub = Modular.get();
 
   List<PostItemState> get _listData {

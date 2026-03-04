@@ -1,13 +1,11 @@
-import 'package:features_firebase_chat_presentation/features_firebase_chat_presentation.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:features_firebase_chat_presentation/src/navigation/router.gr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
+@RoutePage()
 class OthersScreen extends StatelessWidget {
   const OthersScreen({super.key});
-
-
-  FirebaseChatNavigator get _navigator => Modular.get();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +14,7 @@ class OthersScreen extends StatelessWidget {
       children: [
         ListTile(
           title: const Text('Firebase chat'),
-          onTap: _navigator.toFirebaseChatAuthorization,
+          onTap: () => AutoRouter.of(context).push(FirebaseAuthRoute()),
         ),
       ],
     ).padding(all: 8);
