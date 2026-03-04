@@ -43,6 +43,7 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 1. [melos](https://pub.dev/packages/melos)
 1. [rxdart](https://pub.dev/packages/rxdart)
 1. [flutter_modular](https://pub.dev/packages/flutter_modular)
+1. [auto_route](https://pub.dev/packages/auto_route)
 1. [flutter_cubit](https://pub.dev/documentation/flutter_cubit/latest/)
 1. [retrofit](https://pub.dev/packages/retrofit)
 1. [json_annotation](https://pub.dev/packages/json_annotation)
@@ -96,9 +97,10 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 * [CONTRIBUTING.md](CONTRIBUTING.md) contains information about frameworks and libraries in app
 
 # TODO
-* add Oauth2
-* https://github.com/cfug/dio/issues/1653
-* https://pub.dev/packages/auto_route
-* https://pub.dev/packages/app_links
+* remove flutter_modular
+* fix cors for web
 * https://pub.dev/packages/mapify_generator
+* add Oauth2 example
+* https://github.com/cfug/dio/issues/1653
+* https://pub.dev/packages/app_links
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)
