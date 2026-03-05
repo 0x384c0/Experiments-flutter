@@ -25,7 +25,7 @@ class TestModule {
     getIt.registerFactory<WeatherInteractor>(() => WeatherInteractorImpl(getIt()));
 
     // Mappers
-    getIt.registerFactory<ConditionModelMapper>(() => ConditionModelMapper());
+    getIt.registerFactory<Mapper<ConditionModel?, ConditionState>>(() => ConditionModelMapper());
     getIt.registerFactory<Mapper<ForecastItemModel, ForecastWeatherState>>(
         () => ForecastItemModelMapper(getIt()));
     getIt.registerFactory<Mapper<ForecastModel, WeatherState>>(
