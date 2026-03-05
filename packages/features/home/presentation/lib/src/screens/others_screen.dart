@@ -3,6 +3,7 @@ import 'package:features_firebase_chat_presentation/src/navigation/router.gr.dar
 import 'package:flutter/material.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
+@RoutePage()
 class OthersScreen extends StatelessWidget {
   const OthersScreen({super.key});
 

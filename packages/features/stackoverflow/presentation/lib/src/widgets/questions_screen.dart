@@ -10,12 +10,13 @@ class QuestionsScreen extends HookConsumerWidget {
   const QuestionsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => HookConsumer(
-    builder: (context, ref, child) {
-      final count = ref.watch(questionsCountProvider);
-
-      return count.when(loading: _loadingView, error: _errorView, data: (count) => _list(count, ref));
-    },
+  Widget build(BuildContext context, WidgetRef ref) => ProviderScope(
+    child: HookConsumer(
+      builder: (context, ref, child) {
+        final count = ref.watch(questionsCountProvider);
+        return count.when(loading: _loadingView, error: _errorView, data: (count) => _list(count, ref));
+      },
+    ),
   );
 
   Widget _list(int count, WidgetRef ref) => RefreshIndicator(

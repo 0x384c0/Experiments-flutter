@@ -49,8 +49,7 @@ When contributing to this project, please ensure that your code adheres to the f
 * Classes for navigation are in `lib/packages/features/{feature name}/navigation`.
 * To add a new route, add `@RoutePage()` and run `flutter pub run build_runner build`.
 * After that, the route can be used as `AutoRouter.of(context).push(ScreenRoute)`.
-* **Note:** Drawer menu navigation in [home_screen.dart](packages/features/home/presentation/lib/src/screens/home_screen.dart) is not using any navigation library. It is a single screen with [PageView](https://api.flutter.dev/flutter/widgets/PageView-class.html).
-  * New options in the drawer are added by modifying [SelectedPageState](packages/features/home/presentation/lib/src/data/selected_page_state.dart) and `HomeScreen._page`.
+* Pages for [home_screen.dart](packages/features/home/presentation/lib/src/screens/home_screen.dart) and [drawer_screen.dart](packages/features/home/presentation/lib/src/screens/drawer_screen.dart) defined in [getHomeChildren()](packages/features/home/presentation/lib/src/navigation/router.dart)
 
 ## Localization
 * The app uses [flutter_localizations](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization).
