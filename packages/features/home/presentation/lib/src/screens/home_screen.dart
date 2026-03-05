@@ -12,14 +12,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final homeChildren = getHomeChildren();
-    final homeChildrenMap = homeChildren.map((info) => info.selectedPageState).toList().asMap();
+    final homeChildrenStateMap = homeChildren.map((info) => info.selectedPageState).toList().asMap();
+    final homeChildrenTitleMap = homeChildren
+        .map((info) => info.getTitle(home_localizations.AppLocalizations.of(context)!))
+        .toList()
+        .asMap();
     return AutoTabsScaffold(
       routes: homeChildren.map((info) => info.getRouteInfo()).toList(),
-      appBarBuilder: (context, tabsRouter) {
-        final index = tabsRouter.activeIndex;
-        final selectedPageState = homeChildrenMap[index];
-        return AppBar(title: _getPageTitle(context, selectedPageState));
-      },
+      appBarBuilder: (context, tabsRouter) => AppBar(title: Text(homeChildrenTitleMap[tabsRouter.activeIndex] ?? '')),
       drawer: const Drawer(child: DrawerScreen()),
       bottomNavigationBuilder: (context, tabsRouter) {
         final locale = _getLocalization(context);
@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           SelectedPageState.weather: NavigationDestination(icon: const Icon(Icons.cloud), label: locale.home_weather),
         };
         final destinationStates = destinations.keys.toList();
-        final activeState = homeChildrenMap[tabsRouter.activeIndex];
+        final activeState = homeChildrenStateMap[tabsRouter.activeIndex];
         final selectedIndex = activeState != null ? destinationStates.indexOf(activeState) : -1;
         return NavigationBar(
           destinations: destinations.values.toList(),
@@ -45,24 +45,6 @@ class HomeScreen extends StatelessWidget {
         );
       },
     );
-  }
-
-  Widget _getPageTitle(BuildContext context, SelectedPageState? state) {
-    try {
-      final localization = _getLocalization(context);
-      final string = {
-        SelectedPageState.posts: localization.home_posts,
-        SelectedPageState.weather: localization.home_weather,
-        SelectedPageState.forms: localization.home_forms,
-        SelectedPageState.webView: localization.home_webview,
-        SelectedPageState.experiments: localization.home_experiments,
-        SelectedPageState.stackoverflow: localization.home_stackoverflow,
-        SelectedPageState.others: localization.home_others,
-      }[state!]!;
-      return Text(string);
-    } catch (e) {
-      return SizedBox.shrink();
-    }
   }
 
   home_localizations.AppLocalizations _getLocalization(BuildContext context) =>

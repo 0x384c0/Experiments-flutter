@@ -24,36 +24,43 @@ List<RouteInfoProvider> getHomeChildren() {
       getPageInfo: formsRoutesProvider.rootPage,
       getRouteInfo: formsRoutesProvider.rootRoute,
       selectedPageState: SelectedPageState.forms,
+      getTitle: (locale) => locale.home_forms,
     ),
     RouteInfoProvider(
       getPageInfo: redditRoutesProvider.rootPage,
       getRouteInfo: redditRoutesProvider.rootRoute,
       selectedPageState: SelectedPageState.posts,
+      getTitle: (locale) => locale.home_posts,
     ),
     RouteInfoProvider(
       getPageInfo: weatherRoutesProvider.rootPage,
       getRouteInfo: weatherRoutesProvider.rootRoute,
       selectedPageState: SelectedPageState.weather,
+      getTitle: (locale) => locale.home_weather,
     ),
     RouteInfoProvider(
       getPageInfo: webViewRoutesProvider.rootPage,
       getRouteInfo: webViewRoutesProvider.rootRoute,
       selectedPageState: SelectedPageState.webView,
+      getTitle: (locale) => locale.home_webview,
     ),
     RouteInfoProvider(
       getPageInfo: experimentsRoutesProvider.rootPage,
       getRouteInfo: experimentsRoutesProvider.rootRoute,
       selectedPageState: SelectedPageState.experiments,
+      getTitle: (locale) => locale.home_experiments,
     ),
     RouteInfoProvider(
       getPageInfo: stackoverflowRoutesProvider.rootPage,
       getRouteInfo: stackoverflowRoutesProvider.rootRoute,
       selectedPageState: SelectedPageState.stackoverflow,
+      getTitle: (locale) => locale.home_stackoverflow,
     ),
     RouteInfoProvider(
       getPageInfo: () => OthersRoute.page,
       getRouteInfo: OthersRoute.new,
       selectedPageState: SelectedPageState.others,
+      getTitle: (locale) => locale.home_others,
     ),
   ];
 }
