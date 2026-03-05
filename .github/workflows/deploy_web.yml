@@ -25,7 +25,7 @@ jobs:
 
       - name: Melos Bootstrap
         run:
-          dart run melos bootstrap
+          dart run melos bootstrap - jobs=1
           dart run melos run prebuild:web
 
       - name: Set version
