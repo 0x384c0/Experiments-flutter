@@ -11,21 +11,19 @@ class CommentTile extends CardTile {
   @override
   Widget buildItem(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(state.author),
-              const SizedBox(height: 8),
-              Text(
-                state.title,
-                style: const TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
-        ));
+      padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(state.author),
+            const SizedBox(height: 8),
+            Text(state.title, style: const TextStyle(fontSize: 16)),
+          ],
+        ),
+      ),
+    );
   }
 }

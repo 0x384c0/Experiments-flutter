@@ -5,12 +5,7 @@ class ShadowContainer extends StatelessWidget {
   final double height;
   final Color shadowColor;
 
-  const ShadowContainer({
-    super.key,
-    required this.child,
-    required this.height,
-    required this.shadowColor,
-  });
+  const ShadowContainer({super.key, required this.child, required this.height, required this.shadowColor});
 
   @override
   Widget build(BuildContext context) {

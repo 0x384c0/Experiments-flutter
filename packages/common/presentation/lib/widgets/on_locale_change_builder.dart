@@ -23,9 +23,6 @@ class _OnLocaleChangeBuilderState extends State<OnLocaleChangeBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return KeyedSubtree(
-      key: ValueKey(currentLocale),
-      child: widget.child,
-    );
+    return KeyedSubtree(key: ValueKey(currentLocale), child: widget.child);
   }
 }

@@ -12,34 +12,34 @@ class PostCommentsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ScreenStateBlocBuilder<PostCommentsCubit, PostCommentsPageState>(
-        builder: (context, data) {
-          final postList = data.data.toList();
-          return ScrollToEndListener(
-            onScrolledToEnd: context.read<PostCommentsCubit>().loadNextPage,
-            child: (controller) => CustomScrollView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              controller: controller,
-              slivers: [
-                SliverPadding(
-                  padding: const EdgeInsets.all(8),
-                  sliver: SliverList.builder(
-                    itemCount: data.data.length,
-                    itemBuilder: (context, index) => CommentTile(postList[index], null),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: _pageLoadingIndicator(
-                    context.read<PostCommentsCubit>().stateData?.paginationState?.isLoadingPage ?? false,
-                  ),
-                ),
-              ],
+    builder: (context, data) {
+      final postList = data.data.toList();
+      return ScrollToEndListener(
+        onScrolledToEnd: context.read<PostCommentsCubit>().loadNextPage,
+        child: (controller) => CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          controller: controller,
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.all(8),
+              sliver: SliverList.builder(
+                itemCount: data.data.length,
+                itemBuilder: (context, index) => CommentTile(postList[index], null),
+              ),
             ),
-          );
-        },
+            SliverToBoxAdapter(
+              child: _pageLoadingIndicator(
+                context.read<PostCommentsCubit>().stateData?.paginationState?.isLoadingPage ?? false,
+              ),
+            ),
+          ],
+        ),
       );
+    },
+  );
 
   Widget _pageLoadingIndicator(bool isLoadingPage) => Visibility(
-        visible: isLoadingPage,
-        child: const Center(child: CircularProgressIndicator()).padding(all: 8),
-      );
+    visible: isLoadingPage,
+    child: const Center(child: CircularProgressIndicator()).padding(all: 8),
+  );
 }

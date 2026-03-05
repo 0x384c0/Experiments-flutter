@@ -26,7 +26,7 @@ main() {
       expect(
         (sut.state as ScreenStatePopulated<GenericScreenState<WeatherState>>).data.data.forecast.length,
         MockDatasourceImpl.forecastItems,
-      )
+      ),
     },
   );
 }

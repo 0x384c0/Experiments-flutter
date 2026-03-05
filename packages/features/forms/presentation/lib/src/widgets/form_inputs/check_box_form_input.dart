@@ -6,13 +6,7 @@ class CheckBoxFormInput extends StatelessWidget {
   final Function(bool) onChanged;
   final String? error;
 
-  const CheckBoxFormInput({
-    super.key,
-    required this.value,
-    required this.label,
-    required this.onChanged,
-    this.error,
-  });
+  const CheckBoxFormInput({super.key, required this.value, required this.label, required this.onChanged, this.error});
 
   @override
   Widget build(BuildContext context) {
@@ -25,27 +19,28 @@ class CheckBoxFormInput extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-                width: 24,
-                child: Checkbox(
-                  value: value,
-                  side: error?.isNotEmpty == true
-                      ? MaterialStateBorderSide.resolveWith((states) => BorderSide(
-                            width: CheckboxTheme.of(context).side?.width ?? 2,
-                            color: Theme.of(context).colorScheme.error,
-                          ))
-                      : null,
-                  onChanged: (value) {
-                    value != null ? onChanged(value) : null;
-                  },
-                )),
+              width: 24,
+              child: Checkbox(
+                value: value,
+                side: error?.isNotEmpty == true
+                    ? MaterialStateBorderSide.resolveWith(
+                        (states) => BorderSide(
+                          width: CheckboxTheme.of(context).side?.width ?? 2,
+                          color: Theme.of(context).colorScheme.error,
+                        ),
+                      )
+                    : null,
+                onChanged: (value) {
+                  value != null ? onChanged(value) : null;
+                },
+              ),
+            ),
             const SizedBox(width: 8),
             TextButton(
               onPressed: () {
                 onChanged(!value);
               },
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.zero,
-              ),
+              style: TextButton.styleFrom(padding: EdgeInsets.zero),
               child: label,
             ),
           ],

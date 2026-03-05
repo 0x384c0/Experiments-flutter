@@ -8,7 +8,7 @@ mixin CubitScreenStatePaginationMixin<D, T extends StateWithPagination<D>> on Bl
   emitDataWithPagination(T? dataWithPagination) => emitData(dataWithPagination);
 }
 
-mixin CubitScreenStatePaginationIterableMixin<D,T> on BlocScreenStateMixin<T> {
+mixin CubitScreenStatePaginationIterableMixin<D, T> on BlocScreenStateMixin<T> {
   Iterable<D>? addPages(Iterable<D> nextPageData) => getPagesIterable()?.followedBy(nextPageData);
 
   bool get isCanLoadPages => getPagesIterable()?.isNotEmpty == true;

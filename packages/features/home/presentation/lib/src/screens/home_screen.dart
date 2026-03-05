@@ -34,27 +34,15 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final locale = _getLocalization(context);
     final destinations = [
-      NavigationDestination(
-        icon: const Icon(Icons.edit_note),
-        label: locale.home_forms,
-      ),
-      NavigationDestination(
-        icon: const Icon(Icons.web),
-        label: locale.home_posts,
-      ),
-      NavigationDestination(
-        icon: const Icon(Icons.cloud),
-        label: locale.home_weather,
-      ),
+      NavigationDestination(icon: const Icon(Icons.edit_note), label: locale.home_forms),
+      NavigationDestination(icon: const Icon(Icons.web), label: locale.home_posts),
+      NavigationDestination(icon: const Icon(Icons.cloud), label: locale.home_weather),
     ];
     return Scaffold(
       appBar: AppBar(title: _getPageTitle(context, _selectedScreen)),
       body: _body(context),
       drawer: Drawer(
-        child: DrawerScreen(
-          selectedScreen: _selectedScreen,
-          onDestinationSelected: (e) => _onDestinationSelected(e),
-        ),
+        child: DrawerScreen(selectedScreen: _selectedScreen, onDestinationSelected: (e) => _onDestinationSelected(e)),
       ),
       bottomNavigationBar: NavigationBar(
         destinations: destinations,
@@ -70,14 +58,14 @@ class _HomeScreenState extends State<HomeScreen> {
   final _bucket = PageStorageBucket();
 
   Widget _getPageTitle(BuildContext context, SelectedPageState index) => {
-        SelectedPageState.posts: Text(_getLocalization(context).home_posts),
-        SelectedPageState.weather: Text(_getLocalization(context).home_weather),
-        SelectedPageState.forms: Text(_getLocalization(context).home_forms),
-        SelectedPageState.webView: Text(_getLocalization(context).home_webview),
-        SelectedPageState.experiments: Text(_getLocalization(context).home_experiments),
-        SelectedPageState.stackoverflow: Text(_getLocalization(context).home_stackoverflow),
-        SelectedPageState.others: Text(_getLocalization(context).home_others),
-      }[index]!;
+    SelectedPageState.posts: Text(_getLocalization(context).home_posts),
+    SelectedPageState.weather: Text(_getLocalization(context).home_weather),
+    SelectedPageState.forms: Text(_getLocalization(context).home_forms),
+    SelectedPageState.webView: Text(_getLocalization(context).home_webview),
+    SelectedPageState.experiments: Text(_getLocalization(context).home_experiments),
+    SelectedPageState.stackoverflow: Text(_getLocalization(context).home_stackoverflow),
+    SelectedPageState.others: Text(_getLocalization(context).home_others),
+  }[index]!;
 
   late final _pages = [
     formsNavigator.home(),
@@ -94,11 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bucket: _bucket,
       child: HomePagesProvider(
         onDestinationSelected: _onDestinationSelected,
-        child: PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: _pages,
-        ),
+        child: PageView(controller: _pageController, physics: const NeverScrollableScrollPhysics(), children: _pages),
       ),
     );
   }

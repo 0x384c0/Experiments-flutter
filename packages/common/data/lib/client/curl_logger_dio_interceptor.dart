@@ -7,7 +7,6 @@ class CurlLoggerDioInterceptor extends Interceptor {
   final bool? printOnSuccess;
   final bool convertFormData;
 
-
   CurlLoggerDioInterceptor({this.printOnSuccess, this.convertFormData = true});
 
   @override
@@ -25,10 +24,7 @@ class CurlLoggerDioInterceptor extends Interceptor {
   }
 
   @override
-  void onResponse(
-    Response response,
-    ResponseInterceptorHandler handler,
-  ) {
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
     if (printOnSuccess != null && printOnSuccess == true) {
       log("Response: code ${response.statusCode}");
     }

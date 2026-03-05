@@ -8,7 +8,8 @@ import 'package:injectable/injectable.dart';
 class RedditPostsResponseDTOMapper extends Mapper<RedditPostsResponseDTO, PostsModel> {
   @override
   map(RedditPostsResponseDTO input) {
-    final posts = input.data?.children?.map((e) {
+    final posts =
+        input.data?.children?.map((e) {
           return PostModel(
             permalink: e.data?.permalink,
             author: e.data?.author,

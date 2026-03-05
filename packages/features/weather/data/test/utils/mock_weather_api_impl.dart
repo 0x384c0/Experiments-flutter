@@ -15,9 +15,9 @@ class MockWeatherApiImpl implements WeatherApi {
     when(() => _mockCurrentDTO.temp).thenReturn(temp);
     when(() => mockForecastResponseDTO.current).thenReturn(_mockCurrentDTO);
 
-    when(() => mockForecastResponseDTO.forecast).thenReturn(
-      Iterable.generate(forecastItems).map((e) => _mockForecastItemModel).toList(),
-    );
+    when(
+      () => mockForecastResponseDTO.forecast,
+    ).thenReturn(Iterable.generate(forecastItems).map((e) => _mockForecastItemModel).toList());
     when(() => _mockForecastItemModel.averageTemp).thenReturn(temp);
     when(() => _mockForecastItemModel.dateEpoch).thenReturn(dateEpoch);
   }
@@ -32,7 +32,6 @@ class MockWeatherApiImpl implements WeatherApi {
   static final ForecastResponseDTO mockForecastResponseDTO = _MockForecastResponseDTO();
   final CurrentDTO _mockCurrentDTO = _MockCurrentDTO();
   final ForecastItemModel _mockForecastItemModel = _MockForecastItemModel();
-
 }
 
 class _MockForecastResponseDTO extends Mock implements ForecastResponseDTO {}

@@ -13,12 +13,19 @@ class RedditPostListingDTOMapper extends Mapper<Map<String, Iterable<RedditPostL
     var permalink = input.keys.first;
     var dto = input.values.first;
     var post = dto.elementAt(0).data?.children?[0].data;
-    var comments = dto.elementAt(1).data?.children?.where(_isComment).map((e) => PostModel(
-          author: e.data?.author,
-          category: e.data?.subreddit,
-          icon: e.data?.thumbnail?.parseUri(),
-          title: e.data?.body,
-        ));
+    var comments = dto
+        .elementAt(1)
+        .data
+        ?.children
+        ?.where(_isComment)
+        .map(
+          (e) => PostModel(
+            author: e.data?.author,
+            category: e.data?.subreddit,
+            icon: e.data?.thumbnail?.parseUri(),
+            title: e.data?.body,
+          ),
+        );
     return PostModel(
       permalink: permalink,
       author: post?.author,
@@ -35,10 +42,6 @@ class RedditPostListingDTOMapper extends Mapper<Map<String, Iterable<RedditPostL
 
   bool _isMore(RedditPostListingChildDTO child) => child.kind == "more";
 
-  _dataToMoreModel(RedditPostListingChildDTO? child) => child?.data != null
-      ? MoreModel(
-          parentId: child!.data!.parentId!,
-          children: child.data!.children!,
-        )
-      : null;
+  _dataToMoreModel(RedditPostListingChildDTO? child) =>
+      child?.data != null ? MoreModel(parentId: child!.data!.parentId!, children: child.data!.children!) : null;
 }

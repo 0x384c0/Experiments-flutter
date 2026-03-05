@@ -23,19 +23,16 @@ class StringFormField extends TextFormField {
     List<String>? hints,
     bool? obscureText,
   }) : super(
-          enabled: onChanged != null,
-          autofillHints: hints,
-          obscureText: obscureText ?? false,
-          obscuringCharacter: _obscuringCharacter,
-          decoration: obscureText == true
-              ? InputDecoration(
-                  labelText: isRequired == true ? "$label$_requiredSymbol" : label,
-                  errorText: error,
-                  hintText: hintText ?? _obscuredHint,
-                )
-              : InputDecoration(
-                  labelText: isRequired == true ? "$label$_requiredSymbol" : label,
-                  errorText: error,
-                ),
-        );
+         enabled: onChanged != null,
+         autofillHints: hints,
+         obscureText: obscureText ?? false,
+         obscuringCharacter: _obscuringCharacter,
+         decoration: obscureText == true
+             ? InputDecoration(
+                 labelText: isRequired == true ? "$label$_requiredSymbol" : label,
+                 errorText: error,
+                 hintText: hintText ?? _obscuredHint,
+               )
+             : InputDecoration(labelText: isRequired == true ? "$label$_requiredSymbol" : label, errorText: error),
+       );
 }

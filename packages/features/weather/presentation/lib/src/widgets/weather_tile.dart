@@ -15,16 +15,9 @@ class WeatherTile extends CardTile {
       padding: const EdgeInsets.all(24.0),
       child: Row(
         children: [
-          Image.network(
-            state.condition.icon,
-            width: 64,
-            height: 64,
-          ),
+          Image.network(state.condition.icon, width: 64, height: 64),
           const Spacer(flex: 1),
-          Text(
-            state.temp,
-            style: const TextStyle(fontSize: 32),
-          ),
+          Text(state.temp, style: const TextStyle(fontSize: 32)),
           const Spacer(flex: 4),
           Wrap(
             direction: Axis.vertical,
@@ -35,7 +28,7 @@ class WeatherTile extends CardTile {
               Text("${locale.weather_humidity}: ${state.humidity}"),
               Text("${locale.weather_wind}: ${state.wind}"),
             ],
-          )
+          ),
         ],
       ),
     );

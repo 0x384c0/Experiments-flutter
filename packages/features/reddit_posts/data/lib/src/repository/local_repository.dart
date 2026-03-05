@@ -30,10 +30,7 @@ class LocalRepositoryImpl implements PostsLocalRepository {
   }
 
   @override
-  Future<Iterable<PostModel>?> getMoreChildren({
-    required String linkId,
-    required Iterable<String> children,
-  }) async {
+  Future<Iterable<PostModel>?> getMoreChildren({required String linkId, required Iterable<String> children}) async {
     final id = Object.hashAll([linkId, ...children]);
     return _moreChildrenCache[id];
   }
@@ -44,18 +41,13 @@ class LocalRepositoryImpl implements PostsLocalRepository {
   final _postCache = <int, PostModel>{};
 
   @override
-  Future insertPost(
-    PostModel data, {
-    required String permalink,
-  }) async {
+  Future insertPost(PostModel data, {required String permalink}) async {
     final id = permalink.hashCode;
     _postCache[id] = data;
   }
 
   @override
-  Future<PostModel?> getPost({
-    required String permalink,
-  }) async {
+  Future<PostModel?> getPost({required String permalink}) async {
     final id = permalink.hashCode;
     return _postCache[id];
   }
@@ -71,10 +63,7 @@ class LocalRepositoryImpl implements PostsLocalRepository {
   final PostsEntityToModelMapper _postsEntityToModelMapper;
 
   @override
-  Future insertPosts(
-    PostsModel data, {
-    required String? after,
-  }) async {
+  Future insertPosts(PostsModel data, {required String? after}) async {
     final id = after?.hashCode ?? _defaultPageId;
 
     final (postsEntity, postEntities) = _postsModelToEntityMapper.map((data, id));
@@ -84,9 +73,7 @@ class LocalRepositoryImpl implements PostsLocalRepository {
   }
 
   @override
-  Future<PostsModel?> getPosts({
-    required String? after,
-  }) async {
+  Future<PostsModel?> getPosts({required String? after}) async {
     final id = after?.hashCode ?? _defaultPageId;
     final postsEntityData = await _postsDao.getPostsEntityForId(id);
     if (postsEntityData == null) return null;
@@ -96,5 +83,5 @@ class LocalRepositoryImpl implements PostsLocalRepository {
 
   @override
   Future deletePosts() => _postsDao.deleteAll();
-//endregion
+  //endregion
 }

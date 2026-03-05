@@ -24,34 +24,34 @@ sealed class FormzzValidationState with _$FormzzValidationState {
   FormzzValidationState._();
 
   factory FormzzValidationState.initial() => FormzzValidationState(
-        profileImagePath: "",
-        entityType: EntityType.physicalPerson,
-        phone: "",
-        firstName: const RequiredString.pure(""),
-        companyName: const RequiredString.pure(""),
-        email: const Email.pure(""),
-        password: const Password.pure(""),
-        repeatPassword: const RepeatPassword.pure("", password: ""),
-        userAgreement: const RequiredBool.pure(false),
-      );
+    profileImagePath: "",
+    entityType: EntityType.physicalPerson,
+    phone: "",
+    firstName: const RequiredString.pure(""),
+    companyName: const RequiredString.pure(""),
+    email: const Email.pure(""),
+    password: const Password.pure(""),
+    repeatPassword: const RepeatPassword.pure("", password: ""),
+    userAgreement: const RequiredBool.pure(false),
+  );
 
   FormzzValidationState get dirtyCopy => copyWith(
-        firstName: RequiredString.dirty(firstName.value),
-        companyName: RequiredString.dirty(companyName.value),
-        email: Email.dirty(password.value),
-        password: Password.dirty(password.value),
-        repeatPassword: RepeatPassword.dirty(repeatPassword.value, password: password.value),
-        userAgreement: RequiredBool.dirty(userAgreement.value),
-      );
+    firstName: RequiredString.dirty(firstName.value),
+    companyName: RequiredString.dirty(companyName.value),
+    email: Email.dirty(password.value),
+    password: Password.dirty(password.value),
+    repeatPassword: RepeatPassword.dirty(repeatPassword.value, password: password.value),
+    userAgreement: RequiredBool.dirty(userAgreement.value),
+  );
 
   bool get isFormHasInvalidFields => [
-        firstName.isValid,
-        if (isValidateCompanyName) companyName.isValid,
-        email.isValid,
-        password.isValid,
-        repeatPassword.isValid,
-        userAgreement.isValid,
-      ].contains(false);
+    firstName.isValid,
+    if (isValidateCompanyName) companyName.isValid,
+    email.isValid,
+    password.isValid,
+    repeatPassword.isValid,
+    userAgreement.isValid,
+  ].contains(false);
 
   bool get isValidateCompanyName => entityType == EntityType.legalEntity;
 }

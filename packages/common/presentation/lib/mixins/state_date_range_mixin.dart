@@ -14,20 +14,11 @@ mixin StateDateRangeMixin<T> {
   VoidCallback? get onRightPressed => _isCanSwipeByDay(1) ? () => _swipeByDay(1) : null;
 
   DateTimeRange get selectedRangeOrDefault =>
-      selectedRange ??
-      initialRange ??
-      DateTimeRange(
-        start: DateTime.now(),
-        end: DateTime.now(),
-      );
+      selectedRange ?? initialRange ?? DateTimeRange(start: DateTime.now(), end: DateTime.now());
 
   DateTime _getSwipedDate(int day) {
     final fromDate = day < 0 ? selectedRangeOrDefault.start : selectedRangeOrDefault.end;
-    return DateTime(
-      fromDate.year,
-      fromDate.month,
-      fromDate.day + day,
-    );
+    return DateTime(fromDate.year, fromDate.month, fromDate.day + day);
   }
 
   bool get isOneDaySelected => !selectedRangeOrDefault.isMultipleDays;

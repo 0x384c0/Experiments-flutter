@@ -21,10 +21,7 @@ abstract class DataSubscription<T, K> {
     _dataIsLoadingControllerMap.remove(key);
   }
 
-  sync({
-    K? key,
-    bool invalidate = false,
-  }) async {
+  sync({K? key, bool invalidate = false}) async {
     if (await isOnline && invalidate) await deleteLocal();
     await _sendLocalToStream(key);
     await _syncLocalWithRemote(key);
@@ -94,10 +91,7 @@ abstract class DataSubscription<T, K> {
 
 @Injectable()
 class PostsDataSubscription extends DataSubscription<PostsModel, String> {
-  PostsDataSubscription(
-    this._remoteRepository,
-    this._localRepository,
-  );
+  PostsDataSubscription(this._remoteRepository, this._localRepository);
 
   final PostsRemoteRepository _remoteRepository;
   final PostsLocalRepository _localRepository;

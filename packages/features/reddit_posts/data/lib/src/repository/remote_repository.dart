@@ -29,39 +29,21 @@ class RemoteRepositoryImpl implements PostsRemoteRepository {
   final Mapper<dynamic, ErrorModel> _errorDtoMapper;
 
   @override
-  Future<PostsModel> getPosts({
-    String? after,
-  }) =>
-      _redditApi
-          .getPosts(
-            subreddit: _defaultSubreddit,
-            sort: RedditPostsSortDTO.top.name,
-            limit: _pageLimit,
-            after: after,
-          )
-          .then(_redditPostsResponseDTOMapper.map)
-          .mapError(_errorDtoMapper.map);
+  Future<PostsModel> getPosts({String? after}) => _redditApi
+      .getPosts(subreddit: _defaultSubreddit, sort: RedditPostsSortDTO.top.name, limit: _pageLimit, after: after)
+      .then(_redditPostsResponseDTOMapper.map)
+      .mapError(_errorDtoMapper.map);
 
   @override
-  Future<PostModel> getPost({
-    required String permalink,
-  }) =>
-      _redditApi
-          .getPost(permalink: permalink)
-          .then((dto) => _redditPostListingDTOMapper.map({permalink: dto}))
-          .mapError(_errorDtoMapper.map);
+  Future<PostModel> getPost({required String permalink}) => _redditApi
+      .getPost(permalink: permalink)
+      .then((dto) => _redditPostListingDTOMapper.map({permalink: dto}))
+      .mapError(_errorDtoMapper.map);
 
   @override
-  Future<Iterable<PostModel>> getMoreChildren({
-    required String linkId,
-    required Iterable<String> children,
-  }) =>
+  Future<Iterable<PostModel>> getMoreChildren({required String linkId, required Iterable<String> children}) =>
       _redditApi
-          .getMoreChildren(
-            apiType: "json",
-            linkId: linkId,
-            children: children.join(","),
-          )
+          .getMoreChildren(apiType: "json", linkId: linkId, children: children.join(","))
           .then(_redditJsonResponseDTOMapper.map)
           .mapError(_errorDtoMapper.map);
 }

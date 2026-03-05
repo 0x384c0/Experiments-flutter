@@ -26,20 +26,20 @@ class TestModule {
 
     // Mappers
     getIt.registerFactory<Mapper<ConditionModel?, ConditionState>>(() => ConditionModelMapper());
-    getIt.registerFactory<Mapper<ForecastItemModel, ForecastWeatherState>>(
-        () => ForecastItemModelMapper(getIt()));
-    getIt.registerFactory<Mapper<ForecastModel, WeatherState>>(
-        () => ForecastModelMapper(getIt(), getIt()));
+    getIt.registerFactory<Mapper<ForecastItemModel, ForecastWeatherState>>(() => ForecastItemModelMapper(getIt()));
+    getIt.registerFactory<Mapper<ForecastModel, WeatherState>>(() => ForecastModelMapper(getIt(), getIt()));
 
     // Utils
     final mockGeoLocationProvider = MockGeoLocationProviderImpl();
-    when(() => mockGeoLocationProvider.getLocation()).thenAnswer(
-        (_) async => const LocationState(latitude: 40.7128, longitude: 74.0060));
+    when(
+      () => mockGeoLocationProvider.getLocation(),
+    ).thenAnswer((_) async => const LocationState(latitude: 40.7128, longitude: 74.0060));
     getIt.registerFactory<GeoLocationProvider>(() => mockGeoLocationProvider);
 
     // Cubits
     getIt.registerFactory<WeatherCubit>(() => WeatherCubit(getIt(), getIt(), getIt()));
     getIt.registerFactoryParam<ForecastDetailsCubit, Map<String?, ForecastWeatherState?>, void>(
-        (param1, _) => ForecastDetailsCubit(param1, getIt(), getIt(), getIt()));
+      (param1, _) => ForecastDetailsCubit(param1, getIt(), getIt(), getIt()),
+    );
   }
 }

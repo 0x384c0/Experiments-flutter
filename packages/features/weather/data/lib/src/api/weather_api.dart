@@ -13,11 +13,7 @@ abstract class WeatherApi {
   factory WeatherApi(Dio dio) = _WeatherApi;
 
   @GET("/current.json")
-  Future<ForecastResponseDTO> getCurrent(
-    @Query("key") String key,
-    @Query("q") String q,
-    @Query("aqi") bool aqi,
-  );
+  Future<ForecastResponseDTO> getCurrent(@Query("key") String key, @Query("q") String q, @Query("aqi") bool aqi);
 
   @GET("/forecast.json")
   Future<ForecastResponseDTO> getForecast(

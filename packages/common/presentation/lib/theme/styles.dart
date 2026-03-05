@@ -16,12 +16,8 @@ class Styles {
     foregroundColor: _context.themeColors.grey.shade700,
   );
 
-  Decoration get selectedDecoration => OuterBorderDecoration(
-        color: _context.themeColors.grey.shade100,
-        width: 4,
-        radius: 10,
-        offset: 2,
-      );
+  Decoration get selectedDecoration =>
+      OuterBorderDecoration(color: _context.themeColors.grey.shade100, width: 4, radius: 10, offset: 2);
 
   Decoration get unselectedDecoration => const BoxDecoration();
 }

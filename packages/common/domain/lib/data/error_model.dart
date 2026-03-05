@@ -1,10 +1,5 @@
 class ErrorModel {
-  ErrorModel({
-    this.message,
-    this.code,
-    this.stackTrace,
-    required this.type,
-  });
+  ErrorModel({this.message, this.code, this.stackTrace, required this.type});
 
   final String? message;
   final int? code;
@@ -19,8 +14,4 @@ class ErrorModel {
   bool get isUnauthorized => code == unauthorizedCode;
 }
 
-enum ErrorModelType {
-  unknown,
-  connectionError,
-  badResponse,
-}
+enum ErrorModelType { unknown, connectionError, badResponse }

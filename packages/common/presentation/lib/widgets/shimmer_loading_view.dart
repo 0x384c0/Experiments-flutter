@@ -5,11 +5,7 @@ class ShimmerLoadingView extends StatelessWidget {
   final TextStyle? style;
   final int lines;
 
-  const ShimmerLoadingView({
-    super.key,
-    this.style,
-    this.lines = 1,
-  });
+  const ShimmerLoadingView({super.key, this.style, this.lines = 1});
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +24,7 @@ class ShimmerLoadingView extends StatelessWidget {
             child: Container(
               height: containerHeight,
               width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-              ),
+              decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
             ),
           ),
         ),

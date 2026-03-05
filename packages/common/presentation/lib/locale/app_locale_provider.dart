@@ -65,7 +65,5 @@ class AppLocaleProvider extends ChangeNotifier implements LocaleRepository {
   }
 
   @override
-  Map<String, String> get headers => {
-        HttpHeaders.acceptLanguageHeader: _appLocale.languageCode,
-      };
+  Map<String, String> get headers => {HttpHeaders.acceptLanguageHeader: _appLocale.languageCode};
 }

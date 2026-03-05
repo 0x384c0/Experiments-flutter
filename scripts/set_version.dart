@@ -23,7 +23,7 @@ void main() async {
   // Use a regular expression to replace the patch version
   final updatedContent = pubspecContent.replaceFirstMapped(
     RegExp(r'(version:\s*\d+\.\d+\.\d+\+)\d+'),
-        (match) => '${match.group(1)}$version',
+    (match) => '${match.group(1)}$version',
   );
 
   // Write the updated content back to the file

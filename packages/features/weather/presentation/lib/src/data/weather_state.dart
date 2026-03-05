@@ -2,10 +2,7 @@ class WeatherState {
   final CurrentWeatherState current;
   final Iterable<ForecastWeatherState> forecast;
 
-  WeatherState(
-    this.current,
-    this.forecast,
-  );
+  WeatherState(this.current, this.forecast);
 }
 
 class CurrentWeatherState {
@@ -15,13 +12,7 @@ class CurrentWeatherState {
   final String precipitation;
   final ConditionState condition;
 
-  CurrentWeatherState(
-    this.temp,
-    this.wind,
-    this.humidity,
-    this.precipitation,
-    this.condition,
-  );
+  CurrentWeatherState(this.temp, this.wind, this.humidity, this.precipitation, this.condition);
 }
 
 class ForecastWeatherState {
@@ -48,8 +39,5 @@ class ConditionState {
   final String text;
   final String icon;
 
-  ConditionState(
-    this.text,
-    this.icon,
-  );
+  ConditionState(this.text, this.icon);
 }

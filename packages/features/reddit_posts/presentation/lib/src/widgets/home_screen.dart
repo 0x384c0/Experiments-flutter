@@ -17,24 +17,12 @@ class PostsHomeScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ListTile(
-          title: Text(locale.posts_remote_first),
-          onTap: () => router.push(PostsRoute()),
-        ),
-        ListTile(
-          title: Text(locale.posts_local_first),
-          onTap: () => router.push(LocalFirstPostsRoute()),
-        ),
+        ListTile(title: Text(locale.posts_remote_first), onTap: () => router.push(PostsRoute())),
+        ListTile(title: Text(locale.posts_local_first), onTap: () => router.push(LocalFirstPostsRoute())),
         const Spacer(),
-        ElevatedButton(
-          onPressed: () => _clearDb(context),
-          child: Text(locale.posts_clear_sqlite_database),
-        ),
+        ElevatedButton(onPressed: () => _clearDb(context), child: Text(locale.posts_clear_sqlite_database)),
         const SizedBox(height: 8),
-        ElevatedButton(
-          onPressed: () => _initDb(context),
-          child: Text(locale.posts_initialize_sqlite_database),
-        ),
+        ElevatedButton(onPressed: () => _initDb(context), child: Text(locale.posts_initialize_sqlite_database)),
         const SizedBox(height: 8),
       ],
     ).padding(all: 8);
@@ -50,8 +38,9 @@ class PostsHomeScreen extends StatelessWidget {
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(locale.posts_sqlite_database_initialization_error(e))));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(locale.posts_sqlite_database_initialization_error(e))));
       }
     }
   }
@@ -66,8 +55,9 @@ class PostsHomeScreen extends StatelessWidget {
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(locale.posts_sqlite_database_clear_error(e))));
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(locale.posts_sqlite_database_clear_error(e))));
       }
     }
   }

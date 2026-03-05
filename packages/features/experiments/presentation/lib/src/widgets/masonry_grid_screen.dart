@@ -27,24 +27,22 @@ class MasonryGridScreen extends StatelessWidget {
   }
 
   Widget _gridItem(BuildContext context, int index) => Card.filled(
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          onTap: () => _onItemTap(context, index),
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListTile(
-              leading: const Icon(Icons.album),
-              title: Text("Item: $index"),
-              subtitle: Text("Text: ${generateRandomString(Random(index).nextInt(100))}"),
-            ),
-          ),
+    clipBehavior: Clip.hardEdge,
+    child: InkWell(
+      onTap: () => _onItemTap(context, index),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          leading: const Icon(Icons.album),
+          title: Text("Item: $index"),
+          subtitle: Text("Text: ${generateRandomString(Random(index).nextInt(100))}"),
         ),
-      );
+      ),
+    ),
+  );
 
   _onItemTap(BuildContext context, int index) {
     ScaffoldMessenger.of(context).hideCurrentSnackBar();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Tapped item: $index")),
-    );
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Tapped item: $index")));
   }
 }

@@ -1,5 +1,5 @@
-import 'package:features_webview_presentation/src/widgets/web_view/web_view_embedded_screen.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:features_webview_presentation/src/widgets/web_view/web_view_embedded_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
@@ -11,10 +11,7 @@ class EmbeddedWebViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(),
-        body: WebViewEmbeddedScreen(
-          uri: uri,
-          showLoading: true,
-        ),
-      );
+    appBar: AppBar(),
+    body: WebViewEmbeddedScreen(uri: uri, showLoading: true),
+  );
 }

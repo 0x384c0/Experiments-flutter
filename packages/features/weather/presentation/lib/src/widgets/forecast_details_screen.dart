@@ -39,11 +39,7 @@ class ForecastDetailsScreen extends StatelessWidget {
       crossAxisAlignment: WrapCrossAlignment.start,
       spacing: 16,
       children: [
-        Image.network(
-          state.condition.icon,
-          width: 64,
-          height: 64,
-        ),
+        Image.network(state.condition.icon, width: 64, height: 64),
         Text("${locale.weather_chance_of_rain}: ${state.chanceOfRain}"),
         Text("${locale.weather_humidity}: ${state.humidity}"),
         Text("${locale.weather_wind}: ${state.wind}"),

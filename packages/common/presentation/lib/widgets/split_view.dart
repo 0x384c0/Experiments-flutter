@@ -90,10 +90,7 @@ class _SplitViewState extends State<SplitView> {
                   width: widget.dividerWidth,
                   height: double.infinity,
                   color: widget.dividerColor ?? Theme.of(context).colorScheme.outlineVariant,
-                  child: const FittedBox(
-                    fit: BoxFit.none,
-                    child: Icon(Icons.drag_indicator, size: 15),
-                  ),
+                  child: const FittedBox(fit: BoxFit.none, child: Icon(Icons.drag_indicator, size: 15)),
                 ),
                 SizedBox(width: rightWidth, child: widget.right),
               ],

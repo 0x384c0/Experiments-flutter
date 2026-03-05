@@ -18,9 +18,12 @@ main() {
     sut = GetIt.instance.get<ForecastDetailsCubit>(param1: {MockDatasourceImpl.dateEpoch.toString(): null});
   });
 
-  blocTest<ForecastDetailsCubit, ScreenState<GenericScreenState<Map<String?, ForecastWeatherState?>>>>('refresh successful',
-      build: () => sut,
-      act: (cubit) => cubit.refresh(),
-      verify: (bloc) =>
-          {expect(sut.stateData?.data[MockDatasourceImpl.dateEpoch.toString()]?.temp, '${MockDatasourceImpl.temp}°')});
+  blocTest<ForecastDetailsCubit, ScreenState<GenericScreenState<Map<String?, ForecastWeatherState?>>>>(
+    'refresh successful',
+    build: () => sut,
+    act: (cubit) => cubit.refresh(),
+    verify: (bloc) => {
+      expect(sut.stateData?.data[MockDatasourceImpl.dateEpoch.toString()]?.temp, '${MockDatasourceImpl.temp}°'),
+    },
+  );
 }

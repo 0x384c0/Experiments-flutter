@@ -45,8 +45,14 @@ class OuterBorderInputBorder extends InputBorder {
   bool get isOutline => true;
 
   @override
-  void paint(Canvas canvas, Rect rect,
-      {double? gapStart, double gapExtent = 0.0, double gapPercentage = 0.0, TextDirection? textDirection}) {
+  void paint(
+    Canvas canvas,
+    Rect rect, {
+    double? gapStart,
+    double gapExtent = 0.0,
+    double gapPercentage = 0.0,
+    TextDirection? textDirection,
+  }) {
     // Draw the outer border
     final outerRect = Rect.fromLTWH(
       rect.left - outerBorderOffset,

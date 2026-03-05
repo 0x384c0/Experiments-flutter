@@ -1,14 +1,11 @@
 import 'dart:io';
+
 import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:mime/mime.dart';
+import 'package:path_provider/path_provider.dart';
 
 class FileDownloader extends ChangeNotifier {
-  Future<File?> downloadFile({
-    required Uri url,
-    Map<String, dynamic>? headers,
-    String? mimeType,
-  }) async {
+  Future<File?> downloadFile({required Uri url, Map<String, dynamic>? headers, String? mimeType}) async {
     try {
       final tempDir = await getTemporaryDirectory();
       final fileName = url.path.split('/').last + DateTime.now().toString();

@@ -12,21 +12,17 @@ class WebViewManager {
   static final _lastInterceptedFileUrls = Queue<Uri>();
 
   static InAppWebViewSettings get initialSettings => InAppWebViewSettings(
-        useShouldOverrideUrlLoading: true,
-        mediaPlaybackRequiresUserGesture: false,
-        useOnDownloadStart: true,
-        useHybridComposition: true,
-        allowsInlineMediaPlayback: true,
-      );
+    useShouldOverrideUrlLoading: true,
+    mediaPlaybackRequiresUserGesture: false,
+    useOnDownloadStart: true,
+    useHybridComposition: true,
+    allowsInlineMediaPlayback: true,
+  );
 
   static Future<PermissionResponse?> onPermissionRequest(
     InAppWebViewController controller,
     PermissionRequest permissionRequest,
-  ) async =>
-      PermissionResponse(
-        action: PermissionResponseAction.GRANT,
-        resources: permissionRequest.resources,
-      );
+  ) async => PermissionResponse(action: PermissionResponseAction.GRANT, resources: permissionRequest.resources);
 
   static getShouldOverrideUrlLoading(OnNavigateAction Function(Uri uri)? onNavigate, Function reload) =>
       (InAppWebViewController controller, NavigationAction navigationAction) async {
@@ -82,26 +78,28 @@ class WebViewManager {
 
     (await cookieManager.getCookies(url: WebUri.uri(url)))
         .where((cookie) => cookie.expiresDate == null)
-        .forEach((cookie) => cookieManager.setCookie(
-              url: WebUri.uri(url),
-              name: cookie.name,
-              value: cookie.value,
-              path: cookie.path ?? '/',
-              domain: cookie.domain,
-              expiresDate: expiresDate,
-              isSecure: cookie.isSecure,
-              isHttpOnly: cookie.isHttpOnly,
-              sameSite: cookie.sameSite,
-            ));
+        .forEach(
+          (cookie) => cookieManager.setCookie(
+            url: WebUri.uri(url),
+            name: cookie.name,
+            value: cookie.value,
+            path: cookie.path ?? '/',
+            domain: cookie.domain,
+            expiresDate: expiresDate,
+            isSecure: cookie.isSecure,
+            isHttpOnly: cookie.isHttpOnly,
+            sameSite: cookie.sameSite,
+          ),
+        );
   }
 
   static deleteAllCookies() => CookieManager.instance().deleteAllCookies();
 
   static getCookie(Uri url, String name) => CookieManager.instance().getCookie(url: WebUri.uri(url), name: name);
 
-  static getCookies(Uri url) async => (await CookieManager.instance().getCookies(url: WebUri.uri(url)))
-      .map((cookie) => '${cookie.name}=${cookie.value}')
-      .join('; ');
+  static getCookies(Uri url) async => (await CookieManager.instance().getCookies(
+    url: WebUri.uri(url),
+  )).map((cookie) => '${cookie.name}=${cookie.value}').join('; ');
 
   static bool _isDocFile(Uri uri) {
     if (_lastInterceptedFileUrls.contains(uri)) return true;
@@ -123,11 +121,7 @@ class WebViewManager {
     return isFile;
   }
 
-  static bool shouldIgnoreError(
-    Uri? url,
-    WebResourceError error,
-  ) =>
-      url != null ? _isDocFile(url) : false;
+  static bool shouldIgnoreError(Uri? url, WebResourceError error) => url != null ? _isDocFile(url) : false;
 }
 
 class OnNavigateAction {

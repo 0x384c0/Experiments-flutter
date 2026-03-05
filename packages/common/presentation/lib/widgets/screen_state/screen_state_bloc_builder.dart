@@ -17,18 +17,18 @@ class ScreenStateBlocBuilder<B extends BlocScreenStateMixin<S>, S> extends BlocB
     Widget Function(S? data, Widget child) layoutBuilder = _defaultLayoutBuilder,
     required Widget Function(BuildContext context, S data) builder,
   }) : super(
-          builder: (context, state) => _createBlocScreenStateBlocBuilder<B, S>(
-            refresh: isCanRefreshSelf
-                ? ({bool? showLoading}) async => await context.read<B>().refresh(showLoading: showLoading)
-                : null,
-            layoutBuilder: layoutBuilder,
-            builder: (data) => builder(context, data),
-            isSliver: isSliver,
-            context: context,
-            state: state,
-            viewsBuilder: viewsBuilder,
-          ),
-        );
+         builder: (context, state) => _createBlocScreenStateBlocBuilder<B, S>(
+           refresh: isCanRefreshSelf
+               ? ({bool? showLoading}) async => await context.read<B>().refresh(showLoading: showLoading)
+               : null,
+           layoutBuilder: layoutBuilder,
+           builder: (data) => builder(context, data),
+           isSliver: isSliver,
+           context: context,
+           state: state,
+           viewsBuilder: viewsBuilder,
+         ),
+       );
 
   static Widget _createScreenStateBlocBuilder<B extends BlocBase<ScreenState<T>>, T>({
     Key? key,
@@ -70,10 +70,7 @@ class ScreenStateBlocBuilder<B extends BlocScreenStateMixin<S>, S> extends BlocB
 
     assert(overlay != null || body != null);
 
-    Widget widget = Stack(children: [
-      overlay ?? const SizedBox.shrink(),
-      body ?? const SizedBox.shrink(),
-    ]);
+    Widget widget = Stack(children: [overlay ?? const SizedBox.shrink(), body ?? const SizedBox.shrink()]);
 
     return layoutBuilder(data, widget);
   }
@@ -88,16 +85,15 @@ class ScreenStateBlocBuilder<B extends BlocScreenStateMixin<S>, S> extends BlocB
     required ScreenState<T> state,
     required BuildContext context,
     required ScreenStateViewBuilder viewsBuilder,
-  }) =>
-      _createScreenStateBlocBuilder<B, T>(
-        key: key,
-        layoutBuilder: layoutBuilder,
-        refresh: refresh,
-        builder: builder,
-        state: state,
-        context: context,
-        viewsBuilder: viewsBuilder,
-      );
+  }) => _createScreenStateBlocBuilder<B, T>(
+    key: key,
+    layoutBuilder: layoutBuilder,
+    refresh: refresh,
+    builder: builder,
+    state: state,
+    context: context,
+    viewsBuilder: viewsBuilder,
+  );
 
   static Widget _defaultLayoutBuilder(_, child) => child;
 

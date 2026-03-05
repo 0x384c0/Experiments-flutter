@@ -6,21 +6,11 @@ class OuterBorderDecoration extends Decoration {
   final double radius;
   final double offset;
 
-  const OuterBorderDecoration({
-    required this.color,
-    required this.width,
-    required this.radius,
-    this.offset = 0,
-  });
+  const OuterBorderDecoration({required this.color, required this.width, required this.radius, this.offset = 0});
 
   @override
   BoxPainter createBoxPainter([VoidCallback? onChanged]) {
-    return _OuterBorderPainter(
-      borderColor: color,
-      borderWidth: width,
-      borderRadius: radius,
-      borderOffset: offset,
-    );
+    return _OuterBorderPainter(borderColor: color, borderWidth: width, borderRadius: radius, borderOffset: offset);
   }
 }
 
@@ -49,10 +39,7 @@ class _OuterBorderPainter extends BoxPainter {
       rect.height + (borderWidth - borderOffset) * 2,
     );
 
-    final outerRRect = RRect.fromRectAndRadius(
-      outerRect,
-      Radius.circular(borderRadius),
-    );
+    final outerRRect = RRect.fromRectAndRadius(outerRect, Radius.circular(borderRadius));
 
     final paint = Paint()
       ..color = borderColor

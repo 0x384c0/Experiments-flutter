@@ -6,7 +6,6 @@ import 'utils/mock_datasource_impl.dart';
 import 'utils/mock_location.dart';
 import 'utils/test_module.dart';
 
-
 main() {
   late WeatherInteractor sut;
   setUp(() {

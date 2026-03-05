@@ -1,10 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:common_presentation/extensions/build_context_theme.dart';
 import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:features_forms_presentation/src/validators/email.dart';
 import 'package:flutter/material.dart';
-import 'package:rxdart/rxdart.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'form_inputs/file_form_input.dart';
 import 'form_inputs/image_form_input.dart';
@@ -99,8 +99,9 @@ class _MaterialValidationScreenState extends State<MaterialValidationScreen> {
   }
 
   final _suggestionsSubject = PublishSubject<String>();
-  late final _suggestionsSubscription =
-      _suggestionsSubject.debounceTime(const Duration(milliseconds: 300)).asyncMap(_getSuggestions);
+  late final _suggestionsSubscription = _suggestionsSubject
+      .debounceTime(const Duration(milliseconds: 300))
+      .asyncMap(_getSuggestions);
 
   Future<Iterable<PickerMenuEntry<int>>> _debouncedGetSuggestions(String text) {
     try {

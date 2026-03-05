@@ -33,23 +33,26 @@ class OuterBorderInputBorder extends InputBorder {
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return Path()
-      ..addRRect(borderRadius.toRRect(rect).deflate(borderSide.width / 2));
+    return Path()..addRRect(borderRadius.toRRect(rect).deflate(borderSide.width / 2));
   }
 
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    return Path()
-      ..addRRect(borderRadius.toRRect(rect).inflate(outerBorderOffset + outerBorderWidth / 2));
+    return Path()..addRRect(borderRadius.toRRect(rect).inflate(outerBorderOffset + outerBorderWidth / 2));
   }
 
   @override
   bool get isOutline => true;
 
   @override
-  void paint(Canvas canvas, Rect rect,
-      {double? gapStart, double gapExtent = 0.0, double gapPercentage = 0.0, TextDirection? textDirection}) {
-
+  void paint(
+    Canvas canvas,
+    Rect rect, {
+    double? gapStart,
+    double gapExtent = 0.0,
+    double gapPercentage = 0.0,
+    TextDirection? textDirection,
+  }) {
     // Draw the outer border
     final outerRect = Rect.fromLTWH(
       rect.left - outerBorderOffset,

@@ -5,11 +5,7 @@ class OnAppEventBuilder extends StatefulWidget {
   final Widget child;
   final List<AppEvent> events;
 
-  const OnAppEventBuilder({
-    super.key,
-    required this.child,
-    required this.events,
-  });
+  const OnAppEventBuilder({super.key, required this.child, required this.events});
 
   @override
   State<StatefulWidget> createState() => _OnAppEventBuilderState();
@@ -23,10 +19,7 @@ class _OnAppEventBuilderState extends State<OnAppEventBuilder> {
     final appStateNotifier = context.watch<AppStateNotifier>();
     if (widget.events.contains(appStateNotifier.lastEvent)) _childKey = UniqueKey();
     appStateNotifier.reset();
-    return KeyedSubtree(
-      key: _childKey,
-      child: widget.child,
-    );
+    return KeyedSubtree(key: _childKey, child: widget.child);
   }
 }
 
@@ -45,6 +38,4 @@ class AppStateNotifier extends ChangeNotifier {
   }
 }
 
-enum AppEvent {
-  invalidateAll,
-}
+enum AppEvent { invalidateAll }

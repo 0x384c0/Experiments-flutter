@@ -8,14 +8,14 @@ class OfflineCacheInterceptor extends DioCacheInterceptor implements OfflineCach
   final CacheStore _cacheStore;
 
   OfflineCacheInterceptor(this._cacheStore)
-      : super(
-    options: CacheOptions(
-      store: _cacheStore,
-      maxStale: const Duration(hours: 1),
-      // hitCacheOnNetworkFailure: true,
-      policy: CachePolicy.forceCache,
-    ),
-  );
+    : super(
+        options: CacheOptions(
+          store: _cacheStore,
+          maxStale: const Duration(hours: 1),
+          // hitCacheOnNetworkFailure: true,
+          policy: CachePolicy.forceCache,
+        ),
+      );
 
   static const _offlineCacheExtraKey = 'offlineCacheExtraKey';
 

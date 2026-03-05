@@ -26,8 +26,5 @@ class PostsModel {
   final Iterable<PostModel>? posts;
   final String? after;
 
-  PostsModel(
-    this.posts,
-    this.after,
-  );
+  PostsModel(this.posts, this.after);
 }

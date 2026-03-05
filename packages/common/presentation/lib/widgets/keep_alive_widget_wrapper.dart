@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 class KeepAliveWidgetWrapper extends StatefulWidget {
-  const KeepAliveWidgetWrapper({
-    super.key,
-    required this.create,
-  });
+  const KeepAliveWidgetWrapper({super.key, required this.create});
 
   final Widget Function(Key) create;
 

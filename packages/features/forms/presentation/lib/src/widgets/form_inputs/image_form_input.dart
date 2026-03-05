@@ -3,27 +3,23 @@ import 'dart:io';
 import 'package:common_presentation/extensions/build_context_localization.dart';
 import 'package:features_forms_presentation/l10n/app_localizations.g.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ImageFormInput extends StatelessWidget {
   final String? imagePath;
   final Function(String imagePath) onImageSelected;
   final VoidCallback onRemove;
 
-  ImageFormInput({
-    super.key,
-    required this.imagePath,
-    required this.onImageSelected,
-    required this.onRemove,
-  });
+  ImageFormInput({super.key, required this.imagePath, required this.onImageSelected, required this.onRemove});
 
   @override
   Widget build(BuildContext context) {
     const size = 130.0;
     return DecoratedBox(
-      decoration:
-          BoxDecoration(border: Border.fromBorderSide(BorderSide(color: Theme.of(context).colorScheme.primary))),
+      decoration: BoxDecoration(
+        border: Border.fromBorderSide(BorderSide(color: Theme.of(context).colorScheme.primary)),
+      ),
       child: SizedBox(
         width: size,
         height: size,
@@ -42,9 +38,11 @@ class ImageFormInput extends StatelessWidget {
                     width: size,
                     height: size,
                   ).decorate(color: Theme.of(context).colorScheme.surface),
-                  Icon(Icons.clear, color: Theme.of(context).colorScheme.surface, size: 32.0)
-                      .padding(all: 5)
-                      .onTap(onRemove)
+                  Icon(
+                    Icons.clear,
+                    color: Theme.of(context).colorScheme.surface,
+                    size: 32.0,
+                  ).padding(all: 5).onTap(onRemove),
                 ],
               ),
           ],

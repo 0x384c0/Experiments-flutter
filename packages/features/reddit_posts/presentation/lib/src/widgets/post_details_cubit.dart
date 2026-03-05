@@ -8,7 +8,7 @@ import 'package:get_it/get_it.dart';
 
 class PostDetailsCubit extends Cubit<ScreenState<PostDetailsState>> with BlocScreenStateMixin {
   PostDetailsCubit(PostDetailsState? state)
-      : super(state != null ? ScreenStatePopulated(data: state) : ScreenStateEmptyLoading()) {
+    : super(state != null ? ScreenStatePopulated(data: state) : ScreenStateEmptyLoading()) {
     refresh();
   }
 

@@ -8,23 +8,11 @@ class Dimensions extends ThemeExtension<Dimensions> {
   final double medium;
   final double large;
 
-  const Dimensions({
-    required this.small,
-    required this.medium,
-    required this.large,
-  });
+  const Dimensions({required this.small, required this.medium, required this.large});
 
   @override
-  Dimensions copyWith({
-    double? small,
-    double? medium,
-    double? large,
-  }) {
-    return Dimensions(
-      small: small ?? this.small,
-      medium: medium ?? this.medium,
-      large: large ?? this.large,
-    );
+  Dimensions copyWith({double? small, double? medium, double? large}) {
+    return Dimensions(small: small ?? this.small, medium: medium ?? this.medium, large: large ?? this.large);
   }
 
   @override
@@ -37,9 +25,5 @@ class Dimensions extends ThemeExtension<Dimensions> {
     );
   }
 
-  static const light = Dimensions(
-    small: 8.0,
-    medium: 16.0,
-    large: 24.0,
-  );
+  static const light = Dimensions(small: 8.0, medium: 16.0, large: 24.0);
 }

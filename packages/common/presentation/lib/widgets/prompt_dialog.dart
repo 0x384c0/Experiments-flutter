@@ -67,10 +67,7 @@ class PromptDialog extends StatelessWidget {
                   child: Text(positive),
                 ),
                 const SizedBox(height: 12),
-                OutlinedButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text(negative),
-                ),
+                OutlinedButton(onPressed: () => Navigator.pop(context), child: Text(negative)),
               ],
             ),
           ),
@@ -86,14 +83,9 @@ class PromptDialog extends StatelessWidget {
     required String subTitle,
     required String positive,
     required String negative,
-  }) =>
-      showDialog(
-          context: context,
-          builder: (context) => PromptDialog._(
-                icon: icon,
-                title: title,
-                subTitle: subTitle,
-                positive: positive,
-                negative: negative,
-              )).then((value) => value == true);
+  }) => showDialog(
+    context: context,
+    builder: (context) =>
+        PromptDialog._(icon: icon, title: title, subTitle: subTitle, positive: positive, negative: negative),
+  ).then((value) => value == true);
 }

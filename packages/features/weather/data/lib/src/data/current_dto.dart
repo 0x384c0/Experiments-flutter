@@ -29,8 +29,7 @@ class CurrentDTO implements WeatherModel {
   @JsonKey(name: "condition")
   ConditionDTO? conditionDto;
 
-  factory CurrentDTO.fromJson(Map<String, dynamic> json) =>
-      _$CurrentDTOFromJson(json);
+  factory CurrentDTO.fromJson(Map<String, dynamic> json) => _$CurrentDTOFromJson(json);
 
   Map<String, dynamic> toJson() => _$CurrentDTOToJson(this);
 }
@@ -47,8 +46,7 @@ class ConditionDTO implements ConditionModel {
   @JsonKey(name: "icon")
   String? icon;
 
-  factory ConditionDTO.fromJson(Map<String, dynamic> json) =>
-      _$ConditionDTOFromJson(json);
+  factory ConditionDTO.fromJson(Map<String, dynamic> json) => _$ConditionDTOFromJson(json);
 
   Map<String, dynamic> toJson() => _$ConditionDTOToJson(this);
 }

@@ -22,9 +22,7 @@ abstract class RedditApi {
   });
 
   @GET("{permalink}")
-  Future<List<RedditPostListingDTO>> getPost({
-    @Path("permalink") required String permalink,
-  });
+  Future<List<RedditPostListingDTO>> getPost({@Path("permalink") required String permalink});
 
   @GET("/api/morechildren")
   Future<RedditJsonResponseDTO> getMoreChildren({

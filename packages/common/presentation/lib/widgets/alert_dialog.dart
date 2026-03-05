@@ -12,7 +12,6 @@ class AlertDialogPresenter {
     required AlertDialogState? alertDialogState,
     required VoidCallback onCloseAlert,
   }) {
-
     final presentedTitle = _presentedAlertDialogState?.getTitle(context);
     final presentedContent = _presentedAlertDialogState?.getContent(context);
 

@@ -33,12 +33,12 @@ class _WidgetsScreenState extends State<WidgetsScreen> {
   }
 
   _card(Widget child, {GestureTapCallback? onTap}) => Card.filled(
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          onTap: onTap,
-          child: Padding(padding: const EdgeInsets.all(8.0), child: child),
-        ),
-      );
+    clipBehavior: Clip.hardEdge,
+    child: InkWell(
+      onTap: onTap,
+      child: Padding(padding: const EdgeInsets.all(8.0), child: child),
+    ),
+  );
 
   _testInheritedWidget() {
     final testData = generateRandomString(10);
@@ -46,27 +46,21 @@ class _WidgetsScreenState extends State<WidgetsScreen> {
       testData: testData,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Data for InheritedWidget: $testData"),
-          _DataFromInheritedWidget(),
-        ],
+        children: [Text("Data for InheritedWidget: $testData"), _DataFromInheritedWidget()],
       ),
     );
   }
 
   _testStatefulWidget(BuildContext context) => _TestStatefulWidget(
-        key: _statefulWidgetStateKey,
-        color: Theme.of(context).colorScheme.primary,
-        child: const Text("Test Stateful Widget"),
-      );
+    key: _statefulWidgetStateKey,
+    color: Theme.of(context).colorScheme.primary,
+    child: const Text("Test Stateful Widget"),
+  );
 }
 
 //region InheritedWidget
 class _TestInheritedWidget extends InheritedWidget {
-  const _TestInheritedWidget({
-    required super.child,
-    required this.testData,
-  });
+  const _TestInheritedWidget({required super.child, required this.testData});
 
   final String testData;
 
@@ -88,11 +82,7 @@ class _DataFromInheritedWidget extends StatelessWidget {
 
 //region StatefulWidget
 class _TestStatefulWidget extends StatefulWidget {
-  const _TestStatefulWidget({
-    super.key,
-    required this.color,
-    required this.child,
-  });
+  const _TestStatefulWidget({super.key, required this.color, required this.child});
 
   final Color color;
   final Widget child;
@@ -107,11 +97,8 @@ class _TestStatefulWidgetState extends State<_TestStatefulWidget> {
   void grow() => setState(() => _size += 0.1);
 
   @override
-  Widget build(BuildContext context) => Container(
-        color: widget.color,
-        transform: Matrix4.diagonal3Values(_size, _size, 1.0),
-        child: widget.child,
-      );
+  Widget build(BuildContext context) =>
+      Container(color: widget.color, transform: Matrix4.diagonal3Values(_size, _size, 1.0), child: widget.child);
 }
 //endregion
 
@@ -149,7 +136,7 @@ class _CustomRenderObject extends RenderBox {
     if (shader == null) return;
     shader.setFloat(0, size.width); // iResolution x
     shader.setFloat(1, size.height); // iResolution y
-    shader.setFloat(3, (_startTime - DateTime.now().millisecondsSinceEpoch) / 1000);// iTime
+    shader.setFloat(3, (_startTime - DateTime.now().millisecondsSinceEpoch) / 1000); // iTime
     context.canvas.drawPaint(Paint()..shader = shader);
     _drawNextFrame();
   }

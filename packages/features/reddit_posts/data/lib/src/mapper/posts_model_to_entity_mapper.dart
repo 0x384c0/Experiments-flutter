@@ -9,25 +9,21 @@ typedef PostsModelToEntityMapper = Mapper<(PostsModel, int), (PostsEntityData, I
 class PostsModelToEntityMapperImpl extends PostsModelToEntityMapper {
   @override
   map(input) => (
-        PostsEntityData(
-          id: input.$2,
-          createdAt: DateTime.now(),
-          after: input.$1.after,
-        ),
-        input.$1.posts?.map(
-              (model) => PostEntityData(
-                id: model.permalink.hashCode,
-                postsEntityId: input.$2,
-                permalink: model.permalink,
-                author: model.author,
-                category: model.category,
-                icon: model.icon?.toString(),
-                title: model.title,
-                after: model.after,
-                moreParentId: model.moreModel?.parentId,
-                moreChildren: model.moreModel?.children.join(","),
-              ),
-            ) ??
-            []
-      );
+    PostsEntityData(id: input.$2, createdAt: DateTime.now(), after: input.$1.after),
+    input.$1.posts?.map(
+          (model) => PostEntityData(
+            id: model.permalink.hashCode,
+            postsEntityId: input.$2,
+            permalink: model.permalink,
+            author: model.author,
+            category: model.category,
+            icon: model.icon?.toString(),
+            title: model.title,
+            after: model.after,
+            moreParentId: model.moreModel?.parentId,
+            moreChildren: model.moreModel?.children.join(","),
+          ),
+        ) ??
+        [],
+  );
 }

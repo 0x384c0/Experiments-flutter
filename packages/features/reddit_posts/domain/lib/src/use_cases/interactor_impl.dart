@@ -11,10 +11,7 @@ import 'package:injectable/injectable.dart';
 
 @Injectable(as: PostsInteractor)
 class PostsInteractorImpl implements PostsInteractor {
-  PostsInteractorImpl(
-    this.remoteRepository,
-    this.localRepository,
-  );
+  PostsInteractorImpl(this.remoteRepository, this.localRepository);
 
   final _perPage = 20;
 
@@ -22,7 +19,9 @@ class PostsInteractorImpl implements PostsInteractor {
   final PostsLocalRepository localRepository;
 
   @override
-  Future<PostsModel> getPosts({required String? after}) => remoteRepository.getPosts(after: after).cached(
+  Future<PostsModel> getPosts({required String? after}) => remoteRepository
+      .getPosts(after: after)
+      .cached(
         saveToCache: (data) => localRepository.insertPosts(data, after: after),
         getFromCache: () => localRepository.getPosts(after: after),
         shouldInvalidateCache: () async => after == null,
@@ -30,18 +29,12 @@ class PostsInteractorImpl implements PostsInteractor {
       );
 
   @override
-  Future<PostModel> getPost({
-    required String? permalink,
-  }) =>
-      permalink != null
-          ? remoteRepository.getPost(permalink: permalink)
-          : Future.error(const FormatException("permalink is null"));
+  Future<PostModel> getPost({required String? permalink}) => permalink != null
+      ? remoteRepository.getPost(permalink: permalink)
+      : Future.error(const FormatException("permalink is null"));
 
   @override
-  Future<Iterable<PostModel>> getMoreChildren({
-    required int page,
-    required MoreModel? moreModel,
-  }) async {
+  Future<Iterable<PostModel>> getMoreChildren({required int page, required MoreModel? moreModel}) async {
     if (moreModel == null || moreModel.children.isEmpty) return [];
     if (page > moreModel.children.length) return [];
     return remoteRepository.getMoreChildren(

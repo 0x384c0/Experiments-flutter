@@ -7,9 +7,7 @@ extension WidgetListener on Widget {
   /// [child] will be recreated when one of [events] triggered by [AppStateNotifier] and on locale change if [localeChange] is true
   Widget wrapInEventListeners({
     bool localeChange = true,
-    List<AppEvent> events = const [
-      AppEvent.invalidateAll,
-    ],
+    List<AppEvent> events = const [AppEvent.invalidateAll],
     required Widget child,
   }) {
     var result = child;

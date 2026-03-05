@@ -12,7 +12,8 @@ abstract class CardTile extends ListTile {
       if (selected) WidgetState.selected,
     };
     final ListTileThemeData tileTheme = ListTileTheme.of(context);
-    final MouseCursor effectiveMouseCursor = WidgetStateProperty.resolveAs<MouseCursor?>(mouseCursor, states) ??
+    final MouseCursor effectiveMouseCursor =
+        WidgetStateProperty.resolveAs<MouseCursor?>(mouseCursor, states) ??
         tileTheme.mouseCursor?.resolve(states) ??
         WidgetStateMouseCursor.clickable.resolve(states);
     final cardShape = shape ?? tileTheme.shape ?? const Border();
@@ -33,10 +34,7 @@ abstract class CardTile extends ListTile {
           selected: selected,
           enabled: enabled,
           child: Ink(
-            decoration: ShapeDecoration(
-              shape: cardShape,
-              color: _tileBackgroundColor(theme, tileTheme),
-            ),
+            decoration: ShapeDecoration(shape: cardShape, color: _tileBackgroundColor(theme, tileTheme)),
             child: buildItem(context),
           ),
         ),

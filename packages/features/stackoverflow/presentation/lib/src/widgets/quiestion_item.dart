@@ -17,51 +17,38 @@ class QuestionItem extends HookConsumerWidget {
   const QuestionItem({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) => ref.watch(currentQuestion).when(
-        error: _errorView,
-        loading: _loadingView,
-        data: _body,
-      );
+  Widget build(BuildContext context, WidgetRef ref) =>
+      ref.watch(currentQuestion).when(error: _errorView, loading: _loadingView, data: _body);
 
   Widget _body(Question question) => Card(
-        child: ListTile(
-          title: Text(question.title),
-          subtitle: Column(
+    child: ListTile(
+      title: Text(question.title),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 5),
+          Text(question.body, maxLines: 3, overflow: TextOverflow.ellipsis),
+          const SizedBox(height: 12),
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 5),
-              Text(
-                question.body,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 12),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              const SizedBox(height: 6),
+              Row(
                 children: [
-                  const SizedBox(height: 6),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: _PostInfo(
-                          originalPoster: question.owner,
-                          postCreationDate: question.creationDate,
-                        ),
-                      ),
-                      _UpvoteCount(question.score),
-                      const SizedBox(width: 10),
-                      _AnswersCount(
-                        question.answerCount,
-                        accepted: question.acceptedAnswerId != null,
-                      ),
-                    ],
+                  Expanded(
+                    child: _PostInfo(originalPoster: question.owner, postCreationDate: question.creationDate),
                   ),
+                  _UpvoteCount(question.score),
+                  const SizedBox(width: 10),
+                  _AnswersCount(question.answerCount, accepted: question.acceptedAnswerId != null),
                 ],
               ),
             ],
           ),
-        ),
-      );
+        ],
+      ),
+    ),
+  );
 
   Widget _loadingView() => SizedBox(height: 200, child: const Center(child: CircularProgressIndicator()));
 
@@ -79,66 +66,54 @@ class QuestionItem extends HookConsumerWidget {
 String _useAskedHowLongAgo(DateTime creationDate) {
   final label = useState('');
 
-  useEffect(
-    () {
-      void setLabel() {
-        final now = DateTime.now();
-        final diff = now.difference(creationDate);
+  useEffect(() {
+    void setLabel() {
+      final now = DateTime.now();
+      final diff = now.difference(creationDate);
 
-        String value;
-        if (diff.inDays > 1) {
-          value = '${diff.inDays} days';
-        } else if (diff.inHours > 0) {
-          value = '${diff.inHours} hours';
-        } else if (diff.inMinutes > 0) {
-          value = '${diff.inMinutes} mins';
-        } else {
-          value = '${diff.inSeconds} seconds';
-        }
-
-        label.value = 'asked $value ago';
+      String value;
+      if (diff.inDays > 1) {
+        value = '${diff.inDays} days';
+      } else if (diff.inHours > 0) {
+        value = '${diff.inHours} hours';
+      } else if (diff.inMinutes > 0) {
+        value = '${diff.inMinutes} mins';
+      } else {
+        value = '${diff.inSeconds} seconds';
       }
 
-      setLabel();
-      final timer = Timer.periodic(const Duration(minutes: 1), (_) => setLabel());
+      label.value = 'asked $value ago';
+    }
 
-      return timer.cancel;
-    },
-    [creationDate],
-  );
+    setLabel();
+    final timer = Timer.periodic(const Duration(minutes: 1), (_) => setLabel());
+
+    return timer.cancel;
+  }, [creationDate]);
 
   return label.value;
 }
 
 class _PostInfo extends HookConsumerWidget {
-  const _PostInfo({
-    required this.originalPoster,
-    required this.postCreationDate,
-  });
+  const _PostInfo({required this.originalPoster, required this.postCreationDate});
 
   final User originalPoster;
   final DateTime postCreationDate;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            _useAskedHowLongAgo(postCreationDate),
-            style: const TextStyle(color: Color(0xFF9fa6ad), fontSize: 12),
-          ),
-          const SizedBox(height: 3),
-          UserAvatar(owner: originalPoster),
-        ],
-      );
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(_useAskedHowLongAgo(postCreationDate), style: const TextStyle(color: Color(0xFF9fa6ad), fontSize: 12)),
+      const SizedBox(height: 3),
+      UserAvatar(owner: originalPoster),
+    ],
+  );
 }
 
 /// A UI component for showing the answer count on a question
 class _AnswersCount extends StatelessWidget {
-  const _AnswersCount(
-    this.answerCount, {
-    required this.accepted,
-  });
+  const _AnswersCount(this.answerCount, {required this.accepted});
 
   final int answerCount;
   final bool accepted;
@@ -148,8 +123,8 @@ class _AnswersCount extends StatelessWidget {
     final textStyle = accepted
         ? null
         : answerCount == 0
-            ? const TextStyle(color: Color(0xffacb2b8))
-            : const TextStyle(color: Color(0xff5a9e6f));
+        ? const TextStyle(color: Color(0xffacb2b8))
+        : const TextStyle(color: Color(0xff5a9e6f));
     return Container(
       decoration: answerCount > 0
           ? BoxDecoration(

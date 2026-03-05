@@ -7,12 +7,7 @@ abstract class PostsInteractor {
   Future<PostsModel> getPosts({required String? after});
 
   /// return single [PostsModel] with comments from API
-  Future<PostModel> getPost({
-    required String? permalink,
-  });
+  Future<PostModel> getPost({required String? permalink});
 
-  Future<Iterable<PostModel>> getMoreChildren({
-    required int page,
-    required MoreModel? moreModel,
-  });
+  Future<Iterable<PostModel>> getMoreChildren({required int page, required MoreModel? moreModel});
 }

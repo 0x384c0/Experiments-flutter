@@ -6,34 +6,20 @@ import 'theme_colors.dart';
 
 class ThemeProvider {
   static final theme = ThemeData(
-    extensions: [
-      _dimensions,
-      _colors,
-    ],
+    extensions: [_dimensions, _colors],
     colorScheme: _colorScheme,
-    appBarTheme: AppBarTheme(
-      shadowColor: _colors.grey.shade200,
-      surfaceTintColor: _colors.grey.shade50,
-      elevation: 1,
-    ),
+    appBarTheme: AppBarTheme(shadowColor: _colors.grey.shade200, surfaceTintColor: _colors.grey.shade50, elevation: 1),
     drawerTheme: const DrawerThemeData(width: double.infinity),
     checkboxTheme: CheckboxThemeData(
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
       side: BorderSide(color: _borderColor),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(4),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
     ),
     filledButtonTheme: FilledButtonThemeData(style: _buttonStyle),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: _buttonStyle.copyWith(
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        side: WidgetStatePropertyAll(
-          BorderSide(
-            width: 1,
-            color: _colors.grey.shade300,
-          ),
-        ),
+        side: WidgetStatePropertyAll(BorderSide(width: 1, color: _colors.grey.shade300)),
       ),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -61,13 +47,12 @@ class ThemeProvider {
     dividerTheme: DividerThemeData(color: _colors.grey.shade200, space: 0, indent: 0, endIndent: 0),
     iconTheme: IconThemeData(color: _colors.grey.shade500),
     menuTheme: const MenuThemeData(
-        style: MenuStyle(
-      shape: WidgetStatePropertyAll(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(_borderRadius)),
+      style: MenuStyle(
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(_borderRadius))),
         ),
       ),
-    )),
+    ),
     cardTheme: CardThemeData(
       shape: RoundedRectangleBorder(
         side: BorderSide(width: 1, color: _colors.grey.shade200),
@@ -92,11 +77,7 @@ class ThemeProvider {
       ),
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
     ),
-    dialogTheme: DialogThemeData(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-    ),
+    dialogTheme: DialogThemeData(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
   );
 
   static final ColorScheme _colorScheme = ColorScheme.light(

@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:common_presentation/widgets/loading_overlay_view.dart';
+import 'package:features_firebase_chat_presentation/src/navigation/router.gr.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
-import 'package:features_firebase_chat_presentation/src/navigation/router.gr.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
 @RoutePage()
@@ -23,12 +23,12 @@ class _FirebaseAuthScreenState extends State<FirebaseAuthScreen> {
   var _isLoading = false;
 
   _showLoading() => setState(() {
-        _isLoading = true;
-      });
+    _isLoading = true;
+  });
 
   _hideLoading() => setState(() {
-        _isLoading = false;
-      });
+    _isLoading = false;
+  });
 
   @override
   void initState() {
@@ -51,33 +51,30 @@ class _FirebaseAuthScreenState extends State<FirebaseAuthScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text("FirebaseAuthScreen")),
-        body: Stack(
-          children: [
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: _emailController,
-                    decoration: const InputDecoration(labelText: 'forms_email'),
-                    validator: (value) {
-                      if (value?.isEmpty == true) return 'forms_empty_field';
-                      if (!_emailRegExp.hasMatch(value!)) return 'forms_invalid_field';
-                      return null;
-                    },
-                  ),
-                  ElevatedButton(
-                    onPressed: _createUser,
-                    child: const Text('SignIn to Chat'),
-                  ),
-                ],
-              ).padding(all: 8),
-            ),
-            LoadingOverlayView(isLoading: _isLoading),
-          ],
+    appBar: AppBar(title: const Text("FirebaseAuthScreen")),
+    body: Stack(
+      children: [
+        Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                controller: _emailController,
+                decoration: const InputDecoration(labelText: 'forms_email'),
+                validator: (value) {
+                  if (value?.isEmpty == true) return 'forms_empty_field';
+                  if (!_emailRegExp.hasMatch(value!)) return 'forms_invalid_field';
+                  return null;
+                },
+              ),
+              ElevatedButton(onPressed: _createUser, child: const Text('SignIn to Chat')),
+            ],
+          ).padding(all: 8),
         ),
-      );
+        LoadingOverlayView(isLoading: _isLoading),
+      ],
+    ),
+  );
 
   _createUser() async {
     if (!_formKey.currentState!.validate()) return;

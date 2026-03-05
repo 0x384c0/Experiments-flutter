@@ -11,8 +11,7 @@ import 'package:injectable/injectable.dart';
 typedef ForecastDetailsPageState = GenericScreenState<Map<String?, ForecastWeatherState?>>;
 
 @injectable
-class ForecastDetailsCubit extends Cubit<ScreenState<ForecastDetailsPageState>>
-    with BlocScreenStateMixin {
+class ForecastDetailsCubit extends Cubit<ScreenState<ForecastDetailsPageState>> with BlocScreenStateMixin {
   ForecastDetailsCubit(
     @factoryParam this._args,
     this._interactor,
@@ -30,12 +29,12 @@ class ForecastDetailsCubit extends Cubit<ScreenState<ForecastDetailsPageState>>
     final dateEpoch = _args.entries.first.key;
     return dateEpoch != null
         ? _geoLocationManager
-            .getLocation()
-            .then((value) => _interactor.getForecastItem(value, dateEpoch))
-            .then(_forecastItemModelMapper.mapOptional)
-            .then((value) => {dateEpoch: value})
-            .then(_newState)
-            .then(emitData)
+              .getLocation()
+              .then((value) => _interactor.getForecastItem(value, dateEpoch))
+              .then(_forecastItemModelMapper.mapOptional)
+              .then((value) => {dateEpoch: value})
+              .then(_newState)
+              .then(emitData)
         : Future.error(Exception("dateEpoch is null"));
   }
 

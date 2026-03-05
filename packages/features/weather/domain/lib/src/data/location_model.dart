@@ -7,10 +7,7 @@ abstract class LocationModel {
   /// (exclusive) to +180 (inclusive).
   final double longitude;
 
-  const LocationModel({
-    required this.latitude,
-    required this.longitude,
-  });
+  const LocationModel({required this.latitude, required this.longitude});
 
   @override
   String toString() {

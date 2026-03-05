@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'user.g.dart';
 part 'user.freezed.dart';
+part 'user.g.dart';
 
 @freezed
 sealed class User with _$User {
@@ -21,12 +20,7 @@ sealed class User with _$User {
 
 @freezed
 sealed class BadgeCount with _$BadgeCount {
-  factory BadgeCount({
-    required int bronze,
-    required int silver,
-    required int gold,
-  }) = _BadgeCount;
+  factory BadgeCount({required int bronze, required int silver, required int gold}) = _BadgeCount;
 
-  factory BadgeCount.fromJson(Map<String, Object> json) =>
-      _$BadgeCountFromJson(json);
+  factory BadgeCount.fromJson(Map<String, Object> json) => _$BadgeCountFromJson(json);
 }

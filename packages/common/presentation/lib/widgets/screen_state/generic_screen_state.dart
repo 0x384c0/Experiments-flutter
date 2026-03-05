@@ -3,11 +3,7 @@ import '../../mixins/cubit_pagination_mixin.dart';
 import '../alert_dialog.dart';
 
 class GenericScreenState<T> implements StateWithPagination<T>, StateWithAlert {
-  GenericScreenState({
-    required this.data,
-    this.paginationState,
-    this.alertDialogState,
-  });
+  GenericScreenState({required this.data, this.paginationState, this.alertDialogState});
 
   @override
   final T data;
@@ -19,11 +15,7 @@ class GenericScreenState<T> implements StateWithPagination<T>, StateWithAlert {
   final AlertDialogState? alertDialogState;
 
   @override
-  GenericScreenState<T> copyWith({
-    T? data,
-    PaginationState? paginationState,
-    AlertDialogState? alertDialogState,
-  }) {
+  GenericScreenState<T> copyWith({T? data, PaginationState? paginationState, AlertDialogState? alertDialogState}) {
     return GenericScreenState(
       data: data ?? this.data,
       paginationState: paginationState ?? this.paginationState,

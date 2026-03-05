@@ -11,10 +11,7 @@ class OthersScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ListTile(
-          title: const Text('Firebase chat'),
-          onTap: () => AutoRouter.of(context).push(FirebaseAuthRoute()),
-        ),
+        ListTile(title: const Text('Firebase chat'), onTap: () => AutoRouter.of(context).push(FirebaseAuthRoute())),
       ],
     ).padding(all: 8);
   }

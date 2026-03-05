@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 
-
 import 'post_details_cubit.dart';
 import 'post_tile.dart';
 
@@ -21,39 +20,30 @@ class PostDetailsScreen extends StatelessWidget {
   final PostDetailsState state;
 
   @override
-  Widget build(BuildContext context) =>
-      MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (_) => PostDetailsCubit(state)),
-          BlocProvider(create: (_) => PostCommentsCubit(state.permalink)
-          ),
-        ],
-        child: _buildBloc(context),
-      );
+  Widget build(BuildContext context) => MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (_) => PostDetailsCubit(state)),
+      BlocProvider(create: (_) => PostCommentsCubit(state.permalink)),
+    ],
+    child: _buildBloc(context),
+  );
 
   Widget _buildBloc(BuildContext context) =>
-      ScreenStateBlocBuilder<PostDetailsCubit, PostDetailsState>(
-        layoutBuilder: _buildScaffold,
-        builder: _buildBody,
-      );
+      ScreenStateBlocBuilder<PostDetailsCubit, PostDetailsState>(layoutBuilder: _buildScaffold, builder: _buildBody);
 
   Widget _buildBody(BuildContext context, PostDetailsState data) =>
       data.postItemState != null ? _list(data.postItemState!, context) : _loadingIndicator();
 
-  Widget _buildScaffold(PostDetailsState? data, Widget child) =>
-      Scaffold(
-        appBar: AppBar(title: Text(data?.postItemState?.category ?? "")),
-        body: ConnectionStatusView.withChild(Center(child: child)),
-      );
+  Widget _buildScaffold(PostDetailsState? data, Widget child) => Scaffold(
+    appBar: AppBar(title: Text(data?.postItemState?.category ?? "")),
+    body: ConnectionStatusView.withChild(Center(child: child)),
+  );
 
   Widget _list(PostItemState state, BuildContext context) {
     final PostDetailsCubit cubit = context.read();
 
     return Column(
-      children: [
-        PostTile(cubit.stateData?.postItemState ?? state, null),
-        const PostCommentsView().flexible(flex: 1),
-      ],
+      children: [PostTile(cubit.stateData?.postItemState ?? state, null), const PostCommentsView().flexible(flex: 1)],
     );
   }
 

@@ -54,18 +54,10 @@ class ErrorDtoMapper extends Mapper<dynamic, ErrorModel> {
           } else {
             message = input.toString();
           }
-          return ErrorModel(
-            message: message,
-            type: ErrorModelType.unknown,
-            stackTrace: stackTrace,
-          );
+          return ErrorModel(message: message, type: ErrorModelType.unknown, stackTrace: stackTrace);
       }
     }
 
-    return ErrorModel(
-      message: input.toString(),
-      type: ErrorModelType.unknown,
-      stackTrace: stackTrace,
-    );
+    return ErrorModel(message: input.toString(), type: ErrorModelType.unknown, stackTrace: stackTrace);
   }
 }

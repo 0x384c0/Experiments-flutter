@@ -37,57 +37,49 @@ class _LocalFirstPostsScreenState extends State<LocalFirstPostsScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text(AppLocalizations.of(context)!.posts_local_first)),
-        body: ConnectionStatusView.withChild(
-          Stack(
-            children: [
-              _list(),
-              Visibility(
-                visible: _listData.isEmpty && _isLoading || _isReSyncing,
-                child: _loading(),
-              ),
-            ],
-          ),
-          onBackOnline: _onBackOnline,
-          onNoConnection: _onNoConnection,
-        ),
-      );
+    appBar: AppBar(title: Text(AppLocalizations.of(context)!.posts_local_first)),
+    body: ConnectionStatusView.withChild(
+      Stack(
+        children: [
+          _list(),
+          Visibility(visible: _listData.isEmpty && _isLoading || _isReSyncing, child: _loading()),
+        ],
+      ),
+      onBackOnline: _onBackOnline,
+      onNoConnection: _onNoConnection,
+    ),
+  );
 
   Widget _list() => RefreshIndicator(
-        onRefresh: _refreshAll,
-        child: ScrollToEndListener(
-          onScrolledToEnd: _loadNextPage,
-          child: (controller) => CustomScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            controller: controller,
-            slivers: [
-              SliverPadding(
-                padding: const EdgeInsets.all(8),
-                sliver: SliverList.builder(
-                  itemCount: _listData.length,
-                  itemBuilder: (c, index) => PostTile(
-                    _listData[index],
-                    () => _onPostTap(c,_listData[index]),
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(child: _pageLoadingIndicator(_nextPageLoading)),
-            ],
+    onRefresh: _refreshAll,
+    child: ScrollToEndListener(
+      onScrolledToEnd: _loadNextPage,
+      child: (controller) => CustomScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        controller: controller,
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.all(8),
+            sliver: SliverList.builder(
+              itemCount: _listData.length,
+              itemBuilder: (c, index) => PostTile(_listData[index], () => _onPostTap(c, _listData[index])),
+            ),
           ),
-        ),
-      );
+          SliverToBoxAdapter(child: _pageLoadingIndicator(_nextPageLoading)),
+        ],
+      ),
+    ),
+  );
 
   Widget _pageLoadingIndicator(bool isLoadingPage) => Visibility(
-        visible: isLoadingPage,
-        child: const Center(child: CircularProgressIndicator()).padding(all: 8),
-      );
+    visible: isLoadingPage,
+    child: const Center(child: CircularProgressIndicator()).padding(all: 8),
+  );
 
   Widget _loading() => Container(
-        color: Colors.white.withOpacity(0.5), // Semi-transparent white background
-        child: const Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
+    color: Colors.white.withOpacity(0.5), // Semi-transparent white background
+    child: const Center(child: CircularProgressIndicator()),
+  );
 
   _onPostTap(BuildContext context, PostItemState postItemState) {
     final router = AutoRouter.of(context); // TODO: get from DI
@@ -121,19 +113,29 @@ class _LocalFirstPostsScreenState extends State<LocalFirstPostsScreen> {
 
   _listenPageData(String? key) {
     if (!_sub.getDataStream(key: key).hasListener) {
-      _sub.getDataStream(key: key).stream.listen((data) => setState(() {
-            if (data != null) _loadedPages[data.after] = data;
-          }));
+      _sub
+          .getDataStream(key: key)
+          .stream
+          .listen(
+            (data) => setState(() {
+              if (data != null) _loadedPages[data.after] = data;
+            }),
+          );
     }
 
     if (!_sub.getDataIsLoadingStream(key: key).hasListener) {
-      _sub.getDataIsLoadingStream(key: key).stream.listen((isLoading) => setState(() {
-            if (key == null) {
-              _isLoading = isLoading; // listen first page loading
-            } else {
-              _pagesLoadingState[key] = isLoading;
-            }
-          }));
+      _sub
+          .getDataIsLoadingStream(key: key)
+          .stream
+          .listen(
+            (isLoading) => setState(() {
+              if (key == null) {
+                _isLoading = isLoading; // listen first page loading
+              } else {
+                _pagesLoadingState[key] = isLoading;
+              }
+            }),
+          );
     }
   }
 

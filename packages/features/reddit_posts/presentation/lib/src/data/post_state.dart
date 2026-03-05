@@ -10,11 +10,5 @@ class PostItemState {
 
   PostItemState(this.permalink, this.author, this.category, this.icon, this.title, this.comments);
 
-  const PostItemState.emtpy()
-      : permalink = "",
-        author = "",
-        category = "",
-        icon = null,
-        title = "",
-        comments = null;
+  const PostItemState.emtpy() : permalink = "", author = "", category = "", icon = null, title = "", comments = null;
 }

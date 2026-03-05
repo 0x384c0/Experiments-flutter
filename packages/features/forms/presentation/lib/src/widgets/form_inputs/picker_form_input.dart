@@ -37,47 +37,44 @@ class _PickerFormInputState<T> extends State<PickerFormInput<T>> {
 
   @override
   Widget build(context) => SearchAnchor(
-        builder: (context, controller) => GestureDetector(
-          onTap: controller.openView,
-          child: TextFormField(
-            controller: _textController,
-            validator: (_) => widget.validator?.call(_selection),
-            decoration: InputDecoration(labelText: widget.labelText),
-            readOnly: true,
-            onTap: controller.openView,
-            strutStyle: const StrutStyle(fontSize: 15),
-            maxLines: null,
-          ),
-        ),
-        viewHintText: widget.viewHintText,
-        suggestionsBuilder: (context, controller) async {
-          final suggestions = (await widget.getSuggestions(controller.text)).toList();
-          return List.generate(
-            suggestions.length,
-            (int index) => (widget.listItemBuilder ?? _defaultListItemBuilder).call(
-              suggestions[index],
-              () {
-                controller.closeView(null);
-                controller.clear();
-                _onEntitySelected(suggestions[index]);
-              },
-            ),
-          );
-        },
+    builder: (context, controller) => GestureDetector(
+      onTap: controller.openView,
+      child: TextFormField(
+        controller: _textController,
+        validator: (_) => widget.validator?.call(_selection),
+        decoration: InputDecoration(labelText: widget.labelText),
+        readOnly: true,
+        onTap: controller.openView,
+        strutStyle: const StrutStyle(fontSize: 15),
+        maxLines: null,
+      ),
+    ),
+    viewHintText: widget.viewHintText,
+    suggestionsBuilder: (context, controller) async {
+      final suggestions = (await widget.getSuggestions(controller.text)).toList();
+      return List.generate(
+        suggestions.length,
+        (int index) => (widget.listItemBuilder ?? _defaultListItemBuilder).call(suggestions[index], () {
+          controller.closeView(null);
+          controller.clear();
+          _onEntitySelected(suggestions[index]);
+        }),
       );
+    },
+  );
 
   Widget _chipBuilder(BuildContext context, PickerMenuEntry<T> entry) =>
       (widget.chipBuilder ?? _defaultChipBuilder).call(entry, () => _onChipDeleted(entry));
 
   _onChipDeleted(PickerMenuEntry<T> entry) => setState(() {
-        _selection.remove(entry);
-        _updateValues();
-      });
+    _selection.remove(entry);
+    _updateValues();
+  });
 
   _onEntitySelected(PickerMenuEntry<T> entry) => setState(() {
-        _selection.add(entry);
-        _updateValues();
-      });
+    _selection.add(entry);
+    _updateValues();
+  });
 
   _updateValues() {
     _textController.updateValues(_selection);
@@ -92,17 +89,12 @@ class _PickerFormInputState<T> extends State<PickerFormInput<T>> {
   Widget _defaultChipBuilder(PickerMenuEntry<T> entry, Function() onChipDeleted) =>
       ToppingInputChip(label: entry.label, onDeleted: onChipDeleted);
 
-  Widget _defaultListItemBuilder(PickerMenuEntry<T> entry, GestureTapCallback onTap) => ListTile(
-        title: Text(entry.label),
-        onTap: onTap,
-      );
+  Widget _defaultListItemBuilder(PickerMenuEntry<T> entry, GestureTapCallback onTap) =>
+      ListTile(title: Text(entry.label), onTap: onTap);
 }
 
 class PickerMenuEntry<T> {
-  PickerMenuEntry({
-    required this.value,
-    required this.label,
-  });
+  PickerMenuEntry({required this.value, required this.label});
 
   final T value;
   final String label;

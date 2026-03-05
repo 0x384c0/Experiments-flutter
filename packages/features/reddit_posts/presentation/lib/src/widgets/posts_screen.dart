@@ -21,22 +21,19 @@ class PostsScreen extends StatelessWidget with WidgetAlertMixin {
 
   @override
   Widget build(BuildContext context) => BlocProvider(
-        create: (_) => PostsCubit(),
-        child: Scaffold(
-          appBar: AppBar(title: Text(AppLocalizations.of(context)!.posts_remote_first)),
-          body: _buildBloc(context),
-        ),
-      );
+    create: (_) => PostsCubit(),
+    child: Scaffold(
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.posts_remote_first)),
+      body: _buildBloc(context),
+    ),
+  );
 
   Widget _buildBloc(BuildContext context) => ScreenStateBlocBuilder<PostsCubit, PostsPageState>(builder: _buildBody);
 
   Widget _buildBody(BuildContext context, PostsPageState data) {
     final cubit = context.read<PostsCubit>();
     onBuild(context, cubit);
-    return ConnectionStatusView.withChild(
-      Center(child: _list(context, data.data)),
-      onBackOnline: cubit.refresh,
-    );
+    return ConnectionStatusView.withChild(Center(child: _list(context, data.data)), onBackOnline: cubit.refresh);
   }
 
   Widget _list(BuildContext context, Iterable<PostItemState> posts) {
@@ -55,10 +52,7 @@ class PostsScreen extends StatelessWidget with WidgetAlertMixin {
               sliver: SliverList.builder(
                 itemCount: postList.length,
                 itemBuilder: (context, index) {
-                  return PostTile(
-                    postList[index],
-                    () => _onPostTap(context, postList[index]),
-                  );
+                  return PostTile(postList[index], () => _onPostTap(context, postList[index]));
                 },
               ),
             ),
@@ -70,9 +64,9 @@ class PostsScreen extends StatelessWidget with WidgetAlertMixin {
   }
 
   Widget _pageLoadingIndicator(bool isLoadingPage) => Visibility(
-        visible: isLoadingPage,
-        child: const Center(child: CircularProgressIndicator()).padding(all: 8),
-      );
+    visible: isLoadingPage,
+    child: const Center(child: CircularProgressIndicator()).padding(all: 8),
+  );
 
   _onPostTap(BuildContext context, PostItemState postItemState) {
     final router = AutoRouter.of(context); // TODO: get from DI

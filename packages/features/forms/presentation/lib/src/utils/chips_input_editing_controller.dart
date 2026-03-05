@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ChipsInputEditingController<T> extends TextEditingController {
-  ChipsInputEditingController({
-    required this.values,
-    required this.chipBuilder,
-    this.separator,
-  }) : super(text: String.fromCharCode(_kObjectReplacementChar) * values.length);
+  ChipsInputEditingController({required this.values, required this.chipBuilder, this.separator})
+    : super(text: String.fromCharCode(_kObjectReplacementChar) * values.length);
 
   // This constant character acts as a placeholder in the TextField text value.
   // There will be one character for each of the InputChip displayed.

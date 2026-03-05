@@ -12,11 +12,8 @@ typedef WeatherPageState = GenericScreenState<WeatherState>;
 
 @injectable
 class WeatherCubit extends Cubit<ScreenState<WeatherPageState>> with BlocScreenStateMixin {
-  WeatherCubit(
-    this._interactor,
-    this._geoLocationManager,
-    this._forecastModelMapper,
-  ) : super(ScreenStateEmptyLoading());
+  WeatherCubit(this._interactor, this._geoLocationManager, this._forecastModelMapper)
+    : super(ScreenStateEmptyLoading());
 
   final WeatherInteractor _interactor;
   final GeoLocationProvider _geoLocationManager;

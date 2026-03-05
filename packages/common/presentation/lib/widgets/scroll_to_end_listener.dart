@@ -14,12 +14,7 @@ import 'package:flutter/widgets.dart';
 /// );
 ///
 class ScrollToEndListener extends StatefulWidget {
-  const ScrollToEndListener({
-    super.key,
-    this.controller,
-    required this.onScrolledToEnd,
-    required this.child,
-  });
+  const ScrollToEndListener({super.key, this.controller, required this.onScrolledToEnd, required this.child});
 
   final VoidCallback? onScrolledToEnd;
   final ScrollController? controller;

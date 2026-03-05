@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoadingIndicator extends StatelessWidget {
-  const LoadingIndicator({
-    super.key,
-    this.opacity = 1,
-    this.value,
-  });
+  const LoadingIndicator({super.key, this.opacity = 1, this.value});
 
   final double opacity;
   final double? value;

@@ -46,8 +46,7 @@ void main(List<String> args) async {
   }
 
   // Define URLs for downloading files
-  final driftWorkerUrl =
-      'https://github.com/simolus3/drift/releases/download/drift-$driftVersion/drift_worker.js';
+  final driftWorkerUrl = 'https://github.com/simolus3/drift/releases/download/drift-$driftVersion/drift_worker.js';
   final sqlite3WasmUrl =
       'https://github.com/simolus3/sqlite3.dart/releases/download/sqlite3-$sqlite3Version/sqlite3.wasm';
 

@@ -8,10 +8,7 @@ part 'question.g.dart';
 
 @freezed
 sealed class QuestionsResponse with _$QuestionsResponse {
-  factory QuestionsResponse({
-    required List<Question> items,
-    required int total,
-  }) = _QuestionsResponse;
+  factory QuestionsResponse({required List<Question> items, required int total}) = _QuestionsResponse;
 
   factory QuestionsResponse.fromJson(Map<String, Object?> json) => _$QuestionsResponseFromJson(json);
 }

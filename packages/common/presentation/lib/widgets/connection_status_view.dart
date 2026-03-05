@@ -40,10 +40,14 @@ class ConnectionStatusView extends StatefulWidget {
           safeAreaBottom: alignment == AlignmentDirectional.bottomCenter,
           onBackOnline: onBackOnline,
           onNoConnection: onNoConnection,
-        )
+        ),
       ],
     );
-    if (theme != null) result = Theme(data: theme, child: Material(child: result));
+    if (theme != null)
+      result = Theme(
+        data: theme,
+        child: Material(child: result),
+      );
     return result;
   }
 }
@@ -60,11 +64,8 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
   static const _opacity = 0.8;
 
   @override
-  Widget build(BuildContext context) => AnimatedSwitcher(
-        duration: _animationDuration,
-        layoutBuilder: _defaultLayoutBuilder,
-        child: body(),
-      );
+  Widget build(BuildContext context) =>
+      AnimatedSwitcher(duration: _animationDuration, layoutBuilder: _defaultLayoutBuilder, child: body());
 
   Widget _defaultLayoutBuilder(Widget? currentChild, List<Widget> previousChildren) {
     return Stack(
@@ -132,33 +133,30 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
   }
 
   _onStatusChange(InternetStatus status) => setState(() {
-        switch (_state) {
-          case _ConnectionStatusState.hidden:
-          case _ConnectionStatusState.backOnline:
-            if (status == InternetStatus.disconnected) {
-              _state = _ConnectionStatusState.noConnection;
-              widget.onNoConnection?.call();
-            }
-            _cancelHide();
-            break;
-          case _ConnectionStatusState.noConnection:
-            if (status == InternetStatus.connected) {
-              _state = _ConnectionStatusState.backOnline;
-              widget.onBackOnline?.call();
-            }
-            _hideDelayed();
-            break;
+    switch (_state) {
+      case _ConnectionStatusState.hidden:
+      case _ConnectionStatusState.backOnline:
+        if (status == InternetStatus.disconnected) {
+          _state = _ConnectionStatusState.noConnection;
+          widget.onNoConnection?.call();
         }
-      });
+        _cancelHide();
+        break;
+      case _ConnectionStatusState.noConnection:
+        if (status == InternetStatus.connected) {
+          _state = _ConnectionStatusState.backOnline;
+          widget.onBackOnline?.call();
+        }
+        _hideDelayed();
+        break;
+    }
+  });
 
   _cancelHide() => _hideTimer?.cancel();
 
   _hideDelayed() {
     _cancelHide();
-    _hideTimer = Timer(
-      _hideDuration,
-      () => setState(() => _state = _ConnectionStatusState.hidden),
-    );
+    _hideTimer = Timer(_hideDuration, () => setState(() => _state = _ConnectionStatusState.hidden));
   }
 
   @override
@@ -169,8 +167,4 @@ class _ConnectionStatusViewState extends State<ConnectionStatusView> {
   }
 }
 
-enum _ConnectionStatusState {
-  hidden,
-  noConnection,
-  backOnline,
-}
+enum _ConnectionStatusState { hidden, noConnection, backOnline }

@@ -19,9 +19,7 @@ abstract interface class FirebaseTokenRepository {
 }
 
 class PushNotificationModel {
-  PushNotificationModel(
-    this.data,
-  );
+  PushNotificationModel(this.data);
 
   final Map<String, dynamic>? data;
 }
@@ -38,10 +36,7 @@ class PushNotificationProviderImpl implements PushNotificationProvider {
   static const _androidIcon = '@drawable/launch_background';
   static const _notificationIcon = '@drawable/ic_notification';
 
-  PushNotificationProviderImpl(
-    this._firebaseTokenRepository,
-    this._pushNotificationNavigator,
-  );
+  PushNotificationProviderImpl(this._firebaseTokenRepository, this._pushNotificationNavigator);
 
   final FirebaseTokenRepository _firebaseTokenRepository;
   final PushNotificationNavigator _pushNotificationNavigator;
@@ -84,8 +79,11 @@ class PushNotificationProviderImpl implements PushNotificationProvider {
   Future<AuthorizationStatus> _handlePermissions() async {
     final status = (await FirebaseMessaging.instance.requestPermission()).authorizationStatus;
     if (status != AuthorizationStatus.denied && status != AuthorizationStatus.notDetermined) {
-      await FirebaseMessaging.instance
-          .setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true);
+      await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
     }
     return status;
   }

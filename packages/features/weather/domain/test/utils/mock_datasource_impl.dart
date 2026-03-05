@@ -14,8 +14,9 @@ class MockDatasourceImpl implements WeatherRemoteRepository {
 
     when(() => _mockWeatherModel.temp).thenReturn(temp);
 
-    when(() => _forecastModel.forecast)
-        .thenReturn(Iterable.generate(forecastItems).map((e) => _forecastItemModel).toList());
+    when(
+      () => _forecastModel.forecast,
+    ).thenReturn(Iterable.generate(forecastItems).map((e) => _forecastItemModel).toList());
     when(() => _forecastItemModel.averageTemp).thenReturn(temp);
     when(() => _forecastItemModel.dateEpoch).thenReturn(dateEpoch);
   }

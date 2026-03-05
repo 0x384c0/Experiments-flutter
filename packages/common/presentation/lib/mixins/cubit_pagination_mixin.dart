@@ -34,30 +34,37 @@ mixin CubitPaginationMixin<D, T extends StateWithPagination<D>> {
   Future<void> loadNextPage() async {
     if (_paginationState.isLoadingPage || _paginationState.isFinalPageLoaded) return;
     try {
-      emitDataWithPagination(dataWithPagination?.copyWith(
-        paginationState: _paginationState.copyWith(
-          isLoadingPage: true,
-          currentPageIndex: _paginationState.currentPageIndex + 1,
-        ),
-      ) as T);
+      emitDataWithPagination(
+        dataWithPagination?.copyWith(
+              paginationState: _paginationState.copyWith(
+                isLoadingPage: true,
+                currentPageIndex: _paginationState.currentPageIndex + 1,
+              ),
+            )
+            as T,
+      );
       final result = await loadPage(_paginationState.currentPageIndex);
       if (isLastPage(result)) {
         emitDataWithPagination(
-            dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)) as T);
+          dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)) as T,
+        );
       } else {
         emitDataWithPagination(dataWithPagination?.copyWith(data: addPages(result)) as T);
       }
     } catch (e) {
       emitDataWithPagination(
-          dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)) as T);
+        dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isFinalPageLoaded: true)) as T,
+      );
       rethrow;
     } finally {
       await Future.delayed(const Duration(milliseconds: 50));
       emitDataWithPagination(
-          dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isLoadingPage: false)) as T);
+        dataWithPagination?.copyWith(paginationState: _paginationState.copyWith(isLoadingPage: false)) as T,
+      );
     }
   }
-//endregion
+
+  //endregion
 }
 
 abstract interface class StateWithPagination<T> {
@@ -65,37 +72,22 @@ abstract interface class StateWithPagination<T> {
 
   PaginationState? get paginationState;
 
-  StateWithPagination<T> copyWith({
-    T? data,
-    PaginationState? paginationState,
-  });
+  StateWithPagination<T> copyWith({T? data, PaginationState? paginationState});
 }
 
 class PaginationState {
-  PaginationState({
-    required this.currentPageIndex,
-    required this.isLoadingPage,
-    required this.isFinalPageLoaded,
-  });
+  PaginationState({required this.currentPageIndex, required this.isLoadingPage, required this.isFinalPageLoaded});
 
   final int currentPageIndex;
   final bool isLoadingPage;
   final bool isFinalPageLoaded;
 
-  factory PaginationState.empty() => PaginationState(
-        currentPageIndex: 0,
-        isLoadingPage: false,
-        isFinalPageLoaded: false,
-      );
+  factory PaginationState.empty() =>
+      PaginationState(currentPageIndex: 0, isLoadingPage: false, isFinalPageLoaded: false);
 
-  PaginationState copyWith({
-    int? currentPageIndex,
-    bool? isLoadingPage,
-    bool? isFinalPageLoaded,
-  }) =>
-      PaginationState(
-        currentPageIndex: currentPageIndex ?? this.currentPageIndex,
-        isLoadingPage: isLoadingPage ?? this.isLoadingPage,
-        isFinalPageLoaded: isFinalPageLoaded ?? this.isFinalPageLoaded,
-      );
+  PaginationState copyWith({int? currentPageIndex, bool? isLoadingPage, bool? isFinalPageLoaded}) => PaginationState(
+    currentPageIndex: currentPageIndex ?? this.currentPageIndex,
+    isLoadingPage: isLoadingPage ?? this.isLoadingPage,
+    isFinalPageLoaded: isFinalPageLoaded ?? this.isFinalPageLoaded,
+  );
 }

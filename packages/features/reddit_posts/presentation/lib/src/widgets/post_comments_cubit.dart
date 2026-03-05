@@ -50,7 +50,7 @@ class PostCommentsCubit extends Cubit<ScreenState<PostCommentsPageState>>
     return postModel;
   }
 
-//region CubitPaginationMixin
+  //region CubitPaginationMixin
   @override
   Future<Iterable<PostItemState>> loadPage(int pageNumber) => _interactor
       .getMoreChildren(page: pageNumber, moreModel: _moreModel)
@@ -59,5 +59,5 @@ class PostCommentsCubit extends Cubit<ScreenState<PostCommentsPageState>>
   @override
   Iterable<PostItemState>? getPagesIterable() => stateData?.data;
 
-// endregion
+  // endregion
 }

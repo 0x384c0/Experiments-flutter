@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:dio/dio.dart';
 
 /// A Dio interceptor that ensures requests are not sent
@@ -25,10 +26,7 @@ class RateLimitInterceptor extends Interceptor {
   }
 
   @override
-  void onRequest(
-      RequestOptions options,
-      RequestInterceptorHandler handler,
-      ) async {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
     // Chain requests so only one is processed at a time
     while (_lock != null) {
       await _lock!.future;

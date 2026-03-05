@@ -19,7 +19,7 @@ class PostsCubit extends Cubit<ScreenState<PostsPageState>>
         CubitScreenStatePaginationMixin,
         CubitScreenStatePaginationIterableMixin<PostItemState, GenericScreenState<Iterable<PostItemState>>>,
         CubitAlertMixin {
-  PostsCubit() : super(ScreenStateEmptyLoading()){
+  PostsCubit() : super(ScreenStateEmptyLoading()) {
     refresh();
   }
 
@@ -42,12 +42,8 @@ class PostsCubit extends Cubit<ScreenState<PostsPageState>>
 
   //region CubitPaginationMixin
   @override
-  Future<Iterable<PostItemState>> loadPage(int pageNumber) => _interactor
-      .getPosts(
-        after: _lastAfter,
-      )
-      .then(_saveLastAfter)
-      .then(_postModelMapper.map);
+  Future<Iterable<PostItemState>> loadPage(int pageNumber) =>
+      _interactor.getPosts(after: _lastAfter).then(_saveLastAfter).then(_postModelMapper.map);
 
   @override
   Iterable<PostItemState>? getPagesIterable() => stateData?.data;

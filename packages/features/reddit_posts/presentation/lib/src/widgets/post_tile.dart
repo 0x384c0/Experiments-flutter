@@ -1,8 +1,7 @@
 import 'package:common_presentation/widgets/card_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:transparent_image/transparent_image.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
-
+import 'package:transparent_image/transparent_image.dart';
 
 import '../data/post_state.dart';
 
@@ -32,23 +31,12 @@ class PostTile extends CardTile {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              state.title,
-              style: const TextStyle(fontSize: 16),
-            ).paddingOnly(top: 4, bottom: 4),
+            Text(state.title, style: const TextStyle(fontSize: 16)).paddingOnly(top: 4, bottom: 4),
             Row(
               children: [
-                Text(
-                  state.category,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
+                Text(state.category, style: const TextStyle(fontWeight: FontWeight.bold)),
                 const Text(" • "),
-                Expanded(
-                  child: Text(
-                    state.author,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                )
+                Expanded(child: Text(state.author, overflow: TextOverflow.ellipsis)),
               ],
             ),
           ],
@@ -57,10 +45,5 @@ class PostTile extends CardTile {
     ).padding(all: url?.isEmpty ?? true ? 8 : 0);
   }
 
-  Widget _imageError(
-    BuildContext context,
-    Object error,
-    StackTrace? stackTrace,
-  ) =>
-      const Icon(Icons.image);
+  Widget _imageError(BuildContext context, Object error, StackTrace? stackTrace) => const Icon(Icons.image);
 }

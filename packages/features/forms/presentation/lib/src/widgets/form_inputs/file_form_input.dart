@@ -9,13 +9,7 @@ class FileFormInput extends StatefulWidget {
   final ValueChanged<Uint8List?>? onFileSelectedWeb;
   final FormFieldValidator<String?>? validator;
 
-  const FileFormInput({
-    super.key,
-    required this.label,
-    this.onFileSelected,
-    this.onFileSelectedWeb,
-    this.validator,
-  });
+  const FileFormInput({super.key, required this.label, this.onFileSelected, this.onFileSelectedWeb, this.validator});
 
   @override
   State<StatefulWidget> createState() => _FileFormInputState();
@@ -34,7 +28,7 @@ class _FileFormInputState extends State<FileFormInput> {
     "rtf",
     "odt",
     "txt",
-    "html"
+    "html",
   ];
 
   late final _controller = TextEditingController();
@@ -70,8 +64,8 @@ class _FileFormInputState extends State<FileFormInput> {
   }
 
   _clear() => setState(() {
-        _controller.clear();
-        widget.onFileSelected?.call(null);
-        widget.onFileSelectedWeb?.call(null);
-      });
+    _controller.clear();
+    widget.onFileSelected?.call(null);
+    widget.onFileSelectedWeb?.call(null);
+  });
 }

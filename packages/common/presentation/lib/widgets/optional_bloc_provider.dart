@@ -7,11 +7,7 @@ class OptionalBlocProvider<T extends Cubit<Object>> extends StatelessWidget {
   final T Function(BuildContext context) create;
   final Widget child;
 
-  const OptionalBlocProvider({
-    super.key,
-    required this.create,
-    required this.child,
-  });
+  const OptionalBlocProvider({super.key, required this.create, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -21,9 +17,6 @@ class OptionalBlocProvider<T extends Cubit<Object>> extends StatelessWidget {
       return child;
     }
 
-    return BlocProvider<T>(
-      create: create,
-      child: child,
-    );
+    return BlocProvider<T>(create: create, child: child);
   }
 }
