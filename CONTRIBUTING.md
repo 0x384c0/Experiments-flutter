@@ -32,11 +32,11 @@ When contributing to this project, please ensure that your code adheres to the f
 
 ## Dependency Injection
 * To provide and inject dependencies, the app uses [injectable](https://pub.dev/packages/injectable).
-* Dependencies are provided by `Module` subclasses.
-* Dependencies can be injected anywhere with `Modular.get<Type>()`.
-* Optionally, dependencies can be injected automatically in the constructor, but only in classes that are provided in `Module` subclasses.
-* Each layer in a feature has its own `Module`, which provides its dependencies.
-* All modules are instantiated in [AppModule](lib/app_module.dart).
+* Classes for dependency injection are in `lib/packages/features/{feature name}/di`.
+* Dependencies are provided by adding any injectable annotation like `@injectable` or `@lazySingleton`.
+* Dependencies can be injected anywhere with `GetIt.instance.get<Type>()`.
+* Each micro package in a feature has its own `Module`, generated from `@microPackageInit`.
+* All modules are initialized in [configure_dependencies.dart](apps/app_main/lib/di/configure_dependencies.dart).
 
 ## Theme and Styles
 * The app theme is provided by [ThemeProvider](packages/common/presentation/lib/theme/theme_provider.dart) and can be accessed as `context.theme`.
@@ -46,10 +46,9 @@ When contributing to this project, please ensure that your code adheres to the f
 
 ## Navigation
 * For navigation, [auto_route](https://pub.dev/packages/auto_route) is used.
-* Classes for navigation are placed in `lib/packages/features/{feature name}/navigation`.
-* To add a new route, modify `lib/packages/features/{feature name}/navigation/module.dart` by providing the route name and widget.
-* Then add a method to execute this route in `lib/packages/features/{feature name}/navigation/navigator.dart` by its name and, optionally, arguments.
-* After that, the navigator can be accessed with Dependency Injection.
+* Classes for navigation are in `lib/packages/features/{feature name}/navigation`.
+* To add a new route, add `@RoutePage()` and run `flutter pub run build_runner build`.
+* After that, the route can be used as `AutoRouter.of(context).push(ScreenRoute)`.
 * **Note:** Drawer menu navigation in [home_screen.dart](packages/features/home/presentation/lib/src/screens/home_screen.dart) is not using any navigation library. It is a single screen with [PageView](https://api.flutter.dev/flutter/widgets/PageView-class.html).
   * New options in the drawer are added by modifying [SelectedPageState](packages/features/home/presentation/lib/src/data/selected_page_state.dart) and `HomeScreen._page`.
 
