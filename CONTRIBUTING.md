@@ -31,7 +31,7 @@ When contributing to this project, please ensure that your code adheres to the f
 # Frameworks and Libraries
 
 ## Dependency Injection
-* To provide and inject dependencies, the app uses [flutter_modular](https://modular.flutterando.com.br/docs/flutter_modular/dependency-injection) and [auto_injector](https://pub.dev/packages/auto_injector).
+* To provide and inject dependencies, the app uses [injectable](https://pub.dev/packages/injectable).
 * Dependencies are provided by `Module` subclasses.
 * Dependencies can be injected anywhere with `Modular.get<Type>()`.
 * Optionally, dependencies can be injected automatically in the constructor, but only in classes that are provided in `Module` subclasses.
@@ -45,7 +45,7 @@ When contributing to this project, please ensure that your code adheres to the f
 * Common dimensions and paddings are stored in [Dimensions](packages/common/presentation/lib/theme/dimensions.dart) and can be accessed as `context.dimensions.{dimension name}`.
 
 ## Navigation
-* For navigation, [flutter_modular](https://modular.flutterando.com.br/docs/flutter_modular/navegation/) is used.
+* For navigation, [auto_route](https://pub.dev/packages/auto_route) is used.
 * Classes for navigation are placed in `lib/packages/features/{feature name}/navigation`.
 * To add a new route, modify `lib/packages/features/{feature name}/navigation/module.dart` by providing the route name and widget.
 * Then add a method to execute this route in `lib/packages/features/{feature name}/navigation/navigator.dart` by its name and, optionally, arguments.

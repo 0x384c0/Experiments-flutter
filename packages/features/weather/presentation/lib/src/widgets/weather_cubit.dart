@@ -6,16 +6,21 @@ import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:features_weather_presentation/src/utils/geo_location_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:injectable/injectable.dart';
 
 typedef WeatherPageState = GenericScreenState<WeatherState>;
 
+@injectable
 class WeatherCubit extends Cubit<ScreenState<WeatherPageState>> with BlocScreenStateMixin {
-  WeatherCubit() : super(ScreenStateEmptyLoading());
+  WeatherCubit(
+    this._interactor,
+    this._geoLocationManager,
+    this._forecastModelMapper,
+  ) : super(ScreenStateEmptyLoading());
 
-  late final WeatherInteractor _interactor = Modular.get();
-  late final GeoLocationProvider _geoLocationManager = Modular.get();
-  late final Mapper<ForecastModel, WeatherState> _forecastModelMapper = Modular.get();
+  final WeatherInteractor _interactor;
+  final GeoLocationProvider _geoLocationManager;
+  final Mapper<ForecastModel, WeatherState> _forecastModelMapper;
 
   @override
   onRefresh() => _geoLocationManager

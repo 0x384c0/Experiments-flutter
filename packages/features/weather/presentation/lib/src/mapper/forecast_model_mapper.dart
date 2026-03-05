@@ -1,10 +1,12 @@
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:features_weather_domain/features_weather_domain.dart';
+import 'package:injectable/injectable.dart';
 
 import '../data/weather_state.dart';
 import 'condition_model_mapper.dart';
 import 'forecast_item_model_mapper.dart';
 
+@Injectable(as: Mapper<ForecastModel, WeatherState>)
 class ForecastModelMapper extends Mapper<ForecastModel, WeatherState> {
   var forecastItemModelMapper = ForecastItemModelMapper();
   var conditionModelMapper = ConditionModelMapper();

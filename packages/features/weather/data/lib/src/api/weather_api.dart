@@ -1,12 +1,16 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../data/forecast_response_dto.dart';
+
 part 'weather_api.g.dart';
 
+@Injectable()
 @RestApi(baseUrl: "https://api.weatherapi.com/v1")
 abstract class WeatherApi {
-  factory WeatherApi(Dio dio, {String baseUrl}) = _WeatherApi;
+  @factoryMethod
+  factory WeatherApi(Dio dio) = _WeatherApi;
 
   @GET("/current.json")
   Future<ForecastResponseDTO> getCurrent(

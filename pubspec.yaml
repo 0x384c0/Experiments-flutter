@@ -38,7 +38,6 @@ melos:
         sdk: ^3.8.0
       dependencies:
         # Common
-        flutter_modular: ^6.4.1
         injectable: ^2.7.1+4
         get_it: ^9.2.1
         rxdart: ^0.28.0

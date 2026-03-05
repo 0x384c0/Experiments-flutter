@@ -1,4 +1,5 @@
 import 'package:features_weather_domain/features_weather_domain.dart';
+import 'package:injectable/injectable.dart';
 
 /// requests information about weather in area
 abstract class WeatherInteractor {
@@ -13,6 +14,7 @@ abstract class WeatherInteractor {
 }
 
 /// private implementation of [WeatherInteractor]
+@Injectable(as: WeatherInteractor)
 class WeatherInteractorImpl implements WeatherInteractor {
   WeatherInteractorImpl(this.remoteRepository);
 

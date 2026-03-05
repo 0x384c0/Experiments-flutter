@@ -1,7 +1,9 @@
 import 'package:features_weather_domain/features_weather_domain.dart';
+import 'package:injectable/injectable.dart';
 
 import '../api/weather_api.dart';
 
+@Injectable(as: WeatherRemoteRepository)
 class RemoteRepositoryImpl implements WeatherRemoteRepository {
   RemoteRepositoryImpl(this._weatherApi);
 

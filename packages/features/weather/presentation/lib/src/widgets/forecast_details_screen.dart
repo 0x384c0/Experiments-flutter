@@ -5,6 +5,7 @@ import 'package:features_weather_presentation/l10n/app_localizations.g.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import 'forecast_details_cubit.dart';
 
@@ -17,7 +18,7 @@ class ForecastDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => ForecastDetailsCubit({state.dateEpoch: state})..refresh(),
+      create: (_) => GetIt.I<ForecastDetailsCubit>(param1: {state.dateEpoch: state})..refresh(),
       child: _buildBody(context),
     );
   }

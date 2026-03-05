@@ -1,1 +1,1 @@
-export 'src/di/module.dart';
+export 'src/di/init_micro_package.module.dart';

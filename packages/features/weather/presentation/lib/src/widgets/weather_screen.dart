@@ -5,6 +5,7 @@ import 'package:features_weather_presentation/src/navigation/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
+import 'package:get_it/get_it.dart';
 
 import 'forecast_tile.dart';
 import 'weather_cubit.dart';
@@ -17,7 +18,7 @@ class WeatherScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      BlocProvider(create: (_) => WeatherCubit()..refresh(), child: _buildBody(context));
+      BlocProvider(create: (_) => GetIt.I<WeatherCubit>()..refresh(), child: _buildBody(context));
 
   Widget _buildBody(BuildContext context) => ScreenStateBlocBuilder<WeatherCubit, WeatherPageState>(
     builder: (context, data) => Center(child: _list(context, data.data)),
@@ -25,7 +26,7 @@ class WeatherScreen extends StatelessWidget {
 
   Widget _list(BuildContext context, WeatherState state) {
     final router = AutoRouter.of(context);
-    final WeatherCubit cubit = ReadContext(context).read();
+    final WeatherCubit cubit = context.read();
     var widgets = [
       WeatherTile(state.current, null),
       ...state.forecast.map((e) => ForecastTile(e, () => router.push(ForecastDetailsRoute(state: e)))),

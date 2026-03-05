@@ -17,7 +17,6 @@ dependencies:
   common_presentation:
   common_domain:
   flutter_bloc: ^9.1.1
-  flutter_modular: ^6.4.1
   geolocator: ^14.0.2
   rxdart: ^0.28.0
   auto_route: ^11.1.0

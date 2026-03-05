@@ -42,7 +42,7 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 
 1. [melos](https://pub.dev/packages/melos)
 1. [rxdart](https://pub.dev/packages/rxdart)
-1. [flutter_modular](https://pub.dev/packages/flutter_modular)
+1. [injectable](https://pub.dev/packages/injectable)
 1. [auto_route](https://pub.dev/packages/auto_route)
 1. [flutter_cubit](https://pub.dev/documentation/flutter_cubit/latest/)
 1. [retrofit](https://pub.dev/packages/retrofit)
@@ -97,7 +97,6 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 * [CONTRIBUTING.md](CONTRIBUTING.md) contains information about frameworks and libraries in app
 
 # TODO
-* remove flutter_modular
 * private injectables
 * fix cors for web
 * https://pub.dev/packages/mapify_generator

@@ -6,19 +6,24 @@ import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:features_weather_presentation/src/utils/geo_location_provider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:injectable/injectable.dart';
 
 typedef ForecastDetailsPageState = GenericScreenState<Map<String?, ForecastWeatherState?>>;
 
+@injectable
 class ForecastDetailsCubit extends Cubit<ScreenState<ForecastDetailsPageState>>
     with BlocScreenStateMixin {
-  ForecastDetailsCubit(this._args) : super(ScreenStateEmptyLoading());
+  ForecastDetailsCubit(
+    @factoryParam this._args,
+    this._interactor,
+    this._geoLocationManager,
+    this._forecastItemModelMapper,
+  ) : super(ScreenStateEmptyLoading());
 
   final Map<String?, ForecastWeatherState?> _args;
-
-  late final GeoLocationProvider _geoLocationManager = Modular.get();
-  late final WeatherInteractor _interactor = Modular.get<WeatherInteractor>();
-  late final Mapper<ForecastItemModel, ForecastWeatherState> _forecastItemModelMapper = Modular.get();
+  final WeatherInteractor _interactor;
+  final GeoLocationProvider _geoLocationManager;
+  final Mapper<ForecastItemModel, ForecastWeatherState> _forecastItemModelMapper;
 
   @override
   onRefresh() async {
