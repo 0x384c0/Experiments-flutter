@@ -1,5 +1,6 @@
 import 'package:features_weather_presentation/src/data/location_state.dart';
 import 'package:injectable/injectable.dart';
+import 'package:safe_device/safe_device.dart';
 
 import 'geo_location.dart';
 
@@ -9,12 +10,17 @@ abstract class GeoLocationProvider {
 
 @Injectable(as: GeoLocationProvider)
 class GeoLocationProviderImpl implements GeoLocationProvider {
-  @override
-  Future<LocationState> getLocation() => GeoLocation.getPosition().then((value) => LocationState.fromPosition(value));
-}
+  bool? _isRealDevice = null;
 
-// TODO: provide for emulator
-class MockGeoLocationProviderImpl implements GeoLocationProvider {
   @override
-  Future<LocationState> getLocation() async => const LocationState(latitude: 40.7128, longitude: 74.0060);
+  Future<LocationState> getLocation() async {
+    if (_isRealDevice == null) {
+      try {
+        _isRealDevice = await SafeDevice.isRealDevice;
+      } catch (_) {}
+    }
+    return _isRealDevice == true
+        ? GeoLocation.getPosition().then((value) => LocationState.fromPosition(value))
+        : const LocationState(latitude: 40.7128, longitude: 74.0060);
+  }
 }
