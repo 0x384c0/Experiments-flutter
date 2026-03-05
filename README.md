@@ -98,6 +98,7 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 
 # TODO
 * remove flutter_modular
+* private injectables
 * fix cors for web
 * https://pub.dev/packages/mapify_generator
 * add Oauth2 example

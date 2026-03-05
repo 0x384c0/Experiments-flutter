@@ -4,6 +4,7 @@ import 'package:features_reddit_posts_domain/src/data/post_model.dart';
 import 'package:features_reddit_posts_domain/src/repository/local_repository.dart';
 import 'package:features_reddit_posts_domain/src/repository/remote_repository.dart';
 import 'package:flutter/foundation.dart';
+import 'package:injectable/injectable.dart';
 
 abstract class DataSubscription<T, K> {
   final _dataStreamControllerMap = <K?, StreamController<T?>>{};
@@ -91,6 +92,7 @@ abstract class DataSubscription<T, K> {
   Future deleteLocal();
 }
 
+@Injectable()
 class PostsDataSubscription extends DataSubscription<PostsModel, String> {
   PostsDataSubscription(
     this._remoteRepository,

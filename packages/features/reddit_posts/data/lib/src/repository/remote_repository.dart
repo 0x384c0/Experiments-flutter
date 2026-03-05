@@ -7,7 +7,9 @@ import 'package:features_reddit_posts_data/src/data/reddit_post_listing_dto.dart
 import 'package:features_reddit_posts_data/src/data/reddit_posts_response_dto.dart';
 import 'package:features_reddit_posts_data/src/data/reddit_posts_sort_dto.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: PostsRemoteRepository)
 class RemoteRepositoryImpl implements PostsRemoteRepository {
   static const String _defaultSubreddit = "all";
   static const int _pageLimit = 25;

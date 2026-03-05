@@ -8,8 +8,8 @@ import 'package:features_reddit_posts_presentation/src/data/post_details_state.d
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
 import 'package:features_reddit_posts_presentation/src/navigation/router.gr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
+import 'package:get_it/get_it.dart';
 
 import 'post_tile.dart';
 
@@ -22,8 +22,8 @@ class LocalFirstPostsScreen extends StatefulWidget {
 }
 
 class _LocalFirstPostsScreenState extends State<LocalFirstPostsScreen> {
-  late final Mapper<PostsModel, Iterable<PostItemState>> _postModelMapper = Modular.get();
-  final PostsDataSubscription _sub = Modular.get();
+  late final Mapper<PostsModel, Iterable<PostItemState>> _postModelMapper = GetIt.instance.get();
+  final PostsDataSubscription _sub = GetIt.instance.get();
 
   List<PostItemState> get _listData {
     List<PostItemState> result = [];

@@ -1,9 +1,11 @@
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
+import 'package:injectable/injectable.dart';
 
 import '../data/post_details_state.dart';
 import '../data/post_state.dart';
 
+@Injectable(as: Mapper<PostModel, PostDetailsState>)
 class PostModelToPostDetailsStateMapper extends Mapper<PostModel, PostDetailsState> {
   @override
   PostDetailsState map(PostModel input) => PostDetailsState(

@@ -4,7 +4,7 @@ import 'package:common_presentation/widgets/screen_state/screen_state.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 
 class PostDetailsCubit extends Cubit<ScreenState<PostDetailsState>> with BlocScreenStateMixin {
   PostDetailsCubit(PostDetailsState? state)
@@ -12,8 +12,8 @@ class PostDetailsCubit extends Cubit<ScreenState<PostDetailsState>> with BlocScr
     refresh();
   }
 
-  late final PostsInteractor _interactor = Modular.get();
-  late final Mapper<PostModel, PostDetailsState> _postModelMapper = Modular.get();
+  late final PostsInteractor _interactor = GetIt.instance.get();
+  late final Mapper<PostModel, PostDetailsState> _postModelMapper = GetIt.instance.get();
 
   @override
   onRefresh() async => _interactor.getPost(permalink: stateData?.permalink).then(_postModelMapper.map).then(emitData);

@@ -1,7 +1,9 @@
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:features_reddit_posts_data/src/data/reddit_json_response_dto.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: Mapper<RedditJsonResponseDTO, Iterable<PostModel>>)
 class RedditJsonResponseDTOMapper extends Mapper<RedditJsonResponseDTO, Iterable<PostModel>> {
   @override
   Iterable<PostModel> map(RedditJsonResponseDTO input) =>

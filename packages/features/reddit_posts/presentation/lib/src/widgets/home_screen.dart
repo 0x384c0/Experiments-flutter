@@ -3,8 +3,8 @@ import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/l10n/app_localizations.g.dart';
 import 'package:features_reddit_posts_presentation/src/navigation/router.gr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
+import 'package:get_it/get_it.dart';
 
 @RoutePage()
 class PostsHomeScreen extends StatelessWidget {
@@ -42,7 +42,7 @@ class PostsHomeScreen extends StatelessWidget {
 
   _initDb(BuildContext context) async {
     final locale = AppLocalizations.of(context)!;
-    PostsDataSubscription sub = Modular.get();
+    PostsDataSubscription sub = GetIt.instance.get();
     try {
       await sub.initDb();
       if (context.mounted) {
@@ -58,7 +58,7 @@ class PostsHomeScreen extends StatelessWidget {
 
   _clearDb(BuildContext context) async {
     final locale = AppLocalizations.of(context)!;
-    PostsDataSubscription sub = Modular.get();
+    PostsDataSubscription sub = GetIt.instance.get();
     try {
       await sub.deleteLocal();
       if (context.mounted) {

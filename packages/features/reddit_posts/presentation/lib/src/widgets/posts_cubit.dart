@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:common_presentation/mixins/cubit_alert_mixin.dart';
 import 'package:common_presentation/mixins/cubit_pagination_mixin.dart';
@@ -7,12 +6,9 @@ import 'package:common_presentation/widgets/screen_state/bloc_screen_state_mixin
 import 'package:common_presentation/widgets/screen_state/generic_screen_state.dart';
 import 'package:common_presentation/widgets/screen_state/screen_state.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
-import 'package:features_reddit_posts_presentation/src/data/post_details_state.dart';
 import 'package:features_reddit_posts_presentation/src/data/post_state.dart';
-import 'package:features_reddit_posts_presentation/src/navigation/router.gr.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 
 typedef PostsPageState = GenericScreenState<Iterable<PostItemState>>;
 
@@ -27,8 +23,8 @@ class PostsCubit extends Cubit<ScreenState<PostsPageState>>
     refresh();
   }
 
-  late final PostsInteractor _interactor = Modular.get();
-  late final Mapper<PostsModel, Iterable<PostItemState>> _postModelMapper = Modular.get();
+  late final PostsInteractor _interactor = GetIt.instance.get();
+  late final Mapper<PostsModel, Iterable<PostItemState>> _postModelMapper = GetIt.instance.get();
 
   String? _lastAfter;
 

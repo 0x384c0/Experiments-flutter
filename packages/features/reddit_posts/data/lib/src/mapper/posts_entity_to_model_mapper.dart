@@ -1,10 +1,12 @@
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:features_reddit_posts_data/src/db/posts_database.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
+import 'package:injectable/injectable.dart';
 
 typedef PostsEntityToModelMapper
     = Mapper<(PostsEntityData postsEntity, Iterable<PostEntityData> postEntities), PostsModel>;
 
+@Injectable(as: PostsEntityToModelMapper)
 class PostsEntityToModelMapperImpl extends PostsEntityToModelMapper {
   @override
   map(input) => PostsModel(

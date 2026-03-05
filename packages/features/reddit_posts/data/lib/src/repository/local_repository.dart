@@ -4,7 +4,9 @@ import 'package:features_reddit_posts_data/src/mapper/posts_entity_to_model_mapp
 import 'package:features_reddit_posts_data/src/mapper/posts_model_to_entity_mapper.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:injectable/injectable.dart';
 
+@LazySingleton(as: PostsLocalRepository)
 class LocalRepositoryImpl implements PostsLocalRepository {
   LocalRepositoryImpl(this._postsModelToEntityMapper, this._postsEntityToModelMapper) {
     try {

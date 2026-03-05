@@ -2,9 +2,11 @@ import 'package:common_domain/extensions/string.dart';
 import 'package:common_domain/mapper/mapper.dart';
 import 'package:features_reddit_posts_data/src/data/reddit_post_listing_child_dto.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
+import 'package:injectable/injectable.dart';
 
 import '../data/reddit_post_listing_dto.dart';
 
+@Injectable(as: Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel>)
 class RedditPostListingDTOMapper extends Mapper<Map<String, Iterable<RedditPostListingDTO>>, PostModel> {
   @override
   map(input) {

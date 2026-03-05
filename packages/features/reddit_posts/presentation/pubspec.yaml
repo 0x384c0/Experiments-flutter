@@ -17,7 +17,6 @@ dependencies:
   common_presentation:
   common_domain:
   flutter_bloc: ^9.1.1
-  flutter_modular: ^6.4.1
   transparent_image: 2.0.1
   flutter_view_modifiers: 0.0.9
   auto_route: ^11.1.0
@@ -25,8 +24,8 @@ dependencies:
   get_it: ^9.2.1
 
 dev_dependencies:
-  auto_route_generator: ^10.4.0
   build_runner: ^2.12.2
+  auto_route_generator: ^10.4.0
   injectable_generator: ^2.12.1
 
 flutter:

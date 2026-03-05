@@ -13,7 +13,7 @@ dependencies:
   features_reddit_posts_domain:
   common_data:
   common_domain:
-  flutter_modular: ^6.4.1
+  injectable: ^2.7.1+4
   freezed_annotation: ^3.0.0
   json_annotation: ^4.9.0
   retrofit: ^4.8.0
@@ -28,6 +28,7 @@ dev_dependencies:
   json_serializable: ^6.11.1
   retrofit_generator: ^10.0.0
   drift_dev: ^2.23.0
+  injectable_generator: ^2.12.1
 
 global_options:
   freezed:

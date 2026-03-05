@@ -7,7 +7,9 @@ import 'package:features_reddit_posts_domain/src/data/post_model.dart';
 import 'package:features_reddit_posts_domain/src/repository/local_repository.dart';
 import 'package:features_reddit_posts_domain/src/repository/remote_repository.dart';
 import 'package:features_reddit_posts_domain/src/use_cases/interactor.dart';
+import 'package:injectable/injectable.dart';
 
+@Injectable(as: PostsInteractor)
 class PostsInteractorImpl implements PostsInteractor {
   PostsInteractorImpl(
     this.remoteRepository,
