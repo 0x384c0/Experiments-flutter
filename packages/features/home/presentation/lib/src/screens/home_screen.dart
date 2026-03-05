@@ -9,6 +9,7 @@ import 'package:features_weather_presentation/features_weather_presentation.dart
 import 'package:features_webview_presentation/features_webview_presentation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 
 import '../data/selected_page_state.dart';
 import 'others_screen.dart';
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late FormsNavigator formsNavigator = Modular.get();
   late WebViewNavigator webViewNavigator = Modular.get();
   late ExperimentsNavigator experimentsNavigator = Modular.get();
-  late StackOverflowNavigator stackoverflowNavigator = Modular.get();
+  late StackOverflowNavigator stackoverflowNavigator = GetIt.instance.get();
 
   @override
   Widget build(BuildContext context) {

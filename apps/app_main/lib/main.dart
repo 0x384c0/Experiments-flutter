@@ -7,6 +7,7 @@ import 'package:safe_device/safe_device.dart';
 
 import 'app_module.dart';
 import 'app_view.dart';
+import 'di/configure_dependencies.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,8 @@ void main() async {
   try {
     isRealDevice = await SafeDevice.isRealDevice;
   } catch (_) {}
+
+  configureDependencies();
 
   runApp(
     ModularApp(

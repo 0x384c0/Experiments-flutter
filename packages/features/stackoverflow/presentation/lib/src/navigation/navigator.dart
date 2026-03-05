@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:injectable/injectable.dart';
 
 import '../widgets/questions_screen.dart';
 
@@ -10,6 +11,7 @@ abstract class StackOverflowNavigator {
 }
 
 /// Private implementation if stackoverflow navigation
+@Injectable(as: StackOverflowNavigator)
 class NavigatorImpl implements StackOverflowNavigator {
   @override
   home() => const ProviderScope(child: QuestionsScreen());
