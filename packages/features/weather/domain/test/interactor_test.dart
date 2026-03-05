@@ -1,6 +1,6 @@
 import 'package:features_weather_domain/features_weather_domain.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 
 import 'utils/mock_datasource_impl.dart';
 import 'utils/mock_location.dart';
@@ -11,7 +11,7 @@ main() {
   late WeatherInteractor sut;
   setUp(() {
     TestModule.initModules();
-    sut = Modular.get<WeatherInteractor>();
+    sut = GetIt.instance.get<WeatherInteractor>();
   });
 
   test('get forecast successful', () async {

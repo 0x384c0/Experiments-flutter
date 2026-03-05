@@ -2,8 +2,10 @@ import 'package:features_weather_data/src/api/weather_api.dart';
 import 'package:features_weather_data/src/data/current_dto.dart';
 import 'package:features_weather_data/src/data/forecast_response_dto.dart';
 import 'package:features_weather_domain/features_weather_domain.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mocktail/mocktail.dart';
 
+@Injectable(as: WeatherApi)
 class MockWeatherApiImpl implements WeatherApi {
   static const temp = 19.0;
   static const forecastItems = 7;

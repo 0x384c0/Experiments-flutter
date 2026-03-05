@@ -4,6 +4,7 @@ import 'package:common_presentation/widgets/screen_state/screen_state.dart';
 import 'package:features_weather_presentation/src/data/weather_state.dart';
 import 'package:features_weather_presentation/src/widgets/weather_cubit.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 
 import 'utils/mock_datasource_impl.dart';
 import 'utils/mock_storage.dart';
@@ -14,7 +15,7 @@ main() {
   setUp(() async {
     TestModule.initModules();
     mockHydratedStorage();
-    sut = WeatherCubit();
+    sut = GetIt.instance.get<WeatherCubit>();
   });
 
   blocTest<WeatherCubit, ScreenState<GenericScreenState<WeatherState>>>(

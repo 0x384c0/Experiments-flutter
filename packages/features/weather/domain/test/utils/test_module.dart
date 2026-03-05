@@ -1,22 +1,13 @@
 import 'package:features_weather_domain/features_weather_domain.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:get_it/get_it.dart';
 
 import 'mock_datasource_impl.dart';
 
-class _MockDataModule extends Module {
-  @override
-  void exportedBinds(Injector i) {
-    i.add<WeatherRemoteRepository>(MockDatasourceImpl.new);
-  }
-}
-
-class TestModule extends Module {
-  @override
-  List<Module> get imports => [
-        WeatherDomainModule([_MockDataModule()]),
-      ];
-
+class TestModule {
   static void initModules() {
-    Modular.bindModule(TestModule());
+    final getIt = GetIt.instance;
+    getIt.reset();
+    getIt.registerFactory<WeatherRemoteRepository>(() => MockDatasourceImpl());
+    getIt.registerFactory<WeatherInteractor>(() => WeatherInteractorImpl(getIt()));
   }
 }

@@ -7,8 +7,6 @@ import '../data/weather_state.dart';
 @Injectable(as: Mapper<ConditionModel?, ConditionState>)
 class ConditionModelMapper extends Mapper<ConditionModel?, ConditionState> {
   @override
-  ConditionState map(ConditionModel? input) => ConditionState(
-        input?.text ?? "",
-        input?.icon?.replaceAll("//", "https://") ?? "",
-      );
+  ConditionState map(ConditionModel? input) =>
+      ConditionState(input?.text ?? '', input?.icon?.replaceAll('//', 'https://') ?? '');
 }
