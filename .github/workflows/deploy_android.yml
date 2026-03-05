@@ -27,7 +27,7 @@ jobs:
         run: dart pub global activate melos
 
       - name: Melos Bootstrap
-        run: dart run melos bootstrap - jobs=1
+        run: dart run melos bootstrap
 
       - name: Set version
         run: dart run melos set_version

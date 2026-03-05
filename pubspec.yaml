@@ -22,7 +22,7 @@ workspace:
   - apps/app_main
 
 dev_dependencies:
-  melos: ^7.3.0
+  melos: ^7.4.0
 
 melos:
   packages:
@@ -125,7 +125,9 @@ melos:
       packageFilters:
         dependsOn:
           - build_runner
-      exec: dart run build_runner build --delete-conflicting-outputs
+      run: dart run build_runner build --delete-conflicting-outputs
+      exec:
+        concurrency: 1
 
     build_runner_changed:
       packageFilters:
