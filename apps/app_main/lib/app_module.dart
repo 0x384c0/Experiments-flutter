@@ -1,12 +1,9 @@
-import 'package:features_experiments_presentation/features_experiments_presentation.dart';
-import 'package:features_forms_presentation/features_forms_presentation.dart';
 import 'package:features_reddit_posts_data/features_reddit_posts_data.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/features_reddit_posts_presentation.dart';
 import 'package:features_weather_data/features_weather_data.dart';
 import 'package:features_weather_domain/features_weather_domain.dart';
 import 'package:features_weather_presentation/features_weather_presentation.dart';
-import 'package:features_webview_presentation/features_webview_presentation.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppModule extends Module {
@@ -25,8 +22,5 @@ class AppModule extends Module {
           WeatherPresentationModule(isRealDevice: isRealDevice),
           WeatherDataModule(),
         ]),
-        FormsPresentationModule(),
-        WebViewPresentationModule(),
-        ExperimentsPresentationModule(),
       ];
 }

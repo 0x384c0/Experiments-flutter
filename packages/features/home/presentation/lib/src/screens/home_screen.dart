@@ -8,7 +8,6 @@ import 'package:features_stackoverflow_presentation/features_stackoverflow_prese
 import 'package:features_weather_presentation/features_weather_presentation.dart';
 import 'package:features_webview_presentation/features_webview_presentation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get_it/get_it.dart';
 
 import '../data/selected_page_state.dart';
@@ -24,11 +23,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late PostsNavigator redditPostsNavigator = Modular.get();
-  late WeatherNavigator weatherNavigator = Modular.get();
-  late FormsNavigator formsNavigator = Modular.get();
-  late WebViewNavigator webViewNavigator = Modular.get();
-  late ExperimentsNavigator experimentsNavigator = Modular.get();
+  late PostsNavigator redditPostsNavigator = GetIt.instance.get();
+  late WeatherNavigator weatherNavigator = GetIt.instance.get();
+  late FormsNavigator formsNavigator = GetIt.instance.get();
+  late WebViewNavigator webViewNavigator = GetIt.instance.get();
+  late ExperimentsNavigator experimentsNavigator = GetIt.instance.get();
   late StackOverflowNavigator stackoverflowNavigator = GetIt.instance.get();
 
   @override

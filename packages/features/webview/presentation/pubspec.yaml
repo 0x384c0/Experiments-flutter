@@ -14,7 +14,6 @@ dependencies:
     sdk: flutter
   intl: ^0.20.2
   common_presentation:
-  flutter_modular: ^6.4.1
   path_provider: ^2.1.5
   url_launcher: ^6.3.2
   flutter_inappwebview: ^6.1.5
@@ -22,10 +21,13 @@ dependencies:
   mime: ^2.0.0
   file_picker: ^10.3.3
   auto_route: ^11.1.0
+  injectable: ^2.7.1+4
+  get_it: ^9.2.1
 
 dev_dependencies:
   auto_route_generator: ^10.4.0
   build_runner: ^2.12.2
+  injectable_generator: ^2.12.1
 
 flutter:
   generate: true

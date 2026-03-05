@@ -1,7 +1,6 @@
-import 'package:features_webview_presentation/features_webview_presentation.dart';
 import 'package:features_webview_presentation/src/widgets/web_views_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
+import 'package:injectable/injectable.dart';
 
 @Deprecated('use auto_route directly')
 /// Navigation for feature
@@ -10,6 +9,7 @@ abstract class WebViewNavigator {
 }
 
 /// Private implementation of navigation
+@Injectable(as: WebViewNavigator)
 class NavigatorImpl implements WebViewNavigator {
   @override
   home() => const WebViewsScreen();
