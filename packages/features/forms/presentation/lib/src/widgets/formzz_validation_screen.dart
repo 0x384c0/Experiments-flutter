@@ -16,16 +16,15 @@ class FormzzValidationScreen extends StatelessWidget {
   const FormzzValidationScreen({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      BlocProvider(create: (_) => FormzzValidationCubit(), child: _FormzzValidationView());
-}
+  Widget build(BuildContext context) => BlocProvider(
+    create: (_) => FormzzValidationCubit(),
+    child: BlocBuilder<FormzzValidationCubit, FormzzValidationState>(builder: _buildScaffold),
+  );
 
-class _FormzzValidationView extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildScaffold(BuildContext context, FormzzValidationState formState) {
     final locale = AppLocalizations.of(context)!;
     final FormzzValidationCubit cubit = context.read();
-    final formState = cubit.state;
+
     return Scaffold(
       appBar: AppBar(title: Text(locale.forms_formzz_validation)),
       body: SingleChildScrollView(
@@ -37,13 +36,13 @@ class _FormzzValidationView extends StatelessWidget {
                 RadioFormInput(
                   text: locale.forms_physical_person,
                   value: EntityType.physicalPerson,
-                  groupValue: cubit.state.entityType,
+                  groupValue: formState.entityType,
                   onChanged: cubit.onEntityTypeChanged,
                 ),
                 RadioFormInput(
                   text: locale.forms_legal_entity,
                   value: EntityType.legalEntity,
-                  groupValue: cubit.state.entityType,
+                  groupValue: formState.entityType,
                   onChanged: cubit.onEntityTypeChanged,
                 ),
               ],
@@ -97,14 +96,14 @@ class _FormzzValidationView extends StatelessWidget {
               obscureText: true,
             ).paddingOnly(bottom: context.dimensions.medium),
             CheckBoxFormInput(
-              value: cubit.state.userAgreement.value,
+              value: formState.userAgreement.value,
               label: Text(locale.forms_agree_to_terms),
-              error: cubit.state.userAgreement.error?.stringDescription(context),
+              error: formState.userAgreement.error?.stringDescription(context),
               onChanged: cubit.onUserAgreementChanged,
             ).paddingOnly(bottom: context.dimensions.medium),
             const SizedBox(height: 24),
             ElevatedButton(onPressed: () => _onSubmit(context, cubit), child: Text(locale.forms_submit)),
-            if (cubit.state.isFormHasInvalidFields) ...[
+            if (formState.isFormHasInvalidFields) ...[
               const SizedBox(height: 16),
               Text(locale.forms_form_has_error, style: TextStyle(color: Theme.of(context).colorScheme.error)),
             ],
