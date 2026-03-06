@@ -54,14 +54,16 @@ class FormzzValidationScreen extends StatelessWidget {
               onChanged: cubit.onFirstNameChanged,
               label: locale.forms_first_name,
             ).paddingOnly(bottom: context.dimensions.medium),
-            if (formState.isValidateCompanyName)
-              StringFormField(
+            Visibility(
+              visible: formState.isValidateCompanyName,
+              child: StringFormField(
                 initialValue: formState.companyName.value,
                 isRequired: true,
                 error: formState.companyName.error?.stringDescription(context),
                 onChanged: cubit.onCompanyNameChanged,
                 label: locale.forms_company_name,
-              ).paddingOnly(bottom: context.dimensions.medium),
+              ),
+            ).paddingOnly(bottom: context.dimensions.medium),
             StringFormField(
               initialValue: formState.phone,
               isRequired: false,
@@ -101,14 +103,17 @@ class FormzzValidationScreen extends StatelessWidget {
               error: formState.userAgreement.error?.stringDescription(context),
               onChanged: cubit.onUserAgreementChanged,
             ).paddingOnly(bottom: context.dimensions.medium),
-            const SizedBox(height: 24),
+            SizedBox(height: context.dimensions.large),
             ElevatedButton(onPressed: () => _onSubmit(context, cubit), child: Text(locale.forms_submit)),
-            if (formState.isFormHasInvalidFields) ...[
-              const SizedBox(height: 16),
-              Text(locale.forms_form_has_error, style: TextStyle(color: Theme.of(context).colorScheme.error)),
-            ],
+            Visibility(
+              visible: formState.isFormHasInvalidFields,
+              child: Text(
+                locale.forms_form_has_error,
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
+              ).paddingOnly(top: context.dimensions.medium),
+            ),
           ],
-        ).padding(all: 16),
+        ).padding(all: context.dimensions.medium),
       ),
     );
   }
