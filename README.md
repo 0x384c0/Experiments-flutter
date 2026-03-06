@@ -97,10 +97,7 @@ Presentation and Data depend on Domain, but Domain knows nothing about them.
 * [CONTRIBUTING.md](CONTRIBUTING.md) contains information about frameworks and libraries in app
 
 # TODO
-* private injectables
-* fix cors for web
-* https://pub.dev/packages/mapify_generator
-* add Oauth2 example
-* https://github.com/cfug/dio/issues/1653
-* https://pub.dev/packages/app_links
+* [generate mappers](https://github.com/netglade/auto_mappr)
+* make some injectables package private
 * add loading indicators using [Lottie](https://pub.dev/packages/lottie)
+* add Oauth2 example
