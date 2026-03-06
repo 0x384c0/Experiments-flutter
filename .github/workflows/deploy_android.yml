@@ -29,9 +29,6 @@ jobs:
       - name: Melos Bootstrap
         run: dart run melos bootstrap
 
-      - name: Set version
-        run: dart run melos set_version
-
       - name: Build Android
         run: cd apps/app_main && flutter build apk --release
 
