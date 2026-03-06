@@ -38,7 +38,7 @@ sealed class FormzzValidationState with _$FormzzValidationState {
   FormzzValidationState get dirtyCopy => copyWith(
     firstName: RequiredString.dirty(firstName.value),
     companyName: RequiredString.dirty(companyName.value),
-    email: Email.dirty(password.value),
+    email: Email.dirty(email.value),
     password: Password.dirty(password.value),
     repeatPassword: RepeatPassword.dirty(repeatPassword.value, password: password.value),
     userAgreement: RequiredBool.dirty(userAgreement.value),
