@@ -1,1 +1,0 @@
-enum RedditPostsSortDTO { top, controversial }
