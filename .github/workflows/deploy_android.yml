@@ -1,4 +1,4 @@
-name: deploy_android
+name: deploy_android_TMP
 
 on:
   workflow_dispatch:
