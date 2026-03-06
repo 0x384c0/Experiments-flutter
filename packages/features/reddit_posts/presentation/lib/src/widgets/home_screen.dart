@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:common_presentation/extensions/build_context_theme.dart';
 import 'package:features_reddit_posts_domain/features_reddit_posts_domain.dart';
 import 'package:features_reddit_posts_presentation/l10n/app_localizations.g.dart';
 import 'package:features_reddit_posts_presentation/src/navigation/router.gr.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_view_modifiers/flutter_view_modifiers.dart';
 import 'package:get_it/get_it.dart';
@@ -17,12 +19,26 @@ class PostsHomeScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        ListTile(title: Text(locale.posts_remote_first), onTap: () => router.push(PostsRoute())),
-        ListTile(title: Text(locale.posts_local_first), onTap: () => router.push(LocalFirstPostsRoute())),
+        ListTile(title: Text(locale.posts_remote_first), onTap: kIsWeb ? null : () => router.push(PostsRoute())),
+        ListTile(
+          title: Text(locale.posts_local_first),
+          onTap: kIsWeb ? null : () => router.push(LocalFirstPostsRoute()),
+        ),
+        if (kIsWeb)
+          Text(
+            'Feature not available due to Reddit CORS policy: strict-origin-when-cross-origin',
+            style: context.theme.textTheme.bodySmall?.copyWith(color: context.themeColors.error),
+          ).center(),
         const Spacer(),
-        ElevatedButton(onPressed: () => _clearDb(context), child: Text(locale.posts_clear_sqlite_database)),
+        ElevatedButton(
+          child: Text(locale.posts_clear_sqlite_database),
+          onPressed: kIsWeb ? null : () => _clearDb(context),
+        ),
         const SizedBox(height: 8),
-        ElevatedButton(onPressed: () => _initDb(context), child: Text(locale.posts_initialize_sqlite_database)),
+        ElevatedButton(
+          child: Text(locale.posts_initialize_sqlite_database),
+          onPressed: kIsWeb ? null : () => _initDb(context),
+        ),
         const SizedBox(height: 8),
       ],
     ).padding(all: 8);
