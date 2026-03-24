@@ -12,6 +12,7 @@ class TimelapseControls extends StatelessWidget {
   final bool isRecording;
   final List<String> capturedImages;
   final VoidCallback onResetSettings;
+  final VoidCallback onShowCurtain;
   final VoidCallback onToggleRecording;
   final Function(bool isStart) onPickDateTime;
   final ValueSetter<int> onIntervalChanged;
@@ -22,6 +23,7 @@ class TimelapseControls extends StatelessWidget {
     required this.isRecording,
     required this.capturedImages,
     required this.onResetSettings,
+    required this.onShowCurtain,
     required this.onToggleRecording,
     required this.onPickDateTime,
     required this.onIntervalChanged,
@@ -40,6 +42,12 @@ class TimelapseControls extends StatelessWidget {
               const Text(
                 'Settings',
                 style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              TextButton.icon(
+                onPressed: onShowCurtain,
+                icon: const Icon(Icons.visibility_off, color: Colors.white70, size: 18),
+                label: const Text('Curtain', style: TextStyle(color: Colors.white70, fontSize: 12)),
+                style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
               ),
               if (!isRecording)
                 TextButton.icon(

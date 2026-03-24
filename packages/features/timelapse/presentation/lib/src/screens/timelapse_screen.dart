@@ -7,6 +7,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
 import 'package:features_timelapse_presentation/src/data/timelapse_settings.dart';
 import 'package:features_timelapse_presentation/src/extensions/camera_image.dart';
+import 'package:features_timelapse_presentation/src/widgets/screen_curtain.dart';
 import 'package:features_timelapse_presentation/src/widgets/seconds_picker.dart';
 import 'package:features_timelapse_presentation/src/widgets/timelapse_controls.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
   Timer? _scheduleTimer;
   final List<String> _capturedImages = [];
   bool _isCapturing = false;
+  double _curtainProgress = 0;
 
   @override
   void initState() {
@@ -116,6 +118,12 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
     WakelockPlus.disable();
     setState(() => _isRecording = false);
     unawaited(_resumePreview());
+  }
+
+  void _setCurtainProgress(double value) {
+    final nextValue = value.clamp(0.0, 1.0);
+    if (_curtainProgress == nextValue) return;
+    setState(() => _curtainProgress = nextValue);
   }
 
   Future<void> _pausePreview() async {
@@ -304,6 +312,7 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
                           onPickDateTime: _pickDateTime,
                           onIntervalChanged: (val) =>
                               setState(() => _settings = _settings.copyWith(intervalSeconds: val)),
+                          onShowCurtain: () => _setCurtainProgress(1),
                         ),
                       ),
                     ),
@@ -311,6 +320,12 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
                 ),
               );
             },
+          ),
+          Positioned.fill(
+            child: ScreenCurtain(
+              progress: _curtainProgress,
+              onProgressChanged: _setCurtainProgress,
+            ),
           ),
         ],
       ),
