@@ -5,44 +5,13 @@ import 'dart:ui';
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
-import '../navigation/router.gr.dart';
-
-class TimeOfDayWithSeconds {
-  final int hour;
-  final int minute;
-  final int second;
-
-  TimeOfDayWithSeconds({required this.hour, required this.minute, required this.second});
-}
-
-class _TimelapseSettings {
-  final int intervalSeconds;
-  final DateTime? startDate;
-  final DateTime? endDate;
-
-  const _TimelapseSettings({
-    this.intervalSeconds = 5,
-    this.startDate,
-    this.endDate,
-  });
-
-  _TimelapseSettings copyWith({
-    int? intervalSeconds,
-    DateTime? startDate,
-    DateTime? endDate,
-  }) {
-    return _TimelapseSettings(
-      intervalSeconds: intervalSeconds ?? this.intervalSeconds,
-      startDate: startDate ?? this.startDate,
-      endDate: endDate ?? this.endDate,
-    );
-  }
-}
+import '../data/timelapse_settings.dart';
+import '../widgets/seconds_picker.dart';
+import '../widgets/timelapse_controls.dart';
 
 @RoutePage()
 class TimelapseScreen extends StatefulWidget {
@@ -55,7 +24,7 @@ class TimelapseScreen extends StatefulWidget {
 class _TimelapseScreenState extends State<TimelapseScreen> {
   CameraController? _controller;
   bool _isRecording = false;
-  _TimelapseSettings _settings = const _TimelapseSettings();
+  TimelapseSettings _settings = const TimelapseSettings();
   Timer? _timer;
   Timer? _scheduleTimer;
   final List<String> _capturedImages = [];
@@ -152,16 +121,16 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
 
     try {
       final XFile image = await _controller!.takePicture();
-      
+
       final directory = await getApplicationDocumentsDirectory();
       final timelapseDir = Directory(p.join(directory.path, 'timelapse'));
       if (!await timelapseDir.exists()) {
         await timelapseDir.create(recursive: true);
       }
-      
+
       final String fileName = 'timelapse_${DateTime.now().millisecondsSinceEpoch}.jpg';
       final String permanentPath = p.join(timelapseDir.path, fileName);
-      
+
       await File(image.path).copy(permanentPath);
       await File(image.path).delete();
 
@@ -175,7 +144,7 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
 
   void _resetSettings() {
     setState(() {
-      _settings = const _TimelapseSettings();
+      _settings = const TimelapseSettings();
     });
   }
 
@@ -191,7 +160,7 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
       final initialDateTime = (isStart ? _settings.startDate : _settings.endDate) ?? DateTime.now();
       final time = await showDialog<TimeOfDayWithSeconds>(
         context: context,
-        builder: (context) => _TimeWithSecondsPicker(
+        builder: (context) => SecondsPicker(
           initialTime: TimeOfDayWithSeconds(
             hour: initialDateTime.hour,
             minute: initialDateTime.minute,
@@ -266,7 +235,16 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
                         ),
                         padding: const EdgeInsets.all(20),
                         color: Colors.black.withOpacity(0.4),
-                        child: _buildControls(orientation),
+                        child: TimelapseControls(
+                          settings: _settings,
+                          isRecording: _isRecording,
+                          capturedImages: _capturedImages,
+                          onResetSettings: _resetSettings,
+                          onToggleRecording: _toggleRecording,
+                          onPickDateTime: _pickDateTime,
+                          onIntervalChanged: (val) =>
+                              setState(() => _settings = _settings.copyWith(intervalSeconds: val)),
+                        ),
                       ),
                     ),
                   ),
@@ -276,191 +254,6 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildControls(Orientation orientation) {
-    final List<Widget> items = [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Text(
-            'Settings',
-            style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          if (!_isRecording)
-            TextButton.icon(
-              onPressed: _resetSettings,
-              icon: const Icon(Icons.refresh, color: Colors.white70, size: 18),
-              label: const Text('Reset', style: TextStyle(color: Colors.white70, fontSize: 12)),
-              style: TextButton.styleFrom(visualDensity: VisualDensity.compact),
-            ),
-        ],
-      ),
-      const Divider(color: Colors.white24),
-      Row(
-        children: [
-          const Icon(Icons.timer, color: Colors.white, size: 20),
-          const SizedBox(width: 8),
-          const Text('Interval:', style: TextStyle(color: Colors.white, fontSize: 14)),
-          Expanded(
-            child: Slider(
-              value: _settings.intervalSeconds.toDouble(),
-              min: 1,
-              max: 60,
-              divisions: 59,
-              label: '${_settings.intervalSeconds} s',
-              onChanged: _isRecording
-                  ? null
-                  : (val) => setState(() => _settings = _settings.copyWith(intervalSeconds: val.toInt())),
-            ),
-          ),
-          Text(
-            '${_settings.intervalSeconds} s',
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-        ],
-      ),
-      _buildListTile(
-        icon: Icons.calendar_today,
-        title: 'Start Time',
-        subtitle: _settings.startDate == null ? 'Immediate' : DateFormat.yMd().add_Hms().format(_settings.startDate!),
-        onTap: _isRecording ? null : () => _pickDateTime(true),
-      ),
-      _buildListTile(
-        icon: Icons.event_busy,
-        title: 'End Time',
-        subtitle: _settings.endDate == null ? 'Manual Stop' : DateFormat.yMd().add_Hms().format(_settings.endDate!),
-        onTap: _isRecording ? null : () => _pickDateTime(false),
-      ),
-      const SizedBox(height: 12),
-      ElevatedButton.icon(
-        onPressed: _toggleRecording,
-        icon: Icon(_isRecording ? Icons.stop_circle : Icons.play_circle_filled),
-        label: Text(_isRecording ? 'STOP' : 'START'),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: _isRecording ? Colors.red.withOpacity(0.8) : Colors.green.withOpacity(0.8),
-          foregroundColor: Colors.white,
-          minimumSize: const Size(double.infinity, 50),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        ),
-      ),
-      const SizedBox(height: 16),
-      const Text(
-        'Recent Snapshots',
-        style: TextStyle(color: Colors.white70, fontSize: 12, fontWeight: FontWeight.bold),
-      ),
-      const SizedBox(height: 8),
-      SizedBox(
-        height: 80,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: _capturedImages.length,
-          itemBuilder: (context, index) {
-            final path = _capturedImages[index];
-            return Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: GestureDetector(
-                onTap: () => context.router.push(ImagePreviewRoute(imagePath: path)),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Image.file(File(path), width: 80, height: 80, fit: BoxFit.cover),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    ];
-
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: items,
-      ),
-    );
-  }
-
-  Widget _buildListTile({
-    required IconData icon,
-    required String title,
-    required String subtitle,
-    VoidCallback? onTap,
-  }) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: Icon(icon, color: Colors.white70, size: 20),
-      title: Text(title, style: const TextStyle(color: Colors.white, fontSize: 13)),
-      subtitle: Text(subtitle, style: const TextStyle(color: Colors.white70, fontSize: 11)),
-      onTap: onTap,
-      dense: true,
-    );
-  }
-}
-
-class _TimeWithSecondsPicker extends StatefulWidget {
-  final TimeOfDayWithSeconds initialTime;
-
-  const _TimeWithSecondsPicker({required this.initialTime});
-
-  @override
-  State<_TimeWithSecondsPicker> createState() => _TimeWithSecondsPickerState();
-}
-
-class _TimeWithSecondsPickerState extends State<_TimeWithSecondsPicker> {
-  late int hour;
-  late int minute;
-  late int second;
-
-  @override
-  void initState() {
-    super.initState();
-    hour = widget.initialTime.hour;
-    minute = widget.initialTime.minute;
-    second = widget.initialTime.second;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Select Time (H:M:S)'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          _buildPickerRow('Hour', hour, 23, (v) => setState(() => hour = v)),
-          _buildPickerRow('Min', minute, 59, (v) => setState(() => minute = v)),
-          _buildPickerRow('Sec', second, 59, (v) => setState(() => second = v)),
-        ],
-      ),
-      actions: [
-        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-        TextButton(
-          onPressed: () => Navigator.pop(context, TimeOfDayWithSeconds(hour: hour, minute: minute, second: second)),
-          child: const Text('OK'),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPickerRow(String label, int value, int max, ValueChanged<int> onChanged) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 40,
-          child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
-        ),
-        Expanded(
-          child: Slider(
-            value: value.toDouble(),
-            min: 0,
-            max: max.toDouble(),
-            divisions: max == 0 ? 1 : max,
-            onChanged: (v) => onChanged(v.toInt()),
-          ),
-        ),
-        Text(value.toString().padLeft(2, '0'), style: const TextStyle(fontFamily: 'monospace')),
-      ],
     );
   }
 }
