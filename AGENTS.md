@@ -16,11 +16,15 @@ This is a **Clean Architecture Modular Flutter App** managed with **Melos**.
 - Look there only while working with large requests, affecting multiple files.
 
 ## AI-Agents Tips
-- Never run the app.
 - While running commands don't to listen to logs. Only look at error code. But if command finished with error code, only then analyze logs.
-- When adding a new feature packages, ensure its DI module is registered in `apps/app_main/lib/di/configure_dependencies.dart` and run `melos run build_runner` after making changes.
-- When added new Interactors and Mappers, cover it with Unit tests
-- For navigation use `@RoutePage()` and run `melos run build_runner` after making changes.
+- When adding a new feature packages, ensure that:
+  - it is added as in workspace in [pubspec.yaml](pubspec.yaml), with its dependencies
+  - its presentation exports `init_micro_package.module.dart`, `src/navigation/router.dart` and `src/navigation/routes_provider.dart`
+  - its DI module is registered in [configure_dependencies.dart](apps/app_main/lib/di/configure_dependencies.dart)
+  - its router is registered in [app_router.dart](apps/app_main/lib/app_router.dart)
+  - run `melos run build_runner` after making changes.
+- After adding or modifying new Interactors and Mappers, cover it with Unit tests with mock injections
+- For navigation use `@RoutePage()` and run `melos run build_runner` after making changes. During creation of AutoRoute provide only page. 
 - For UI use [extensions](packages/common/presentation/lib/extensions).
 - For Screens that uses async calls to API use [screen_state](packages/common/presentation/lib/widgets/screen_state)
 - New Widgets in [common module](packages/common/presentation) must have the least amount of dependencies, ideally just a stateless or stateful widgets.
