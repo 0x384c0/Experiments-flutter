@@ -1,17 +1,18 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
+import 'package:features_timelapse_presentation/src/data/timelapse_settings.dart';
+import 'package:features_timelapse_presentation/src/extensions/camera_image.dart';
+import 'package:features_timelapse_presentation/src/widgets/seconds_picker.dart';
+import 'package:features_timelapse_presentation/src/widgets/timelapse_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
-
-import '../data/timelapse_settings.dart';
-import '../widgets/seconds_picker.dart';
-import '../widgets/timelapse_controls.dart';
 
 @RoutePage()
 class TimelapseScreen extends StatefulWidget {
@@ -28,6 +29,7 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
   Timer? _timer;
   Timer? _scheduleTimer;
   final List<String> _capturedImages = [];
+  bool _isCapturing = false;
 
   @override
   void initState() {
@@ -46,9 +48,7 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
     if (await timelapseDir.exists()) {
       final files = timelapseDir.listSync().whereType<File>().toList();
       files.sort((a, b) => b.lastModifiedSync().compareTo(a.lastModifiedSync()));
-      setState(() {
-        _capturedImages.addAll(files.map((f) => f.path));
-      });
+      setState(() => _capturedImages.addAll(files.map((f) => f.path)));
     }
   }
 
@@ -60,6 +60,7 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
       cameras.first,
       ResolutionPreset.high,
       enableAudio: false,
+      imageFormatGroup: ImageFormatGroup.jpeg,
     );
     try {
       await _controller!.initialize();
@@ -78,13 +79,7 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
     super.dispose();
   }
 
-  void _toggleRecording() {
-    if (_isRecording) {
-      _stopTimelapse();
-    } else {
-      _startTimelapse();
-    }
-  }
+  void _toggleRecording() => _isRecording ? _stopTimelapse() : _startTimelapse();
 
   void _startTimelapse() {
     final now = DateTime.now();
@@ -99,14 +94,17 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
   void _beginCapturing() {
     setState(() => _isRecording = true);
     WakelockPlus.enable();
-    _timer = Timer.periodic(Duration(seconds: _settings.intervalSeconds), (timer) {
-      final now = DateTime.now();
-      if (_settings.endDate != null && now.isAfter(_settings.endDate!)) {
-        _stopTimelapse();
-        return;
-      }
-      _takeSnapshot();
-    });
+    _timer = Timer.periodic(
+      Duration(seconds: _settings.intervalSeconds),
+      (timer) {
+        final now = DateTime.now();
+        if (_settings.endDate != null && now.isAfter(_settings.endDate!)) {
+          _stopTimelapse();
+          return;
+        }
+        _takeSnapshot();
+      },
+    );
   }
 
   void _stopTimelapse() {
@@ -118,9 +116,28 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
 
   Future<void> _takeSnapshot() async {
     if (_controller == null || !_controller!.value.isInitialized) return;
+    if (_isCapturing) return;
+    _isCapturing = true;
 
     try {
-      final XFile image = await _controller!.takePicture();
+      final completer = Completer<CameraImage>();
+      int frameCount = 0;
+      const int framesToSkip = 2; // let AE/AWB settle for one frame
+
+      await _controller!.startImageStream((CameraImage image) {
+        if (completer.isCompleted) return;
+        if (frameCount < framesToSkip) {
+          frameCount++;
+          return;
+        }
+        completer.complete(image);
+      });
+
+      final CameraImage frame = await completer.future;
+
+      await _controller!.stopImageStream();
+
+      final Uint8List jpegBytes = await frame.frameToJpeg();
 
       final directory = await getApplicationDocumentsDirectory();
       final timelapseDir = Directory(p.join(directory.path, 'timelapse'));
@@ -129,16 +146,14 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
       }
 
       final String fileName = 'timelapse_${DateTime.now().millisecondsSinceEpoch}.jpg';
-      final String permanentPath = p.join(timelapseDir.path, fileName);
+      final String path = p.join(timelapseDir.path, fileName);
+      await File(path).writeAsBytes(jpegBytes);
 
-      await File(image.path).copy(permanentPath);
-      await File(image.path).delete();
-
-      setState(() {
-        _capturedImages.insert(0, permanentPath);
-      });
+      if (mounted) setState(() => _capturedImages.insert(0, path));
     } catch (e) {
       debugPrint('Error taking snapshot: $e');
+    } finally {
+      _isCapturing = false;
     }
   }
 
