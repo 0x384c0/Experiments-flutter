@@ -85,7 +85,10 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
     final now = DateTime.now();
     if (_settings.startDate != null && _settings.startDate!.isAfter(now)) {
       setState(() => _isRecording = true);
-      _scheduleTimer = Timer(_settings.startDate!.difference(now), _beginCapturing);
+      _scheduleTimer = Timer(
+        _settings.startDate!.difference(now),
+        _beginCapturing,
+      );
     } else {
       _beginCapturing();
     }
@@ -94,17 +97,17 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
   void _beginCapturing() {
     setState(() => _isRecording = true);
     WakelockPlus.enable();
-    _timer = Timer.periodic(
-      Duration(seconds: _settings.intervalSeconds),
-      (timer) {
-        final now = DateTime.now();
-        if (_settings.endDate != null && now.isAfter(_settings.endDate!)) {
-          _stopTimelapse();
-          return;
-        }
-        _takeSnapshot();
-      },
-    );
+    unawaited(_pausePreview());
+    _timer = Timer.periodic(Duration(seconds: _settings.intervalSeconds), (
+      timer,
+    ) {
+      final now = DateTime.now();
+      if (_settings.endDate != null && now.isAfter(_settings.endDate!)) {
+        _stopTimelapse();
+        return;
+      }
+      _takeSnapshot();
+    });
   }
 
   void _stopTimelapse() {
@@ -112,6 +115,33 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
     _scheduleTimer?.cancel();
     WakelockPlus.disable();
     setState(() => _isRecording = false);
+    unawaited(_resumePreview());
+  }
+
+  Future<void> _pausePreview() async {
+    final controller = _controller;
+    if (controller == null || !controller.value.isInitialized) return;
+    if (controller.value.isPreviewPaused) return;
+
+    try {
+      await controller.pausePreview();
+      if (mounted) setState(() {});
+    } catch (e) {
+      debugPrint('Error pausing preview: $e');
+    }
+  }
+
+  Future<void> _resumePreview() async {
+    final controller = _controller;
+    if (controller == null || !controller.value.isInitialized) return;
+    if (!controller.value.isPreviewPaused) return;
+
+    try {
+      await controller.resumePreview();
+      if (mounted) setState(() {});
+    } catch (e) {
+      debugPrint('Error resuming preview: $e');
+    }
   }
 
   Future<void> _takeSnapshot() async {
@@ -186,7 +216,14 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
 
       if (time != null && mounted) {
         setState(() {
-          final dt = DateTime(date.year, date.month, date.day, time.hour, time.minute, time.second);
+          final dt = DateTime(
+            date.year,
+            date.month,
+            date.day,
+            time.hour,
+            time.minute,
+            time.second,
+          );
           if (isStart) {
             _settings = _settings.copyWith(startDate: dt);
           } else {
@@ -213,24 +250,32 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
       ),
       body: Stack(
         children: [
-          // Background Camera Preview
           Positioned.fill(
-            child: OrientationBuilder(
-              builder: (context, orientation) {
-                final isPortrait = orientation == Orientation.portrait;
-                final previewSize = _controller!.value.previewSize!;
-                return FittedBox(
-                  fit: BoxFit.cover,
-                  child: SizedBox(
-                    width: isPortrait ? previewSize.height : previewSize.width,
-                    height: isPortrait ? previewSize.width : previewSize.height,
-                    child: CameraPreview(_controller!),
+            child: _controller!.value.isPreviewPaused
+                ? ColoredBox(
+                    color: Colors.black,
+                    child: Center(
+                      child: Text(
+                        'Preview paused',
+                        style: const TextStyle(color: Colors.white70),
+                      ),
+                    ),
+                  )
+                : OrientationBuilder(
+                    builder: (context, orientation) {
+                      final isPortrait = orientation == Orientation.portrait;
+                      final previewSize = _controller!.value.previewSize!;
+                      return FittedBox(
+                        fit: BoxFit.cover,
+                        child: SizedBox(
+                          width: isPortrait ? previewSize.height : previewSize.width,
+                          height: isPortrait ? previewSize.width : previewSize.height,
+                          child: CameraPreview(_controller!),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           ),
-          // Semitransparent Controls Overlay
           OrientationBuilder(
             builder: (context, orientation) {
               final isPortrait = orientation == Orientation.portrait;
@@ -249,7 +294,7 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
                           maxHeight: isPortrait ? MediaQuery.of(context).size.height * 0.6 : double.infinity,
                         ),
                         padding: const EdgeInsets.all(20),
-                        color: Colors.black.withOpacity(0.4),
+                        color: Colors.black.withValues(alpha: 0.4),
                         child: TimelapseControls(
                           settings: _settings,
                           isRecording: _isRecording,
