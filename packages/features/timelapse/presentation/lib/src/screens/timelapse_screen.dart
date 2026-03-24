@@ -197,13 +197,19 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
         children: [
           // Background Camera Preview
           Positioned.fill(
-            child: FittedBox(
-              fit: BoxFit.cover,
-              child: SizedBox(
-                width: _controller!.value.previewSize!.height,
-                height: _controller!.value.previewSize!.width,
-                child: CameraPreview(_controller!),
-              ),
+            child: OrientationBuilder(
+              builder: (context, orientation) {
+                final isPortrait = orientation == Orientation.portrait;
+                final previewSize = _controller!.value.previewSize!;
+                return FittedBox(
+                  fit: BoxFit.cover,
+                  child: SizedBox(
+                    width: isPortrait ? previewSize.height : previewSize.width,
+                    height: isPortrait ? previewSize.width : previewSize.height,
+                    child: CameraPreview(_controller!),
+                  ),
+                );
+              },
             ),
           ),
           // Semitransparent Controls Overlay
