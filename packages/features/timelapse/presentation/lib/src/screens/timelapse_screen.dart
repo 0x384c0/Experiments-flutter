@@ -6,7 +6,11 @@ import 'package:auto_route/auto_route.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
+
+import '../navigation/router.gr.dart';
 
 class TimeOfDayWithSeconds {
   final int hour;
@@ -59,7 +63,24 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
   @override
   void initState() {
     super.initState();
-    _initializeCamera();
+    _initialize();
+  }
+
+  Future<void> _initialize() async {
+    await _loadSavedImages();
+    await _initializeCamera();
+  }
+
+  Future<void> _loadSavedImages() async {
+    final directory = await getApplicationDocumentsDirectory();
+    final timelapseDir = Directory(p.join(directory.path, 'timelapse'));
+    if (await timelapseDir.exists()) {
+      final files = timelapseDir.listSync().whereType<File>().toList();
+      files.sort((a, b) => b.lastModifiedSync().compareTo(a.lastModifiedSync()));
+      setState(() {
+        _capturedImages.addAll(files.map((f) => f.path));
+      });
+    }
   }
 
   Future<void> _initializeCamera() async {
@@ -130,9 +151,22 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
     if (_controller == null || !_controller!.value.isInitialized) return;
 
     try {
-      final image = await _controller!.takePicture();
+      final XFile image = await _controller!.takePicture();
+      
+      final directory = await getApplicationDocumentsDirectory();
+      final timelapseDir = Directory(p.join(directory.path, 'timelapse'));
+      if (!await timelapseDir.exists()) {
+        await timelapseDir.create(recursive: true);
+      }
+      
+      final String fileName = 'timelapse_${DateTime.now().millisecondsSinceEpoch}.jpg';
+      final String permanentPath = p.join(timelapseDir.path, fileName);
+      
+      await File(image.path).copy(permanentPath);
+      await File(image.path).delete();
+
       setState(() {
-        _capturedImages.insert(0, image.path);
+        _capturedImages.insert(0, permanentPath);
       });
     } catch (e) {
       debugPrint('Error taking snapshot: $e');
@@ -323,11 +357,15 @@ class _TimelapseScreenState extends State<TimelapseScreen> {
           scrollDirection: Axis.horizontal,
           itemCount: _capturedImages.length,
           itemBuilder: (context, index) {
+            final path = _capturedImages[index];
             return Padding(
               padding: const EdgeInsets.only(right: 8.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.file(File(_capturedImages[index]), width: 80, height: 80, fit: BoxFit.cover),
+              child: GestureDetector(
+                onTap: () => context.router.push(ImagePreviewRoute(imagePath: path)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.file(File(path), width: 80, height: 80, fit: BoxFit.cover),
+                ),
               ),
             );
           },

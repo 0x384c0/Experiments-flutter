@@ -7,5 +7,6 @@ class TimelapseRouter extends RootStackRouter {
   @override
   List<AutoRoute> get routes => [
     AutoRoute(page: TimelapseRoute.page),
+    AutoRoute(page: ImagePreviewRoute.page),
   ];
 }
