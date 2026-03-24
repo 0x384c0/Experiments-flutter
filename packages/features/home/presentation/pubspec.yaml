@@ -23,6 +23,7 @@ dependencies:
   features_experiments_presentation:
   features_stackoverflow_presentation:
   features_firebase_chat_presentation:
+  features_timelapse_presentation:
   flutter_view_modifiers: 0.0.9
   auto_route: ^11.1.0
 

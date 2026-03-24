@@ -19,6 +19,7 @@ workspace:
   - packages/features/weather/domain
   - packages/features/weather/presentation
   - packages/features/webview/presentation
+  - packages/features/timelapse/presentation
   - apps/app_main
 
 dev_dependencies:
